@@ -11,7 +11,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        // Dit is pas die lijpe shit
+        // put your code here
         ?>
     </body>
 </html>

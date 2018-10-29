@@ -4,11 +4,11 @@ $username = "root";
 
 
 // Create connection
-$conn = new mysqli($servername, $username);
+$dbcon = new mysqli($servername, $username);
 
 // Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if ($dbcon->connect_error) {
+    die("Connection failed: " . $dbcon->connect_error);
 }
 echo "Connected successfully";
 ?>

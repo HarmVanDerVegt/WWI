@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="55f0f3e3-dfb5-4a16-b1bd-2f52eadafd21" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/WWI/includes/dbconnect.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WWI/includes/dbconnect.php" beforeDir="false" afterPath="$PROJECT_DIR$/WWI/includes/dbconnect.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,23 +48,25 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="1" />
-          <entry key="php" value="3" />
+          <entry key="php" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="1" />
-          <entry key="PHP" value="3" />
+          <entry key="PHP" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="php" value="5" />
+          <entry key="php" value="203" />
+          <entry key="txt" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PHP" value="5" />
+          <entry key="PHP" value="203" />
+          <entry key="PLAIN_TEXT" value="31" />
         </counts>
       </usages-collector>
     </session>
@@ -83,8 +85,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/WWI/includes/dbconnect.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="43" lean-forward="true" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
+            <state relative-caret-position="17">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WWI/includes/dbtest.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="28" column="7" lean-forward="true" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -100,6 +111,7 @@
         <option value="$PROJECT_DIR$/WWI/includes/footer.php" />
         <option value="$PROJECT_DIR$/WWI/includes/header.php" />
         <option value="$PROJECT_DIR$/WWI/css/navbar.css" />
+        <option value="$PROJECT_DIR$/WWI/includes/dbtest.php" />
         <option value="$PROJECT_DIR$/WWI/includes/dbconnect.php" />
       </list>
     </option>
@@ -111,11 +123,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-10" />
-    <option name="y" value="-10" />
-    <option name="width" value="940" />
-    <option name="height" value="1090" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-7" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -140,6 +151,12 @@
               <item name="WWI" type="462c0819:PsiDirectoryNode" />
               <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="WWI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WWI" type="462c0819:PsiDirectoryNode" />
+              <item name="WWI" type="462c0819:PsiDirectoryNode" />
+              <item name="includes" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -148,6 +165,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SearchEverywhereHistoryKey" value=".&#9;null&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -299,19 +317,24 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="PHP Script.dbconnect.php">
+  <component name="RunManager" selected="PHP Script.dbtest.php">
     <configuration name="template.php" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/WWI/WWI/template.php">
       <method v="2" />
     </configuration>
     <configuration name="dbconnect.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/WWI/includes/dbconnect.php">
       <method v="2" />
     </configuration>
+    <configuration name="dbtest.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/WWI/includes/dbtest.php">
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="JavaScript Debug.template.php" />
       <item itemvalue="PHP Script.dbconnect.php" />
+      <item itemvalue="PHP Script.dbtest.php" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="PHP Script.dbtest.php" />
         <item itemvalue="PHP Script.dbconnect.php" />
         <item itemvalue="JavaScript Debug.template.php" />
       </list>
@@ -329,21 +352,43 @@
       <updated>1540811447823</updated>
       <workItem from="1540811449443" duration="1077000" />
     </task>
+    <task id="LOCAL-00001" summary="db connect toegevoegd">
+      <created>1540815948330</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1540815948330</updated>
+    </task>
+    <task id="LOCAL-00002" summary="db connect toegevoegd">
+      <created>1540816088285</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1540816088285</updated>
+    </task>
+    <task id="LOCAL-00003" summary="db connect toegevoegd">
+      <created>1540816426847</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1540816426847</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2779000" />
+    <option name="totallyTimeSpent" value="5513000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25266525" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25266525" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" weight="0.329718" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.329718" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.329718" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -365,6 +410,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="db connect toegevoegd" />
+    <option name="LAST_COMMIT_MESSAGE" value="db connect toegevoegd" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/WWI/includes/footer.php">
@@ -402,10 +451,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/WWI/includes/dbtest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="7" lean-forward="true" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/WWI/includes/dbconnect.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="43" lean-forward="true" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
+        <state relative-caret-position="17">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>

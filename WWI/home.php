@@ -10,8 +10,11 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <?php
-        // Dit is pas die lijpe shit
-        ?>
+        <h1>World Wide Importers</h1>
+        <?php include("includes/header.php"); ?>
+        <br>
+        <p>Dit is content</p>
+        <br>
+        <?php include("includes/footer.php"); ?>
     </body>
 </html>

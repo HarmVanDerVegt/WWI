@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-
+$dbname = "wideworldimporters";
 
 // Create connection
 $dbcon = new mysqli($servername, $username);

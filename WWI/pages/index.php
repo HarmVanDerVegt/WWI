@@ -10,10 +10,12 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <h1>World Wide Importers</h1>
         <?php include("../includes/header.php"); ?>
         <br>
-        <p>Dit is content</p>
+        <div>
+            <h1>Aanbiedingen</h1>
+            <h1>categorieën</h1>
+        </div>
         <br>
         <?php include("../includes/footer.php"); ?>
     </body>

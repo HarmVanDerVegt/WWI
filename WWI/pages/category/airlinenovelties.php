@@ -10,17 +10,14 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-<<<<<<< HEAD:WWI/airlinenovelties.php
         <?php
         // put your code here
         ?>
-=======
         <h1>World Wide Importers</h1>
-        <?php include("includes/header.php"); ?>
+        <?php include("../../includes/header.php"); ?>
         <br>
         <p>Dit is content</p>
         <br>
-        <?php include("includes/footer.php"); ?>
->>>>>>> 9af3e71adf97b3d2bb88c1dd2f5f0bcc9e1d3e91:WWI/home.php
+        <?php include("../../includes/footer.php"); ?>
     </body>
 </html>

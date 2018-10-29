@@ -1,8 +1,8 @@
 <html>
 <head>
-    <link href="css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/navbar.css" rel="stylesheet" />
-    <script src="js/bootstrap.min.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../css/navbar.css" rel="stylesheet" />
+    <script src="../js/bootstrap.min.js"></script>
 </head>
 
 <nav class="navbar navbar-custom">

@@ -10,8 +10,13 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <?php
-        // put your code here
-        ?>
+        <?php include("../includes/header.php"); ?>
+        <br>
+        <div>
+            <h1>Aanbiedingen</h1>
+            <h1>categorieën</h1>
+        </div>
+        <br>
+        <?php include("../includes/footer.php"); ?>
     </body>
 </html>

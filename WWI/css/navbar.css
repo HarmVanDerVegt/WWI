@@ -7,6 +7,9 @@
     color: rgba(255, 255, 255, .8);
 }
 
+.navbar-custom .btn{
+    color: #ffffff;
+}
 /*
 !* change the brand and text color *!
 .navbar-custom .navbar-brand,

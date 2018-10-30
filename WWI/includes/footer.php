@@ -1,1 +1,1 @@
-<p>Dit is een footer.</p>
+<p class="text-center">© 2018 WWI</p>

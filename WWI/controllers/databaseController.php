@@ -9,7 +9,7 @@ function createDB()
     if ($dbcon->connect_error) {
         die("Connection failed: " . $dbcon->connect_error);
     }
-    echo "succes";
+    //echo "succes";
 
     return $dbcon;
 

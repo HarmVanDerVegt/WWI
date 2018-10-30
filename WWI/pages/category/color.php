@@ -5,8 +5,11 @@ include ROOT_PATH . "/includes/header.php";
 Voor de query
 
 <?php
-include ROOT_PATH . "/controllers/colorController.php";
-print_r(getColorByID(6));
+include_once ROOT_PATH . "/controllers/colorController.php";
+include_once  ROOT_PATH . "/controllers/stockItemController.php";
+$item = getStockItemByID(6);
+
+print_r($item["UnitPrice"]);
 ?>
 
 Na de query

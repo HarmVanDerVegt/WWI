@@ -1,5 +1,6 @@
 <?php
 include_once ROOT_PATH . "/config.php";
+include_once  ROOT_PATH . "/controllers/databaseController.php";
 
 $table = "stockItems";
 
@@ -23,15 +24,8 @@ function getAllStockItems()
     return $array;
 }
 
-function getStockItemByID($SELECT, $FROM, $WHERE){
+function getStockItemByID($ID){
+    global $table;
 
-    $db = createDB();
-
-    $sql = "SELECT {$SELECT}
-            FROM {$FROM}
-            WHERE {$WHERE}";
-
-    $result = $db->query($sql);
-
-    return $result;
+    return getRowByIntID("stockItemID", $table, $ID);
 }

@@ -13,6 +13,7 @@ and open the template in the editor.
         <?php include("../includes/header.php"); ?>
         <br>
         <div>
+            <img src="media/airline.jpg" alt="Smiley face" height="400" width="400">
             <a href="category/airlinenovelties.php"><h1>Airline Novelties</h1></a>
             <a href="category/clothing.php"><h1>Clothing</h1></a>
             <a href="category/computingnovelties.php"><h1>Computing Novelties</h1></a>

@@ -14,3 +14,77 @@
 .navbar .dropdown-toggle {
     color: #ffffff;
 }
+
+#nav-bar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    /*overflow: hidden;*/
+    background-color: #1c25ff;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+}
+
+#nav-bar li {
+    float: left;
+    border-right: 3px inset gray;
+}
+
+#nav-bar li a {
+    display: block;
+    height: 50px;
+    width: 150px;
+    text-decoration: none;
+    text-transform: capitalize;
+    text-align: center;
+    color: white;
+    padding: 15px 15px 10px 15px;
+}
+
+#nav-bar li a:hover {
+    background-color: #C4BCB9;
+}
+
+#nav-bar li:last-child {
+    border-right: none;
+}
+
+#nav-bar li a,
+.navbar-edit {
+    /*edits the "Deals" tab if needed*/
+    cursor: pointer;
+}
+
+.navbar-drop {
+    position: relative;
+}
+
+.navbar-drop:hover .navbar-drop-content {
+    /*Displays the "dropdown box" when the navbar element is hovered over*/
+    display: block;
+}
+
+.navbar-drop-content {
+    /*this edits the dropdown card itself*/
+    display: none;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    /*to make the dropdown menu look like a "card"*/
+    width: 100%;
+    position: absolute;
+    top: 25px;
+    z-index: 500;
+}
+
+#nav-bar li .navbar-drop-content a {
+    /*edits the links in the drop down*/
+    color: black;
+    background-color: #F5F3EF;
+    text-decoration: none;
+    text-align: left;
+}
+
+#nav-bar li .navbar-drop-content a:hover {
+    /*edits the links in the dropdown when hovered*/
+    background-color: #2837ff;
+}

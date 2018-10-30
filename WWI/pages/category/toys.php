@@ -2,7 +2,7 @@
 
 <?php
 if (!defined('ROOT_PATH')){
-    include("../config.php");
+    include("../../config.php");
 }
 ?>
 

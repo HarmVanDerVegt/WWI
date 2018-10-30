@@ -5,6 +5,7 @@ if (!defined('ROOT_PATH')){
 
 include(ROOT_PATH . "/includes/header.php"); ?>
 
+<br>
 <div class="container">
     <div class="row">
         <div class="col-sm">
@@ -13,6 +14,7 @@ include(ROOT_PATH . "/includes/header.php"); ?>
                     <h5 class="card-title">Card Title</h5>
                     <p class="card-text">Card Example</p>
                     <a href="#" class="btn btn-primary">Link</a>
+
                 </div>
             </div>
         </div>

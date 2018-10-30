@@ -10,7 +10,7 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <?php include("../includes/header.php"); ?>
+        <?php include(ROOT_PATH . "/includes/header.php"); ?>
         <br>
         <div>
             <a href="category/airlinenovelties.php"><h1>Airline Novelties</h1></a>
@@ -25,6 +25,6 @@ and open the template in the editor.
             <a href="category/usbnovelties.php"><h1>USB Novelties</h1></a>
         </div>
         <br>
-        <?php include("../includes/footer.php"); ?>
+        <?php include(ROOT_PATH . "/includes/footer.php"); ?>
     </body>
 </html>

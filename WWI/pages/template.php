@@ -20,7 +20,7 @@ include_once ROOT_PATH . "/controllers/supplierController.php";
                         $StockItem = getStockItemByID(6);
                         $Supplier = getSupplierByID($StockItem["SupplierID"]);
 
-                        echo $_SERVER['DOCUMENT_ROOT'];
+                        
                         echo "Naam: " . $StockItem["StockItemName"] . "<br>";
                         if ($StockItem["Photo"] != NULL) {
                             ?> <img src=<?php $StockItem["Photo"] ?> alt="FotoNietGevonden" height="250px" width="250px"> <?php

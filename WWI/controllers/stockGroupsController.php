@@ -1,8 +1,18 @@
 <?php
+include_once ROOT_PATH . "/config.php";
+include_once ROOT_PATH . "/controllers/databaseController";
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+$tableStockGroups = "stockGroups";
 
+function getAllStockGroups(){
+    
+    global $tableStockGroups;
+    
+    return getAllRows($tableStockGroups);
+}
+
+function getStockGroupByID(){
+    global $tableStockGroups;
+    
+    return getRowByIntID("stockGroupID", $table, $ID);
+}

@@ -12,20 +12,43 @@ function createDB()
     //echo "succes";
 
     return $dbcon;
-
-    //define(DB, $dbcon);
 }
 
+//Geeft een rij uit de database terug als array.
+//Gebruik: $result[attribute]
 function getRowByIntID($ID, $table, $value){
+    //Initieert de database.
     $db = createDB();
 
+    //Geeft een error als de value geen int is.
     $value = (int)$value;
 
+    //Prepared de SQL statement.
     $sql = "SELECT *
             FROM $table
             WHERE $ID = $value";
 
+    //Voert de statement uit.
     $result = $db->query($sql);
 
+    //Geeft de eerste rij terug als array en gaat naar de volgende rij, die er niet is.
+    //Dit geeft dus maar één rij terug.
     return $result->fetch_assoc();
+}
+
+function getAllRows($table){
+    $db = createDB();
+
+    $sql = "SELECT *
+            FROM $table";
+
+    $result = $db->query($sql);
+
+    $array = [];
+
+    while ($row = $result->fetch_assoc()){
+        $array[$row[0]] = $row;
+    }
+
+    return $array;
 }

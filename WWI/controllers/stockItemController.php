@@ -2,28 +2,28 @@
 include_once ROOT_PATH . "/config.php";
 include_once  ROOT_PATH . "/controllers/databaseController.php";
 
-$table = "stockItems";
+$tableStockItems = "stockItems";
 
 function getAllStockItems()
 {
-    global $table ;
+    global $tableStockItems;
 
-    return getAllRows($table);
+    return getAllRows($tableStockItems);
 }
 
 function getStockItemByID($ID){
-    global $table;
+    global $tableStockItems;
 
-    return getRowByIntID("stockItemID", $table, $ID);
+    return getRowByIntID("stockItemID", $tableStockItems, $ID);
 }
 
 function getStockItemBySupplierID($ID)
 {
 
-    global $table;
+    global $tableStockItems;
 
 
-    return getRowByForeignID($ID, $table, "Suppliers", "SupplierID", "SupplierID");
+    return getRowByForeignID($ID, $tableStockItems, "Suppliers", "SupplierID", "SupplierID");
 }
 
 

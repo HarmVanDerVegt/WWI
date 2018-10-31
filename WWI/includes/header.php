@@ -7,11 +7,11 @@
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">WWI</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon"></span>
     </button>
-
+    <!-- dropdown catogory -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
@@ -19,12 +19,14 @@
                     Dropdown
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Actie 1</a>
-                    <a class="dropdown-item" href="#">Actie 2</a>
+                    <?php
+                    print ("<a class=\"dropdown-item\" href=\"#\">" .$catogorynavbar. "</a>")
+                    ?>
                 </div>
             </li>
         </ul>
     </div>
+    <!-- einde dropdown catogory -->
     <!-- login -->
     <div class="navbar-right" id="navbarSupportedContent">
         <ul class="navbar-nav">
@@ -33,41 +35,40 @@
                     Login
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Login in</a>
+                    <a class="dropdown-item" href="#"></a>
                     <form class="px-4 py-3">
                         <div class="form-group">
-                            <label for="exampleDropdownFormEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleDropdownFormEmail1"
+                            <label for="exampleDropdownFormEmail1">Email adres</label>
+                            <input type="email" class="form-control" id="FormEmail"
                                    placeholder="email@example.com">
                         </div>
                         <div class="form-group">
                             <label for="exampleDropdownFormPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleDropdownFormPassword1"
-                                   placeholder="Password">
+                            <input type="password" class="form-control" id="FormPassword"
+                                   placeholder="Wachtwoord">
                         </div>
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="dropdownCheck">
                             <label class="form-check-label" for="dropdownCheck">
-                                Remember me
+                                Onthoud mij
                             </label>
                         </div>
-                        <button type="submit" class="btn btn-primary">Sign in</button>
+                        <button type="submit" class="btn btn-primary">Log in</button>
                     </form>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">New around here? Sign up</a>
-                    <a class="dropdown-item" href="#">Forgot password?</a>
+                    <a class="dropdown-item" href="#">Nieuw hier? Registreren</a>
+                    <a class="dropdown-item" href="#">Wachtwoord vergeten?</a>
                 </div>
 
             </li>
         </ul>
     </div>
     <!-- einde login -->
-
-
+    <!-- zoekveld -->
     <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <input class="form-control mr-sm-2" type="search" placeholder="Zoeken" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Zoeken</button>
     </form>
-
+    <!-- einde zoekveld -->
 
 </nav>

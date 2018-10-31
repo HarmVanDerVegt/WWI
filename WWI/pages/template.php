@@ -24,7 +24,7 @@ include_once ROOT_PATH . "/controllers/supplierController.php";
                         if ($StockItem["Photo"] != NULL) {
                             ?> <img src=<?php $StockItem["Photo"] ?> alt="FotoNietGevonden" height="250px" width="250px"> <?php
                         } else {
-                            ?> <img src="media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px">; <?php
+                            ?> <img src="media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px"> <?php
                         }
                         if ($StockItem["RecommendedRetailPrice"] != NULL) {
                             echo "De prijs is: €" . $StockItem["RecommendedRetailPrice"] . " euro" . "<br>";
@@ -68,7 +68,7 @@ include_once ROOT_PATH . "/controllers/supplierController.php";
                         if ($StockItem["Photo"] != NULL) {
                             ?> <img src=<?php $StockItem["Photo"] ?> alt="FotoNietGevonden" height="250px" width="250px"> <?php
                         } else {
-                            ?> <img src="media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px">; <?php
+                            ?> <img src="media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px"> <?php
                         }
                         if ($StockItem["RecommendedRetailPrice"] != NULL) {
                             echo "De prijs is: €" . $StockItem["RecommendedRetailPrice"] . " euro" . "<br>";
@@ -109,7 +109,7 @@ include_once ROOT_PATH . "/controllers/supplierController.php";
                         if ($StockItem["Photo"] != NULL) {
                             ?> <img src=<?php $StockItem["Photo"] ?> alt="FotoNietGevonden" height="250px" width="250px"> <?php
                         } else {
-                            ?> <img src="media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px">; <?php
+                            ?> <img src="media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px"> <?php
                         }
                         if ($StockItem["RecommendedRetailPrice"] != NULL) {
                             echo "De prijs is: €" . $StockItem["RecommendedRetailPrice"] . " euro" . "<br>";
@@ -153,7 +153,7 @@ include_once ROOT_PATH . "/controllers/supplierController.php";
                         if ($StockItem["Photo"] != NULL) {
                             ?> <img src=<?php $StockItem["Photo"] ?> alt="FotoNietGevonden" height="250px" width="250px"> <?php
                         } else {
-                            ?> <img src="media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px">; <?php
+                            ?> <img src="media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px"> <?php
                         }
                         if ($StockItem["RecommendedRetailPrice"] != NULL) {
                             echo "De prijs is: €" . $StockItem["RecommendedRetailPrice"] . " euro" . "<br>";
@@ -194,7 +194,7 @@ include_once ROOT_PATH . "/controllers/supplierController.php";
                         if ($StockItem["Photo"] != NULL) {
                             ?> <img src=<?php $StockItem["Photo"] ?> alt="FotoNietGevonden" height="250px" width="250px"> <?php
                         } else {
-                            ?> <img src="media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px">; <?php
+                            ?> <img src="media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px"> <?php
                         }
                         if ($StockItem["RecommendedRetailPrice"] != NULL) {
                             echo "De prijs is: €" . $StockItem["RecommendedRetailPrice"] . " euro" . "<br>";
@@ -235,7 +235,7 @@ include_once ROOT_PATH . "/controllers/supplierController.php";
                         if ($StockItem["Photo"] != NULL) {
                             ?> <img src=<?php $StockItem["Photo"] ?> alt="FotoNietGevonden" height="250px" width="250px"> <?php
                         } else {
-                            ?> <img src="media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px">; <?php
+                            ?> <img src="media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px"> <?php
                         }
                         if ($StockItem["RecommendedRetailPrice"] != NULL) {
                             echo "De prijs is: €" . $StockItem["RecommendedRetailPrice"] . " euro" . "<br>";
@@ -279,7 +279,7 @@ include_once ROOT_PATH . "/controllers/supplierController.php";
                         if ($StockItem["Photo"] != NULL) {
                             ?> <img src=<?php $StockItem["Photo"] ?> alt="FotoNietGevonden" height="250px" width="250px"> <?php
                         } else {
-                            ?> <img src="media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px">; <?php
+                            ?> <img src="media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px"> <?php
                         }
                         if ($StockItem["RecommendedRetailPrice"] != NULL) {
                             echo "De prijs is: €" . $StockItem["RecommendedRetailPrice"] . " euro" . "<br>";
@@ -320,7 +320,7 @@ include_once ROOT_PATH . "/controllers/supplierController.php";
                         if ($StockItem["Photo"] != NULL) {
                             ?> <img src=<?php $StockItem["Photo"] ?> alt="FotoNietGevonden" height="250px" width="250px"> <?php
                         } else {
-                            ?> <img src="media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px">; <?php
+                            ?> <img src="media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px"> <?php
                         }
                         if ($StockItem["RecommendedRetailPrice"] != NULL) {
                             echo "De prijs is: €" . $StockItem["RecommendedRetailPrice"] . " euro" . "<br>";
@@ -361,7 +361,7 @@ include_once ROOT_PATH . "/controllers/supplierController.php";
                         if ($StockItem["Photo"] != NULL) {
                             ?> <img src=<?php $StockItem["Photo"] ?> alt="FotoNietGevonden" height="250px" width="250px"> <?php
                         } else {
-                            ?> <img src="media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px">; <?php
+                            ?> <img src="media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px"> <?php
                         }
                         if ($StockItem["RecommendedRetailPrice"] != NULL) {
                             echo "De prijs is: €" . $StockItem["RecommendedRetailPrice"] . " euro" . "<br>";

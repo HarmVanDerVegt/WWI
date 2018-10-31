@@ -31,7 +31,11 @@ include_once  ROOT_PATH . "/controllers/stockItemController.php";
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Card Title</h5>
-                    <p class="card-text">Card Example</p>
+                    <p class="card-text"><?php
+                        $items = getStockItemBySupplierID(7);
+
+                       echo "SupplierID is: " . $items[153]["SupplierID"] . "<br>";
+                        ?></p>
                     <a href="#" class="btn btn-primary">Link</a>
                 </div>
             </div>
@@ -40,7 +44,11 @@ include_once  ROOT_PATH . "/controllers/stockItemController.php";
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Card Title</h5>
-                    <p class="card-text">Card Example</p>
+                    <p class="card-text"><?php
+                        //$items = getAllStockItems();
+
+                        //print_r($items);
+                        ?></p>
                     <a href="#" class="btn btn-primary">Link</a>
                 </div>
             </div>

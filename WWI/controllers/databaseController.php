@@ -47,8 +47,24 @@ function getAllRows($table){
     $array = [];
 
     while ($row = $result->fetch_assoc()){
-        $array[$row[0]] = $row;
+        $array[array_values($row)[0]] = $row;
     }
 
     return $array;
+}
+
+function getRowByForeignID($ID, $table1, $table2, $value, $joinID, $joinID2){
+
+    $db = createDB();
+
+    $sql = "SELECT *
+            FROM $table1 AS t1
+            JOIN $table2 AS t2
+            ON t1.$joinID = t2.$joinID2
+            WHERE t1.$joinID = $value";
+
+    $result = $db->query($sql);
+
+    return $result->fetch_assoc();
+
 }

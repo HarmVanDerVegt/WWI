@@ -5,6 +5,7 @@ if (!defined('ROOT_PATH')) {
 
 include(ROOT_PATH . "/includes/header.php");
 include_once ROOT_PATH . "/controllers/stockItemController.php";
+include_once ROOT_PATH . "/controllers/supplierController.php";
 ?>
 
 
@@ -17,7 +18,9 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
                     <h5 class="card-title">Card Title</h5>
                     <p class="card-text"><?php
                         $StockItem = getStockItemByID(6);
+                        $Supplier = getSupplierByID($StockItem["SupplierID"]);
 
+                        echo $_SERVER['DOCUMENT_ROOT'];
                         echo "Naam: " . $StockItem["StockItemName"] . "<br>";
                         if ($StockItem["Photo"] != NULL) {
                             ?> <img src=<?php $StockItem["Photo"] ?> alt="FotoNietGevonden" height="250px" width="250px"> <?php
@@ -47,7 +50,7 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
                         if ($StockItem["IsChillerStock"] == TRUE) {
                             echo "Dit is een koelproduct";
                         }
-                        echo "Dit product word geleverd door " . $StockItem["SupplierID"];
+                        echo "Dit product word geleverd door " . $Supplier["SupplierName"];
                         ?></p>
                     <a href="#" class="btn btn-primary">Link</a>
 
@@ -60,6 +63,7 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
                     <h5 class="card-title">Card Title</h5>
                     <p class="card-text"><?php
                         $StockItem = getStockItemByID(24);
+                        $Supplier = getSupplierByID($StockItem["SupplierID"]);
 
                         echo "Naam: " . $StockItem["StockItemName"] . "<br>";
                         if ($StockItem["Photo"] != NULL) {
@@ -87,7 +91,7 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
                         if ($StockItem["IsChillerStock"] == TRUE) {
                             echo "Dit is een koelproduct";
                         }
-                        echo "Dit product word geleverd door " . $StockItem["SupplierID"];
+                        echo "Dit product word geleverd door " . $Supplier["SupplierName"];
                         ?></p>
                     <a href="#" class="btn btn-primary">Link</a>
                 </div>
@@ -99,13 +103,10 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
                     <h5 class="card-title">Card Title</h5>
                     <p class="card-text"><?php
                         $StockItem = getStockItemByID(42);
+                        $Supplier = getSupplierByID($StockItem["SupplierID"]);
+
 
                         echo "Naam: " . $StockItem["StockItemName"] . "<br>";
-                        if ($StockItem["Photo"] != NULL) {
-                            ?> <img src=<?php $StockItem["Photo"] ?> alt="FotoNietGevonden" height="250px" width="250px"> <?php
-                        } else {
-                            ?> <img src="media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px">; <?php
-                        }
                         if ($StockItem["Photo"] != NULL) {
                             ?> <img src=<?php $StockItem["Photo"] ?> alt="FotoNietGevonden" height="250px" width="250px"> <?php
                         } else {
@@ -131,7 +132,7 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
                         if ($StockItem["IsChillerStock"] == TRUE) {
                             echo "Dit is een koelproduct";
                         }
-                        echo "Dit product word geleverd door " . $StockItem["SupplierID"];
+                        echo "Dit product word geleverd door " . $Supplier["SupplierName"];
                         ?></p>
                     <a href="#" class="btn btn-primary">Link</a>
                 </div>
@@ -146,6 +147,8 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
                     <h5 class="card-title">Card Title</h5>
                     <p class="card-text"><?php
                         $StockItem = getStockItemByID(217);
+                        $Supplier = getSupplierByID($StockItem["SupplierID"]);
+
 
                         echo "Naam: " . $StockItem["StockItemName"] . "<br>";
                         if ($StockItem["Photo"] != NULL) {
@@ -173,7 +176,7 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
                         if ($StockItem["IsChillerStock"] == TRUE) {
                             echo "Dit is een koelproduct";
                         }
-                        echo "Dit product word geleverd door " . $StockItem["SupplierID"];
+                        echo "Dit product word geleverd door " . $Supplier["SupplierName"];
                         ?></p>
                     <a href="#" class="btn btn-primary">Link</a>
                 </div>
@@ -185,6 +188,8 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
                     <h5 class="card-title">Card Title</h5>
                     <p class="card-text"><?php
                         $StockItem = getStockItemByID(225);
+                        $Supplier = getSupplierByID($StockItem["SupplierID"]);
+
 
                         echo "Naam: " . $StockItem["StockItemName"] . "<br>";
                         if ($StockItem["Photo"] != NULL) {
@@ -212,7 +217,7 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
                         if ($StockItem["IsChillerStock"] == TRUE) {
                             echo "Dit is een koelproduct" . "<br>";
                         }
-                        echo "Dit product word geleverd door " . $StockItem["SupplierID"];
+                        echo "Dit product word geleverd door " . $Supplier["SupplierName"];
                         ?></p>
                     <a href="#" class="btn btn-primary">Link</a>
                 </div>
@@ -224,6 +229,8 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
                     <h5 class="card-title">Card Title</h5>
                     <p class="card-text"><?php
                         $StockItem = getStockItemByID(60);
+                        $Supplier = getSupplierByID($StockItem["SupplierID"]);
+
 
                         echo "Naam: " . $StockItem["StockItemName"] . "<br>";
                         if ($StockItem["Photo"] != NULL) {
@@ -251,7 +258,7 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
                         if ($StockItem["IsChillerStock"] == TRUE) {
                             echo "Dit is een koelproduct";
                         }
-                        echo "Dit product word geleverd door " . $StockItem["SupplierID"];
+                        echo "Dit product word geleverd door " . $Supplier["SupplierName"];
                         ?></p>
                     <a href="#" class="btn btn-primary">Link</a>
                 </div>
@@ -266,6 +273,8 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
                     <h5 class="card-title">Card Title</h5>
                     <p class="card-text"><?php
                         $StockItem = getStockItemByID(69);
+                        $Supplier = getSupplierByID($StockItem["SupplierID"]);
+
 
                         echo "Naam: " . $StockItem["StockItemName"] . "<br>";
                         if ($StockItem["Photo"] != NULL) {
@@ -293,7 +302,7 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
                         if ($StockItem["IsChillerStock"] == TRUE) {
                             echo "Dit is een koelproduct";
                         }
-                        echo "Dit product word geleverd door " . $StockItem["SupplierID"];
+                        echo "Dit product word geleverd door " . $Supplier["SupplierName"];
                         ?></p>
                     <a href="#" class="btn btn-primary">Link</a>
                 </div>
@@ -305,6 +314,8 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
                     <h5 class="card-title">Card Title</h5>
                     <p class="card-text"><?php
                         $StockItem = getStockItemByID(14);
+                        $Supplier = getSupplierByID($StockItem["SupplierID"]);
+
 
                         echo "Naam: " . $StockItem["StockItemName"] . "<br>";
                         if ($StockItem["Photo"] != NULL) {
@@ -332,7 +343,7 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
                         if ($StockItem["IsChillerStock"] == TRUE) {
                             echo "Dit is een koelproduct";
                         }
-                        echo "Dit product word geleverd door " . $StockItem["SupplierID"];
+                        echo "Dit product word geleverd door " . $Supplier["SupplierName"];
                         ?></p>
                     <a href="#" class="btn btn-primary">Link</a>
                 </div>
@@ -344,6 +355,8 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
                     <h5 class="card-title">Card Title</h5>
                     <p class="card-text"><?php
                         $StockItem = getStockItemByID(88);
+                        $Supplier = getSupplierByID($StockItem["SupplierID"]);
+
 
                         echo "Naam: " . $StockItem["StockItemName"] . "<br>";
                         if ($StockItem["Photo"] != NULL) {
@@ -371,7 +384,7 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
                         if ($StockItem["IsChillerStock"] == TRUE) {
                             echo "Dit is een koelproduct";
                         }
-                        echo "Dit product word geleverd door " . $StockItem["SupplierID"];
+                        echo "Dit product word geleverd door " . $Supplier["SupplierName"];
                         ?></p>
                     <a href="#" class="btn btn-primary">Link</a>
                 </div>

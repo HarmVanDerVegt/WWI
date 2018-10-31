@@ -14,7 +14,8 @@ if (!defined('ROOT_PATH')) {
     </head>
     <body>
         <!-- voegt header toe -->
-        <?php include(ROOT_PATH . "/includes/header.php"); ?>
+        <?php include(ROOT_PATH . "/includes/header.php");
+        include_once ROOT_PATH . "/controllers/stockGroupsController.php";?>
         <br>
 
         <!-- category informatie -->

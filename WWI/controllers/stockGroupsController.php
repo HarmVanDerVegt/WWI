@@ -1,6 +1,6 @@
 <?php
 include_once ROOT_PATH . "/config.php";
-include_once ROOT_PATH . "/controllers/databaseController";
+include_once ROOT_PATH . "/controllers/databaseController.php";
 
 $tableStockGroups = "stockGroups";
 
@@ -16,3 +16,4 @@ function getStockGroupByID(){
     
     return getRowByIntID("stockGroupID", $table, $ID);
 }
+?>

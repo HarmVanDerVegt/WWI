@@ -1,9 +1,9 @@
 <head>
-    <link href="\WWI\WWI\css\bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="\css\bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <!--    <link href="\WWI\WWI\css\navbar.css" rel="stylesheet" type="text/css"/>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://unpkg.com/popper.js"></script>
-    <script src='\WWI\WWI\js\bootstrap.bundle.min.js'></script>
+    <script src='\js\bootstrap.bundle.min.js'></script>
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">

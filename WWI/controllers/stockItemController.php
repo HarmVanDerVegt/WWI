@@ -8,20 +8,7 @@ function getAllStockItems()
 {
     global $table ;
 
-    $db = createDB();
-
-    $sql = "SELECT stockItemID
-            FROM {$table};";
-
-    $result = $db->query($sql);
-
-    $array = [];
-
-    while ($row = $result->fetch_assoc()) {
-        $array[$row["stockItemID"]] = $row;
-    }
-
-    return $array;
+    return getAllRows($table);
 }
 
 function getStockItemByID($ID){
@@ -29,3 +16,30 @@ function getStockItemByID($ID){
 
     return getRowByIntID("stockItemID", $table, $ID);
 }
+
+function getStockItemBySupplierID($ID)
+{
+
+    global $table;
+
+    $db = createDB();
+
+    $sql = "SELECT *
+            FROM $table AS si
+            JOIN Suppliers AS s
+            ON s.SupplierID = si.SupplierID
+            WHERE si.SupplierID = $ID";
+
+    $result = $db->query($sql);
+
+    $array = [];
+
+    while ($row = $result->fetch_assoc()) {
+        $array[array_values($row)[0]] = $row;
+
+
+    }
+    return $array;
+}
+
+

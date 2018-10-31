@@ -53,7 +53,7 @@ function getAllRows($table){
     return $array;
 }
 
-function getRowByForeignID($ID, $table1, $table2, $value, $joinID, $joinID2){
+function getRowByForeignID($value, $table1, $table2, $joinID, $joinID2){
 
     $db = createDB();
 
@@ -65,6 +65,24 @@ function getRowByForeignID($ID, $table1, $table2, $value, $joinID, $joinID2){
 
     $result = $db->query($sql);
 
-    return $result->fetch_assoc();
+/*    if ($result == true){
+        $result->fetch_assoc();
+    }
+    else
+    {
+        if ($result == false){
+            print $sql;
+            mysqli_error($db);
+            $result->fetch_assoc();
+        }
+    }*/
 
+    $array = [];
+
+    while ($row = $result->fetch_assoc()) {
+        $array[array_values($row)[0]] = $row;
+
+
+    }
+    return $array;
 }

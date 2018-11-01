@@ -1,9 +1,9 @@
 <head>
-    <link href="\css\bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="\WWI\WWI\css\bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <!--    <link href="\WWI\WWI\css\navbar.css" rel="stylesheet" type="text/css"/>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://unpkg.com/popper.js"></script>
-    <script src='\js\bootstrap.bundle.min.js'></script>
+    <script src='\WWI\WWI\js\bootstrap.bundle.min.js'></script>
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -11,7 +11,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <!-- dropdown catogory -->
+    <!-- dropdown category -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
@@ -20,13 +20,20 @@
                 </a>
                 <div class="dropdown-menu">
                     <?php
-                    print ("<a class=\"dropdown-item\" href=\"#\">" .$catogorynavbar. "</a>")
+                    include_once "../config.php";
+                    include_once ROOT_PATH . "/controllers/stockGroupsController.php";
+                    $categorynavbarar = getAllStockGroups();
+                    foreach ($categorynavbarar as $categorynavbar) {
+                        //print ("<a class=\"dropdown-item\" href=\"#\">" . $categorynavbar["StockGroupName"] . "</a>");
+                        //print $categorynavbar;
+                        echo "<a class=\"dropdown-item\" href=\"#\">" . $categorynavbar["StockGroupName"] . "</a> \n";
+                    }
                     ?>
                 </div>
             </li>
         </ul>
     </div>
-    <!-- einde dropdown catogory -->
+    <!-- einde dropdown category -->
     <!-- login -->
     <div class="navbar-right" id="navbarSupportedContent">
         <ul class="navbar-nav">

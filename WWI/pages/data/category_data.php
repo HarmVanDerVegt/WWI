@@ -1,5 +1,5 @@
 <?php
-
+// dit bestend is alleen bedoeld voor category
 // catecory informatie ophalen
         $i = 0;
         $category[$i] = new category_type();

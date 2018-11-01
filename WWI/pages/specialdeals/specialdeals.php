@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 
+
 <?php
 if (!defined('ROOT_PATH')) {
-    include("../config.php");
+    include("../../config.php");
 }
+
+echo ROOT_PATH;
 
 include(ROOT_PATH . "/includes/header.php");
 include_once ROOT_PATH . "/controllers/stockItemController.php";
+include_once ROOT_PATH . "/controllers/specialDealsController.php";
 
 ?>
 

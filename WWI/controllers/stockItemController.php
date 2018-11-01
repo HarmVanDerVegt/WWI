@@ -1,5 +1,5 @@
 <?php
-include_once ROOT_PATH . "/config.php";
+include_once "../config.php";
 include_once  ROOT_PATH . "/controllers/databaseController.php";
 
 $tableStockItems = "stockItems";
@@ -32,6 +32,6 @@ function getStockItemBySpecialDealID($ID)
     global $tableStockItems;
     
     
-    return getRowByForeignID($ID, $tableStockItem, "SpecialDeals", "StockItemID", "StockItemID");
+    return getRowByForeignID($ID, $tableStockItems, "SpecialDeals", "StockItemID", "StockItemID");
 }
 

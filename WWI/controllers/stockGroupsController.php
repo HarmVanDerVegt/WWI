@@ -11,9 +11,9 @@ function getAllStockGroups(){
     return getAllRows($tableStockGroups);
 }
 
-function getStockGroupByID($ID){
+function getStockGroupByID(){
     global $tableStockGroups;
     
-    return getRowByIntID("stockGroupID", $tableStockGroups, $ID);
+    return getRowByIntID("stockGroupID", $table, $ID);
 }
-
+?>

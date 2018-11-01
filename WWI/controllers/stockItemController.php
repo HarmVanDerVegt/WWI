@@ -26,4 +26,12 @@ function getStockItemBySupplierID($ID)
     return getRowByForeignID($ID, $tableStockItems, "Suppliers", "SupplierID", "SupplierID");
 }
 
+function getStockItemBySpecialDealID($ID)
+{
+    
+    global $tableStockItems;
+    
+    
+    return getRowByForeignID($ID, $tableStockItem, "SpecialDeals", "StockItemID", "StockItemID");
+}
 

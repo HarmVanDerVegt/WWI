@@ -24,16 +24,16 @@ function getSpecialDealByStockItemID($ID){
     return getRowByForeignID($ID, $tableSpecialDeals, "stockitems", "StockitemID", "StockitemID");
 }
 
-function getLowestSpecialDealID($ID) {
+function getLowestSpecialDealID() {
     
     global $tableSpecialDeals;
     
-    return getLowestAttributeByIntID($ID, $table);
+    return getLowestAttributeByIntID("SpecialDealID", $tableSpecialDeals);
 }
 
-function getHighestSpecialID($ID) {
+function getHighestSpecialDealID() {
     
     global $tableSpecialDeals;
     
-    return getHighestAttributeByIntID($ID, $table);
+    return getHighestAttributeByIntID("SpecialDealID", $tableSpecialDeals);
 }

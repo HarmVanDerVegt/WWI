@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 
+
 <?php
 if (!defined('ROOT_PATH')) {
     include("../config.php");
 }
 
+echo ROOT_PATH;
+
 include(ROOT_PATH . "/includes/header.php");
 include_once ROOT_PATH . "/controllers/stockItemController.php";
+include_once ROOT_PATH . "/controllers/specialDealsController.php";
 
 ?>
 
@@ -25,15 +29,19 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
                             <h5 class="card-title">Card Title</h5>
                             <p class="card-text"><?php
                             
-                            $SpecialDeal = getSpecialDealByID(rand(1, 5));
+                            $LowestSpecialDealValue = getLowestSpecialDealID();
+                            $HighestSpecialDealValue = getHighestSpecialDealID();
+                            
+                            $SpecialDeal = getSpecialDealByID(rand($LowestSpecialDealValue, $HighestSpecialDealValue));
                             $StockItem = getStockItemBySpecialDealID($SpecialDeal["SpecialDealID"]);
             
                             if ($SpecialDeal == NULL || FALSE) {
-                                    ?> <img src=media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px"> <?php
+                                    ?> <img src=specialdeals/SpecialDealFotoNietBeschikbaar" alt="SpecialDealFotoNietGevonden" height="250px" width="250px"> <?php
                                 } else {
                                     ?> <img src="media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px"> <?php
                                 }
                                 ?></p>
+                            
                             <a href="/product?productID=<?php $StockItem["StockItemID"] ?>" class="btn btn-primary">Link</a>
                         </div>
                     </div>

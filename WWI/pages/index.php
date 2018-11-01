@@ -30,7 +30,7 @@ if (!defined('ROOT_PATH')) {
             // laad category data
             include('data/category_data.php');
             ?>
-
+       
         <!-- laat de product categoryen zien -->
             <?php
             // variablen
@@ -41,7 +41,7 @@ if (!defined('ROOT_PATH')) {
             print('<div class="container">');
             print("<h1>Category:</h1>");
             print('<div class="row">');
-        
+            
             foreach ($category as $item) {
                 // toon kaart met naam en foto van category
                 print('<div class="col-6 col-sm-4">');

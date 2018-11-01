@@ -16,6 +16,8 @@ if (!defined('ROOT_PATH')) {
         <!-- voegt header toe -->
             <?php include(ROOT_PATH . "/includes/header.php"); ?>
         <br>
+        
+<!-- begin categorie knoppen------------------------------------------------------------------------------ -->
         <!-- category informatie ophalen -->
             <?php
             // speciale data type voor category informatie
@@ -26,7 +28,7 @@ if (!defined('ROOT_PATH')) {
             }
 
             // laad category data
-            include('data/data.php');
+            include('data/category_data.php');
             ?>
 
         <!-- laat de product categoryen zien -->
@@ -42,7 +44,7 @@ if (!defined('ROOT_PATH')) {
         
             foreach ($category as $item) {
                 // toon kaart met naam en foto van category
-                print('<div class="col-6 col-sm-3">');
+                print('<div class="col-6 col-sm-4">');
                     print('<div class="card">');
                         print('<a href="' . $item->link . '" class="btn btn-info" role="button">');
                             print('<strong>' . $item->category . '</strong><br>');
@@ -51,11 +53,11 @@ if (!defined('ROOT_PATH')) {
                     print('</div>');
                 print('</div>');
             }
-        
+
             print('</div>');
             print('</div>');
             ?>
-        
+<!-- einde category knoppen------------------------------------------------------------------------------ -->
         <!-- voeg footer toe -->
             <br>
             <?php include(ROOT_PATH . "/includes/footer.php"); ?>

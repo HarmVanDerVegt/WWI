@@ -86,3 +86,27 @@ function getRowByForeignID($value, $table1, $table2, $joinID, $joinID2){
     }
     return $array;
 }
+
+function getHighestAttributeByIntID($ID, $table) {
+    $db = createDB();
+
+    $sql = "SELECT MAX($ID)
+            FROM $table
+            LIMIT(1)";
+
+    $result = $db->query($sql);
+
+    return $result->fetch_assoc();   
+}
+
+function getLowestAttributeByIntID($ID, $table) {
+    $db = createDB();
+
+    $sql = "SELECT MIN($ID)
+            FROM $table
+            LIMIT(1)";
+
+    $result = $db->query($sql);
+
+    return $result->fetch_assoc();   
+}

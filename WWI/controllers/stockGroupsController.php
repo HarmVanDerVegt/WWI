@@ -1,6 +1,6 @@
 <?php
 include_once ROOT_PATH . "/config.php";
-include_once ROOT_PATH . "/controllers/databaseController";
+include_once ROOT_PATH . "/controllers/databaseController.php";
 
 $tableStockGroups = "stockGroups";
 
@@ -11,9 +11,9 @@ function getAllStockGroups(){
     return getAllRows($tableStockGroups);
 }
 
-function getStockGroupByID($ID){
+function getStockGroupByID(){
     global $tableStockGroups;
     
-    return getRowByIntID("stockGroupID", $tableStockGroups, $ID);
+    return getRowByIntID("stockGroupID", $table, $ID);
 }
-
+?>

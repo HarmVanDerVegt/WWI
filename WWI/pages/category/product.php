@@ -16,15 +16,21 @@ and open the template in the editor.
         $height = 200;
         $width = 300;
         ?>
+        
         <!-- verzamel data van product -->
         <?php
+        // hier moet de sql data in de goede variablen terecht komen
         $product_naam = "test_product_naam";
         $product_merk = "test";
         $product_prijs = 20;
         $product_voorraad = 100;
         $product_bezorg_info = "in 4 to 5 werkdagen leverbaar";
         $product_afbeelding_path = "../media/noveltyitems.jpg";
+        $product_specs = "veel dingen";
+        $product_beschrijving = "het is een beschrijving";
+        $product_review = "dit is een revieuw";
         ?>
+        
         <!-- Header -->
         <div class="card">
             <div class="card-body">
@@ -63,25 +69,49 @@ and open the template in the editor.
                 </table>
             </div>
         </div>
+        
         <!-- product informatie weergeven-->
         <br>
         <div class="container-fluid">
+            <!-- Toon specificaties -->
             <div class="row">
                 <div class="col-auto">
                     <div class="card">
                         <h2>Specs:</h2>
+                        <p><?php print($product_specs); ?></p>
                         <br>
                     </div>
                 </div>
             </div>
+            
+            <!-- toon product beschrijving -->
             <div class="row">
                 <div class="col-auto">
                     <div class="card">
                         <h2>Product beschrijving:</h2>
+                        <p><?php print($product_beschrijving); ?></p>
                         <br>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <!-- Toont product reviews -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-auto">
+                    <div class="card">
+                        <h2>revieuws:</h2>
+                        <p><?php print($product_review); ?></p>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- toon combi deals -->
+           <div class="row-md-4 offset-md-4">
+                combiedeals
+           </div>
     </body>
 </html>

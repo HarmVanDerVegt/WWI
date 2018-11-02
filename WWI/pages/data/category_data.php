@@ -5,61 +5,61 @@
         $category[$i] = new category_type();
         $category[$i]->category = "Airline Novelties";
         $category[$i]->foto_path = "media/airline.jpg";
-        $category[$i]->link = "category/airlinenovelties.php";
+        $category[$i]->link = "category/product_lijst.php?category=Airline Novelties";
 
         $i++;
         $category[$i] = new category_type();
         $category[$i]->category = "Clothing";
         $category[$i]->foto_path = "media/clothing.jpg";
-        $category[$i]->link = "category/clothing.php";
+        $category[$i]->link = "category/product_lijst.php?category=Clothing";
 
         $i++;
         $category[$i] = new category_type();
         $category[$i]->category = "Computing Novelties";
         $category[$i]->foto_path = "media/computingnovelties.jpg";
-        $category[$i]->link = "category/computingnovelties.php";
+        $category[$i]->link = "category/product_lijst.php?category=Computing Novelties";
 
         $i++;
         $category[$i] = new category_type();
         $category[$i]->category = "Furry Footwear";
         $category[$i]->foto_path = "media/furryfootwear.jpg";
-        $category[$i]->link = "category/furryfootwear.php";
+        $category[$i]->link = "category/product_lijst.php?category=Furry Footwear";
 
         $i++;
         $category[$i] = new category_type();
         $category[$i]->category = "Mugs";
         $category[$i]->foto_path = "media/mugs.jpg";
-        $category[$i]->link = "category/mugs.php";
+        $category[$i]->link = "category/product_lijst.php?category=Mugs";
         
         $i++;
         $category[$i] = new category_type();
         $category[$i]->category = "Novelty Items";
         $category[$i]->foto_path = "media/noveltyitems.jpg";
-        $category[$i]->link = "category/noveltyitems.php";
+        $category[$i]->link = "category/product_lijst.php?category=Novelty Items";
         
         $i++;
         $category[$i] = new category_type();
         $category[$i]->category = "Packaging Materials";
         $category[$i]->foto_path = "media/packagingmaterials.jpg";
-        $category[$i]->link = "category/packagingmaterials.php";
+        $category[$i]->link = "category/product_lijst.php?category=Packaging Materials";
         
         $i++;
         $category[$i] = new category_type();
         $category[$i]->category = "Toys";
         $category[$i]->foto_path = "media/toys.jpg";
-        $category[$i]->link = "category/toys.php";
+        $category[$i]->link = "category/product_lijst.php?category=Toys";
         
         $i++;
         $category[$i] = new category_type();
         $category[$i]->category = "T-shirts";
         $category[$i]->foto_path = "media/tshirts.jpg";
-        $category[$i]->link = "category/tshirts.php";
+        $category[$i]->link = "category/product_lijst.php?category=T-Shirts";
         
         $i++;
         $category[$i] = new category_type();
         $category[$i]->category = "USB Novelties";
         $category[$i]->foto_path = "media/usbnovelties.jpg";
-        $category[$i]->link = "category/usbnovelties.php";
+        $category[$i]->link = "category/product_lijst.php?category=USB Novelties";
         
 
 ?>       

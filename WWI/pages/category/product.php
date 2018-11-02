@@ -16,6 +16,15 @@ include_once ROOT_PATH . "/controllers/colorController.php";
         <title>Category</title>
     </head>
     <body>
+        <!-- path fix -->
+        <?php
+        if (!defined('ROOT_PATH')) {
+            include("../../config.php");
+        }
+        ?>
+        <!-- voegt header toe -->
+        <?php include(ROOT_PATH . "/includes/header.php"); ?>
+        <br>
         <!-- constanten -->
         <?php
         $height = 200;
@@ -26,8 +35,10 @@ include_once ROOT_PATH . "/controllers/colorController.php";
         $Color = getColorsByID($ProductID["ColorName"]);
         $Stock = getStockItemHoldingByID($ProductID["QuantityOnHand"]);
         ?>
+
         <!-- verzamel data van product -->
         <?php
+<<<<<<< HEAD
         // Naam van het product
         $product_naam = $StockItem;
 
@@ -87,13 +98,27 @@ include_once ROOT_PATH . "/controllers/colorController.php";
         $product_leverancier = $Supplier["SupplierName"];
 
         // JN - NOG KIJKEN NAAR IMPLEMENTATIE DATABASE.
+=======
+        // hier moet de sql data in de goede variablen terecht komen
+        $product_naam = "test_product_naam";
+        $product_merk = "test";
+        $product_prijs = 20;
+        $product_voorraad = 100;
+>>>>>>> 507b838f2e60c2e845d8e670fb0e45efe077d2ee
         $product_bezorg_info = "in 4 to 5 werkdagen leverbaar";
 
         // JN - WACHTEN OP TOEVOEGING BLOB DATABASE.
         $product_afbeelding_path = "../media/noveltyitems.jpg";
+        $product_specs = "veel dingen";
+        $product_beschrijving = "het is een beschrijving";
+        $product_review = "dit is een revieuw";
         ?>
 
+<<<<<<< HEAD
         <!-- Header -->
+=======
+        <!-- Header naam, merk, prijs, voorraad -->
+>>>>>>> 507b838f2e60c2e845d8e670fb0e45efe077d2ee
         <div class="card">
             <div class="card-body">
                 <!-- Toon naam van product -->
@@ -138,25 +163,55 @@ include_once ROOT_PATH . "/controllers/colorController.php";
                 </table>
             </div>
         </div>
-        <!-- product informatie weergeven-->
         <br>
+
+        <!-- product informatie weergeven-->
         <div class="container-fluid">
+            
+            <!-- Toon specificaties -->
             <div class="row">
-                <div class="col-auto">
-                    <div class="card">
-                        <h2>Specs:</h2>
-                        <br>
+                <div class="col-sm-8">
+                    <div class="bg-light card">
+                        <h4>Specs:</h4>
+                        <p><?php print($product_specs); ?></p>
                     </div>
                 </div>
             </div>
+            
+            <!-- toon product beschrijving -->
             <div class="row">
-                <div class="col-auto">
-                    <div class="card">
-                        <h2>Product beschrijving:</h2>
-                        <br>
+                <div class="col-sm-8" >
+                    <div class="bg-light  card">
+                        <h4>Product beschrijving:</h4>
+                        <p><?php print($product_beschrijving); ?></p>
                     </div>
                 </div>
             </div>
+            
+            <!-- Toont product reviews -->
+            <div class="row">
+                <div class="col-sm-8" >
+                    <div class="bg-light card">
+                        <h4>revieuws:</h4>
+                        <p><?php print($product_review); ?></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- toon combi deals -->
+            <div class="row">
+                <div class="col-lg-8" >
+                    <div class="bg-light card">
+                        <h4>combideals:</h4>
+                        <p>test</p>
+                    </div>
+                </div>
+            </div>
+            
         </div>
+
+        <!-- voeg footer toe -->
+        <br>
+        <?php include(ROOT_PATH . "/includes/footer.php"); ?>
     </body>
 </html>

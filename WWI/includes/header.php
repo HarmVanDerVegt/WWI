@@ -20,12 +20,10 @@
                 </a>
                 <div class="dropdown-menu">
                     <?php
-                    include_once "../config.php";
+                    //include_once "../config.php";
                     include_once ROOT_PATH . "/controllers/stockGroupsController.php";
                     $categorynavbarar = getAllStockGroups();
                     foreach ($categorynavbarar as $categorynavbar) {
-                        //print ("<a class=\"dropdown-item\" href=\"#\">" . $categorynavbar["StockGroupName"] . "</a>");
-                        //print $categorynavbar;
                         echo "<a class=\"dropdown-item\" href=\"#\">" . $categorynavbar["StockGroupName"] . "</a> \n";
                     }
                     ?>
@@ -72,8 +70,9 @@
     </div>
     <!-- einde login -->
     <!-- zoekveld -->
-    <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Zoeken" aria-label="Search">
+    <form class="form-inline my-2 my-lg-0" action="../pages/Search.php">
+        <input class="form-control mr-sm-2" type="search" placeholder="Zoeken" aria-label="Search" name="Zoeken"
+               id="Zoeken">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Zoeken</button>
     </form>
     <!-- einde zoekveld -->

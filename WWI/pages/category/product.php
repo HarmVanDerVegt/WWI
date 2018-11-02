@@ -86,7 +86,7 @@ and open the template in the editor.
             <!-- Toon specificaties -->
             <div class="row">
                 <div class="col-sm-8">
-                    <div class="bg-light">
+                    <div class="bg-light card">
                         <h4>Specs:</h4>
                         <p><?php print($product_specs); ?></p>
                     </div>
@@ -96,7 +96,7 @@ and open the template in the editor.
             <!-- toon product beschrijving -->
             <div class="row">
                 <div class="col-sm-8" >
-                    <div class="bg-light">
+                    <div class="bg-light  card">
                         <h4>Product beschrijving:</h4>
                         <p><?php print($product_beschrijving); ?></p>
                     </div>
@@ -106,7 +106,7 @@ and open the template in the editor.
             <!-- Toont product reviews -->
             <div class="row">
                 <div class="col-sm-8" >
-                    <div class="bg-light">
+                    <div class="bg-light card">
                         <h4>revieuws:</h4>
                         <p><?php print($product_review); ?></p>
                     </div>
@@ -116,7 +116,7 @@ and open the template in the editor.
             <!-- toon combi deals -->
             <div class="row">
                 <div class="col-lg-8" >
-                    <div class="bg-light">
+                    <div class="bg-light card">
                         <h4>combideals:</h4>
                         <p>test</p>
                     </div>

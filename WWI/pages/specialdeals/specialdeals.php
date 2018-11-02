@@ -6,8 +6,6 @@ if (!defined('ROOT_PATH')) {
     include("../config.php");
 }
 
-echo ROOT_PATH;
-
 include(ROOT_PATH . "/includes/header.php");
 include_once ROOT_PATH . "/controllers/stockItemController.php";
 include_once ROOT_PATH . "/controllers/specialDealsController.php";
@@ -33,16 +31,17 @@ include_once ROOT_PATH . "/controllers/specialDealsController.php";
                             $HighestSpecialDealValue = getHighestSpecialDealID();
                             
                             $SpecialDeal = getSpecialDealByID(rand($LowestSpecialDealValue, $HighestSpecialDealValue));
-                            $StockItem = getStockItemBySpecialDealID($SpecialDeal["SpecialDealID"]);
-            
+                            
+                            $StockItem = getStockItemBySpecialDealID($SpecialDeal["StockItemID"]);
+                            
                             if ($SpecialDeal == NULL || FALSE) {
                                     ?> <img src=specialdeals/SpecialDealFotoNietBeschikbaar" alt="SpecialDealFotoNietGevonden" height="250px" width="250px"> <?php
-                                } else {
-                                    ?> <img src="media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px"> <?php
                                 }
                                 ?></p>
+                           
+                            <?php print($StockItem["SpecialDealID"]) ?>
                             
-                            <a href="/product?productID=<?php $StockItem["StockItemID"] ?>" class="btn btn-primary">Link</a>
+                            <a href="../category/product.php?productID=<?php $StockItem ?>" class="btn btn-primary">Link</a>
                         </div>
                     </div>
                 </div>

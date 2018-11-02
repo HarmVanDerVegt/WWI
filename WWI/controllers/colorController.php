@@ -1,6 +1,4 @@
 <?php
-
-include_once ROOT_PATH . "/config.php";
 include_once ROOT_PATH . "/controllers/databaseController.php";
 
 $tablecolors = "colors";

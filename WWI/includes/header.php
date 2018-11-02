@@ -22,7 +22,7 @@
                 </a>
                 <div class="dropdown-menu">
                     <?php
-                    include_once "../config.php";
+                    //include_once "../config.php";
                     include_once ROOT_PATH . "/controllers/stockGroupsController.php";
                     $categorynavbarar = getAllStockGroups();
                     foreach ($categorynavbarar as $categorynavbar) {

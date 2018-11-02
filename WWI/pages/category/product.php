@@ -38,7 +38,6 @@ include_once ROOT_PATH . "/controllers/colorController.php";
 
         <!-- verzamel data van product -->
         <?php
-<<<<<<< HEAD
         // Naam van het product
         $product_naam = $StockItem;
 
@@ -98,14 +97,6 @@ include_once ROOT_PATH . "/controllers/colorController.php";
         $product_leverancier = $Supplier["SupplierName"];
 
         // JN - NOG KIJKEN NAAR IMPLEMENTATIE DATABASE.
-=======
-        // hier moet de sql data in de goede variablen terecht komen
-        $product_naam = "test_product_naam";
-        $product_merk = "test";
-        $product_prijs = 20;
-        $product_voorraad = 100;
->>>>>>> 507b838f2e60c2e845d8e670fb0e45efe077d2ee
-        $product_bezorg_info = "in 4 to 5 werkdagen leverbaar";
 
         // JN - WACHTEN OP TOEVOEGING BLOB DATABASE.
         $product_afbeelding_path = "../media/noveltyitems.jpg";
@@ -114,11 +105,7 @@ include_once ROOT_PATH . "/controllers/colorController.php";
         $product_review = "dit is een revieuw";
         ?>
 
-<<<<<<< HEAD
-        <!-- Header -->
-=======
         <!-- Header naam, merk, prijs, voorraad -->
->>>>>>> 507b838f2e60c2e845d8e670fb0e45efe077d2ee
         <div class="card">
             <div class="card-body">
                 <!-- Toon naam van product -->

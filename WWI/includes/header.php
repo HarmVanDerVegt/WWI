@@ -4,10 +4,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://unpkg.com/popper.js"></script>
     <script src='\WWI\WWI\js\bootstrap.bundle.min.js'></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">WWI</a>
+    <a href="/WWI/WWI//pages/index.php"><img class="img-thumbnail" src="/WWI/WWI/pages/media/wwi-ls.png" height="250px" width="90px" />
+<!--    <a class="navbar-brand" href="#">WWI</a>-->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -16,7 +20,7 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-                    Dropdown
+                    categorie
                 </a>
                 <div class="dropdown-menu">
                     <?php
@@ -41,7 +45,7 @@
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#"></a>
-                    <form class="px-4 py-3">
+                    <form class="px-4 py-3" method="post" action="../pages/connect.php">
                         <div class="form-group">
                             <label for="exampleDropdownFormEmail1">Email adres</label>
                             <input type="email" class="form-control" id="FormEmail"
@@ -49,7 +53,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleDropdownFormPassword1">Password</label>
-                            <input type="password" class="form-control" id="FormPassword"
+                            <input type="password" class="form-control" id="FormPassword" name="username"
                                    placeholder="Wachtwoord">
                         </div>
                         <div class="form-check">
@@ -70,11 +74,19 @@
     </div>
     <!-- einde login -->
     <!-- zoekveld -->
-    <form class="form-inline my-2 my-lg-0" action="../pages/Search.php">
+    <form class="form-inline my-2 my-lg-0" action="/WWI/WWI/pages/Search.php">
         <input class="form-control mr-sm-2" type="search" placeholder="Zoeken" aria-label="Search" name="Zoeken"
                id="Zoeken">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Zoeken</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Zoeken <i class="fa fa-search"></i></button>
+
     </form>
+    <form class="form-inline my-2 my-lg-0" action="/WWI/WWI/pages/ShoppingCart.php">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Winkelwagen <i class="fa fa-shopping-cart"></i></button>
+    </form>
+    <form class="form-inline my-2 my-lg-0" action="/WWI/WWI/pages/Contact.php">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Contact</button>
+    </form>
+
     <!-- einde zoekveld -->
 
 </nav>

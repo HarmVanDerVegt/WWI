@@ -16,15 +16,6 @@ include_once ROOT_PATH . "/controllers/colorController.php";
         <title>Category</title>
     </head>
     <body>
-        <!-- path fix -->
-        <?php
-        if (!defined('ROOT_PATH')) {
-            include("../../config.php");
-        }
-        ?>
-        <!-- voegt header toe -->
-        <?php include(ROOT_PATH . "/includes/header.php"); ?>
-        <br>
         <!-- constanten -->
         <?php
         $height = 200;
@@ -100,6 +91,8 @@ include_once ROOT_PATH . "/controllers/colorController.php";
 
         // JN - WACHTEN OP TOEVOEGING BLOB DATABASE.
         $product_afbeelding_path = "../media/noveltyitems.jpg";
+        
+        
         $product_specs = "veel dingen";
         $product_beschrijving = "het is een beschrijving";
         $product_review = "dit is een revieuw";

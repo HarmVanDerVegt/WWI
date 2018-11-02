@@ -10,7 +10,7 @@
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a href="../pages/index.php"><img class="img-thumbnail" src="./media/wwi-ls.png" height="250px" width="90px" />
+    <a href="/WWI/WWI//pages/index.php"><img class="img-thumbnail" src="/WWI/WWI/pages/media/wwi-ls.png" height="250px" width="90px" />
 <!--    <a class="navbar-brand" href="#">WWI</a>-->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon"></span>
@@ -74,16 +74,16 @@
     </div>
     <!-- einde login -->
     <!-- zoekveld -->
-    <form class="form-inline my-2 my-lg-0" action="../pages/Search.php">
+    <form class="form-inline my-2 my-lg-0" action="/WWI/WWI/pages/Search.php">
         <input class="form-control mr-sm-2" type="search" placeholder="Zoeken" aria-label="Search" name="Zoeken"
                id="Zoeken">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Zoeken <i class="fa fa-search"></i></button>
 
     </form>
-    <form class="form-inline my-2 my-lg-0" action="../pages/ShoppingCart.php">
+    <form class="form-inline my-2 my-lg-0" action="/WWI/WWI/pages/ShoppingCart.php">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Winkelwagen <i class="fa fa-shopping-cart"></i></button>
     </form>
-    <form class="form-inline my-2 my-lg-0" action="../pages/Contact.php">
+    <form class="form-inline my-2 my-lg-0" action="/WWI/WWI/pages/Contact.php">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Contact</button>
     </form>
 

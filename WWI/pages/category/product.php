@@ -1,9 +1,14 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<?php
+if (!defined('ROOT_PATH')) {
+    include("../../config.php");
+}
+
+include(ROOT_PATH . "/includes/header.php");
+include_once ROOT_PATH . "/controllers/stockItemController.php";
+include_once ROOT_PATH . "/controllers/supplierController.php";
+include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
+include_once ROOT_PATH . "/controllers/colorController.php";
+?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -15,16 +20,79 @@ and open the template in the editor.
         <?php
         $height = 200;
         $width = 300;
+        $ProductID = $_GET["productID"];
+        $StockItem = getStockItemByID($ProductID["StockItemName"]);
+        $Supplier = getSupplierByID($ProductID["SupplierID"]);
+        $Color = getColorsByID($ProductID["ColorName"]);
+        $Stock = getStockItemHoldingByID($ProductID["QuantityOnHand"]);
         ?>
         <!-- verzamel data van product -->
         <?php
-        $product_naam = "test_product_naam";
-        $product_merk = "test";
-        $product_prijs = 20;
-        $product_voorraad = 100;
+        // Naam van het product
+        $product_naam = $StockItem;
+
+        // Indien het merk bekend is, verandert $product_merk in het merknaam. Anders is deze NULL
+        if ($StockItem["Brand"] != NULL) {
+            $product_merk = $StockItem["Brand"];
+        } else {
+            $product_merk = FALSE;
+        }
+
+        // Indien de grootte bekend is, verandert $product_grootte in de grootte. Anders is deze NULL
+        if ($StockItem["Size"] != NULL) {
+            $product_grootte = $StockItem["Size"];
+        } else {
+            $product_grootte = NULL;
+        }
+
+        // Gemiddelde gewicht per eenheid van het product.
+        $product_gewicht = $StockItem["TypicalWeightPerUnit"];
+
+        // Indien de voorgestelde prijs bekend is, verandert $product_prijs in de prijs. Indien deze niet bekend is pakt hij de vaste waarden binnen de UnitPrice en vermenigvuldigt hij deze met het TaxRate percentage.
+        if ($StockItem["RecommendedRetailPrice"] != NULL) {
+            $product_prijs = $StockItem["RecommendedRetailPrice"];
+        } else {
+            $product_prijs = $StockItem["UnitPrice"] * ($StockItem["TaxRate"] / 100 + 100);
+        }
+
+        // Indien de kleur bekend is, verandert $product_kleur naar de kleur. Anders is deze NULL
+        if ($Color["ColorName"] != NUlL) {
+            $product_kleur = $Color["ColorName"];
+        } else {
+            $product_kleur = NULL;
+        }
+
+        // Indien de voorraad meer dan 0 is, is er voorraad, dus dan geeft deze waarde TRUE. Anders is deze FALSE.
+        if ($Stock["QuantityOnHand" > 0]) {
+            $Stock = TRUE;
+        } else {
+            $Stock = FALSE;
+        }
+
+        // Indien er opmerkingen voor het product vanuit marketing zijn zullen deze in de variabele $marketing_commentaar gestopt worden.
+        if ($StockItem["MarketingComments"] != NULL) {
+            $marketing_commentaar = $StockItem["MarketingComments"];
+        } else {
+            $marketing_commentaar = NULL;
+        }
+
+        // Indien het gekozen product een koelproduct is, word $product_is_koelproduct TRUE. Anders is deze FALSE.
+        if ($StockItem["IsChillerStock"] == TRUE) {
+            $product_is_koelproduct = TRUE;
+        } else {
+            $product_is_koelproduct = FALSE;
+        }
+
+        // De leverancier van het gekozen product.
+        $product_leverancier = $Supplier["SupplierName"];
+
+        // JN - NOG KIJKEN NAAR IMPLEMENTATIE DATABASE.
         $product_bezorg_info = "in 4 to 5 werkdagen leverbaar";
+
+        // JN - WACHTEN OP TOEVOEGING BLOB DATABASE.
         $product_afbeelding_path = "../media/noveltyitems.jpg";
         ?>
+
         <!-- Header -->
         <div class="card">
             <div class="card-body">
@@ -37,7 +105,14 @@ and open the template in the editor.
                     <tr>
                         <!-- toon merk van product -->
                         <td>
-                            <?php print("<b>Merk:</b>" . $product_merk); ?>
+                            <?php
+                            if ($product_merk != NULL) {
+                                print("<b>Merk:</b>" . $product_merk);
+                            } else {
+                                print("Dit is geen merkproduct." . "<br>");
+                            }
+                            ?>
+
                         </td>
                         <!-- toon prijs en voorraad  en informatie over bezorging-->
                         <td>

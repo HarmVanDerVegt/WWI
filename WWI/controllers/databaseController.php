@@ -103,7 +103,7 @@ function getLowestAttributeByIntID($ID, $table) {
 
     $sql = "SELECT MIN($ID) laagste
             FROM $table";
-
+    
     $result = $db->query($sql);
 
     return $result->fetch_assoc()["laagste"];   

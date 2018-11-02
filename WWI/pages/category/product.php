@@ -11,12 +11,21 @@ and open the template in the editor.
         <title>Category</title>
     </head>
     <body>
+        <!-- path fix -->
+        <?php
+        if (!defined('ROOT_PATH')) {
+            include("../../config.php");
+        }
+        ?>
+        <!-- voegt header toe -->
+        <?php include(ROOT_PATH . "/includes/header.php"); ?>
+        <br>
         <!-- constanten -->
         <?php
         $height = 200;
         $width = 300;
         ?>
-        
+
         <!-- verzamel data van product -->
         <?php
         // hier moet de sql data in de goede variablen terecht komen
@@ -30,8 +39,8 @@ and open the template in the editor.
         $product_beschrijving = "het is een beschrijving";
         $product_review = "dit is een revieuw";
         ?>
-        
-        <!-- Header -->
+
+        <!-- Header naam, merk, prijs, voorraad -->
         <div class="card">
             <div class="card-body">
                 <!-- Toon naam van product -->
@@ -69,49 +78,55 @@ and open the template in the editor.
                 </table>
             </div>
         </div>
-        
-        <!-- product informatie weergeven-->
         <br>
+
+        <!-- product informatie weergeven-->
         <div class="container-fluid">
+            
             <!-- Toon specificaties -->
             <div class="row">
-                <div class="col-auto">
-                    <div class="card">
-                        <h2>Specs:</h2>
+                <div class="col-sm-8">
+                    <div class="bg-light">
+                        <h4>Specs:</h4>
                         <p><?php print($product_specs); ?></p>
-                        <br>
                     </div>
                 </div>
             </div>
             
             <!-- toon product beschrijving -->
             <div class="row">
-                <div class="col-auto">
-                    <div class="card">
-                        <h2>Product beschrijving:</h2>
+                <div class="col-sm-8" >
+                    <div class="bg-light">
+                        <h4>Product beschrijving:</h4>
                         <p><?php print($product_beschrijving); ?></p>
-                        <br>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Toont product reviews -->
-        <div class="container-fluid">
+            
+            <!-- Toont product reviews -->
             <div class="row">
-                <div class="col-auto">
-                    <div class="card">
-                        <h2>revieuws:</h2>
+                <div class="col-sm-8" >
+                    <div class="bg-light">
+                        <h4>revieuws:</h4>
                         <p><?php print($product_review); ?></p>
-                        <br>
                     </div>
                 </div>
             </div>
+            
+            <!-- toon combi deals -->
+            <div class="row">
+                <div class="col-lg-8" >
+                    <div class="bg-light">
+                        <h4>combideals:</h4>
+                        <p>test</p>
+                    </div>
+                </div>
+            </div>
+            
         </div>
-        
-        <!-- toon combi deals -->
-           <div class="row-md-4 offset-md-4">
-                combiedeals
-           </div>
+
+        <!-- voeg footer toe -->
+        <br>
+        <?php include(ROOT_PATH . "/includes/footer.php"); ?>
     </body>
 </html>

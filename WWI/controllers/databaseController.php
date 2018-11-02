@@ -96,3 +96,16 @@ function getLowestAttributeByIntID($ID, $table) {
 
     return $result->fetch_assoc()["laagste"];   
 }
+
+function getSEARCHInfo($search){
+    $db = createDB();
+    $result = array ();
+    $sql = "SELECT SearchDetails as Searchresult
+            FROM stockitems
+            WHERE SearchDetails like \"%$search%\" ";
+
+    $result =  $db->query($sql);
+foreach ($result as $item){
+    echo $item["Searchresult"]. "<br>";
+}
+}

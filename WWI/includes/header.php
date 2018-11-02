@@ -5,6 +5,7 @@
     <script src="https://unpkg.com/popper.js"></script>
     <script src='\WWI\WWI\js\bootstrap.bundle.min.js'></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -75,7 +76,7 @@
     <form class="form-inline my-2 my-lg-0" action="../pages/Search.php">
         <input class="form-control mr-sm-2" type="search" placeholder="Zoeken" aria-label="Search" name="Zoeken"
                id="Zoeken">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Zoeken</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Zoeken <i class="fa fa-search"></i></button>
 
     </form>
     <form class="form-inline my-2 my-lg-0" action="../pages/ShoppingCart.php">

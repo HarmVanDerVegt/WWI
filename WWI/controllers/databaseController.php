@@ -65,18 +65,6 @@ function getRowByForeignID($value, $table1, $table2, $joinID, $joinID2){
 
     $result = $db->query($sql);
 
-/*    if ($result == true){
-        $result->fetch_assoc();
-    }
-    else
-    {
-        if ($result == false){
-            print $sql;
-            mysqli_error($db);
-            $result->fetch_assoc();
-        }
-    }*/
-
     $array = [];
 
     while ($row = $result->fetch_assoc()) {
@@ -85,4 +73,39 @@ function getRowByForeignID($value, $table1, $table2, $joinID, $joinID2){
 
     }
     return $array;
+}
+
+function getHighestAttributeByIntID($ID, $table) {
+    $db = createDB();
+
+    $sql = "SELECT MAX($ID) hoogste
+            FROM $table";
+
+    $result = $db->query($sql);
+
+    return $result->fetch_assoc()["hoogste"];   
+}
+
+function getLowestAttributeByIntID($ID, $table) {
+    $db = createDB();
+
+    $sql = "SELECT MIN($ID) laagste
+            FROM $table";
+    
+    $result = $db->query($sql);
+
+    return $result->fetch_assoc()["laagste"];   
+}
+
+function getSEARCHInfo($search){
+    $db = createDB();
+    $result = array ();
+    $sql = "SELECT SearchDetails as Searchresult
+            FROM stockitems
+            WHERE SearchDetails like \"%$search%\" ";
+
+    $result =  $db->query($sql);
+foreach ($result as $item){
+    echo $item["Searchresult"]. "<br>";
+}
 }

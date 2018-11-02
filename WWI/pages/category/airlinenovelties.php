@@ -15,7 +15,6 @@ if (!defined('ROOT_PATH')){
         <?php
         // put your code here
         ?>
-        <h1>World Wide Importers</h1>
         <?php include("../../includes/header.php"); ?>
         <br>
         <p>Dit is content</p>

@@ -22,16 +22,19 @@ include_once ROOT_PATH . "/controllers/supplierController.php";
 
                         
                         echo "Naam: " . $StockItem["StockItemName"] . "<br>";
+                        
                         if ($StockItem["Photo"] != NULL) {
                             ?> <img src=<?php $StockItem["Photo"] ?> alt="FotoNietGevonden" height="250px" width="250px"> <?php
                         } else {
                             ?> <img src="media/ProductFotoNietBeschikbaar" alt="FotoNietGevonden" height="250px" width="250px"> <?php
                         }
+                        
                         if ($StockItem["RecommendedRetailPrice"] != NULL) {
                             echo "De prijs is: €" . $StockItem["RecommendedRetailPrice"] . " euro" . "<br>";
                         } else {
                             echo "De prijs is: €" . $StockItem["UnitPrice"] * ($StockItem["TaxRate"] / 100 + 100) . " euro" . "<br>";
                         }
+                        
                         if ($StockItem["Size"] != NULL) {
                             echo "Grootte is: " . $StockItem["Size"] . "<br>";
                         }

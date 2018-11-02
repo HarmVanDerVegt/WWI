@@ -3,11 +3,13 @@ if (!defined('ROOT_PATH')) {
     include("../../config.php");
 }
 
-include(ROOT_PATH . "/includes/header.php");
+// Hier worden de verschillende controllers ingevoegd.
+include(ROOT_PATH . "/includes/header.php"); // <---
 include_once ROOT_PATH . "/controllers/stockItemController.php";
 include_once ROOT_PATH . "/controllers/supplierController.php";
 include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
 include_once ROOT_PATH . "/controllers/colorController.php";
+include_once ROOT_PATH . "/controllers/redirect.php";
 ?>
 <html>
     <head>
@@ -20,17 +22,25 @@ include_once ROOT_PATH . "/controllers/colorController.php";
         <?php
         $height = 200;
         $width = 300;
-        $ProductID = $_GET["productID"];
-        $StockItem = getStockItemByID($ProductID["StockItemName"]);
-        $Supplier = getSupplierByID($ProductID["SupplierID"]);
-        $Color = getColorsByID($ProductID["ColorName"]);
-        $Stock = getStockItemHoldingByID($ProductID["QuantityOnHand"]);
-        ?>
+        //$StockItem = getStockItemByID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
+        $StockItem = getStockItemByID(rand(1, 200));
+        $StockItemName = $StockItem["StockItemName"];
+        $Supplier = getSupplierByID($StockItem["SupplierID"]);
+        $Color = getColorsByID($StockItem["ColorID"]);
+        $Stock = getStockItemHoldingByID($StockItem["StockItemID"]);
 
-        <!-- verzamel data van product -->
-        <?php
+        // Checkt of er daadwerkelijk een product is meegegeven en redirect anders naar een errorpagina.
+
+        $errorpagina = "../error.php";
+
+        $ProductID = getStockItemByID(42);
+        if ($ProductID == NULL || 0) {
+            echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $errorpagina . '">';
+        }
+
+        // verzamel data van product
         // Naam van het product
-        $product_naam = $StockItem;
+        $product_naam = $StockItemName;
 
         // Indien het merk bekend is, verandert $product_merk in het merknaam. Anders is deze NULL
         if ($StockItem["Brand"] != NULL) {
@@ -53,7 +63,7 @@ include_once ROOT_PATH . "/controllers/colorController.php";
         if ($StockItem["RecommendedRetailPrice"] != NULL) {
             $product_prijs = $StockItem["RecommendedRetailPrice"];
         } else {
-            $product_prijs = $StockItem["UnitPrice"] * ($StockItem["TaxRate"] / 100 + 100);
+            $product_prijs = $StockItem["UnitPrice"] * ($StockItem["TaxRate"] / 100 + 1);
         }
 
         // Indien de kleur bekend is, verandert $product_kleur naar de kleur. Anders is deze NULL
@@ -63,11 +73,11 @@ include_once ROOT_PATH . "/controllers/colorController.php";
             $product_kleur = NULL;
         }
 
-        // Indien de voorraad meer dan 0 is, is er voorraad, dus dan geeft deze waarde TRUE. Anders is deze FALSE.
-        if ($Stock["QuantityOnHand" > 0]) {
-            $Stock = TRUE;
+        // Indien de voorraad meer dan 0 is, is er voorraad, verandert $product_voorraad naar de voorraad. Anders is deze NULL
+        if ($Stock["QuantityOnHand"] > 0) {
+            $product_voorraad = $Stock["QuantityOnHand"];
         } else {
-            $Stock = FALSE;
+            $product_voorraad = NULL;
         }
 
         // Indien er opmerkingen voor het product vanuit marketing zijn zullen deze in de variabele $marketing_commentaar gestopt worden.
@@ -88,11 +98,10 @@ include_once ROOT_PATH . "/controllers/colorController.php";
         $product_leverancier = $Supplier["SupplierName"];
 
         // JN - NOG KIJKEN NAAR IMPLEMENTATIE DATABASE.
-
         // JN - WACHTEN OP TOEVOEGING BLOB DATABASE.
         $product_afbeelding_path = "../media/noveltyitems.jpg";
-        
-        
+
+
         $product_specs = "veel dingen";
         $product_beschrijving = "het is een beschrijving";
         $product_review = "dit is een revieuw";
@@ -112,20 +121,63 @@ include_once ROOT_PATH . "/controllers/colorController.php";
                         <td>
                             <?php
                             if ($product_merk != NULL) {
-                                print("<b>Merk:</b>" . $product_merk);
+                                print("<b>Merk:</b>" . $product_merk . "<br>");
                             } else {
                                 print("Dit is geen merkproduct." . "<br>");
                             }
                             ?>
-
                         </td>
-                        <!-- toon prijs en voorraad  en informatie over bezorging-->
+                        <!-- toon prijs van het product-->
                         <td>
-                            <?php print("<b>Prijs: </b>€" . $product_prijs); ?>
-                            <br>
-                            <?php print("<b>voorraad: </b>" . $product_voorraad); ?>
-                            <br>
-                            <?php print($product_bezorg_info); ?>
+                            <?php
+                            if ($product_prijs != NULL) {
+                                print("<b>Prijs: </b>€" . $product_prijs . "<br>");
+                            } else {
+                                print("Er is geen prijs voor dit product beschikbaar" . "<br>");
+                            }
+                            ?>
+                        </td>
+                        <!-- Toont de grootte van een product en laat het weg als deze er niet is. -->
+                        <td>
+                            <?php
+                            if ($product_grootte != NULL) {
+                                print("Dit product is " . $product_grootte . "<br>");
+                            }
+                            ?>
+                        </td>
+                        <!-- Toon of het product een gespecificieerde kleur heeft -->
+                        <td>
+                            <?php
+                            if ($product_kleur != NUlL) {
+                                print("Dit product is " . $product_kleur . "<br>");
+                            }
+                            ?>
+                        </td>
+                        <!-- Toon of er voorraad van het product is -->
+                        <td>
+                            <?php
+                            if ($product_voorraad != NULL) {
+                                print("<b>voorraad: </b>" . $product_voorraad) . " eenheden " . "<br>";
+                            } else {
+                                print("Dit product is momenteel niet op voorraad");
+                            }
+                            ?>
+                        </td>
+                        <!-- Toont eventuele marketing commentaar -->
+                        <td>
+                            <?php
+                            if ($marketing_commentaar != NULL) {
+                                print($marketing_commentaar);
+                            }
+                            ?>
+                        </td>
+                        <!-- Indien dit een koelproduct is, word dit aangegeven. -->
+                        <td>
+                            <?php
+                            if ($product_is_koelproduct == TRUE) {
+                                print("Dit is een koelproduct");
+                            }
+                            ?>
                         </td>
                         <!-- bestel knop -->
                         <td>
@@ -147,7 +199,7 @@ include_once ROOT_PATH . "/controllers/colorController.php";
 
         <!-- product informatie weergeven-->
         <div class="container-fluid">
-            
+
             <!-- Toon specificaties -->
             <div class="row">
                 <div class="col-sm-8">
@@ -157,7 +209,7 @@ include_once ROOT_PATH . "/controllers/colorController.php";
                     </div>
                 </div>
             </div>
-            
+
             <!-- toon product beschrijving -->
             <div class="row">
                 <div class="col-sm-8" >
@@ -167,7 +219,7 @@ include_once ROOT_PATH . "/controllers/colorController.php";
                     </div>
                 </div>
             </div>
-            
+
             <!-- Toont product reviews -->
             <div class="row">
                 <div class="col-sm-8" >
@@ -177,7 +229,7 @@ include_once ROOT_PATH . "/controllers/colorController.php";
                     </div>
                 </div>
             </div>
-            
+
             <!-- toon combi deals -->
             <div class="row">
                 <div class="col-lg-8" >
@@ -187,7 +239,7 @@ include_once ROOT_PATH . "/controllers/colorController.php";
                     </div>
                 </div>
             </div>
-            
+
         </div>
 
         <!-- voeg footer toe -->

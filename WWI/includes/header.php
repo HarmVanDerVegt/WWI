@@ -10,7 +10,8 @@
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">WWI</a>
+    <a href="../pages/index.php"><img class="img-thumbnail" src="./media/wwi-ls.png" height="250px" width="90px" />
+<!--    <a class="navbar-brand" href="#">WWI</a>-->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -19,7 +20,7 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-                    Dropdown
+                    categorie
                 </a>
                 <div class="dropdown-menu">
                     <?php
@@ -82,7 +83,7 @@
     <form class="form-inline my-2 my-lg-0" action="../pages/ShoppingCart.php">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Winkelwagen <i class="fa fa-shopping-cart"></i></button>
     </form>
-    <form class="form-inline my-2 my-lg-0" action="../pages/index.php">
+    <form class="form-inline my-2 my-lg-0" action="../pages/Contact.php">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Contact</button>
     </form>
 

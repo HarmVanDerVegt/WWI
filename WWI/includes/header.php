@@ -4,6 +4,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://unpkg.com/popper.js"></script>
     <script src='\WWI\WWI\js\bootstrap.bundle.min.js'></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -41,7 +43,7 @@
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#"></a>
-                    <form class="px-4 py-3">
+                    <form class="px-4 py-3" method="post" action="../pages/connect.php">
                         <div class="form-group">
                             <label for="exampleDropdownFormEmail1">Email adres</label>
                             <input type="email" class="form-control" id="FormEmail"
@@ -49,7 +51,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleDropdownFormPassword1">Password</label>
-                            <input type="password" class="form-control" id="FormPassword"
+                            <input type="password" class="form-control" id="FormPassword" name="username"
                                    placeholder="Wachtwoord">
                         </div>
                         <div class="form-check">
@@ -74,7 +76,15 @@
         <input class="form-control mr-sm-2" type="search" placeholder="Zoeken" aria-label="Search" name="Zoeken"
                id="Zoeken">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Zoeken</button>
+
     </form>
+    <form class="form-inline my-2 my-lg-0" action="../pages/ShoppingCart.php">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Winkelwagen <i class="fa fa-shopping-cart"></i></button>
+    </form>
+    <form class="form-inline my-2 my-lg-0" action="../pages/index.php">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Contact</button>
+    </form>
+
     <!-- einde zoekveld -->
 
 </nav>

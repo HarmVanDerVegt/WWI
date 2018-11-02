@@ -65,18 +65,6 @@ function getRowByForeignID($value, $table1, $table2, $joinID, $joinID2){
 
     $result = $db->query($sql);
 
-/*    if ($result == true){
-        $result->fetch_assoc();
-    }
-    else
-    {
-        if ($result == false){
-            print $sql;
-            mysqli_error($db);
-            $result->fetch_assoc();
-        }
-    }*/
-
     $array = [];
 
     while ($row = $result->fetch_assoc()) {

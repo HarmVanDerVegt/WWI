@@ -3,7 +3,7 @@
 
 <?php
 if (!defined('ROOT_PATH')) {
-    include("../config.php");
+    include("../../config.php");
 }
 
 include(ROOT_PATH . "/includes/header.php");
@@ -38,8 +38,6 @@ include_once ROOT_PATH . "/controllers/specialDealsController.php";
                                     ?> <img src=specialdeals/SpecialDealFotoNietBeschikbaar" alt="SpecialDealFotoNietGevonden" height="250px" width="250px"> <?php
                                 }
                                 ?></p>
-                           
-                            <?php print($StockItem["SpecialDealID"]) ?>
                             
                             <a href="../category/product.php?productID=<?php $StockItem ?>" class="btn btn-primary">Link</a>
                         </div>

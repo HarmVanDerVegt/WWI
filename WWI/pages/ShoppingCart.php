@@ -11,6 +11,7 @@ include(ROOT_PATH . "/includes/header.php");
 
 $products = array("product A", "product B", "product C");
 $amounts = array("19.99", "10.99", "2.99");
+$check = 0;
 
 #verwijderen
 if (isset($_GET["delete"])) {
@@ -39,6 +40,7 @@ if (isset($_GET['reset'])) {
 
 #winkelwagen
 if (isset($_SESSION["cart"])) {
+    $check = 1;
     ?>
     <h2>Winkelwagen</h2>
     <table>
@@ -76,9 +78,16 @@ if (isset($_SESSION["cart"])) {
     <?php
 }
 ?>
+    
+<?php
+if ($check == 0){
+    print("<h3>Uw winkelwagen is leeg!</h3><br>");
+}else{
+?>
 <tr>
     <td colspan="5"></td>
 </tr>
 <tr>
     <td colspan="5"><a href="?reset=true">Reset Cart</a></td>
 </tr>
+<?php } ?>

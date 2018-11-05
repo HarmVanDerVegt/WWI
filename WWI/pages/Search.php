@@ -17,7 +17,7 @@ if (filter_input(INPUT_GET, "Zoeken", FILTER_SANITIZE_STRING) <> "") {
     }
 }
 ?>
-<table>
+<table class="table table-striped">
 
     <tr>
         <th>Naam</th>
@@ -26,7 +26,6 @@ if (filter_input(INPUT_GET, "Zoeken", FILTER_SANITIZE_STRING) <> "") {
     <tr>
         <?php foreach($sarray as $item){ ?>
         <td><?php print $item["StockItemName"] ?></td>
-        <td><?php print $item["StockItemID"] ?></td>
         <?php print("<td>" . '<a href="/WWI/WWI/pages/category/product.php?productID=' . $item["StockItemID"] . '">Link</a></td>'); ?>
     </tr>
     <?php } ?>

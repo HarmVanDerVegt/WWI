@@ -43,8 +43,8 @@ if (isset($_SESSION["cart"])) {
     $check = 1;
     ?>
     <h2>Winkelwagen</h2>
-    <table>
-        <tr>
+    <table class="table">
+        <tr class="table-primary">
             <th>Product</th>
             <th width="10px">&nbsp;</th>
             <th>Qty</th>
@@ -74,6 +74,9 @@ if (isset($_SESSION["cart"])) {
         <tr>
             <td colspan="7">Total : <?php echo($total); ?></td>
         </tr>
+        <tr>
+            <td colspan="7"><a href="?reset=true">Reset Cart</a></td>
+        </tr>
     </table>
     <?php
 }
@@ -84,10 +87,4 @@ if ($check == 0){
     print("<h3>Uw winkelwagen is leeg!</h3><br>");
 }else{
 ?>
-<tr>
-    <td colspan="5"></td>
-</tr>
-<tr>
-    <td colspan="5"><a href="?reset=true">Reset Cart</a></td>
-</tr>
 <?php } ?>

@@ -58,7 +58,7 @@
             // print de rijen met informatie over producten uit database
             while ($item = mysqli_fetch_assoc($resultaat)) {
                 print("<tr>");
-                print("<td>" . $item["UnitPrice"] . "</td>");
+                print("<td>€" . $item["UnitPrice"] . "</td>");
                 print("<td>" . $item["StockItemName"] . "</td>");
                 print("<td>" . $item["brand"] . "</td>");
                 print("<td>" . $item["TypicalWeightPerUnit"] . "</td>");

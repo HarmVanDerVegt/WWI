@@ -11,7 +11,9 @@ include(ROOT_PATH . "/includes/header.php");
 <?php $Search = (filter_input(INPUT_GET, "Zoeken", FILTER_SANITIZE_STRING));
 
 if (filter_input(INPUT_GET, "Zoeken", FILTER_SANITIZE_STRING) <> "") {
-    getSEARCHInfo($Search);
+    $sarray = getSEARCHInfo($Search);
+    print_r($sarray);
+    echo $sarray;
 }
 ?>
 <?php include(ROOT_PATH . "/includes/footer.php"); ?>

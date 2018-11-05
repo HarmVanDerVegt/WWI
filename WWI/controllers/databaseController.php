@@ -108,4 +108,10 @@ function getSEARCHInfo($search){
 foreach ($result as $item){
     echo $item["Searchresult"]. "<br>";
 }
+    $sql = "SELECT StockItemID as Searchresult
+            FROM stockitems
+            WHERE SearchDetails like \"%$search%\" ";
+    $result = array ();
+    $result =  $db->query($sql);
+    
 }

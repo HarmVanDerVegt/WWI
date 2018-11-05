@@ -22,8 +22,8 @@ include_once ROOT_PATH . "/controllers/redirect.php";
         <?php
         $height = 200;
         $width = 300;
-        //$StockItem = getStockItemByID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
-        $StockItem = getStockItemByID(rand(1, 200));
+        $StockItem = getStockItemByID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
+        //$StockItem = getStockItemByID(rand(1, 200));
         $StockItemName = $StockItem["StockItemName"];
         $Supplier = getSupplierByID($StockItem["SupplierID"]);
         $Color = getColorsByID($StockItem["ColorID"]);
@@ -33,8 +33,8 @@ include_once ROOT_PATH . "/controllers/redirect.php";
 
         $errorpagina = "../error.php";
 
-        $ProductID = getStockItemByID(42);
-        if ($ProductID == NULL || 0) {
+        //$ProductID = getStockItemByID(42);
+        if ($StockItem["StockItemID"] == NULL || 0) {
             echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $errorpagina . '">';
         }
 

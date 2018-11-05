@@ -16,6 +16,8 @@ function createDB()
 
 //Geeft een rij uit de database terug als array.
 //Gebruik: $result[attribute]
+//Voorbeeld:    $item =  getRowByIntID("StockItemID", 'stockItems", 6);
+//              $item["StockItemName"];
 function getRowByIntID($ID, $table, $value){
     //Initieert de database.
     $db = createDB();

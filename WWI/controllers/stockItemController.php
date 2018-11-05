@@ -34,3 +34,18 @@ function getStockItemBySpecialDealID($ID)
     return getRowByForeignID($ID, $tableStockItems, "SpecialDeals", "StockItemID", "StockItemID");
 }
 
+function getStockItemsBySearchDetails($search){
+    $db = createDB();
+    $array = array ();
+    $sql = "SELECT StockItemID, StockItemName
+            FROM stockitems
+            WHERE SearchDetails like \"%$search%\" ";
+
+    $result =  $db->query($sql);
+
+    while ($row = $result->fetch_assoc()) {
+        $array[array_values($row)[0]] = $row;
+    }
+
+    return $array;
+}

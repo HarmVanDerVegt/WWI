@@ -23,7 +23,7 @@
         }
         // sql query voor het vinden van de goede producten
         $sql_code = ""
-                . "SELECT SI.StockItemName,SI.brand,SI.UnitPrice,SI.TypicalWeightPerUnit "
+                . "SELECT SI.StockItemID, SI.StockItemName,SI.brand,SI.UnitPrice,SI.TypicalWeightPerUnit "
                 . "FROM stockitems SI "
                 . "JOIN stockitemstockgroups SI_SG "
                 . "ON SI.StockItemID = SI_SG.StockItemID "
@@ -53,15 +53,18 @@
                 <th>Naam</th>
                 <th>Merk</th>
                 <th>Gewicht</th>
+                <th>Link</th>
             </tr>
             <?php
             // print de rijen met informatie over producten uit database
             while ($item = mysqli_fetch_assoc($resultaat)) {
                 print("<tr>");
-                print("<td>€" . $item["UnitPrice"] . "</td>");
+                $stockItemID = $item["StockItemID"];
+                print("<td>" . $item["UnitPrice"] . "</td>");
                 print("<td>" . $item["StockItemName"] . "</td>");
                 print("<td>" . $item["brand"] . "</td>");
                 print("<td>" . $item["TypicalWeightPerUnit"] . "</td>");
+                print("<td>" . '<a href="/WWI/WWI/pages/category/product.php?productID=' . $stockItemID . '">Link</a></td>');
                 print("</tr>");
             }
             ?>

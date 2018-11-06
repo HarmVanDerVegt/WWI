@@ -35,7 +35,9 @@ function getRowByIntID($ID, $table, $value){
 
     //Geeft de eerste rij terug als array en gaat naar de volgende rij, die er niet is.
     //Dit geeft dus maar één rij terug.
-    return $result->fetch_assoc();
+    $result = $result->fetch_assoc();
+    $db->close();
+    return $result;
 }
 
 function getAllRows($table){

@@ -48,15 +48,15 @@
                     </a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#"></a>
-                        <form class="px-4 py-3" method="post" action="../pages/connect.php">
+                        <form class="px-4 py-3" method="post" action="../pages/login.php">
                             <div class="form-group">
                                 <label for="exampleDropdownFormEmail1">Email adres</label>
-                                <input type="email" class="form-control" id="FormEmail"
+                                <input type="email" class="form-control" id="FormEmail" name="username"
                                        placeholder="email@example.com">
                             </div>
                             <div class="form-group">
                                 <label for="exampleDropdownFormPassword1">Password</label>
-                                <input type="password" class="form-control" id="FormPassword" name="username"
+                                <input type="password" class="form-control" id="FormPassword" name="password"
                                        placeholder="Wachtwoord">
                             </div>
                             <div class="form-check">

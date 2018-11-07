@@ -30,7 +30,11 @@
                         include_once ROOT_PATH . "/controllers/stockGroupsController.php";
                         $categorynavbarar = getAllStockGroups();
                         foreach ($categorynavbarar as $categorynavbar) {
-                            echo "<a class=\"dropdown-item\" href=\"#\">" . $categorynavbar["StockGroupName"] . "</a> \n";
+                            $link = "<a class=\"dropdown-item\"
+                            href=\"/WWI/WWI/pages/category/product_lijst.php?category="
+                                . $categorynavbar["StockGroupName"] . "\">"
+                                . $categorynavbar["StockGroupName"] . "</a>";
+                            echo $link;
                         }
                         ?>
                     </div>

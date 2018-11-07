@@ -95,7 +95,7 @@
                     print('<div class="card">');
                     print('Prijs : ' . $prijs);
                     print('<br>beschrijving :<br>');
-                    if(isset($naam[1])) print('<textarea rows="2" cols="5">' . $naam[1] . '</textarea>');
+                    print('<textarea rows="2" cols="5">' . $naam[1] . '</textarea>');
                     if($merk != NULL) print('<br>Merk : ' . $merk . '<br>');
                     print('<br>Gewicht : ' . $gewicht . '<br>');
                     print('</div>');

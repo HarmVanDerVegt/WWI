@@ -48,28 +48,31 @@ if (!defined('ROOT_PATH')) {
         print('<div class="row">');
         ?>
         <!-- Toont de special deals -->
-
         <br>
         <div class="container">
             <div class="row">
                 <div class="col-sm">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Card Title</h5>
-                            <p class="card-text"><?php
-        $LowestSpecialDealValue = getLowestSpecialDealID();
-        $HighestSpecialDealValue = getHighestSpecialDealID();
+                    <div class="card text-white">
+                        <img class="card-img" src="../media/ProductFotoNietBeschikbaar.png" alt="Card image" height="200px">
+                            <div class="card-img-overlay">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card Title</h5>
+                                    <p class="card-text"><?php
+                                        $LowestSpecialDealValue = getLowestSpecialDealID();
+                                        $HighestSpecialDealValue = getHighestSpecialDealID();
 
-        $SpecialDeal = getSpecialDealByID(rand($LowestSpecialDealValue, $HighestSpecialDealValue));
+                                        $SpecialDeal = getSpecialDealByID(rand($LowestSpecialDealValue, $HighestSpecialDealValue));
 
-        $StockItem = getStockItemBySpecialDealID($SpecialDeal["StockItemID"]);
+                                        $StockItem = getStockItemBySpecialDealID($SpecialDeal["StockItemID"]);
 
-        if ($SpecialDeal == NULL || FALSE) {
-            ?> <img src=specialdeals/SpecialDealFotoNietBeschikbaar" alt="SpecialDealFotoNietGevonden" height="250px" width="250px"> <?php
-                                }
-                                ?></p>
+                                        if ($SpecialDeal == NULL || FALSE) {
+                                            ?> <img src=specialdeals/SpecialDealFotoNietBeschikbaar" alt="SpecialDealFotoNietGevonden" height="250px" width="250px"> <?php
+                                        }
+                                        ?></p>
 
-                            <a href="../category/product.php?productID=<?php $StockItem ?>" class="btn btn-primary">Link</a>
+                                    <a href="../category/product.php?productID=<?php $StockItem ?>" class="btn btn-primary">Link</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -97,6 +100,6 @@ if (!defined('ROOT_PATH')) {
         <!-- einde category knoppen------------------------------------------------------------------------------ -->
         <!-- voeg footer toe -->
         <br>
-<?php include(ROOT_PATH . "/includes/footer.php"); ?>
+        <?php include(ROOT_PATH . "/includes/footer.php"); ?>
     </body>
 </html>

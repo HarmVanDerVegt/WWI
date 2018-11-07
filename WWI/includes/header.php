@@ -1,6 +1,7 @@
 <head>
     <link href="\WWI\WWI\css\bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="\WWI\WWI\css\navbar.css" rel="stylesheet" type="text/css"/>
+    <link href="\WWI\WWI\css\button.css" rel="stylesheet" type="text/css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://unpkg.com/popper.js"></script>
     <script src='\WWI\WWI\js\bootstrap.bundle.min.js'></script>
@@ -9,8 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a href="/WWI/WWI//pages/index.php"><img class="img-thumbnail" src="/WWI/WWI/pages/media/wwi-ls.png" height="250px"
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a href="/WWI/WWI/pages/index.php"><img class="img-thumbnail" src="/WWI/WWI/pages/media/wwi-ls.png" height="250px"
                                              width="90px"/>
         <!--<a class="navbar-brand" href="#">WWI</a>-->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
@@ -24,7 +25,7 @@
                        data-toggle="dropdown">
                         categorie
                     </a>
-                    <div class="dropdown-menu">
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <?php
                         //include_once "../config.php";
                         include_once ROOT_PATH . "/controllers/stockGroupsController.php";
@@ -65,7 +66,7 @@
                                     Onthoud mij
                                 </label>
                             </div>
-                            <button type="submit" class="btn btn-primary">Log in</button>
+                            <button type="submit" class="btn btn-sample btn-sample-success">Log in</button>
                         </form>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Nieuw hier? Registreren</a>
@@ -80,16 +81,16 @@
         <form class="form-inline my-2 my-lg-0" action="/WWI/WWI/pages/Search.php">
             <input class="form-control mr-sm-2" type="search" placeholder="Zoeken" aria-label="Search" name="Zoeken"
                    id="Zoeken">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Zoeken <i class="fa fa-search"></i>
+            <button class="btn btn-sample btn-sample-success" type="submit">Zoeken <i class="fa fa-search"></i>
             </button>
 
         </form>
         <form class="form-inline my-2 my-lg-0" action="/WWI/WWI/pages/ShoppingCart.php">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Winkelwagen <i
+            <button class="btn btn-sample btn-sample-success" type="submit">Winkelwagen <i
                         class="fa fa-shopping-cart"></i></button>
         </form>
         <form class="form-inline my-2 my-lg-0" action="/WWI/WWI/pages/Contact.php">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Contact</button>
+            <button class="btn btn-sample btn-sample-success" type="submit">Contact</button>
         </form>
 
         <!-- einde zoekveld -->

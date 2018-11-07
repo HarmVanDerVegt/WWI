@@ -49,3 +49,40 @@ function getStockItemsBySearchDetails($search){
 
     return $array;
 }
+
+function getSearchTags(){
+    $db = createDB();
+
+    $sql = "SELECT DISTINCT(Tags)
+            FROM StockItems";
+
+    $result = $db->query($sql);
+
+    $array = [];
+
+    while ($tags = $result->fetch_assoc()){
+        array_push($array, $tags["Tags"]);
+    }
+
+
+    print_r($array);
+    echo "<br><br<br> XXXXX <br><br><br>";
+    $filteredTags = [];
+
+    foreach ($array as $tag){
+        print_r($tags);
+        //print "<br>";
+        //foreach ($tags as $tag){
+        //    print_r($tag);
+        //    print "<br>";
+        //    array_push($filteredTags, $tag["Tags"]);
+        //}
+    }
+
+    print_r($filteredTags);
+
+    $unigueTags = array_unique($filteredTags);
+
+    print_r($unigueTags);
+
+}

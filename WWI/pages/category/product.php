@@ -4,12 +4,11 @@ if (!defined('ROOT_PATH')) {
 }
 
 // Hier worden de verschillende controllers ingevoegd.
-include(ROOT_PATH . "/includes/header.php"); // <---
+include(ROOT_PATH . "/includes/header.php");
 include_once ROOT_PATH . "/controllers/stockItemController.php";
 include_once ROOT_PATH . "/controllers/supplierController.php";
 include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
 include_once ROOT_PATH . "/controllers/colorController.php";
-include_once ROOT_PATH . "/controllers/redirect.php";
 ?>
 <html>
     <head>
@@ -62,7 +61,7 @@ include_once ROOT_PATH . "/controllers/redirect.php";
         // Gemiddelde gewicht per eenheid van het product.
         $product_gewicht = $StockItem["TypicalWeightPerUnit"];
         if ($product_gewicht != NULL) {
-            print("Het gewoonlijke gewicht per eenheid is: ");
+            $product_specs = ("Het gewoonlijke gewicht per eenheid is: ");
             if ($product_gewicht >= 1 || $product_gewicht > ceil($product_gewicht) && $product_gewicht < ceil($product_gewicht)) {
                 $product_specs .= (round($product_gewicht, 1) . " kilo" . "<br>");
             } elseif ($product_gewicht >= 1) {
@@ -70,18 +69,6 @@ include_once ROOT_PATH . "/controllers/redirect.php";
             } else {
                 $product_specs .= ($product_gewicht . " gram" . "<br>");
             }
-        }
-
-        // Indien de voorgestelde prijs bekend is, verandert $product_prijs in de prijs. Indien deze niet bekend is pakt hij de vaste waarden binnen de UnitPrice en vermenigvuldigt hij deze met het TaxRate percentage.
-        if ($StockItem["RecommendedRetailPrice"] != NULL) {
-            $product_prijs = $StockItem["RecommendedRetailPrice"];
-            print("<b>Prijs: </b>€" . $product_prijs . "<br>");
-        } else {
-            $product_prijs = $StockItem["UnitPrice"] * ($StockItem["TaxRate"] / 100 + 1);
-            print("<b>Prijs: </b>€" . $product_prijs . "<br>");
-        }
-        if ($product_prijs == NULL) {
-            print("Er is geen prijs voor dit product beschikbaar" . "<br>");
         }
 
         // Indien de kleur bekend is, verandert $product_kleur naar de kleur. Anders is deze NULL
@@ -92,15 +79,6 @@ include_once ROOT_PATH . "/controllers/redirect.php";
             $product_kleur = NULL;
         }
 
-        // Indien de voorraad meer dan 0 is, is er voorraad, verandert $product_voorraad naar de voorraad. Anders is deze NULL
-        if ($Stock["QuantityOnHand"] > 0) {
-            $product_voorraad = $Stock["QuantityOnHand"];
-            print("<b>voorraad: </b>" . $product_voorraad) . " eenheden " . "<br>";
-        } else {
-            $product_voorraad = NULL;
-            print("Dit product is momenteel niet op voorraad");
-        }
-        
         // Indien er opmerkingen voor het product vanuit marketing zijn zullen deze in de variabele $marketing_commentaar gestopt worden.
         if ($StockItem["MarketingComments"] != NULL) {
             $marketing_commentaar = $StockItem["MarketingComments"];
@@ -108,7 +86,7 @@ include_once ROOT_PATH . "/controllers/redirect.php";
         } else {
             $marketing_commentaar = NULL;
         }
-        
+
         // Indien het gekozen product een koelproduct is, word $product_is_koelproduct TRUE. Anders is deze FALSE.
         if ($StockItem["IsChillerStock"] == TRUE) {
             $product_specs .= ("Dit is een koelproduct" . "<br>");
@@ -122,9 +100,6 @@ include_once ROOT_PATH . "/controllers/redirect.php";
         // JN - NOG KIJKEN NAAR IMPLEMENTATIE DATABASE.
         // JN - WACHTEN OP TOEVOEGING BLOB DATABASE.
         $product_afbeelding_path = "../media/noveltyitems.jpg";
-
-        
-        $product_beschrijving = "het is een beschrijving";
         $product_review = "dit is een review";
         ?>
 
@@ -138,6 +113,33 @@ include_once ROOT_PATH . "/controllers/redirect.php";
                 <table>
                     <!-- Toon de globale informatie van product -->
                     <tr>
+                        <td>
+                            <?php
+                            // Indien de voorraad meer dan 0 is, is er voorraad, verandert $product_voorraad naar de voorraad. Anders is deze NULL
+                            if ($Stock["QuantityOnHand"] > 0) {
+                                $product_voorraad = $Stock["QuantityOnHand"];
+                                print("<b>voorraad: </b>" . $product_voorraad) . " eenheden " . "<br>";
+                            } else {
+                                $product_voorraad = NULL;
+                                print("Dit product is momenteel niet op voorraad");
+                            }
+                            ?>
+                        </td>
+                        <td>
+                            <?php
+                            // Indien de voorgestelde prijs bekend is, verandert $product_prijs in de prijs. Indien deze niet bekend is pakt hij de vaste waarden binnen de UnitPrice en vermenigvuldigt hij deze met het TaxRate percentage.
+                            if ($StockItem["RecommendedRetailPrice"] != NULL) {
+                                $product_prijs = $StockItem["RecommendedRetailPrice"];
+                                print("<b>Prijs: </b>€" . $product_prijs . "<br>");
+                            } else {
+                                $product_prijs = $StockItem["UnitPrice"] * ($StockItem["TaxRate"] / 100 + 1);
+                                print("<b>Prijs: </b>€" . $product_prijs . "<br>");
+                            }
+                            if ($product_prijs == NULL) {
+                                print("Er is geen prijs voor dit product beschikbaar" . "<br>");
+                            }
+                            ?>
+                        </td>
                         <!-- bestel knop -->
                         <td>
                             <form>
@@ -193,6 +195,6 @@ include_once ROOT_PATH . "/controllers/redirect.php";
 
         <!-- voeg footer toe -->
         <br>
-    <?php include(ROOT_PATH . "/includes/footer.php"); ?>
+        <?php include(ROOT_PATH . "/includes/footer.php"); ?>
     </body>
 </html>

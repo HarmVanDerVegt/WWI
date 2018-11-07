@@ -77,7 +77,7 @@ if (!defined('ROOT_PATH')) {
                     </div>
                 </div>
             </div>
-        </div>
+        <br>
 
         <!-- Rest van de categorieën -->
 

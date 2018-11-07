@@ -19,8 +19,6 @@ include_once ROOT_PATH . "/controllers/supplierController.php";
                     <p class="card-text"><?php
                         $StockItem = getStockItemByID(6);
                         $Supplier = getSupplierByID($StockItem["SupplierID"]);
-
-                        
                         echo "Naam: " . $StockItem["StockItemName"] . "<br>";
                         
                         if ($StockItem["Photo"] != NULL) {

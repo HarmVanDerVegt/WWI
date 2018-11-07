@@ -11,7 +11,7 @@
     <div class="footer-custom">
         <div class="container" class="footer-custom">
 
-            <div class="text-center py-3 text-white">Products     Useful     links     Contact</div>
+            <div class="text-center py-3 text-white"> <a href="/WWI/WWI/pages/Contact.php">Products</a>          account     <a href="/WWI/WWI/pages/index.php">Contact</a></div>
         </div>
     </div>
 

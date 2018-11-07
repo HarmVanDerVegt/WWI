@@ -22,7 +22,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown">
-                        categorie
+                        Categorie
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <?php
@@ -54,19 +54,19 @@
                         <a class="dropdown-item" href="#"></a>
                         <form class="px-4 py-3" method="post" action="../pages/login.php">
                             <div class="form-group">
-                                <label for="exampleDropdownFormEmail1">Email adres</label>
+                                <div class="text-white">Email adres</div>
                                 <input type="email" class="form-control" id="FormEmail" name="username"
                                        placeholder="email@example.com">
                             </div>
                             <div class="form-group">
-                                <label for="exampleDropdownFormPassword1">Password</label>
+                                <div class="text-white">Password</div>
                                 <input type="password" class="form-control" id="FormPassword" name="password"
                                        placeholder="Wachtwoord">
                             </div>
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="dropdownCheck">
                                 <label class="form-check-label" for="dropdownCheck">
-                                    Onthoud mij
+                                    <div class="text-white">  Onthoud mij </div>
                                 </label>
                             </div>
                             <button type="submit" class="btn btn-sample btn-sample-success">Log in</button>

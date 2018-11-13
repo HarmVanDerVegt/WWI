@@ -16,12 +16,22 @@
         <!-- producten ophallen van database -->
         <?php
         // -------------variablen
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
         // vind meegegeven variable van url
+        // category id naam ophalen
         if (filter_has_var(INPUT_GET, "category")) {
             $category_naam = filter_input(INPUT_GET, "category", FILTER_SANITIZE_STRING);
         } else {
-            $category_naam = "Mugs";
+            if (isset($_SESSION['category'])) {
+                $category_naam = $_SESSION['category'];
+            } else {
+                $category_naam = "Mugs";
+            }
         }
+        $_SESSION["category"] = $category_naam;
+        
         // sql query voor het vinden van de goede producten
         $sql_code = ""
                 . "SELECT SI.StockItemID, SI.StockItemName,SI.brand,SI.UnitPrice,SI.TypicalWeightPerUnit "
@@ -42,29 +52,60 @@
         // items opvragen uit sql data base
         $resultaat = mysqli_query($sql_connectie, $sql_code);
         ?>
+
         <!-- inhoud pagina------------------------------------------ -->
         <?php include(ROOT_PATH . "/includes/header.php"); ?>
         <br>
-        <!-- -->
+        <!-- Titel van pagina -->
         <h1>category:&emsp;<?php print($category_naam); ?></h1>
+        <!-- resultaat informatie van opgehaalde producten -->
+        <?php
+        $aantal_producten = mysqli_num_rows($resultaat);
+        // welke pagina moet worden getoond
+        if (filter_has_var(INPUT_GET, "aantal_producten")) {
+            $aantal_producten_tonen = filter_input(INPUT_GET, "aantal_producten", FILTER_VALIDATE_INT);
+        } else {
+            $aantal_producten_tonen = 2;
+        }
+        $paginas = (int) ceil($aantal_producten / $aantal_producten_tonen);
+
+        if (filter_has_var(INPUT_GET, "pagina")) {
+            $pagina_nr = filter_input(INPUT_GET, "pagina", FILTER_VALIDATE_INT);
+        } else {
+            $pagina_nr = 1;
+        }
+        ?>
         <!-- vraag gebruiker hoeveel itmes wil zien -->
         <form>
-            Aantal pagina's:
+            Aantal producten tonen:
             <select name="aantal_producten">
-                <option>2</option>
-                <option>4</option>
+                <?php
+                for ($i = 2; $i <= 32; $i *= 2) {
+                    print("<option " . (($i == $aantal_producten_tonen) ? "selected" : "") . ">" . $i . "</option>");
+                }
+                ?>
             </select>
             <input type="submit" value="laad">
+            Pagina:
+            <?php
+            for ($i = 1; $i <= $paginas; $i++) {
+                print("<input type='submit' name='pagina' value='" . $i . "'>");
+            }
+            ?>
         </form>
+
         <!-- genereren van generieke pagina -->
         <div class="container">
             <div class="row">
                 <?php
-                $i = 0;
-                while ($item = mysqli_fetch_assoc($resultaat)) {
-                    // constanten voor generatie pagina
-                    $aantal_items = 2;
-                    
+                for ($i = 0; $i < ($pagina_nr - 1) * $aantal_producten_tonen; $i++) {
+                    mysqli_fetch_assoc($resultaat);
+                }
+                for ($loop = 0; $loop < $aantal_producten_tonen; $loop++) {
+                    // laad gegevens van een rij 
+                    $item = mysqli_fetch_assoc($resultaat);
+                    if ($item == NULL)
+                        break;
                     // --------------------------doe benodige gegevens in variablen                    
                     $naam = explode("-", $item["StockItemName"]);
                     $foto_path = "../media/airline.jpg";
@@ -73,12 +114,10 @@
                     $gewicht = $item["TypicalWeightPerUnit"];
                     $product_id = $item["StockItemID"];
 
-                    // -------------------------ga naar een nieuwe rij na elke 4 items
-                    if ($i > $aantal_items-1) {
-                        $i = 0;
+                    // -------------------------ga naar een nieuwe rij na elke 2 items
+                    if ($loop % 2 == 0) {
                         print('</div><div class="row">');
                     }
-                    $i++;
 
                     // ---------------------------------------maak een kaart
                     print('<a href="/WWI/WWI/pages/category/product.php?productID=' . $product_id . '" class="btn" role="button" style="length: 100px;"0>');
@@ -95,15 +134,13 @@
                     print('<div class="card">');
                     print('Prijs : ' . $prijs);
                     print('<br>beschrijving :<br>');
-                    if(isset($naam[1])) print('<textarea rows="2" cols="5">' . $naam[1] . '</textarea>');
-                    if($merk != NULL) print('<br>Merk : ' . $merk . '<br>');
-                    print('<br>Gewicht : ' . $gewicht . '<br>');
+                    if (isset($naam[1]))
+                        print('<textarea rows="2" cols="5">' . $naam[1] . '</textarea>');
+                    if ($merk != NULL)
+                        print('<br>Merk : ' . $merk . '<br>');
                     print('</div>');
-
                     print('</div>');
                     print('</a>');
-                    
-                   
                 }
                 ?>
             </div>

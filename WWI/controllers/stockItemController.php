@@ -107,7 +107,7 @@ function getStockItemsByStockGroupID($category_naam) {
             . "JOIN stockgroups SG "
             . "ON SI_SG.StockGroupID=SG.StockGroupID "
             . "WHERE SG.StockGroupName='" . $category_naam . "' ";
-
+    
     $result = $db->query($sql);
 
     while ($row = $result->fetch_assoc()) {

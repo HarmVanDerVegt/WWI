@@ -43,7 +43,7 @@
         </div>
         <!-- einde dropdown category -->
         <!-- login -->
-        <?php include_once "../pages/Header_Loginmenu.php";?>
+        <?php include_once ROOT_PATH . "/pages/Header_Loginmenu.php";?>
         <!-- einde login -->
         <!-- zoekveld -->
         <form class="form-inline my-2 my-lg-0" action="/WWI/WWI/pages/Search.php">

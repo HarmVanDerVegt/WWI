@@ -185,8 +185,28 @@ include_once ROOT_PATH . "/controllers/colorController.php";
             <div class="row">
                 <div class="col-lg-8" >
                     <div class="bg-light card">
-                        <h4>combideals:</h4>
-                        <p>test</p>
+                        <h4>Combideals:</h4>
+                        <p> Misschien zijn deze producten een leuke combinatie met dit product? </p>
+                        <div class="card-group">
+                            <div class="card">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

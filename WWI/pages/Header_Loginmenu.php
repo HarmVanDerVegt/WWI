@@ -1,5 +1,5 @@
 <?php
-include_once "../controllers/userController.php";
+include_once ROOT_PATH . "/controllers/userController.php";
 
 ?>
 <div class="navbar-right" id="navbarSupportedContent">

@@ -62,39 +62,32 @@ function getSearchTags(){
 
     $result = $db->query($sql);
 
-    //$array = [];
 
     while ($tags = $result->fetch_assoc()){
-        //array_push($array, $tags["Tags"]);
         $array[] = $tags["Tags"];
     }
 
+    $filteredTags = [];
 
-    print_r($array);
-    echo "<br><br<br> XXXXX <br><br><br>";
-    $filteredTags = []; //array_map('current', $array);
-
-    $i = 0;
     foreach ($array as $tag){
-        //print_r($tags);
-        //print $i;
-        //print "<br>";
-        //foreach ($tags as $tag){
-        //    print_r($tag);
-        //    print "<br>";
-        //    array_push($filteredTags, $tag["Tags"]);
-        //}
+
+        $tag = trim($tag, "[]");
+
         $tag = explode(",", $tag);
-        $i++;
+
         $filteredTags = array_merge($filteredTags, $tag);
     }
 
 
+    $unigueTags = array_unique($filteredTags);
 
-    print_r($filteredTags);
+    $returnTags = [];
 
-    //$unigueTags = array_unique($filteredTags);
+    foreach ($unigueTags as $unigueTag){
+        if (!empty($unigueTag)){
+            $returnTags[] = $unigueTag;
+        }
+    }
 
-    //print_r($unigueTags);
-
+    return $returnTags;
 }

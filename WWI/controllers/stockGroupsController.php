@@ -10,9 +10,18 @@ function getAllStockGroups(){
     return getAllRows($tableStockGroups);
 }
 
-function getStockGroupByID(){
+function getStockGroupByID($ID){
     global $tableStockGroups;
     
-    return getRowByIntID("stockGroupID", $table, $ID);
+    return getRowByIntID("stockGroupID", $tableStockGroups, $ID);
+}
+
+function getStockGroupByStockItemID($ID){
+
+    global $tableStockGroups;
+
+
+    return getRowByForeignID($ID, $tableStockGroups, "StockITems", "StockItemID", "StockItemID");
+
 }
 ?>

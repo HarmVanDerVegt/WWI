@@ -100,7 +100,7 @@ function getStockItemsByStockGroupID($category_id) {
     $db = createDB();
     $array = [];
     $sql = ""
-            . "SELECT SI.StockItemID "
+            . "SELECT * "
             . "FROM stockitems SI "
             . "JOIN stockitemstockgroups SI_SG "
             . "ON SI.StockItemID = SI_SG.StockItemID "

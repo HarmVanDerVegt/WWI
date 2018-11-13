@@ -185,7 +185,6 @@ include_once ROOT_PATH . "/controllers/colorController.php";
             <!-- Selecteert combideals -->
 <?php
             $CombiDeals = getStockItemsByStockGroupID($StockGroupID);
-            //print_r($CombiDeals);
             
             $hoogsteID = 0;
             foreach ($CombiDeals as $stockItem){
@@ -201,9 +200,12 @@ include_once ROOT_PATH . "/controllers/colorController.php";
                 }
             }
             
-            $CombiDeal1 = rand($laagsteID, $hoogsteID);
-            $CombiDeal2 = rand($laagsteID, $hoogsteID);
-            $CombiDeal3 = rand($laagsteID, $hoogsteID);
+            $CombiDeal1ID = rand($laagsteID, $hoogsteID);
+            $CombiDeal1Naam = $CombiDeals[$CombiDeal1ID]["StockItemName"];
+            $CombiDeal2ID = rand($laagsteID, $hoogsteID);
+            $CombiDeal2Naam = $CombiDeals[$CombiDeal2ID]["StockItemName"];
+            $CombiDeal3ID = rand($laagsteID, $hoogsteID);
+            $CombiDeal3Naam = $CombiDeals[$CombiDeal3ID]["StockItemName"];
 ?>
             <!-- Toon combideals -->
             <div class="row">
@@ -215,19 +217,22 @@ include_once ROOT_PATH . "/controllers/colorController.php";
                             <div class="card">
                                 <img class="card-img-top" src="..." alt="Card image cap">
                                 <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
+                                    <h5 class="card-title"> <?php print($CombiDeal1Naam) ?> </h5>
+                                    <link href="product.php? <?php $CombiDeal1ID ?> ">
                                 </div>
                             </div>
                             <div class="card">
                                 <img class="card-img-top" src="..." alt="Card image cap">
                                 <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
+                                    <h5 class="card-title"> <?php print($CombiDeal2Naam) ?> </h5>
+                                    <link href="product.php? <?php $CombiDeal2ID ?> ">
                                 </div>
                             </div>
                             <div class="card">
                                 <img class="card-img-top" src="..." alt="Card image cap">
                                 <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
+                                    <h5 class="card-title"> <?php print($CombiDeal3Naam) ?> </h5>
+                                    <link href="product.php? <?php $CombiDeal3ID ?> ">
                                 </div>
                             </div>
                         </div>

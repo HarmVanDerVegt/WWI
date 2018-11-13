@@ -26,6 +26,7 @@ include_once ROOT_PATH . "/controllers/colorController.php";
         $Supplier = getSupplierByID($StockItem["SupplierID"]);
         $Color = getColorsByID($StockItem["ColorID"]);
         $Stock = getStockItemHoldingByID($StockItem["StockItemID"]);
+        $StockGroup = getStockGroupByID($
 
         // Checkt of er daadwerkelijk een product is meegegeven en redirect anders naar een errorpagina.
 
@@ -175,13 +176,17 @@ include_once ROOT_PATH . "/controllers/colorController.php";
             <div class="row">
                 <div class="col-sm-8" >
                     <div class="bg-light card">
-                        <h4>reviews:</h4>
+                        <h4>Reviews:</h4>
                         <p><?php print($product_review); ?></p>
                     </div>
                 </div>
             </div>
 
-            <!-- toon combi deals -->
+            <!-- Selecteert combideals -->
+            
+            
+            
+            <!-- Toon combideals -->
             <div class="row">
                 <div class="col-lg-8" >
                     <div class="bg-light card">

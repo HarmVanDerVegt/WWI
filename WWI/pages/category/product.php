@@ -189,20 +189,21 @@ include_once ROOT_PATH . "/controllers/colorController.php";
             
             $hoogsteID = 0;
             foreach ($CombiDeals as $stockItem){
-                if ($stockItem["stockitemID"] > $hoogsteID){
-                    $hoogsteID = $stockItem["stockitemID"];
+                if ($stockItem["StockItemID"] > $hoogsteID){
+                    $hoogsteID = $stockItem["StockItemID"];
                 }
             }
             
             $laagsteID = $hoogsteID;
             foreach ($CombiDeals as $stockItem) {
-                if ($stockItem["stockitemID"] < $laagsteID) {
-                    $laagsteID = $stockItem["stockitemID"];
+                if ($stockItem["StockItemID"] < $laagsteID) {
+                    $laagsteID = $stockItem["StockItemID"];
                 }
             }
             
-            echo $laagsteID;
-            echo $hoogsteID;
+            $CombiDeal1 = rand($laagsteID, $hoogsteID);
+            $CombiDeal2 = rand($laagsteID, $hoogsteID);
+            $CombiDeal3 = rand($laagsteID, $hoogsteID);
 ?>
             <!-- Toon combideals -->
             <div class="row">

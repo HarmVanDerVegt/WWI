@@ -27,11 +27,7 @@ include_once ROOT_PATH . "/controllers/colorController.php";
         $Color = getColorsByID($StockItem["ColorID"]);
         $Stock = getStockItemHoldingByID($StockItem["StockItemID"]);
         $StockGroup = getStockGroupIDByStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
-        $StockGroupID = $StockGroup["StockGroupName"];
-        
-        print_r( $StockGroup);
-        print($StockGroupID);
-        
+        $StockGroupID = $StockGroup["StockGroupID"];
         // Checkt of er daadwerkelijk een product is meegegeven en redirect anders naar een errorpagina.
 
         $errorpagina = "../error.php";
@@ -187,9 +183,18 @@ include_once ROOT_PATH . "/controllers/colorController.php";
             </div>
 
             <!-- Selecteert combideals -->
+<?php
+            $CombiDeals = getStockItemsByStockGroupID($StockGroupID);
             
+            print_r($CombiDeals);
             
+            $tableStockGroups = "tableStockItems";
+            $LowestCombiDealValue = getHighestCombidealStockItemID();
+            $HighestCombiDealValue = getHighestCombidealStockItemID();
             
+            echo $LowestCombiDealValue;
+           // echo $HighestCombiDealValue;
+?>
             <!-- Toon combideals -->
             <div class="row">
                 <div class="col-lg-8" >

@@ -96,24 +96,39 @@ function getSearchTags() {
     //print_r($unigueTags);
 }
 
-function getStockItemsByStockGroupID($category_naam) {
+function getStockItemsByStockGroupID($category_id) {
     $db = createDB();
-    $array = array();
+    $array = [];
     $sql = ""
-            . "SELECT * "
+            . "SELECT SI.stockitemID "
             . "FROM stockitems SI "
             . "JOIN stockitemstockgroups SI_SG "
             . "ON SI.StockItemID = SI_SG.StockItemID "
             . "JOIN stockgroups SG "
             . "ON SI_SG.StockGroupID=SG.StockGroupID "
-            . "WHERE SG.StockGroupName='" . $category_naam . "' ";
+            . "WHERE SG.StockGroupID='" . $category_id . "' ";
     
     $result = $db->query($sql);
 
-    while ($row = $result->fetch_assoc()) {
+       while ($row = $result->fetch_assoc()) {
         $array[array_values($row)[0]] = $row;
     }
+    
     $db->close();
+    
     return $array;
 }
 
+function getHighestCombidealStockItemID() {
+    
+    global $tableStockGroups;
+    
+    return getHighestAttributeByIntID("StockItemID", $tableStockGroups);
+}
+
+function getLowestCombidealStockItemID() {
+    
+    global $tableStockItems;
+    
+    return getLowestAttributeByIntID("StockItemID", $tableStockGroups);
+}

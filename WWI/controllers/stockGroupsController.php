@@ -19,7 +19,7 @@ function getStockGroupByID($ID){
 function getStockGroupIDByStockItemID($ID){
 
 
-     return getRowByForeignID($ID, "StockItemStockGroups", "StockItems", "StockItemID", "StockItemID");
+     return getRowByTwoForeignIDs($ID, "StockItems", "StockItemStockGroups", "StockGroups", "StockItemID", "StockGroupID");
 
 }
 ?>

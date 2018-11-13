@@ -1,7 +1,6 @@
 <?php
 
-function createDB()
-{
+function createDB() {
     // Create connection
     $dbcon = mysqli_connect('localhost', 'root', '', 'wideworldimporters');
 
@@ -18,12 +17,12 @@ function createDB()
 //Gebruik: $result[attribute]
 //Voorbeeld:    $item =  getRowByIntID("StockItemID", 'stockItems", 6);
 //              $item["StockItemName"];
-function getRowByIntID($ID, $table, $value){
+function getRowByIntID($ID, $table, $value) {
     //Initieert de database.
     $db = createDB();
 
     //Geeft een error als de value geen int is.
-    $value = (int)$value;
+    $value = (int) $value;
 
     //Prepared de SQL statement.
     $sql = "SELECT *
@@ -40,7 +39,7 @@ function getRowByIntID($ID, $table, $value){
     return $result;
 }
 
-function getAllRows($table){
+function getAllRows($table) {
     $db = createDB();
 
     $sql = "SELECT *
@@ -50,14 +49,14 @@ function getAllRows($table){
 
     $array = [];
 
-    while ($row = $result->fetch_assoc()){
+    while ($row = $result->fetch_assoc()) {
         $array[array_values($row)[0]] = $row;
     }
 
     return $array;
 }
 
-function getRowByForeignID($value, $table1, $table2, $joinID, $joinID2){
+function getRowByForeignID($value, $table1, $table2, $joinID, $joinID2) {
 
     $db = createDB();
 
@@ -73,8 +72,6 @@ function getRowByForeignID($value, $table1, $table2, $joinID, $joinID2){
 
     while ($row = $result->fetch_assoc()) {
         $array[array_values($row)[0]] = $row;
-
-
     }
     return $array;
 }
@@ -87,7 +84,7 @@ function getHighestAttributeByIntID($ID, $table) {
 
     $result = $db->query($sql);
 
-    return $result->fetch_assoc()["hoogste"];   
+    return $result->fetch_assoc()["hoogste"];
 }
 
 function getLowestAttributeByIntID($ID, $table) {
@@ -95,8 +92,30 @@ function getLowestAttributeByIntID($ID, $table) {
 
     $sql = "SELECT MIN($ID) laagste
             FROM $table";
-    
+
     $result = $db->query($sql);
 
-    return $result->fetch_assoc()["laagste"];   
+    return $result->fetch_assoc()["laagste"];
+}
+
+function getRowByTwoForeignIDs($value, $table1, $table2, $table3, $joinID, $joinID2) {
+
+    $db = createDB();
+
+    $sql = "SELECT *
+            FROM $table1 AS t1
+            JOIN $table2 AS t2
+            ON t1.$joinID = t2.$joinID
+            JOIN $table3 AS t3
+            ON t2.$joinID2 = t3.$joinID2
+            WHERE t1.$joinID = $value";
+
+    $result = $db->query($sql);
+
+
+    $returnValue = $result->fetch_assoc();
+    
+    $db->close();
+    
+    return $returnValue;
 }

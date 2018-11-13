@@ -26,6 +26,7 @@ include_once ROOT_PATH . "/controllers/colorController.php";
         $Supplier = getSupplierByID($StockItem["SupplierID"]);
         $Color = getColorsByID($StockItem["ColorID"]);
         $Stock = getStockItemHoldingByID($StockItem["StockItemID"]);
+        $StockGroup = getStockGroupByID($
 
         // Checkt of er daadwerkelijk een product is meegegeven en redirect anders naar een errorpagina.
 
@@ -175,18 +176,42 @@ include_once ROOT_PATH . "/controllers/colorController.php";
             <div class="row">
                 <div class="col-sm-8" >
                     <div class="bg-light card">
-                        <h4>reviews:</h4>
+                        <h4>Reviews:</h4>
                         <p><?php print($product_review); ?></p>
                     </div>
                 </div>
             </div>
 
-            <!-- toon combi deals -->
+            <!-- Selecteert combideals -->
+            
+            
+            
+            <!-- Toon combideals -->
             <div class="row">
                 <div class="col-lg-8" >
                     <div class="bg-light card">
-                        <h4>combideals:</h4>
-                        <p>test</p>
+                        <h4>Combideals:</h4>
+                        <p> Misschien zijn deze producten een leuke combinatie met dit product? </p>
+                        <div class="card-group">
+                            <div class="card">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

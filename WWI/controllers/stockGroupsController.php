@@ -16,12 +16,10 @@ function getStockGroupByID($ID){
     return getRowByIntID("stockGroupID", $tableStockGroups, $ID);
 }
 
-function getStockGroupByStockItemID($ID){
-
-    global $tableStockGroups;
+function getStockGroupIDByStockItemID($ID){
 
 
-    return getRowByForeignID($ID, $tableStockGroups, "StockITems", "StockItemID", "StockItemID");
+     return getRowByForeignID($ID, "StockItemStockGroups", "StockItems", "StockItemID", "StockItemID");
 
 }
 ?>

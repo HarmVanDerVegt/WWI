@@ -26,8 +26,12 @@ include_once ROOT_PATH . "/controllers/colorController.php";
         $Supplier = getSupplierByID($StockItem["SupplierID"]);
         $Color = getColorsByID($StockItem["ColorID"]);
         $Stock = getStockItemHoldingByID($StockItem["StockItemID"]);
-        $StockGroup = getStockGroupByID($
-
+        $StockGroup = getStockGroupIDByStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
+        $StockGroupID = $StockGroup["StockGroupName"];
+        
+        print_r( $StockGroup);
+        print($StockGroupID);
+        
         // Checkt of er daadwerkelijk een product is meegegeven en redirect anders naar een errorpagina.
 
         $errorpagina = "../error.php";

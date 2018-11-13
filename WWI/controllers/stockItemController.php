@@ -118,17 +118,3 @@ function getStockItemsByStockGroupID($category_id) {
     
     return $array;
 }
-
-function getHighestCombidealStockItemID() {
-    
-    global $tableStockGroups;
-    
-    return getHighestAttributeByIntID("StockItemID", $tableStockGroups);
-}
-
-function getLowestCombidealStockItemID() {
-    
-    global $tableStockItems;
-    
-    return getLowestAttributeByIntID("StockItemID", $tableStockGroups);
-}

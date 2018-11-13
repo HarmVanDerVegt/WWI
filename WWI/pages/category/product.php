@@ -185,15 +185,24 @@ include_once ROOT_PATH . "/controllers/colorController.php";
             <!-- Selecteert combideals -->
 <?php
             $CombiDeals = getStockItemsByStockGroupID($StockGroupID);
+            //print_r($CombiDeals);
             
-            print_r($CombiDeals);
+            $hoogsteID = 0;
+            foreach ($CombiDeals as $stockItem){
+                if ($stockItem["stockitemID"] > $hoogsteID){
+                    $hoogsteID = $stockItem["stockitemID"];
+                }
+            }
             
-            $tableStockGroups = "tableStockItems";
-            $LowestCombiDealValue = getHighestCombidealStockItemID();
-            $HighestCombiDealValue = getHighestCombidealStockItemID();
+            $laagsteID = $hoogsteID;
+            foreach ($CombiDeals as $stockItem) {
+                if ($stockItem["stockitemID"] < $laagsteID) {
+                    $laagsteID = $stockItem["stockitemID"];
+                }
+            }
             
-            echo $LowestCombiDealValue;
-           // echo $HighestCombiDealValue;
+            echo $laagsteID;
+            echo $hoogsteID;
 ?>
             <!-- Toon combideals -->
             <div class="row">

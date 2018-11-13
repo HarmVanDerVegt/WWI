@@ -23,21 +23,6 @@ $check = 0;
    $_SESSION["qty"][$i] = $qty;
  }
 
-#verwijderen
-if (isset($_GET["delete"])) {
-    $i = $_GET["delete"];
-   $qty = $_SESSION["qty"][$i];
-    $qty = $qty - 1;
-    $_SESSION["qty"][$i] = $qty;
-
-   if ($qty <= 0) {
-       $_SESSION["amounts"][$i] = 0;
-       unset($_SESSION["cart"][$i]);
-    } else {
-        $_SESSION["amounts"][$i] = $amounts[$i] * $qty;
-    }
-}
-
 #reset
 if (isset($_GET['reset'])) {
     if ($_GET["reset"] == 'true') {
@@ -61,7 +46,7 @@ if (isset($_SESSION["cart"])) {
             <th width="10px">&nbsp;</th>
             <th>Prijs</th>
             <th width="10px">&nbsp;</th>
-            <th>Verwijderen</th>
+            <th>Updaten</th>
         </tr>
         <?php
         $total = 0;

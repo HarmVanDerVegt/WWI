@@ -1,11 +1,10 @@
 <?php
-session_start();
 
 if (!defined('ROOT_PATH')) {
     include("../config.php");
 }
 
-//include(ROOT_PATH . "/includes/header.php");
+include(ROOT_PATH . "/includes/header.php");
 
 $products = array("product A", "product B", "product C");
 $amounts = array("19.99", "10.99", "2.99");

@@ -3,6 +3,7 @@ include_once  ROOT_PATH . "/controllers/databaseController.php";
 
 $tableStockItems = "stockItems";
 
+//Geeft alle stockItems terug als array in een array, met als identifiers de stockItemIDs.
 function getAllStockItems()
 {
     global $tableStockItems;
@@ -10,12 +11,14 @@ function getAllStockItems()
     return getAllRows($tableStockItems);
 }
 
+//Geeft een stockItem als array terug, met als keys de namen van de attributen en de values als values.
 function getStockItemByID($ID){
     global $tableStockItems;
 
     return getRowByIntID("stockItemID", $tableStockItems, $ID);
 }
 
+//Geeft een stockItem als array terug, met als keys de namen van de attributen en de values als values.
 function getStockItemBySupplierID($ID)
 {
 
@@ -25,6 +28,7 @@ function getStockItemBySupplierID($ID)
     return getRowByForeignID($ID, $tableStockItems, "Suppliers", "SupplierID", "SupplierID");
 }
 
+//Geeft een stockItem als array terug, met als keys de namen van de attributen en de values als values.
 function getStockItemBySpecialDealID($ID)
 {
     
@@ -33,7 +37,7 @@ function getStockItemBySpecialDealID($ID)
     
     return getRowByForeignID($ID, $tableStockItems, "SpecialDeals", "StockItemID", "StockItemID");
 }
-
+//Geeft een stockItem als array terug, met als keys StockItemID en StockItemName.
 function getStockItemsBySearchDetails($search){
     $db = createDB();
     $array = array ();

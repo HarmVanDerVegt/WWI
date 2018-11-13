@@ -7,100 +7,96 @@ if (!defined('ROOT_PATH')) {
 ?>
 
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <link href="\WWI\WWI\css\bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <title></title>
-    </head>
-    <body>
-        <!-- voegt header toe -->
-        <?php include(ROOT_PATH . "/includes/header.php"); ?>
-        <br>
+<head>
+    <meta charset="UTF-8">
+    <link href="\WWI\WWI\css\bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <title></title>
+</head>
+<body>
+<!-- voegt header toe -->
+<?php include(ROOT_PATH . "/includes/header.php"); ?>
+<br>
 
-        <!-- begin categorie knoppen------------------------------------------------------------------------------ -->
-        <!-- category informatie ophalen -->
-        <?php
+<!-- begin categorie knoppen------------------------------------------------------------------------------ -->
+<!-- category informatie ophalen -->
+<?php
 
-        // speciale data type voor category informatie
-        class category_type {
+// speciale data type voor category informatie
+class category_type
+{
 
-            public $category = "";
-            public $foto_path = "";
-            public $link = "";
+    public $category = "";
+    public $foto_path = "";
+    public $link = "";
 
-        }
+}
 
-        // laad category data
-        include('data/category_data.php');
-        include_once ROOT_PATH . "/controllers/stockItemController.php";
-        include_once ROOT_PATH . "/controllers/specialDealsController.php";
-        ?>
+// laad category data
+include('data/category_data.php');
+include_once ROOT_PATH . "/controllers/stockItemController.php";
+include_once ROOT_PATH . "/controllers/specialDealsController.php";
+?>
 
-        <!-- laat de product categoryen zien -->
-        <?php
-        // variablen
-        $height = 100;
-        $width = 100;
+<!-- laat de product categoryen zien -->
+<?php
+// variablen
+$height = 100;
+$width = 100;
 
-        // genereer html code die de category's laat zien
-        print('<div class="container">');
-        print("<h1>Category:</h1>");
-        print('<div class="row">');
-        ?>
-        <!-- Definieert de special deal -->
+// genereer html code die de category's laat zien
+print('<div class="container">');
+print('<div class="row">');
+?>
+<!-- Definieert de special deal -->
 
-        <!-- Toont de special deals -->
-        <br>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm">
-                    <div class="card text-white">
-                        <?php
-                        $LowestSpecialDealValue = getLowestSpecialDealID();
-                        $HighestSpecialDealValue = getHighestSpecialDealID();
+<!-- Toont de special deals -->
+<br>
+<?php
+$LowestSpecialDealValue = getLowestSpecialDealID();
+$HighestSpecialDealValue = getHighestSpecialDealID();
 
-                        $SpecialDeal = getSpecialDealByID(rand($LowestSpecialDealValue, $HighestSpecialDealValue));
-                        ?>
-                        <a href="../category/product.php?productID=<?php $StockItem ?>"
-                        <?php if ($SpecialDeal == NULL || FALSE) { ?>
-                               <img src="../media/SpecialDeals/SpecialDealFotoNietBeschikbaar" alt="SpecialDealFotoNietBeschikbaar" height="250px" width="250px">
-                               <?php } else { ?>
-                                <img src="../media/SpecialDeals/" alt="Test" height="250px">
-                            <?php } ?>
-                            <div class="card-img-overlay">
-                                <div class="card-body">
-                                    <?php
-                                    $StockItem = getStockItemBySpecialDealID($SpecialDeal["StockItemID"]);
-                                    ?>
-                                </div>
-                            </div>
-                    </div>
-                </div>
+$SpecialDeal = getSpecialDealByID(rand($LowestSpecialDealValue, $HighestSpecialDealValue));
+$StockItem = getStockItemBySpecialDealID($SpecialDeal["StockItemID"]);
+?>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3" style="max-height: 403px;width: inherit">
+            <div class="card"">
+                <a href="../pages/category/product.php?productID=2">
+                    <img
+                            class="card-img-top"
+                            src="./media/SpecialDeals/SpecialDealFotoNietBeschikbaar.png"
+                    >
+                </a>
             </div>
         </div>
-            <br>
+    </div>
+</div>
+<br>
+<br>
 
-            <!-- Rest van de categorieën -->
+<!-- Rest van de categorieën -->
 
-            <?php
-            foreach ($category as $item) {
-                // toon kaart met naam en foto van category
-                print('<div class="col-6 col-sm-4">');
-                print('<div class="card">');
-                print('<a href="' . $item->link . '" class="btn btn-info" role="button">');
-                print('<strong>' . $item->category . '</strong><br>');
-                print('<img src="' . $item->foto_path . '" alt="' . $item->category . '" height="' . $height . 'px" width="' . $width . 'px">');
-                print('</a>');
-                print('</div>');
-                print('</div>');
-            }
+<?php
+foreach ($category as $item) {
+    // toon kaart met naam en foto van category
+    print('<div class="col-6 col-sm-4">');
+    print('<div class="card">');
+    print('<a href="' . $item->link . '" class="btn btn-info" role="button">');
+    print('<strong>' . $item->category . '</strong><br>');
+    print('<img src="' . $item->foto_path . '" alt="' . $item->category . '" height="' . $height . 'px" width="' . $width . 'px">');
+    print('</a>');
+    print('</div>');
+    print('</div>');
+}
 
-            print('</div>');
-            print('</div>');
-            ?>
-            <!-- einde category knoppen------------------------------------------------------------------------------ -->
-            <!-- voeg footer toe -->
-            <br>
-            <?php include(ROOT_PATH . "/includes/footer.php"); ?>
-            </body>
-            </html>
+print('</div>');
+print('</div>');
+?>
+<!-- einde category knoppen------------------------------------------------------------------------------ -->
+<!-- voeg footer toe -->
+<br>
+<?php include(ROOT_PATH . "/includes/footer.php"); ?>
+</body>
+</html>

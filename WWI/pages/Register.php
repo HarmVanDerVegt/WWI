@@ -15,7 +15,7 @@ if (!defined('ROOT_PATH')) {
         <div class="card-body mx-auto">
             <div class="signup-form">
                 <form  method="post">
-                    <p class="hint-text">Registreer voor een gratis account.</p>
+                    <p class="hint-text">Registreer voor een account.</p>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-6"><input type="text" class="form-control" name="Voornaam" placeholder="Voornaam" required="required"></div>
@@ -47,6 +47,9 @@ if (!defined('ROOT_PATH')) {
                         <input type="password" class="form-control" name="bevestig_wachtwoord" placeholder="Bevestig Wachtwoord" required="required">
                     </div>
                     <div class="form-group">
+                        <input type="tel" class="form-control" name="Phone" placeholder="Telefoon Nummer">
+                    </div>
+                    <div class="form-group">
                         <label class="checkbox-inline"><input type="checkbox" required="required"> Ik accepteer de <a href="../pages/Voorwaarden.php">Voorwaarden</a></label>
                     </div>
                     <div class="form-group">
@@ -70,6 +73,7 @@ $Register["Woonplaats"] = filter_input(INPUT_POST, 'woonplaats');
 $Register["Email"] = filter_input(INPUT_POST, 'email');
 $Register["Wachtwoord"] = filter_input(INPUT_POST, 'wachtwoord');
 $Register["bevestig_wachtwoord"] = filter_input(INPUT_POST, 'bevestig_wachtwoord');
+$Register["Phone"] = filter_input(INPUT_POST, 'Phone');
 
 print_r ($Register);
 

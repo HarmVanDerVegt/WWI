@@ -107,14 +107,35 @@ function getStockItemsByStockGroupID($category_id) {
             . "JOIN stockgroups SG "
             . "ON SI_SG.StockGroupID=SG.StockGroupID "
             . "WHERE SG.StockGroupID='" . $category_id . "' ";
-    
+
     $result = $db->query($sql);
 
-       while ($row = $result->fetch_assoc()) {
+    while ($row = $result->fetch_assoc()) {
         $array[array_values($row)[0]] = $row;
+    }
+
+    $db->close();
+
+    return $array;
+}
+
+function getStockGroupIDsFromStockItemID($ID) {
+    $db = createDB();
+
+    $sql = ""
+            . "SELECT sisg.StockGroupID "
+            . "FROM stockitemstockgroups sisg "
+            . "WHERE stockitemID ='" . $ID . "' ";
+
+    $result = $db->query($sql);
+
+    $array = [];
+    
+    while ($row = $result->fetch_assoc()) {
+        $array[] = $row["StockGroupID"];
     }
     
     $db->close();
-    
+
     return $array;
 }

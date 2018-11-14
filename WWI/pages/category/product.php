@@ -183,30 +183,23 @@ include_once ROOT_PATH . "/controllers/colorController.php";
             </div>
 
             <!-- Selecteert combideals -->
-<?php
-            $CombiDeals = getStockItemsByStockGroupID($StockGroupID);
+            <?php
+            $StockGroups = getStockGroupIDsFromStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
+            $SingleStockGroup = array_rand($StockGroups, 1);
+            $CombiDeals = getStockItemsByStockGroupID($StockGroups[$SingleStockGroup]);
+
+            $CombiDealRand1 = array_rand($CombiDeals, 1);
+            $CombiDeal1ID = $CombiDeals[$CombiDealRand1]["StockItemID"];
+            $CombiDeal1Naam = $CombiDeals[$CombiDealRand1]["StockItemName"];
             
-            $hoogsteID = 0;
-            foreach ($CombiDeals as $stockItem){
-                if ($stockItem["StockItemID"] > $hoogsteID){
-                    $hoogsteID = $stockItem["StockItemID"];
-                }
-            }
+            $CombiDealRand2 = array_rand($CombiDeals, 1);
+            $CombiDeal2ID = $CombiDeals[$CombiDealRand2]["StockItemID"];
+            $CombiDeal2Naam = $CombiDeals[$CombiDealRand2]["StockItemName"];
             
-            $laagsteID = $hoogsteID;
-            foreach ($CombiDeals as $stockItem) {
-                if ($stockItem["StockItemID"] < $laagsteID) {
-                    $laagsteID = $stockItem["StockItemID"];
-                }
-            }
-            
-            $CombiDeal1ID = rand($laagsteID, $hoogsteID);
-            $CombiDeal1Naam = $CombiDeals[$CombiDeal1ID]["StockItemName"];
-            $CombiDeal2ID = rand($laagsteID, $hoogsteID);
-            $CombiDeal2Naam = $CombiDeals[$CombiDeal2ID]["StockItemName"];
-            $CombiDeal3ID = rand($laagsteID, $hoogsteID);
-            $CombiDeal3Naam = $CombiDeals[$CombiDeal3ID]["StockItemName"];
-?>
+            $CombiDealRand3 = array_rand($CombiDeals, 1);
+            $CombiDeal3ID = $CombiDeals[$CombiDealRand3]["StockItemID"];
+            $CombiDeal3Naam = $CombiDeals[$CombiDealRand3]["StockItemName"];
+            ?>
             <!-- Toon combideals -->
             <div class="row">
                 <div class="col-lg-8" >
@@ -217,22 +210,25 @@ include_once ROOT_PATH . "/controllers/colorController.php";
                             <div class="card">
                                 <img class="card-img-top" src="..." alt="Card image cap">
                                 <div class="card-body">
-                                    <h5 class="card-title"> <?php print($CombiDeal1Naam) ?> </h5>
                                     <a href="product.php?productID=<?php print($CombiDeal1ID) ?> ">
+                                        <h5 class="card-title"> <?php print($CombiDeal1Naam) ?> </h5>
+                                    </a>
                                 </div>
                             </div>
                             <div class="card">
                                 <img class="card-img-top" src="..." alt="Card image cap">
                                 <div class="card-body">
-                                    <h5 class="card-title"> <?php print($CombiDeal2Naam) ?> </h5>
                                     <a href="product.php?productID=<?php print($CombiDeal2ID) ?> ">
+                                        <h5 class="card-title"> <?php print($CombiDeal2Naam) ?> </h5>
+                                    </a>
                                 </div>
                             </div>
                             <div class="card">
                                 <img class="card-img-top" src="..." alt="Card image cap">
                                 <div class="card-body">
-                                    <h5 class="card-title"> <?php print($CombiDeal3Naam) ?> </h5>
                                     <a href="product.php?productID=<?php print($CombiDeal3ID) ?> ">
+                                        <h5 class="card-title"> <?php print($CombiDeal3Naam) ?> </h5>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -241,8 +237,8 @@ include_once ROOT_PATH . "/controllers/colorController.php";
             </div>
             <br>
             <br>
-        <!-- voeg footer toe -->
-        <br>
-        <?php include(ROOT_PATH . "/includes/footer.php"); ?>
-    </body>
-</html>
+            <!-- voeg footer toe -->
+            <br>
+            <?php include(ROOT_PATH . "/includes/footer.php"); ?>
+            </body>
+            </html>

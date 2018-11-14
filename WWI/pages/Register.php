@@ -10,7 +10,7 @@ if (!defined('ROOT_PATH')) {
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!-- voegt header toe -->
 <?php include(ROOT_PATH . "/includes/header.php"); ?>
-
+<!-- start van reg form -->
     <div class="card mx-auto" style="width: 36rem;">
         <div class="card-body mx-auto">
             <div class="signup-form">
@@ -59,10 +59,9 @@ if (!defined('ROOT_PATH')) {
             </div>
         </div>
     </div>
-
+    <!-- start van reg form to array form -->
 <?php
 $Register =  array ();
-
 $Register["Voornaam"] = filter_input(INPUT_POST, 'Voornaam');
 $Register["Achternaam"] = filter_input(INPUT_POST, 'Achternaam');
 $Register["Adres"] = filter_input(INPUT_POST, 'Adres');

@@ -4,7 +4,7 @@
         $i = 0;
         $category[$i] = new category_type();
         $category[$i]->category = "Airline Novelties";
-        $category[$i]->foto_path = "media/airline.jpg";
+        $category[$i]->foto_path = "media/airlinenovelties.jpg";
         $category[$i]->link = "category/product_lijst.php?category=Airline Novelties";
 
         $i++;

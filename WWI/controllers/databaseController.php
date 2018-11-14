@@ -147,16 +147,73 @@ function InsertNewUser($valuarray)
     $db = createDB();
     $maxsql = "select max(PersonID) +1 from people";
     $maxresult = $db->query($maxsql);
-    $maxidresult = $maxresult->fetch_assoc();
-    $citysql = "select CityID from cities where CityName like '%.$woonplaats.%'";
+    $maxidresultar = $maxresult->fetch_assoc();
+
+    $customeridsql = "select max(CustomerID) +1 from customers";
+    $customerresult = $db->query($customeridsql);
+    $customerresultar = $customerresult->fetch_assoc();
+
+    $citysql = "select CityID from cities where CityName like '%$woonplaats%'";
     $cityid = $db->query($citysql);
-    $cityidresult = $cityid->fetch_assoc();
+    $cityidresultar = $cityid->fetch_assoc();
 
+    foreach ($maxidresultar as $maxarresult){
+    $maxidresult = $maxarresult;
+    }
+    foreach ($cityidresultar as $cityarresult){
+        $cityidresult = $cityarresult;
+    }
+    foreach ($customerresultar as $customerarresult){
+        $customerID = $customerarresult;
+    }
 
-    $peoplesql = "insert into people SET wideworldimporters.people.LogonName = ('.$Email.'), wideworldimporters.people.HashedPassword = ('.$passhash.'), PersonID =('.$maxidresult.'), FullName = ('.$voornaam.' . '.$achternaam.'),PreferredName =('.$voornaam.'),SearchName =('.$voornaam.' . '.$achternaam.'), IsPermittedToLogon =(1), IsExternalLogonProvider =(0),IsSystemUser = (1),IsEmployee = (0), IsSalesperson = (0),PhoneNumber=('.$phone.'), LastEditedBy =(1),ValidFrom =('$date . 23:59:00'),ValidTo =('9999-12-31 23:59:59')";
-    $db->exec($peoplesql);
+    $peoplesql = "insert into people
+                  SET wideworldimporters.people.LogonName = ('$Email'),
+                  wideworldimporters.people.HashedPassword = ('$passhash'),
+                  PersonID =('$maxidresult'),
+                  FullName = ('$voornaam' ' $achternaam'),
+                  PreferredName =('$voornaam'),
+                  SearchName =('$voornaam'  ' $achternaam'),
+                  IsPermittedToLogon =(1),
+                  IsExternalLogonProvider =(0),
+                  IsSystemUser = (1),
+                  IsEmployee = (0),
+                  IsSalesperson = (0),
+                  PhoneNumber=('$phone'),
+                  LastEditedBy =(1),
+                  ValidFrom =('$date  00:00:00'),
+                  ValidTo =('9999-12-31 23:59:59')";
+   $result1= $db->query($peoplesql);
 
-    $customersql = " insert into customers set CustomerID=($maxidresult), PrimaryContactPersonID=(.$maxidresult.),CustomerName=('.$voornaam.' . '.$achternaam.'),BillToCustomerID=(.$maxidresult.),CustomerCategoryID=(8),DeliveryMethodID=(1),DeliveryCityID=( .$cityidresult. ),PostalCityID=(. $cityidresult .),AccountOpenedDate=(. $date. ),StandardDiscountPercentage=(0),IsStatementSent=(0),PaymentDays=(7),FaxNumber=(000-000-0000),WebsiteURL=(NULL),DeliveryAddressLine1=(),DeliveryPostalCode=(.$postcode.),PostalAddressLine1=('$straat.$huisnummer'),PostalAddressLine1=('$adres'),PostalPostalCode=(.$postcode.),LastEditedBy=(99),ValidFrom =($date .'23:59:00'),ValidTo =('9999-12-31 23:59:59')";
-    $db->exec($customersql);
+    $customersql = " insert into customers 
+                    set CustomerID=($customerID),
+                    PrimaryContactPersonID=($maxidresult),
+                    CustomerName=('$voornaam' ' $achternaam'),
+                    BillToCustomerID=($customerID),
+                    CustomerCategoryID=(8),
+                    DeliveryMethodID=(1),
+                    DeliveryCityID=($cityidresult),
+                    PostalCityID=($cityidresult),
+                    AccountOpenedDate=('$date  00:00:00'),
+                    StandardDiscountPercentage=(0),
+                    IsStatementSent=(0),
+                    PaymentDays=(7),
+                    FaxNumber=(000-000-0000),
+                    WebsiteURL=('nullwebsite'),
+                    DeliveryAddressLine1=('$straat ' ' $huisnummer'),
+                    DeliveryPostalCode=('$postcode'),
+                    PostalAddressLine1=('$straat ' ' $huisnummer'),
+                    PostalPostalCode=('$postcode'),
+                    LastEditedBy=(1),
+                    ValidFrom =('$date 23:59:00'),
+                    ValidTo =('9999-12-31 23:59:59'),
+                    IsOnCreditHold=(0),
+                    PhoneNumber=($phone)";
+    $result2 = $db->query($customersql);
+
+    if ($result1== FALSE){
+        return "sldfj";
+        print"laksjdf";
+    }
 
 }

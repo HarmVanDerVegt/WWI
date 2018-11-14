@@ -218,30 +218,29 @@ include_once ROOT_PATH . "/controllers/colorController.php";
                                 <img class="card-img-top" src="..." alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title"> <?php print($CombiDeal1Naam) ?> </h5>
-                                    <link href="product.php? <?php $CombiDeal1ID ?> ">
+                                    <a href="product.php?productID=<?php print($CombiDeal1ID) ?> ">
                                 </div>
                             </div>
                             <div class="card">
                                 <img class="card-img-top" src="..." alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title"> <?php print($CombiDeal2Naam) ?> </h5>
-                                    <link href="product.php? <?php $CombiDeal2ID ?> ">
+                                    <a href="product.php?productID=<?php print($CombiDeal2ID) ?> ">
                                 </div>
                             </div>
                             <div class="card">
                                 <img class="card-img-top" src="..." alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title"> <?php print($CombiDeal3Naam) ?> </h5>
-                                    <link href="product.php? <?php $CombiDeal3ID ?> ">
+                                    <a href="product.php?productID=<?php print($CombiDeal3ID) ?> ">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-        </div>
-
+            <br>
+            <br>
         <!-- voeg footer toe -->
         <br>
         <?php include(ROOT_PATH . "/includes/footer.php"); ?>

@@ -116,7 +116,7 @@ function getRowByTwoForeignIDs($value, $table1, $table2, $table3, $joinID, $join
             ON t2.$joinID2 = t3.$joinID2
             WHERE t1.$joinID = $value";
 
-
+    $result = $db->query($sql);
     $returnValue = $result->fetch_assoc();
 
     $db->close();
@@ -128,7 +128,6 @@ function InsertNewUser($valuarray)
 {
     $voornaam = $valuarray["Voornaam"];
     $achternaam = $valuarray["Achternaam"];
-    $adres = $valuarray["Adres"];
     $straat = $valuarray["Straat"];
     $huisnummer = $valuarray["Huisnummer"];
     $postcode = $valuarray["Postcode"];
@@ -139,25 +138,25 @@ function InsertNewUser($valuarray)
     $phone = $valuarray["Phone"];
     $date = date("Y/m/d");
     if ($password == $verpassword) {
-        $passhash = hash(sha256, $password);
+        $passhash = hash('sha256', $password);
     } else {
-        echo("Wachtwoorden zijn niet gelijk");
+        return("Wachtwoorden zijn niet gelijk");
     }
 
 
     $db = createDB();
-    $sql = "select max(PersonID)
-from people";
-    $max = $db->query($sql);
-    $sql = "select CityID
-from cities where CityName like '%.$woonplaats.%'";
-    $cityid = $db->query($sql);
+    $maxsql = "select max(PersonID) +1 from people";
+    $maxresult = $db->query($maxsql);
+    $maxidresult = $maxresult->fetch_assoc();
+    $citysql = "select CityID from cities where CityName like '%.$woonplaats.%'";
+    $cityid = $db->query($citysql);
+    $cityidresult = $cityid->fetch_assoc();
 
 
-    $sql = "insert into people 
-    SET wideworldimporters.people.LogonName = ('.$Email.'), wideworldimporters.people.HashedPassword = ('.$passhash.'), PersonID =(.$max + 1.), FullName = ('.$voornaam.' '.$achternaam.'),PreferredName =('.$voornaam.'),SearchName =('.$voornaam.' '.$achternaam.'), IsPermittedToLogon =(1), IsExternalLogonProvider =(0),IsSystemUser = (1),IsEmployee = (0), IsSalesperson = (0),PhoneNumber=('.$phone.'), LastEditedBy =(1),ValidFrom =($date .'23:59:00'),ValidTo =('9999-12-31 23:59:59')";
-    $result = $db->query($sql);
-    $sql = " insert into customers set CustomerID=($max + 1), PrimaryContactPersonID=($max + 1),CustomerName=('.$voornaam.' '.$achternaam.'),BillToCustomerID=($max + 1),CustomerCategoryID=(8),DeliveryMethodID=(1),DeliveryCityID=( $cityid ),PostalCityID=( $cityid ),AccountOpenedDate=(),StandardDiscountPercentage=(0),IsStatementSent=(0),PaymentDays=(7),FaxNumber=(000-000-0000),WebsiteURL=(NULL),DeliveryAddressLine1=(),DeliveryPostalCode=(),PostalAddressLine1=(),PostalPostalCode=(),LastEditedBy=(99),ValidFrom =($date .'23:59:00'),ValidTo =('9999-12-31 23:59:59')";
-    $result = $db->query($sql);
+    $peoplesql = "insert into people SET wideworldimporters.people.LogonName = ('.$Email.'), wideworldimporters.people.HashedPassword = ('.$passhash.'), PersonID =('.$maxidresult.'), FullName = ('.$voornaam.' . '.$achternaam.'),PreferredName =('.$voornaam.'),SearchName =('.$voornaam.' . '.$achternaam.'), IsPermittedToLogon =(1), IsExternalLogonProvider =(0),IsSystemUser = (1),IsEmployee = (0), IsSalesperson = (0),PhoneNumber=('.$phone.'), LastEditedBy =(1),ValidFrom =('$date . 23:59:00'),ValidTo =('9999-12-31 23:59:59')";
+    $db->exec($peoplesql);
+
+    $customersql = " insert into customers set CustomerID=($maxidresult), PrimaryContactPersonID=(.$maxidresult.),CustomerName=('.$voornaam.' . '.$achternaam.'),BillToCustomerID=(.$maxidresult.),CustomerCategoryID=(8),DeliveryMethodID=(1),DeliveryCityID=( .$cityidresult. ),PostalCityID=(. $cityidresult .),AccountOpenedDate=(. $date. ),StandardDiscountPercentage=(0),IsStatementSent=(0),PaymentDays=(7),FaxNumber=(000-000-0000),WebsiteURL=(NULL),DeliveryAddressLine1=(),DeliveryPostalCode=(.$postcode.),PostalAddressLine1=('$straat.$huisnummer'),PostalAddressLine1=('$adres'),PostalPostalCode=(.$postcode.),LastEditedBy=(99),ValidFrom =($date .'23:59:00'),ValidTo =('9999-12-31 23:59:59')";
+    $db->exec($customersql);
 
 }

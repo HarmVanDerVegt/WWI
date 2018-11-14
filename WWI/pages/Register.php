@@ -23,9 +23,6 @@ if (!defined('ROOT_PATH')) {
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="Adres" placeholder="Adres" required="required">
-                    </div>
-                    <div class="form-group">
                         <div class="row">
                         <div class="col-xs-8"><input type="text" class="form-control" name="Straat" placeholder="Straat" required="required"></div>
                         <div class="col-xs-4"><input type="text" class="form-control" name="Huisnummer" placeholder="Nr." required="required"></div>
@@ -74,7 +71,7 @@ $Register["Wachtwoord"] = filter_input(INPUT_POST, 'wachtwoord');
 $Register["bevestig_wachtwoord"] = filter_input(INPUT_POST, 'bevestig_wachtwoord');
 $Register["Phone"] = filter_input(INPUT_POST, 'Phone');
 
-print_r ($Register);
+InsertNewUser($Register);
 
 
 

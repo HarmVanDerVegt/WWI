@@ -199,6 +199,12 @@ include_once ROOT_PATH . "/controllers/colorController.php";
             $CombiDealRand3 = array_rand($CombiDeals, 1);
             $CombiDeal3ID = $CombiDeals[$CombiDealRand3]["StockItemID"];
             $CombiDeal3Naam = $CombiDeals[$CombiDealRand3]["StockItemName"];
+            $fuckingnaam = getImageLinkFromStockGroupID($CombiDealRand1);
+            print $fuckingnaam . " XX1XX <br>";
+            $fuckingnaam2 = getImageLinkFromStockGroupID($CombiDealRand2);
+            print $fuckingnaam2 . " XX2XX <br>";
+            $fuckingnaam3 = getImageLinkFromStockGroupID($CombiDealRand3);
+            print $fuckingnaam3 . " XX3XX <br>";
             ?>
             <!-- Toon combideals -->
             <div class="row">
@@ -208,7 +214,7 @@ include_once ROOT_PATH . "/controllers/colorController.php";
                         <p> Misschien zijn deze producten een leuke combinatie met dit product? </p>
                         <div class="card-group">
                             <div class="card">
-                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <img class="card-img-top" src="<?php print $fuckingnaam ?>" alt="Card image cap">
                                 <div class="card-body">
                                     <a href="product.php?productID=<?php print($CombiDeal1ID) ?> ">
                                         <h5 class="card-title"> <?php print($CombiDeal1Naam) ?> </h5>
@@ -216,7 +222,7 @@ include_once ROOT_PATH . "/controllers/colorController.php";
                                 </div>
                             </div>
                             <div class="card">
-                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <img class="card-img-top" src="<?php print getImageLinkFromStockGroupID($CombiDealRand2) ?>" alt="Card image cap">
                                 <div class="card-body">
                                     <a href="product.php?productID=<?php print($CombiDeal2ID) ?> ">
                                         <h5 class="card-title"> <?php print($CombiDeal2Naam) ?> </h5>
@@ -224,7 +230,7 @@ include_once ROOT_PATH . "/controllers/colorController.php";
                                 </div>
                             </div>
                             <div class="card">
-                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <img class="card-img-top" src="<?php print getImageLinkFromStockGroupID($CombiDealRand3) ?>" alt="Card image cap">
                                 <div class="card-body">
                                     <a href="product.php?productID=<?php print($CombiDeal3ID) ?> ">
                                         <h5 class="card-title"> <?php print($CombiDeal3Naam) ?> </h5>

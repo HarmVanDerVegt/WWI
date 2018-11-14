@@ -113,7 +113,7 @@
                         break;
                     // --------------------------doe benodige gegevens in variablen                    
                     $naam = explode("-", $item["StockItemName"]);
-                    $foto_path = "../media/airline.jpg";
+                    $foto_path = "../media/airlinenovelties.jpg";
                     $prijs = $item["UnitPrice"];
                     $merk = $item["brand"];
                     $gewicht = $item["TypicalWeightPerUnit"];

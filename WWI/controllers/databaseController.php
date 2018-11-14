@@ -157,7 +157,7 @@ from cities where CityName like '%.$woonplaats.%'";
     $sql = "insert into people 
     SET wideworldimporters.people.LogonName = ('.$Email.'), wideworldimporters.people.HashedPassword = ('.$passhash.'), PersonID =(.$max + 1.), FullName = ('.$voornaam.' '.$achternaam.'),PreferredName =('.$voornaam.'),SearchName =('.$voornaam.' '.$achternaam.'), IsPermittedToLogon =(1), IsExternalLogonProvider =(0),IsSystemUser = (1),IsEmployee = (0), IsSalesperson = (0),PhoneNumber=('.$phone.'), LastEditedBy =(1),ValidFrom =($date .'23:59:00'),ValidTo =('9999-12-31 23:59:59')";
     $result = $db->query($sql);
-    sql = " insert into customers set CustomerID=($max + 1), PrimaryContactPersonID=($max + 1),CustomerName=('.$voornaam.' '.$achternaam.'),BillToCustomerID=($max + 1),CustomerCategoryID=(8),DeliveryMethodID=(1),DeliveryCityID=( $cityid ),PostalCityID=( $cityid ),AccountOpenedDate=(),StandardDiscountPercentage=(0),IsStatementSent=(0),PaymentDays=(7),FaxNumber=(000-000-0000),WebsiteURL=(NULL),DeliveryAddressLine1=(),DeliveryPostalCode=(),PostalAddressLine1=(),PostalPostalCode=(),LastEditedBy=(99),ValidFrom =($date .'23:59:00'),ValidTo =('9999-12-31 23:59:59')";
+    $sql = " insert into customers set CustomerID=($max + 1), PrimaryContactPersonID=($max + 1),CustomerName=('.$voornaam.' '.$achternaam.'),BillToCustomerID=($max + 1),CustomerCategoryID=(8),DeliveryMethodID=(1),DeliveryCityID=( $cityid ),PostalCityID=( $cityid ),AccountOpenedDate=(),StandardDiscountPercentage=(0),IsStatementSent=(0),PaymentDays=(7),FaxNumber=(000-000-0000),WebsiteURL=(NULL),DeliveryAddressLine1=(),DeliveryPostalCode=(),PostalAddressLine1=(),PostalPostalCode=(),LastEditedBy=(99),ValidFrom =($date .'23:59:00'),ValidTo =('9999-12-31 23:59:59')";
     $result = $db->query($sql);
 
 }

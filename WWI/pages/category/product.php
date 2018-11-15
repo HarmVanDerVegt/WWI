@@ -17,6 +17,7 @@ include_once ROOT_PATH . "/controllers/colorController.php";
     <title>Category</title>
 </head>
 <body>
+?>
 <!-- constanten -->
 <?php
 $height = 200;
@@ -28,6 +29,15 @@ $Color = getColorsByID($StockItem["ColorID"]);
 $Stock = getStockItemHoldingByID($StockItem["StockItemID"]);
 $StockGroup = getStockGroupIDByStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
 $StockGroupID = $StockGroup["StockGroupID"];
+
+
+#sessie laden
+$i = filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT);
+if (!isset($_SESSION["total"])) {
+$_SESSION["total"] = 0;
+$_SESSION["qty"][$i] = 0;
+$_SESSION["amounts"][$i] = 0;
+}
 // Checkt of er daadwerkelijk een product is meegegeven en redirect anders naar een errorpagina.
 
 $errorpagina = "../error.php";
@@ -143,9 +153,18 @@ $product_review = "dit is een review";
                 </td>
                 <!-- bestel knop -->
                 <td>
-                    <form>
-                        <input type="submit" value="bestellen">
-                    </form>
+                    <form action="ShoppingCart.php">
+                        <input type="hidden" value="<?php echo($i);?>" name="add">
+            <tr>
+                <td><?php echo($StockItemName); ?></td>
+                <td width="10px">&nbsp;</td>
+                <td><?php echo($product_prijs); ?></td>
+                <td width="10px">&nbsp;</td>
+                <td><input type="number" name="hoeveelheid" min="0"></td>
+                <td width="10px">&nbsp;</td>
+                <td><input type="submit" value="Toevoegen aan winkelwagen"></td>
+            </tr>
+            </form>
                 </td>
             </tr>
             <!-- Toon product afbeelding -->

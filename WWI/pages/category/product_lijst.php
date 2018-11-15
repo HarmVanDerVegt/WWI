@@ -65,7 +65,8 @@
         if (filter_has_var(INPUT_GET, "aantal_producten")) {
             $aantal_producten_tonen = filter_input(INPUT_GET, "aantal_producten", FILTER_VALIDATE_INT);
         } else {
-            $aantal_producten_tonen = 2;
+            // default aantal producten zien
+            $aantal_producten_tonen = 8;
         }
         $paginas = (int) ceil($aantal_producten / $aantal_producten_tonen);
 
@@ -88,9 +89,13 @@
             <input type="submit" value="laad">
             Pagina:
             <?php
+            print("<button type='submit' name='pagina' value='".(($pagina_nr-1 > 0) ? $pagina_nr-1 : 1)."'><<</button>");
             for ($i = 1; $i <= $paginas; $i++) {
-                print("<input type='submit' name='pagina' value='" . $i . "'>");
+                print("<input type='submit' name='pagina' value='" . $i . "'");
+                // kleur de geselecteerde knop
+                print(" ".(($i == $pagina_nr) ? "style='background-color:blue; color:white;'" : "").">");
             }
+            print("<button type='submit' name='pagina' value='".(($pagina_nr+1 <= $paginas) ? $pagina_nr+1 : $paginas)."'>>></button>");
             ?>
         </form>
 
@@ -108,7 +113,7 @@
                         break;
                     // --------------------------doe benodige gegevens in variablen                    
                     $naam = explode("-", $item["StockItemName"]);
-                    $foto_path = "../media/airline.jpg";
+                    $foto_path = "../media/airlinenovelties.jpg";
                     $prijs = $item["UnitPrice"];
                     $merk = $item["brand"];
                     $gewicht = $item["TypicalWeightPerUnit"];

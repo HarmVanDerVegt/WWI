@@ -53,7 +53,7 @@ function getStockItemsBySearchDetails($search) {
     return $array;
 }
 
-function getSearchTags() {
+function getSearchTags(){
     $db = createDB();
 
     $sql = "SELECT DISTINCT(Tags)
@@ -61,44 +61,39 @@ function getSearchTags() {
 
     $result = $db->query($sql);
 
-    //$array = [];
 
-    while ($tags = $result->fetch_assoc()) {
-        //array_push($array, $tags["Tags"]);
+    while ($tags = $result->fetch_assoc()){
         $array[] = $tags["Tags"];
     }
 
+    $filteredTags = [];
 
-    print_r($array);
-    echo "<br><br<br> XXXXX <br><br><br>";
-    $filteredTags = []; //array_map('current', $array);
+    foreach ($array as $tag){
 
-    $i = 0;
-    foreach ($array as $tag) {
-        //print_r($tags);
-        //print $i;
-        //print "<br>";
-        //foreach ($tags as $tag){
-        //    print_r($tag);
-        //    print "<br>";
-        //    array_push($filteredTags, $tag["Tags"]);
-        //}
+        $tag = trim($tag, "[]");
+
         $tag = explode(",", $tag);
-        $i++;
+
         $filteredTags = array_merge($filteredTags, $tag);
     }
 
 
+    $unigueTags = array_unique($filteredTags);
 
-    print_r($filteredTags);
+    $returnTags = [];
 
-    //$unigueTags = array_unique($filteredTags);
-    //print_r($unigueTags);
+    foreach ($unigueTags as $unigueTag){
+        if (!empty($unigueTag)){
+            $returnTags[] = $unigueTag;
+        }
+    }
+
+    return $returnTags;
 }
 
-function getStockItemsByStockGroupID($category_naam) {
+function getStockItemsByStockGroupID($category_id) {
     $db = createDB();
-    $array = array();
+    $array = [];
     $sql = ""
             . "SELECT * "
             . "FROM stockitems SI "
@@ -106,14 +101,71 @@ function getStockItemsByStockGroupID($category_naam) {
             . "ON SI.StockItemID = SI_SG.StockItemID "
             . "JOIN stockgroups SG "
             . "ON SI_SG.StockGroupID=SG.StockGroupID "
-            . "WHERE SG.StockGroupName='" . $category_naam . "' ";
-    
+            . "WHERE SG.StockGroupID='" . $category_id . "' ";
+
     $result = $db->query($sql);
 
     while ($row = $result->fetch_assoc()) {
         $array[array_values($row)[0]] = $row;
     }
+
     $db->close();
+
     return $array;
 }
 
+function getStockGroupIDsFromStockItemID($ID) {
+    $db = createDB();
+
+    $sql = ""
+            . "SELECT sisg.StockGroupID "
+            . "FROM stockitemstockgroups sisg "
+            . "WHERE stockitemID ='" . $ID . "' ";
+
+    $result = $db->query($sql);
+
+    $array = [];
+    
+    while ($row = $result->fetch_assoc()) {
+        $array[] = $row["StockGroupID"];
+    }
+    
+    $db->close();
+
+    return $array;
+}
+
+function getSearchedItems(){
+
+}
+
+function getStockItemsByTags($tags){
+    $db = createDB();
+
+    $sql = "SELECT StockItemName
+            FROM StockItems
+            WHERE (";
+
+    foreach ($tags as $tag){
+        $sql = $sql . " Tags LIKE \"%$tag%\"";
+
+        //If this is not the latest tag:
+        if ($tags[count($tags) - 1] != $tag){
+            $sql = $sql . " OR";
+        }
+    }
+
+    $sql = $sql . ")";
+
+    $result = $db->query($sql);
+
+    $array = [];
+
+    while ($row = $result->fetch_assoc()){
+        $array[] = $row;
+    }
+
+    $db->close();
+
+    return $array;
+}

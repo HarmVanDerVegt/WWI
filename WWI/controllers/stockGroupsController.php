@@ -19,7 +19,21 @@ function getStockGroupByID($ID){
 function getStockGroupIDByStockItemID($ID){
 
 
-     return getRowByForeignID($ID, "StockItemStockGroups", "StockItems", "StockItemID", "StockItemID");
+     return getRowByTwoForeignIDs($ID, "StockItems", "StockItemStockGroups", "StockGroups", "StockItemID", "StockGroupID");
 
+}
+
+function getImageLinkFromStockGroupID($ID){
+    $category = getStockGroupByID($ID);
+
+    $categoryName = $category["StockGroupName"];
+
+    $categoryName = str_replace(" ", "", $categoryName);
+    $categoryName = str_replace("-", "", $categoryName);
+
+    $categoryName = strtolower($categoryName);
+
+    $returnstring = "../media/" . $categoryName . ".jpg";
+    return $returnstring;
 }
 ?>

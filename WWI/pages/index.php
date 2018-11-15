@@ -73,7 +73,7 @@ if (!defined('ROOT_PATH')) {
         <?php
         foreach ($category as $item) {
             // toon kaart met naam en foto van category
-            print('<div class="col-6 col-sm-4">');
+            print('<div class="col-6 col-sm-4" >');
             print('<div class="card">');
             print('<a href="' . $item->link . '" class="btn btn-info" role="button">');
             print('<strong>' . $item->category . '</strong><br>');

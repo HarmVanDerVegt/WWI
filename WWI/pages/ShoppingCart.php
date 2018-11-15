@@ -5,43 +5,43 @@ if (!defined('ROOT_PATH')) {
 }
 
 include(ROOT_PATH . "/includes/header.php");
+include_once(ROOT_PATH . "/controllers/stockItemController.php");
 
 
-
-$products = array("product A", "product B", "product C");
-$amounts = array("19.99", "10.99", "2.99");
+//$products = array("product A", "product B", "product C");
+//$amounts = array("19.99", "10.99", "2.99");
 $check = 0;
 
+
 #Product toevoegen
-if (isset($_GET["add"])) {
-    $i = $_GET["add"];
-    $qty = $_GET["hoeveelheid"];
-    $_SESSION["amounts"][$i] = $amounts[$i] * $qty;
+if (NULL != (filter_input(INPUT_GET, "add", FILTER_SANITIZE_STRING))) {
+    $i = filter_input(INPUT_GET, "add", FILTER_SANITIZE_STRING);
+    $qty = filter_input(INPUT_GET, "hoeveelheid", FILTER_SANITIZE_STRING);
+    //$_SESSION["amounts"][$i] = $amounts[$i] * $qty;
     $_SESSION["cart"][$i] = $i;
     $_SESSION["qty"][$i] = $qty;
 }
 
 #verwijderen
-if (isset($_GET["delete"])) {
-    $i = $_GET["delete"];
+if (NULL !=(filter_input(INPUT_GET, "delete", FILTER_SANITIZE_STRING))) {
+    $i = filter_input(INPUT_GET, "delete", FILTER_SANITIZE_STRING);
     $qty = $_SESSION["qty"][$i];
     $_SESSION["qty"][$i] = $qty;
     $_SESSION["amounts"][$i] = 0;
     unset($_SESSION["cart"][$i]);
-} /*else {
-    $_SESSION["amounts"][$i] = $amounts[$i] * $qty;
-}*/
+}
 
 
 #reset
-if (isset($_GET['reset'])) {
-    if ($_GET["reset"] == 'true') {
+if (NULL != filter_input(INPUT_GET, "reset", FILTER_SANITIZE_STRING)) {
+    if (filter_input(INPUT_GET, "reset", FILTER_SANITIZE_STRING) == 'true') {
         unset($_SESSION["qty"]);
         unset($_SESSION["amounts"]);
         unset($_SESSION["total"]);
         unset($_SESSION["cart"]);
     }
 }
+
 
 #winkelwagen
 if (isset($_SESSION["cart"])) {
@@ -64,23 +64,32 @@ if (isset($_SESSION["cart"])) {
             ?>
             <form action="ShoppingCart.php">
                 <input type="hidden" value="<?php echo($i) ?>" name="add">
+                <?php $product = getStockItemByID($i);
+                $productNaam = $product["StockItemName"];
+                 if ($product["RecommendedRetailPrice"] != NULL) {
+                    $productPrijs = $product["RecommendedRetailPrice"];
+                    print("<b>Prijs: </b>€" . $productPrijs . "<br>");
+                } else {
+                    $productPrijs = $product["UnitPrice"] * ($product["TaxRate"] / 100 + 1);
+                    print("<b>Prijs: </b>€" . $productPrijs . "<br>");
+                }
+                ?>
                 <tr>
-                    <td><?php print($products[$i]); ?></td>
+                    <td><?php print($productNaam); ?></td>
                     <td width="10px">&nbsp;</td>
                     <td><input type="number" name="hoeveelheid" min="0" value="<?php echo($_SESSION["qty"][$i]); ?>">
                     </td>
                     <td width="10px">&nbsp;</td>
-                    <td><?php echo($_SESSION["amounts"][$i]); ?></td>
+                    <td><?php echo($productPrijs * $_SESSION["qty"][$i]); ?></td>
                     <td width="10px">&nbsp;</td>
-                    <td><input type="submit" value="Update winkelwagen"></td>
+                    <td><input class="btn btn-primary"   type="submit" value="Update winkelwagen"></td>
                     <td width="10px"></td>
-                    <td><a class="btn btn-primary" href="?delete=<?php echo($i); ?>">Verwijder uit winkelwagen</a></td>
+                    <td><a class="btn btn-danger" href="?delete=<?php echo($i); ?>">Verwijder uit winkelwagen</a></td>
                 </tr>
             </form>
             <?php
-            $total = $total + $_SESSION["amounts"][$i];
+            $total += $productPrijs * $_SESSION["qty"][$i];
         }
-        $_SESSION["total"] = $total;
         ?>
         <tr>
             <td colspan="7">Totaal : <?php echo($total); ?></td>
@@ -97,6 +106,6 @@ if ($check == 0) {
         <td colspan="5"></td>
     </tr>
     <tr>
-        <td colspan="5"><a href="?reset=true">Reset winkelwagen</a></td>
+        <td colspan="5"><a class="btn btn-primary" href="?reset=true">Reset winkelwagen</a></td>
     </tr>
 <?php } ?>

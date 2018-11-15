@@ -49,4 +49,5 @@ if (!isset($_SESSION["total"])) {
         </form>
         <?php
     }
-    ?>
+
+ //include(ROOT_PATH . "/includes/footer.php"); ?>

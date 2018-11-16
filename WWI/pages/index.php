@@ -32,7 +32,7 @@ if (!defined('ROOT_PATH')) {
                 padding-top: 5px;
                 background-color: #00BCF3;
                 border-radius: 15px;
-                
+
             }
         </style>
     </head>
@@ -55,7 +55,7 @@ if (!defined('ROOT_PATH')) {
         ?>
 
         <!-- toon special deals -->
-        <div class='blue_titel'><h2 class="center">Aanbiedingen:</h2></div>
+<!--        <div class='blue_titel'><h2 class="center">Aanbiedingen:</h2></div>-->
         <a href="../pages/category/product.php?productID=<?php print($StockItem); ?>">
             <img                       
                 class="specialdeals"
@@ -68,8 +68,8 @@ if (!defined('ROOT_PATH')) {
         <br>
 
         <!-- begin categorie knoppen------------------------------------------------------------------------------ -->
-        <!-- titel -->
-        <div class='blue_titel'><h2 class="center">category's:</h2></div>
+<!--        <!-- titel -->
+<!--        <div class='blue_titel'><h2 class="center">category's:</h2></div>-->
         <!-- category informatie ophalen -->
         <?php
 
@@ -100,7 +100,7 @@ if (!defined('ROOT_PATH')) {
             // toon kaart met naam en foto van category
             print('<div class="col-6 col-sm-4" >');
             print('<div class="card">');
-            print('<a href="' . $item->link . '" class="btn btn-info" role="button">');
+            print('<a href="' . $item->link . '" class="btn btn-sample btn-sample-success" role="button">');
             print('<strong>' . $item->category . '</strong><br>');
             print('<img src="' . $item->foto_path . '" alt="' . $item->category . '" height="' . $height . 'px" width="' . $width . 'px">');
             print('</a>');

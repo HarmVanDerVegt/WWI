@@ -6,40 +6,30 @@ if (!defined('ROOT_PATH')) {
 
 include(ROOT_PATH . "/includes/header.php");
 include_once(ROOT_PATH . "/controllers/stockItemController.php");
+include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
 
-
-//$products = array("product A", "product B", "product C");
-//$amounts = array("19.99", "10.99", "2.99");
+#kijken of de winkelwagen leeg is
 $check = 0;
 
 
+
 #Product toevoegen
-if (NULL != (filter_input(INPUT_GET, "add", FILTER_SANITIZE_STRING))) {
-    $i = filter_input(INPUT_GET, "add", FILTER_SANITIZE_STRING);
-    $qty = filter_input(INPUT_GET, "hoeveelheid", FILTER_SANITIZE_STRING);
-    //$_SESSION["amounts"][$i] = $amounts[$i] * $qty;
+if (!empty ($_POST["add"])){
+    $i = filter_input(INPUT_POST,"add", FILTER_SANITIZE_STRING);
+    $qty = filter_input(INPUT_POST,"hoeveelheid", FILTER_SANITIZE_STRING);
     $_SESSION["cart"][$i] = $i;
     $_SESSION["qty"][$i] = $qty;
+    echo("product toevoegen");
 }
 
 #verwijderen
-if (NULL !=(filter_input(INPUT_GET, "delete", FILTER_SANITIZE_STRING))) {
-    $i = filter_input(INPUT_GET, "delete", FILTER_SANITIZE_STRING);
+if (!empty ($_POST["delete"])) {
+    $i = filter_input(INPUT_POST,"delete", FILTER_SANITIZE_STRING);
     $qty = $_SESSION["qty"][$i];
     $_SESSION["qty"][$i] = $qty;
     $_SESSION["amounts"][$i] = 0;
     unset($_SESSION["cart"][$i]);
-}
-
-
-#reset
-if (NULL != filter_input(INPUT_GET, "reset", FILTER_SANITIZE_STRING)) {
-    if (filter_input(INPUT_GET, "reset", FILTER_SANITIZE_STRING) == 'true') {
-        unset($_SESSION["qty"]);
-        unset($_SESSION["amounts"]);
-        unset($_SESSION["total"]);
-        unset($_SESSION["cart"]);
-    }
+    echo("product verwijderen");
 }
 
 
@@ -47,6 +37,7 @@ if (NULL != filter_input(INPUT_GET, "reset", FILTER_SANITIZE_STRING)) {
 if (isset($_SESSION["cart"])) {
     $check = 1;
     ?>
+
     <h2>Winkelwagen</h2>
     <table>
         <tr>
@@ -54,24 +45,24 @@ if (isset($_SESSION["cart"])) {
             <th width="10px">&nbsp;</th>
             <th>Hoeveelheid</th>
             <th width="10px">&nbsp;</th>
-            <th>Prijs</th>
+            <th>Subtotaal</th>
             <th width="10px">&nbsp;</th>
             <th>Updaten</th>
+            <th width="10px"> </th>
+            <th>Product verwijderen</th>
         </tr>
         <?php
         $total = 0;
         foreach ($_SESSION["cart"] as $i) {
             ?>
-            <form action="ShoppingCart.php">
+            <form method="post" action="ShoppingCart.php">
                 <input type="hidden" value="<?php echo($i) ?>" name="add">
                 <?php $product = getStockItemByID($i);
                 $productNaam = $product["StockItemName"];
                  if ($product["RecommendedRetailPrice"] != NULL) {
                     $productPrijs = $product["RecommendedRetailPrice"];
-                    print("<b>Prijs: </b>€" . $productPrijs . "<br>");
                 } else {
                     $productPrijs = $product["UnitPrice"] * ($product["TaxRate"] / 100 + 1);
-                    print("<b>Prijs: </b>€" . $productPrijs . "<br>");
                 }
                 ?>
                 <tr>
@@ -80,11 +71,11 @@ if (isset($_SESSION["cart"])) {
                     <td><input type="number" name="hoeveelheid" min="0" value="<?php echo($_SESSION["qty"][$i]); ?>">
                     </td>
                     <td width="10px">&nbsp;</td>
-                    <td><?php echo($productPrijs * $_SESSION["qty"][$i]); ?></td>
+                    <td><?php echo("€" . $productPrijs * $_SESSION["qty"][$i]); ?></td>
                     <td width="10px">&nbsp;</td>
-                    <td><input class="btn btn-primary"   type="submit" value="Update winkelwagen"></td>
+                    <td><input class="btn btn-sample"   type="submit" value="Update winkelwagen"></td>
                     <td width="10px"></td>
-                    <td><a class="btn btn-danger" href="?delete=<?php echo($i); ?>">Verwijder uit winkelwagen</a></td>
+                    <td><a class="fa fa-trash btn btn-danger" href="?delete=<?php echo($i); ?>"></a></td>
                 </tr>
             </form>
             <?php
@@ -92,7 +83,7 @@ if (isset($_SESSION["cart"])) {
         }
         ?>
         <tr>
-            <td colspan="7">Totaal : <?php echo($total); ?></td>
+            <td colspan="7">Totaal : €<?php echo($total); ?></td>
         </tr>
     </table>
 <?php } ?>
@@ -100,12 +91,16 @@ if (isset($_SESSION["cart"])) {
 <?php
 if ($check == 0) {
     print("<h3>Uw winkelwagen is leeg!</h3><br>");
-} else {
+}else{
     ?>
+    <!--Afrekenen knop-->
     <tr>
         <td colspan="5"></td>
     </tr>
     <tr>
-        <td colspan="5"><a class="btn btn-primary" href="?reset=true">Reset winkelwagen</a></td>
+        <td colspan="5"><input class="btn btn-sample"   type="submit" value="Afrekenen"></td>
     </tr>
-<?php } ?>
+<?php }
+
+
+include(ROOT_PATH . "/includes/footer.php"); ?>

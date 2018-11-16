@@ -10,18 +10,70 @@ if (!defined('ROOT_PATH')) {
     <head>
         <meta charset="UTF-8">
         <link href="\WWI\WWI\css\bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <title></title>
+        <title>World Eide Importers</title>
+        <!-- eigen opmaak regels -->
+        <style>
+            img.specialdeals{
+                max-height: 300px;
+                width: 1135px;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            h2.center{
+                text-align: center;
+                color: white;
+            }
+            div.blue_titel{
+                margin-left: 30px;
+                margin-right: 30px;
+                margin-bottom: 10px;
+                padding-bottom: 5px;
+                padding-top: 5px;
+                background-color: #00BCF3;
+                border-radius: 15px;
+                
+            }
+        </style>
     </head>
     <body>
         <!-- voegt header toe -->
         <?php include(ROOT_PATH . "/includes/header.php"); ?>
         <br>
 
+        <!-- begin specialdeals ---------------------------------------------------------------- -->
+        <!-- ophalen gegevens van special deals uit database -->
+        <?php
+        include_once ROOT_PATH . "/controllers/stockItemController.php";
+        include_once ROOT_PATH . "/controllers/specialDealsController.php";
+        $LowestSpecialDealValue = getLowestSpecialDealID();
+        $HighestSpecialDealValue = getHighestSpecialDealID();
+
+        $SpecialDeal = getSpecialDealByID(rand($LowestSpecialDealValue, $HighestSpecialDealValue));
+        $StockItem = $SpecialDeal['StockItemID']; //getStockItemBySpecialDealID($SpecialDeal["StockItemID"]);
+        $afbeelding_specialdeal = "./media/SpecialDeals/SpecialDealFotoNietBeschikbaar.png";
+        ?>
+
+        <!-- toon special deals -->
+        <div class='blue_titel'><h2 class="center">Aanbiedingen:</h2></div>
+        <a href="../pages/category/product.php?productID=<?php print($StockItem); ?>">
+            <img                       
+                class="specialdeals"
+                src="<?php print($afbeelding_specialdeal); ?>"
+                >
+        </a>
+        <!-- eind specialdeals ---------------------------------------------------------------- -->
+
+        <br>
+        <br>
+
         <!-- begin categorie knoppen------------------------------------------------------------------------------ -->
+        <!-- titel -->
+        <div class='blue_titel'><h2 class="center">category's:</h2></div>
         <!-- category informatie ophalen -->
         <?php
 
-// speciale data type voor category informatie
+        // speciale data type voor category informatie
         class category_type {
 
             public $category = "";
@@ -30,46 +82,19 @@ if (!defined('ROOT_PATH')) {
 
         }
 
-// laad category data
+        // laad category data
         include('data/category_data.php');
-        include_once ROOT_PATH . "/controllers/stockItemController.php";
-        include_once ROOT_PATH . "/controllers/specialDealsController.php";
         ?>
-
         <!-- laat de product categoryen zien -->
         <?php
-// variablen
+        // variablen
         $height = 100;
         $width = 100;
-
-// genereer html code die de category's laat zien
+        // genereer html code die de category's laat zien
         print('<div class="container">');
         print('<div class="row">');
         ?>
-        <!-- Definieert de special deal -->
-
-        <!-- Toont de special deals -->
-        <br>
-        <?php
-        $LowestSpecialDealValue = getLowestSpecialDealID();
-        $HighestSpecialDealValue = getHighestSpecialDealID();
-
-        $SpecialDeal = getSpecialDealByID(rand($LowestSpecialDealValue, $HighestSpecialDealValue));
-        $StockItem = getStockItemBySpecialDealID($SpecialDeal["StockItemID"]);
-        ?>
-
-        <a href="../pages/category/product.php?productID=2">
-            <img
-                class="card-img-top" 
-                style="max-height: 300px; width: 1135px"
-                src="./media/SpecialDeals/SpecialDealFotoNietBeschikbaar.png"
-                >
-        </a>
-        <br>
-        <br>
-
         <!-- Rest van de categorieën -->
-
         <?php
         foreach ($category as $item) {
             // toon kaart met naam en foto van category
@@ -82,7 +107,6 @@ if (!defined('ROOT_PATH')) {
             print('</div>');
             print('</div>');
         }
-
         print('</div>');
         print('</div>');
         ?>

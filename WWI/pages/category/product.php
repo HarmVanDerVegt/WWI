@@ -13,7 +13,6 @@ include_once ROOT_PATH . "/controllers/colorController.php";
 <html>
 <head>
     <meta charset="UTF-8">
-    <link href="\WWI\WWI\css\bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <title>Category</title>
 </head>
 <body>

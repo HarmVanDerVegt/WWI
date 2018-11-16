@@ -3,11 +3,12 @@ if (!defined('ROOT_PATH')) {
     include("../config.php");
 }
 ?>
-
-    <link href="\WWI\WWI\css\button.css" rel="stylesheet" type="text/css"/>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <link href="\WWI\WWI\css\button.css" rel="stylesheet" type="text/css"/>
+    <link href="\WWI\WWI\css\register.css" rel="stylesheet" type="text/css"/>
+
+
     <!-- voegt header toe -->
 <?php include(ROOT_PATH . "/includes/header.php"); ?>
     <!-- start van reg form -->
@@ -85,7 +86,7 @@ $Register["bevestig_wachtwoord"] = filter_input(INPUT_POST, 'bevestig_wachtwoord
 $Register["Phone"] = filter_input(INPUT_POST, 'Phone');
 $Register["Provincie"] = filter_input(INPUT_POST, 'Provincie');
 
-
+if(!empty($Register["Voornaam"])){
 if ($Register["Wachtwoord"] <> $Register["bevestig_wachtwoord"]) {
     echo("wachtwoorden zijn niet gelijk");
 }
@@ -94,8 +95,10 @@ else {
         echo ("wachtwoord te kort");
     }
     else {
-        InsertNewUser($Register);
-    }   }
+       echo InsertNewUser($Register);
+
+    }   }}
+
 
 
     ?>

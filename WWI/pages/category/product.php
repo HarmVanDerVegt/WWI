@@ -169,6 +169,7 @@ $product_review = "dit is een review";
             $SingleStockGroup = array_rand($StockGroups, 1);
             $product_afbeelding_path = getImageLinkFromStockGroupID($StockGroups[$SingleStockGroup]);
             ?>
+            
             <tr>
                 <td>
                     <img class="img-thumbnail" src="<?php print($product_afbeelding_path); ?>"

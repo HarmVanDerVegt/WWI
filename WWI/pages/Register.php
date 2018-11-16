@@ -6,7 +6,8 @@ if (!defined('ROOT_PATH')) {
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <link href="\WWI\WWI\css\button.css" rel="stylesheet" type="text/css"/>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="\WWI\WWI\css\register.css" rel="stylesheet" type="text/css"/>
+
 
     <!-- voegt header toe -->
 <?php include(ROOT_PATH . "/includes/header.php"); ?>
@@ -56,7 +57,7 @@ if (!defined('ROOT_PATH')) {
                                placeholder="Bevestig Wachtwoord" required="required">
                     </div>
                     <div class="form-group">
-                        <input type="tel" class="form-control" name="Phone" placeholder="Telefoon Nummer">
+                        <input type="tel" class="form-control" name="Phone" placeholder="Telefoonnummer">
                     </div>
                     <div class="form-group">
                         <label class="checkbox-inline"><input type="checkbox" required="required"> Ik accepteer de <a
@@ -91,11 +92,13 @@ if ($Register["Wachtwoord"] <> $Register["bevestig_wachtwoord"]) {
 }
 else {
     if (strlen($Register["Wachtwoord"]) < 7) {
-        echo ("wachtwoord moet minimaal 7 kekens zijn");
+        echo ("wachtwoord te kort");
     }
     else {
-        InsertNewUser($Register);
+       echo InsertNewUser($Register);
+
     }   }}
+
 
 
     ?>

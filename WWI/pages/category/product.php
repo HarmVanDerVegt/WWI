@@ -13,11 +13,10 @@ include_once ROOT_PATH . "/controllers/colorController.php";
 <html>
 <head>
     <meta charset="UTF-8">
-    <link href="\WWI\WWI\css\bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <title>Category</title>
 </head>
 <body>
-?>
+
 <!-- constanten -->
 <?php
 $height = 200;
@@ -153,7 +152,7 @@ $product_review = "dit is een review";
                 </td>
                 <!-- bestel knop -->
                 <td>
-                    <form action="\WWI\WWI\pages\ShoppingCart.php">
+                    <form action="\WWI\WWI\pages\ShoppingCart.php" method="post">
                         <input type="hidden" value="<?php echo($i);?>" name="add">
                 <td><b>hoeveelheid: </b><input type="number" name="hoeveelheid" min="0"></td>
                 <td width="10px">&nbsp;</td>

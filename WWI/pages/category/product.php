@@ -17,7 +17,7 @@ include_once ROOT_PATH . "/controllers/colorController.php";
     <title>Category</title>
 </head>
 <body>
-?>
+
 <!-- constanten -->
 <?php
 $height = 200;

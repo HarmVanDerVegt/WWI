@@ -81,7 +81,7 @@ if (isset($_SESSION["cart"])) {
                     <td width="10px">&nbsp;</td>
                     <td><?php echo("€" . $productPrijs * $_SESSION["qty"][$i]); ?></td>
                     <td width="10px">&nbsp;</td>
-                    <td><input class="btn btn-primary"   type="submit" value="Update winkelwagen"></td>
+                    <td><input class="btn btn-sample"   type="submit" value="Update winkelwagen"></td>
                     <td width="10px"></td>
                     <td><a class="fa fa-trash btn btn-danger" href="?delete=<?php echo($i); ?>"></a></td>
                 </tr>
@@ -106,6 +106,9 @@ if ($check == 0) {
         <td colspan="5"></td>
     </tr>
     <tr>
-        <td colspan="5"><input class="btn btn-primary"   type="submit" value="Afrekenen"></td>
+        <td colspan="5"><input class="btn btn-sample"   type="submit" value="Afrekenen"></td>
     </tr>
-<?php } ?>
+<?php }
+
+
+include(ROOT_PATH . "/includes/footer.php"); ?>

@@ -56,7 +56,7 @@ if (!defined('ROOT_PATH')) {
                                placeholder="Bevestig Wachtwoord" required="required">
                     </div>
                     <div class="form-group">
-                        <input type="tel" class="form-control" name="Phone" placeholder="Telefoon Nummer">
+                        <input type="tel" class="form-control" name="Phone" placeholder="Telefoonnummer">
                     </div>
                     <div class="form-group">
                         <label class="checkbox-inline"><input type="checkbox" required="required"> Ik accepteer de <a
@@ -91,7 +91,7 @@ if ($Register["Wachtwoord"] <> $Register["bevestig_wachtwoord"]) {
 }
 else {
     if (strlen($Register["Wachtwoord"]) < 7) {
-        echo ("ww te kort");
+        echo ("wachtwoord te kort");
     }
     else {
         InsertNewUser($Register);

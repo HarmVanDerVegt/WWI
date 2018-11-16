@@ -153,20 +153,13 @@ $product_review = "dit is een review";
                 </td>
                 <!-- bestel knop -->
                 <td>
-                    <form action="ShoppingCart.php">
+                    <form action="\WWI\WWI\pages\ShoppingCart.php">
                         <input type="hidden" value="<?php echo($i);?>" name="add">
-            <tr>
-                <td><?php echo($StockItemName); ?></td>
+                <td><b>hoeveelheid: </b><input type="number" name="hoeveelheid" min="0"></td>
                 <td width="10px">&nbsp;</td>
-                <td><?php echo($product_prijs); ?></td>
-                <td width="10px">&nbsp;</td>
-                <td><input type="number" name="hoeveelheid" min="0"></td>
-                <td width="10px">&nbsp;</td>
-                <td><input type="submit" value="Toevoegen aan winkelwagen"></td>
+                <td><input type="submit" class="btn btn-primary" value="Toevoegen aan winkelwagen"></td>
             </tr>
-            </form>
-                </td>
-            </tr>
+                </form>
             <!-- Toon product afbeelding -->
             <tr>
                 <td>

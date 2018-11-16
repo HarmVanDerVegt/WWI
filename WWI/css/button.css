@@ -70,3 +70,4 @@ fieldset[disabled] .btn-sample.active {
 .btn-sample-success:not(:disabled):not(.disabled):active:focus, .btn-outline-success:not(:disabled):not(.disabled).active:focus,
 .show > .btn-outline-success.dropdown-toggle:focus {
     box-shadow: 0 0 0 0.2rem rgba(255, 167, 69, 0.5);}
+

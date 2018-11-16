@@ -205,18 +205,16 @@ $product_review = "dit is een review";
 
     <!-- Selecteert combideals -->
     <?php
-    //Krijg de categories van dit item, dit kunnen er meerdere zijn.
+    //Krijg de categorieën van het getoonde item, dit kunnen er meerdere zijn.
     $StockGroups = getStockGroupIDsFromStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
 
-    //We halen er nu eentje van op, random.
+    //Verkrijg 1 random geselecteerde categorie van de gegeven categorieën bij de vorige stap.
     $SingleStockGroup = array_rand($StockGroups, 1);
 
-    //Van deze geselecteerde category halen we alle stock items op. Hiervan tonen we er drie.
+    //Van deze geselecteerde categorie halen we alle stock items op.
     $CombiDeals = getStockItemsByStockGroupID($StockGroups[$SingleStockGroup]);
 
-    //echo print_r($CombiDeals);
-
-    //Hij haalt een random stockitem uit de lijst.
+    //Van alle stockitems binnen dezelfde categorie als het getoonde item worden nu drie willekeurige producten getoond.
     $CombiDealRand1 = array_rand($CombiDeals, 1);
     $CombiDeal1ID = $CombiDeals[$CombiDealRand1]["StockItemID"];
     $CombiDeal1Naam = $CombiDeals[$CombiDealRand1]["StockItemName"];

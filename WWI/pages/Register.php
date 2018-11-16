@@ -3,19 +3,18 @@ if (!defined('ROOT_PATH')) {
     include("../config.php");
 }
 ?>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
     <link href="\WWI\WWI\css\button.css" rel="stylesheet" type="text/css"/>
-    <link href="\WWI\WWI\css\register.css" rel="stylesheet" type="text/css"/>
-
-
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <!-- voegt header toe -->
 <?php include(ROOT_PATH . "/includes/header.php"); ?>
     <!-- start van reg form -->
     <div class="card mx-auto" style="width: 36rem;">
         <div class="card-body mx-auto">
             <div class="signup-form">
-                <form method="post" action="confirmregister.php">
+                <form method="post">
                     <p class="hint-text">Registreer voor een account.</p>
                     <div class="form-group">
                         <div class="row">
@@ -86,17 +85,17 @@ $Register["bevestig_wachtwoord"] = filter_input(INPUT_POST, 'bevestig_wachtwoord
 $Register["Phone"] = filter_input(INPUT_POST, 'Phone');
 $Register["Provincie"] = filter_input(INPUT_POST, 'Provincie');
 
-if(!empty($Register["Voornaam"])){
+
 if ($Register["Wachtwoord"] <> $Register["bevestig_wachtwoord"]) {
     echo("wachtwoorden zijn niet gelijk");
 }
 else {
     if (strlen($Register["Wachtwoord"]) < 7) {
-        echo ("wachtwoord moet minimaal 7 kekens zijn");
+        echo ("wachtwoord te kort");
     }
     else {
         InsertNewUser($Register);
-    }   }}
+    }   }
 
 
     ?>

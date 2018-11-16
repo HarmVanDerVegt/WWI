@@ -17,7 +17,6 @@ include_once ROOT_PATH . "/controllers/colorController.php";
     <title>Category</title>
 </head>
 <body>
-?>
 <!-- constanten -->
 <?php
 $height = 200;
@@ -141,10 +140,8 @@ $product_review = "dit is een review";
                     // Indien de voorgestelde prijs bekend is, verandert $product_prijs in de prijs. Indien deze niet bekend is pakt hij de vaste waarden binnen de UnitPrice en vermenigvuldigt hij deze met het TaxRate percentage.
                     if ($StockItem["RecommendedRetailPrice"] != NULL) {
                         $product_prijs = $StockItem["RecommendedRetailPrice"];
-                        print("<b>Prijs: </b>€" . $product_prijs . "<br>");
                     } else {
                         $product_prijs = $StockItem["UnitPrice"] * ($StockItem["TaxRate"] / 100 + 1);
-                        print("<b>Prijs: </b>€" . $product_prijs . "<br>");
                     }
                     if ($product_prijs == NULL) {
                         print("Er is geen prijs voor dit product beschikbaar" . "<br>");
@@ -153,12 +150,12 @@ $product_review = "dit is een review";
                 </td>
                 <!-- bestel knop -->
                 <td>
-                    <form action="ShoppingCart.php">
+                    <form action="/WWI/WWI/pages/ShoppingCart.php">
                         <input type="hidden" value="<?php echo($i);?>" name="add">
             <tr>
                 <td><?php echo($StockItemName); ?></td>
                 <td width="10px">&nbsp;</td>
-                <td><?php echo($product_prijs); ?></td>
+                <td><?php echo("&euro; " . $product_prijs . " euro"); ?></td>
                 <td width="10px">&nbsp;</td>
                 <td><input type="number" name="hoeveelheid" min="0"></td>
                 <td width="10px">&nbsp;</td>
@@ -182,16 +179,6 @@ $product_review = "dit is een review";
 
 <!-- product informatie weergeven-->
 <div class="container-fluid">
-
-    <!-- Toon specificaties -->
-    <div class="row">
-        <div class="col-sm-8">
-            <div class="bg-light card">
-                <h4>Specs:</h4>
-                <p><?php print($product_specs); ?></p>
-            </div>
-        </div>
-    </div>
 
     <!-- Toont product reviews -->
     <div class="row">

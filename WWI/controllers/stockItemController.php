@@ -40,7 +40,7 @@ function getStockItemBySpecialDealID($ID) {
 function getStockItemsBySearchDetails($search) {
     $db = createDB();
     $array = array();
-    $sql = "SELECT StockItemID, StockItemName
+    $sql = "SELECT *
             FROM stockitems
             WHERE SearchDetails like \"%$search%\" ";
 
@@ -135,19 +135,65 @@ function getStockGroupIDsFromStockItemID($ID) {
     return $array;
 }
 
-function getSearchedItems(){
+function getSearchedItems($details, $tags, $categoryID){
 
+    //$tags = implode(",", $tags);
+
+    $details = getStockItemsBySearchDetails($details);
+    //echo print_r($details);
+    $tags = getStockItemsByTags($tags);
+    $categoryID = $categoryID[0];
+
+    $detailsIDs = array_column($details, "StockItemID");
+    $tagsIDs = array_column($tags, "StockItemID");
+    $categoryIDs = getStockItemsByStockGroupID($categoryID);
+    $categoryIDs = array_column($categoryIDs, "StockItemID");
+
+    //$query = [];
+    //$query = array_union($query, $detailsIDs);
+    //$query = array_union($query, $tagsIDs);
+    //$query = array_union($query, $categoryIDs);
+
+    $query = array_intersect($detailsIDs, $tagsIDs, $categoryIDs);
+
+    $searchedItems = [];
+
+    foreach ($query as $item){
+        $searchedItems[] = getStockItemByID($item);
+    }
+
+    return $searchedItems;
+
+    //$query = array_merge($detailsIDs, $tagsIDs);
+
+
+
+}
+
+function array_union($array1, $array2){
+    //$array1 =                                     [1, 2, 3,    6, 7   ];
+    //$array2 =                                     [   2, 3, 5,       8];
+    $union = array_merge(
+                array_intersect($array1, $array2),//[   2, 3            ];
+                array_diff($array1, $array2),     //[1,          6, 7   ];
+                array_diff($array2, $array1)      //[         5,       8];
+        );                                        //[1, 2, 3, 5, 6, 7, 8];
+
+    return $union;
 }
 
 function getStockItemsByTags($tags){
     $db = createDB();
 
-    $sql = "SELECT StockItemName
+    $sql = "SELECT *
             FROM StockItems
             WHERE (";
 
+    //print_r($tags);
+
     foreach ($tags as $tag){
-        $sql = $sql . " Tags LIKE \"%$tag%\"";
+        $strippedTag = trim($tag, '"');
+        $sql = $sql . " Tags LIKE \"%$strippedTag%\"";
 
         //If this is not the latest tag:
         if ($tags[count($tags) - 1] != $tag){
@@ -156,6 +202,8 @@ function getStockItemsByTags($tags){
     }
 
     $sql = $sql . ")";
+
+    //print $sql;
 
     $result = $db->query($sql);
 
@@ -169,3 +217,4 @@ function getStockItemsByTags($tags){
 
     return $array;
 }
+

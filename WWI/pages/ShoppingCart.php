@@ -7,9 +7,7 @@ if (!defined('ROOT_PATH')) {
 include(ROOT_PATH . "/includes/header.php");
 include_once(ROOT_PATH . "/controllers/stockItemController.php");
 
-
-//$products = array("product A", "product B", "product C");
-//$amounts = array("19.99", "10.99", "2.99");
+#kijken of de winkelwagen leeg is
 $check = 0;
 
 
@@ -33,20 +31,21 @@ if (NULL !=(filter_input(INPUT_GET, "delete", FILTER_SANITIZE_STRING))) {
 
 
 #reset
-if (NULL != filter_input(INPUT_GET, "reset", FILTER_SANITIZE_STRING)) {
-    if (filter_input(INPUT_GET, "reset", FILTER_SANITIZE_STRING) == 'true') {
-        unset($_SESSION["qty"]);
-        unset($_SESSION["amounts"]);
-        unset($_SESSION["total"]);
-        unset($_SESSION["cart"]);
-    }
-}
+//if (NULL != filter_input(INPUT_GET, "reset", FILTER_SANITIZE_STRING)) {
+//    if (filter_input(INPUT_GET, "reset", FILTER_SANITIZE_STRING) == 'true') {
+//        unset($_SESSION["qty"]);
+//        unset($_SESSION["amounts"]);
+//        unset($_SESSION["total"]);
+//        unset($_SESSION["cart"]);
+//    }
+//}
 
 
 #winkelwagen
 if (isset($_SESSION["cart"])) {
     $check = 1;
     ?>
+
     <h2>Winkelwagen</h2>
     <table>
         <tr>
@@ -54,9 +53,11 @@ if (isset($_SESSION["cart"])) {
             <th width="10px">&nbsp;</th>
             <th>Hoeveelheid</th>
             <th width="10px">&nbsp;</th>
-            <th>Prijs</th>
+            <th>Subtotaal</th>
             <th width="10px">&nbsp;</th>
             <th>Updaten</th>
+            <th width="10px"> </th>
+            <th>Product verwijderen</th>
         </tr>
         <?php
         $total = 0;
@@ -68,10 +69,8 @@ if (isset($_SESSION["cart"])) {
                 $productNaam = $product["StockItemName"];
                  if ($product["RecommendedRetailPrice"] != NULL) {
                     $productPrijs = $product["RecommendedRetailPrice"];
-                    print("<b>Prijs: </b>€" . $productPrijs . "<br>");
                 } else {
                     $productPrijs = $product["UnitPrice"] * ($product["TaxRate"] / 100 + 1);
-                    print("<b>Prijs: </b>€" . $productPrijs . "<br>");
                 }
                 ?>
                 <tr>
@@ -80,11 +79,11 @@ if (isset($_SESSION["cart"])) {
                     <td><input type="number" name="hoeveelheid" min="0" value="<?php echo($_SESSION["qty"][$i]); ?>">
                     </td>
                     <td width="10px">&nbsp;</td>
-                    <td><?php echo($productPrijs * $_SESSION["qty"][$i]); ?></td>
+                    <td><?php echo("€" . $productPrijs * $_SESSION["qty"][$i]); ?></td>
                     <td width="10px">&nbsp;</td>
                     <td><input class="btn btn-primary"   type="submit" value="Update winkelwagen"></td>
                     <td width="10px"></td>
-                    <td><a class="btn btn-danger" href="?delete=<?php echo($i); ?>">Verwijder uit winkelwagen</a></td>
+                    <td><a class="fa fa-trash btn btn-danger" href="?delete=<?php echo($i); ?>"></a></td>
                 </tr>
             </form>
             <?php
@@ -92,7 +91,7 @@ if (isset($_SESSION["cart"])) {
         }
         ?>
         <tr>
-            <td colspan="7">Totaal : <?php echo($total); ?></td>
+            <td colspan="7">Totaal : €<?php echo($total); ?></td>
         </tr>
     </table>
 <?php } ?>
@@ -100,12 +99,13 @@ if (isset($_SESSION["cart"])) {
 <?php
 if ($check == 0) {
     print("<h3>Uw winkelwagen is leeg!</h3><br>");
-} else {
+}else{
     ?>
+    <!--Afrekenen knop-->
     <tr>
         <td colspan="5"></td>
     </tr>
     <tr>
-        <td colspan="5"><a class="btn btn-primary" href="?reset=true">Reset winkelwagen</a></td>
+        <td colspan="5"><input class="btn btn-primary"   type="submit" value="Afrekenen"></td>
     </tr>
 <?php } ?>

@@ -61,7 +61,7 @@ if (!defined('ROOT_PATH')) {
                     </div>
                     <div class="form-group">
                         <label class="checkbox-inline"><input type="checkbox" required="required"> Ik accepteer de <a
-                                    href="../pages/Voorwaarden.php">Voorwaarden</a></label>
+                                    href="../pages/Voorwaarden.php">Algemene Voorwaarden</a></label>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-sample btn-sample-success btn-block">Registreer nu</button>

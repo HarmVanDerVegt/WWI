@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- SELECT SI.StockItemName,SI.brand,SI.TaxRate,SI.UnitPrice,SI.RecommendedRetailPrice,SI.TypicalWeightPerUnit,SI.Photo,SG.StockGroupName\n -->
 <html>
     <head>
         <meta charset="UTF-8">
@@ -9,18 +8,22 @@
         if (!defined('ROOT_PATH')) {
             include("../../config.php");
         }
+
+        include_once ROOT_PATH . "/controllers/stockItemController.php";
         ?>
+
+
 
     </head>
     <body>
-        <!-- producten ophallen van database -->
+        <!-- Producten ophalen van database -->
         <?php
         // -------------variablen
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        // vind meegegeven variable van url
-        // category id naam ophalen
+        // Zoek meegegeven variable van url
+        // Category id naam ophalen
         if (filter_has_var(INPUT_GET, "category")) {
             $category_naam = filter_input(INPUT_GET, "category", FILTER_SANITIZE_STRING);
         } else {
@@ -31,8 +34,8 @@
             }
         }
         $_SESSION["category"] = $category_naam;
-        
-        // sql query voor het vinden van de goede producten
+
+        // SQL query voor het vinden van de goede producten
         $sql_code = ""
                 . "SELECT SI.StockItemID, SI.StockItemName,SI.brand,SI.UnitPrice,SI.TypicalWeightPerUnit "
                 . "FROM stockitems SI "
@@ -42,10 +45,10 @@
                 . "ON SI_SG.StockGroupID=SG.StockGroupID "
                 . "WHERE SG.StockGroupName='" . $category_naam . "' ";
 
-        // conect met sql server
+        // Connect met sql server
         $sql_connectie = mysqli_connect('localhost', 'root', '', 'wideworldimporters');
 
-        // check of conectie is sucsesvol
+        // Check of de connectie succesvol is
         if (!$sql_connectie) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -57,7 +60,7 @@
         <?php include(ROOT_PATH . "/includes/header.php"); ?>
         <br>
         <!-- Titel van pagina -->
-        <h1>category:&emsp;<?php print($category_naam); ?></h1>
+        <h1>Categorie: <?php print($category_naam); ?></h1>
         <!-- resultaat informatie van opgehaalde producten -->
         <?php
         $aantal_producten = mysqli_num_rows($resultaat);
@@ -89,13 +92,13 @@
             <input type="submit" value="laad">
             Pagina:
             <?php
-            print("<button type='submit' name='pagina' value='".(($pagina_nr-1 > 0) ? $pagina_nr-1 : 1)."'><<</button>");
+            print("<button type='submit' name='pagina' value='" . (($pagina_nr - 1 > 0) ? $pagina_nr - 1 : 1) . "'><<</button>");
             for ($i = 1; $i <= $paginas; $i++) {
                 print("<input type='submit' name='pagina' value='" . $i . "'");
                 // kleur de geselecteerde knop
-                print(" ".(($i == $pagina_nr) ? "style='background-color:blue; color:white;'" : "").">");
+                print(" " . (($i == $pagina_nr) ? "style='background-color:blue; color:white;'" : "") . ">");
             }
-            print("<button type='submit' name='pagina' value='".(($pagina_nr+1 <= $paginas) ? $pagina_nr+1 : $paginas)."'>>></button>");
+            print("<button type='submit' name='pagina' value='" . (($pagina_nr + 1 <= $paginas) ? $pagina_nr + 1 : $paginas) . "'>>></button>");
             ?>
         </form>
 
@@ -111,13 +114,18 @@
                     $item = mysqli_fetch_assoc($resultaat);
                     if ($item == NULL)
                         break;
-                    // --------------------------doe benodige gegevens in variablen                    
-                    $naam = explode("-", $item["StockItemName"]);
-                    $foto_path = "../media/airlinenovelties.jpg";
+
+                    // --------------------------doe benodige gegevens in variablen   
+                    $naam = explode("_", $item["StockItemName"]);
                     $prijs = $item["UnitPrice"];
                     $merk = $item["brand"];
                     $gewicht = $item["TypicalWeightPerUnit"];
                     $product_id = $item["StockItemID"];
+
+                    // -------------------------- Zoek een productfoto 
+                    $StockGroups = getStockGroupIDsFromStockItemID($product_id);
+                    $SingleStockGroup = array_rand($StockGroups, 1);
+                    $product_afbeelding_path = getImageLinkFromStockGroupID($StockGroups[$SingleStockGroup]);
 
                     // -------------------------ga naar een nieuwe rij na elke 2 items
                     if ($loop % 2 == 0) {
@@ -127,20 +135,17 @@
                     // ---------------------------------------maak een kaart
                     print('<a href="/WWI/WWI/pages/category/product.php?productID=' . $product_id . '" class="btn" role="button" style="length: 100px;"0>');
                     // de naam van het product
-                    print('<div class="card">');
+                    print('<div class="card" style="width: 35em;">');
                     print($naam[0]);
                     print('</div>');
                     print('<div class="card-group">');
                     // de afbeelding van product
                     print('<div class="card">');
-                    print('<img class="card-img" src="' . $foto_path . '" width="200" height="200"/>');
+                    print('<img class="card-img" src="' . $product_afbeelding_path . '" width="200" height="200"/>');
                     print('</div>');
                     // de gegevens van het product
                     print('<div class="card">');
                     print('Prijs : ' . $prijs);
-                    print('<br>beschrijving :<br>');
-                    if (isset($naam[1]))
-                        print('<textarea rows="2" cols="5">' . $naam[1] . '</textarea>');
                     if ($merk != NULL)
                         print('<br>Merk : ' . $merk . '<br>');
                     print('</div>');

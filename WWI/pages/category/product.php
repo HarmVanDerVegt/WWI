@@ -108,8 +108,6 @@ if ($StockItem["IsChillerStock"] == TRUE) {
 $product_leverancier = $Supplier["SupplierName"];
 
 // JN - NOG KIJKEN NAAR IMPLEMENTATIE DATABASE.
-// JN - WACHTEN OP TOEVOEGING BLOB DATABASE.
-$product_afbeelding_path = "../media/noveltyitems.jpg";
 $product_review = "dit is een review";
 ?>
 
@@ -165,6 +163,12 @@ $product_review = "dit is een review";
                 </td>
             </tr>
             <!-- Toon product afbeelding -->
+            
+            <?php
+            $StockGroups = getStockGroupIDsFromStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
+            $SingleStockGroup = array_rand($StockGroups, 1);
+            $product_afbeelding_path = getImageLinkFromStockGroupID($StockGroups[$SingleStockGroup]);
+            ?>
             <tr>
                 <td>
                     <img class="img-thumbnail" src="<?php print($product_afbeelding_path); ?>"
@@ -193,13 +197,13 @@ $product_review = "dit is een review";
     <!-- Selecteert combideals -->
     <?php
     //Krijg de categorieën van het getoonde item, dit kunnen er meerdere zijn.
-    $StockGroups = getStockGroupIDsFromStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
+    $SpecialDealStockGroups = getStockGroupIDsFromStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
 
     //Verkrijg 1 random geselecteerde categorie van de gegeven categorieën bij de vorige stap.
-    $SingleStockGroup = array_rand($StockGroups, 1);
+    $SpecialDealSingleStockGroup = array_rand($SpecialDealStockGroups, 1);
 
     //Van deze geselecteerde categorie halen we alle stock items op.
-    $CombiDeals = getStockItemsByStockGroupID($StockGroups[$SingleStockGroup]);
+    $CombiDeals = getStockItemsByStockGroupID($SpecialDealStockGroups[$SpecialDealSingleStockGroup]);
 
     //Van alle stockitems binnen dezelfde categorie als het getoonde item worden nu drie willekeurige producten getoond.
     $CombiDealRand1 = array_rand($CombiDeals, 1);
@@ -214,9 +218,9 @@ $product_review = "dit is een review";
     $CombiDeal3ID = $CombiDeals[$CombiDealRand3]["StockItemID"];
     $CombiDeal3Naam = $CombiDeals[$CombiDealRand3]["StockItemName"];
 
-    $firstLink = getImageLinkFromStockGroupID($StockGroups[$SingleStockGroup]);
-    $secondLink = getImageLinkFromStockGroupID($StockGroups[$SingleStockGroup]);
-    $thirdLink = getImageLinkFromStockGroupID($StockGroups[$SingleStockGroup]);
+    $firstLink = getImageLinkFromStockGroupID($SpecialDealStockGroups[$SpecialDealSingleStockGroup]);
+    $secondLink = getImageLinkFromStockGroupID($SpecialDealStockGroups[$SpecialDealSingleStockGroup]);
+    $thirdLink = getImageLinkFromStockGroupID($SpecialDealStockGroups[$SpecialDealSingleStockGroup]);
 
     ?>
     <!-- Toon combideals -->

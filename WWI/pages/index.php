@@ -32,7 +32,6 @@ if (!defined('ROOT_PATH')) {
                 padding-top: 5px;
                 background-color: #00BCF3;
                 border-radius: 15px;
-
             }
         </style>
     </head>

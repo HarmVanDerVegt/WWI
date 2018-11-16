@@ -136,14 +136,17 @@ function InsertNewUser($valuarray)
     $password = $valuarray["Wachtwoord"];
     $verpassword = $valuarray["bevestig_wachtwoord"];
     $phone = $valuarray["Phone"];
+    $Provincie = $valuarray["Provincie"];
     $date = date("Y/m/d");
     if ($password == $verpassword) {
         $passhash = hash('sha256', $password);
     } else {
-        return("Wachtwoorden zijn niet gelijk");
+        return ("Wachtwoorden zijn niet gelijk");
     }
-
-
+    //set phone number to zero if empty
+    if (isset($phone)) {
+        $phone = 000000;
+    }
     $db = createDB();
     $maxsql = "select max(PersonID) +1 from people";
     $maxresult = $db->query($maxsql);
@@ -153,21 +156,60 @@ function InsertNewUser($valuarray)
     $customerresult = $db->query($customeridsql);
     $customerresultar = $customerresult->fetch_assoc();
 
-    $citysql = "select CityID from cities where CityName like '%$woonplaats%'";
+    $citysql = "select CityID 
+                from cities 
+                where CityName 
+                like '%$woonplaats%'";
     $cityid = $db->query($citysql);
     $cityidresultar = $cityid->fetch_assoc();
 
-    foreach ($maxidresultar as $maxarresult){
-    $maxidresult = $maxarresult;
-    }
-    foreach ($cityidresultar as $cityarresult){
-        $cityidresult = $cityarresult;
-    }
-    foreach ($customerresultar as $customerarresult){
-        $customerID = $customerarresult;
+
+
+// create new city if it does exits
+if (!$cityidresultar ) {
+    $maxcityidsql = "select max(CityID) +1 from cities";
+    $maxrcityidesult = $db->query($maxcityidsql);
+    $maxcityidresultar = $maxrcityidesult->fetch_assoc();
+    foreach ($maxcityidresultar as $maxcityarresult) {
+        $cityidresult = $maxcityarresult;
     }
 
-    $peoplesql = "insert into people
+    $getprovincieid = "select StateProvinceID 
+                          from stateprovinces 
+                          where StateProvinceName 
+                          like '%$Provincie%'";
+    $getprovincieidresult = $db->query($getprovincieid);
+    $getprovincieidresultar = $getprovincieidresult->fetch_assoc();
+    foreach ($getprovincieidresultar as $provinceidresultar) {
+        $provinceid = $provinceidresultar;
+    }
+    $createcitysql = "insert into cities
+                          set CityID=($cityidresult),
+                          CityName=('$woonplaats'), 
+                          StateProvinceID=($provinceid),
+                          LastEditedBy=(1),
+                          ValidFrom =('$date 01:00:00'),
+                          ValidTo =('9999-12-31 23:59:59')";
+    $db->query($createcitysql);
+    $citysql = "select CityID 
+                from cities 
+                where CityName 
+                like '%$woonplaats%'";
+    $cityid = $db->query($citysql);
+    $cityidresultar = $cityid->fetch_assoc();
+}
+//array to value conversion
+foreach ($maxidresultar as $maxarresult) {
+    $maxidresult = $maxarresult;
+}
+foreach ($cityidresultar as $cityarresult) {
+    $cityidresult = $cityarresult;
+}
+foreach ($customerresultar as $customerarresult) {
+    $customerID = $customerarresult;
+}
+
+$peoplesql = "insert into people
                   SET wideworldimporters.people.LogonName = ('$Email'),
                   wideworldimporters.people.HashedPassword = ('$passhash'),
                   PersonID =('$maxidresult'),
@@ -181,11 +223,11 @@ function InsertNewUser($valuarray)
                   IsSalesperson = (0),
                   PhoneNumber=('$phone'),
                   LastEditedBy =(1),
-                  ValidFrom =('$date  00:00:00'),
+                  ValidFrom =('$date  01:00:00'),
                   ValidTo =('9999-12-31 23:59:59')";
-   $result1= $db->query($peoplesql);
+$db->query($peoplesql);
 
-    $customersql = " insert into customers 
+$customersql = " insert into customers 
                     set CustomerID=($customerID),
                     PrimaryContactPersonID=($maxidresult),
                     CustomerName=('$voornaam' ' $achternaam'),
@@ -205,15 +247,11 @@ function InsertNewUser($valuarray)
                     PostalAddressLine1=('$straat ' ' $huisnummer'),
                     PostalPostalCode=('$postcode'),
                     LastEditedBy=(1),
-                    ValidFrom =('$date 23:59:00'),
+                    ValidFrom =('$date 01:00:00'),
                     ValidTo =('9999-12-31 23:59:59'),
                     IsOnCreditHold=(0),
                     PhoneNumber=($phone)";
-    $result2 = $db->query($customersql);
+$db->query($customersql);
 
-    if ($result1== FALSE){
-        return "sldfj";
-        print"laksjdf";
-    }
 
 }

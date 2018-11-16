@@ -10,7 +10,7 @@ if (!defined('ROOT_PATH')) {
     <head>
         <meta charset="UTF-8">
         <link href="\WWI\WWI\css\bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <title>World Eide Importers</title>
+        <title>Wide  World Importers</title>
         <!-- eigen opmaak regels -->
         <style>
             img.specialdeals{

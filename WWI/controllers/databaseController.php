@@ -165,7 +165,7 @@ function InsertNewUser($valuarray)
 
 
 
-// create new city if it does exits
+// create new city if it does not exits
 if (!$cityidresultar ) {
     $maxcityidsql = "select max(CityID) +1 from cities";
     $maxrcityidesult = $db->query($maxcityidsql);

@@ -9,7 +9,7 @@ function createUser($firstName, $lastname, $email, $password){
      $searchName = $firstName . " " . $fullName;
      $hashedPassword = hash('sha256', $password);
 
-     $sql = "INSERT INTO people(FullName, PrefferedName, SearchName, IsPermittedToLogon, LogonName, HashedPassword, IsSystemUser, EmailAddress)
+     $sql = "INSERT INTO people(FullName, PreferredName, SearchName, IsPermittedToLogon, LogonName, HashedPassword, IsSystemUser, EmailAddress)
              VALUES ($fullName, $firstName, $searchName, true, $email, $hashedPassword, true, $email) ";
 
     if ($db->query($sql) === TRUE) {

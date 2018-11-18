@@ -32,7 +32,6 @@ if (!defined('ROOT_PATH')) {
                 padding-top: 5px;
                 background-color: #00BCF3;
                 border-radius: 15px;
-
             }
         </style>
     </head>
@@ -41,7 +40,6 @@ if (!defined('ROOT_PATH')) {
         <?php include(ROOT_PATH . "/includes/header.php"); ?>
         <br>
 
-        <!-- begin specialdeals ---------------------------------------------------------------- -->
         <!-- ophalen gegevens van special deals uit database -->
         <?php
         include_once ROOT_PATH . "/controllers/stockItemController.php";
@@ -54,7 +52,6 @@ if (!defined('ROOT_PATH')) {
         $afbeelding_specialdeal = "./media/SpecialDeals/SpecialDealFotoNietBeschikbaar.png";
         ?>
 
-        <!-- toon special deals -->
 <!--        <div class='blue_titel'><h2 class="center">Aanbiedingen:</h2></div>-->
         <a href="../pages/category/product.php?productID=<?php print($StockItem); ?>">
             <img                       
@@ -62,7 +59,7 @@ if (!defined('ROOT_PATH')) {
                 src="<?php print($afbeelding_specialdeal); ?>"
                 >
         </a>
-        <!-- eind specialdeals ---------------------------------------------------------------- -->
+        <!-- eind specialdeals -->
 
         <br>
         <br>

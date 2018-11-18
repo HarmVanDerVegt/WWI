@@ -3,6 +3,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <link href="\WWI\WWI\css\card.css" rel="stylesheet" type="text/css"/>
         <title>Product Lijst</title>
         <!-- fix path -->
         <?php
@@ -127,7 +128,7 @@
                     // ---------------------------------------maak een kaart
                     print('<a href="/WWI/WWI/pages/category/product.php?productID=' . $product_id . '" class="btn" role="button" style="length: 100px;"0>');
                     // de naam van het product
-                    print('<div class="card">');
+                    print('<div class="card-custom ">');
                     print($naam[0]);
                     print('</div>');
                     print('<div class="card-group">');

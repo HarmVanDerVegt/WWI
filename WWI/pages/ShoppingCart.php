@@ -53,6 +53,7 @@ if (isset($_SESSION["cart"])) {
         </tr>
         <?php
         $total = 0;
+
         foreach ($_SESSION["cart"] as $i) {
             ?>
             <form method="post" action="ShoppingCart.php">
@@ -71,7 +72,7 @@ if (isset($_SESSION["cart"])) {
                 <tr>
                     <td><?php print($productNaam); ?></td>
                     <td width="10px">&nbsp;</td>
-                    <td><input type="number" name="hoeveelheid" min="0" max=" <?php print($product_voorraad) ?> " value="<?php echo($_SESSION["qty"][$i]); ?>">
+                    <td><input type="number" name="hoeveelheid" min="1" max="<?php print($product_voorraad) ?>" value="<?php print($_SESSION["qty"][$i]); ?>" required>
                     </td>
                     <td width="10px">&nbsp;</td>
                     <td><?php echo("€" . $productPrijs * $_SESSION["qty"][$i]); ?></td>
@@ -79,11 +80,11 @@ if (isset($_SESSION["cart"])) {
                     <td><input class="btn btn-sample"   type="submit" value="Update winkelwagen"></td>
                     <td width="10px"></td>
                     <td><a  class="fa fa-trash btn btn-danger" href="?delete=<?php echo($i); ?>"></a></td>
-<!--                    <td><input type="submit" name="delete=--><?php //echo($i); ?><!--"</td>-->
                 </tr>
             </form>
             <?php
-            $total += $productPrijs * $_SESSION["qty"][$i];
+            $total += $productPrijs *
+                $_SESSION["qty"][$i];
         }
         ?>
         <tr>

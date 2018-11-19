@@ -1,17 +1,31 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<?php
+if (!defined('ROOT_PATH')) {
+    include("../config.php");
+}
+?>
+
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Wide World Importers</title>
     </head>
     <body>
-        <?php
-        print("ERROR");
-        ?>
+        
+        <?php include(ROOT_PATH . "/includes/header.php"); ?>
+        
+        <br>
+        <br>
+        <br>
+        
+        <a href="../pages/index.php"><h1>Er is helaas iets misgegaan, probeer het nog eens.</h1></a>
+       
+        <br>
+        <br>
+        <br>
+        
+        <?php include(ROOT_PATH . "/includes/footer.php"); ?>
+        
     </body>
 </html>
+
+<?php

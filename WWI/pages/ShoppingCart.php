@@ -19,7 +19,6 @@ if (!empty ($_POST["add"])){
     $qty = filter_input(INPUT_POST,"hoeveelheid", FILTER_SANITIZE_STRING);
     $_SESSION["cart"][$i] = $i;
     $_SESSION["qty"][$i] = $qty;
-    echo("product toevoegen");
 }
 
 #verwijderen
@@ -29,7 +28,6 @@ if (!empty ($_GET["delete"])) {
     $_SESSION["qty"][$i] = $qty;
     $_SESSION["amounts"][$i] = 0;
     unset($_SESSION["cart"][$i]);
-    echo("product verwijderen");
 }
 
 
@@ -53,6 +51,7 @@ if (isset($_SESSION["cart"])) {
         </tr>
         <?php
         $total = 0;
+
         foreach ($_SESSION["cart"] as $i) {
             ?>
             <form method="post" action="ShoppingCart.php">
@@ -66,12 +65,11 @@ if (isset($_SESSION["cart"])) {
                 } else {
                     $productPrijs = $product["UnitPrice"] * ($product["TaxRate"] / 100 + 1);
                 }
-                print($product_voorraad);
                 ?>
                 <tr>
                     <td><?php print($productNaam); ?></td>
                     <td width="10px">&nbsp;</td>
-                    <td><input type="number" name="hoeveelheid" min="0" max=" <?php print($product_voorraad) ?> " value="<?php echo($_SESSION["qty"][$i]); ?>">
+                    <td><input type="number" name="hoeveelheid" min="1" max="<?php print($product_voorraad) ?>" value="<?php print($_SESSION["qty"][$i]); ?>" required>
                     </td>
                     <td width="10px">&nbsp;</td>
                     <td><?php echo("€" . $productPrijs * $_SESSION["qty"][$i]); ?></td>
@@ -79,7 +77,6 @@ if (isset($_SESSION["cart"])) {
                     <td><input class="btn btn-sample"   type="submit" value="Update winkelwagen"></td>
                     <td width="10px"></td>
                     <td><a  class="fa fa-trash btn btn-danger" href="?delete=<?php echo($i); ?>"></a></td>
-<!--                    <td><input type="submit" name="delete=--><?php //echo($i); ?><!--"</td>-->
                 </tr>
             </form>
             <?php

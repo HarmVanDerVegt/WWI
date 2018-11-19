@@ -23,8 +23,8 @@ if (!empty ($_POST["add"])){
 }
 
 #verwijderen
-if (!empty ($_POST["delete"])) {
-    $i = filter_input(INPUT_POST,"delete", FILTER_SANITIZE_STRING);
+if (!empty ($_GET["delete"])) {
+    $i = filter_input(INPUT_GET,"delete", FILTER_SANITIZE_STRING);
     $qty = $_SESSION["qty"][$i];
     $_SESSION["qty"][$i] = $qty;
     $_SESSION["amounts"][$i] = 0;
@@ -78,7 +78,8 @@ if (isset($_SESSION["cart"])) {
                     <td width="10px">&nbsp;</td>
                     <td><input class="btn btn-sample"   type="submit" value="Update winkelwagen"></td>
                     <td width="10px"></td>
-                    <td><a class="fa fa-trash btn btn-danger" href="?delete=<?php echo($i); ?>"></a></td>
+                    <td><a  class="fa fa-trash btn btn-danger" href="?delete=<?php echo($i); ?>"></a></td>
+<!--                    <td><input type="submit" name="delete=--><?php //echo($i); ?><!--"</td>-->
                 </tr>
             </form>
             <?php

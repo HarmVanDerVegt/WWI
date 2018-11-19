@@ -154,7 +154,7 @@ $product_review = "dit is een review";
                 <td width="10px">&nbsp;</td>
                 <td><?php echo("&euro; " . $product_prijs . " euro"); ?></td>
                 <td width="10px">&nbsp;</td>
-                <td><input type="number" name="hoeveelheid" min="0" max=" <?php print($product_voorraad) ?> "></td>
+                <td><input type="number" name="hoeveelheid" min="1" max="<?php print($product_voorraad) ?>" required></td>
                 <td width="10px">&nbsp;</td>
                 <td><input type="submit"  class="btn btn-sample btn-sample-success btn-block" value="Toevoegen aan winkelwagen"></td>
             </tr>

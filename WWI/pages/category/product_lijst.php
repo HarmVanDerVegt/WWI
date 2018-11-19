@@ -133,7 +133,7 @@
                     }
 
                     // ---------------------------------------maak een kaart
-                    print('<a href="/WWI/WWI/pages/category/product.php?productID=' . $product_id . '" class="btn" role="button" style="length: 100px;"0>');
+                    print('<a href="/WWI/WWI/pages/category/product.php?productID=' . $product_id . '"class="btn" role="button" style="width="200" height="200">');
                     // de naam van het product
                     print('<div class="card" style="width: 35em;">');
                     print($naam[0]);

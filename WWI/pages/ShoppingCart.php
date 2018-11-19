@@ -58,17 +58,20 @@ if (isset($_SESSION["cart"])) {
             <form method="post" action="ShoppingCart.php">
                 <input type="hidden" value="<?php echo($i) ?>" name="add">
                 <?php $product = getStockItemByID($i);
+                $productvoorraad = getStockItemHoldingByID($i);
+                $product_voorraad = $productvoorraad["QuantityOnHand"];
                 $productNaam = $product["StockItemName"];
                  if ($product["RecommendedRetailPrice"] != NULL) {
                     $productPrijs = $product["RecommendedRetailPrice"];
                 } else {
                     $productPrijs = $product["UnitPrice"] * ($product["TaxRate"] / 100 + 1);
                 }
+                print($product_voorraad);
                 ?>
                 <tr>
                     <td><?php print($productNaam); ?></td>
                     <td width="10px">&nbsp;</td>
-                    <td><input type="number" name="hoeveelheid" min="0" value="<?php echo($_SESSION["qty"][$i]); ?>">
+                    <td><input type="number" name="hoeveelheid" min="0" max=" <?php print($product_voorraad) ?> " value="<?php echo($_SESSION["qty"][$i]); ?>">
                     </td>
                     <td width="10px">&nbsp;</td>
                     <td><?php echo("€" . $productPrijs * $_SESSION["qty"][$i]); ?></td>

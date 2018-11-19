@@ -19,7 +19,6 @@ if (!empty ($_POST["add"])){
     $qty = filter_input(INPUT_POST,"hoeveelheid", FILTER_SANITIZE_STRING);
     $_SESSION["cart"][$i] = $i;
     $_SESSION["qty"][$i] = $qty;
-    echo("product toevoegen");
 }
 
 #verwijderen
@@ -29,7 +28,6 @@ if (!empty ($_GET["delete"])) {
     $_SESSION["qty"][$i] = $qty;
     $_SESSION["amounts"][$i] = 0;
     unset($_SESSION["cart"][$i]);
-    echo("product verwijderen");
 }
 
 
@@ -67,7 +65,6 @@ if (isset($_SESSION["cart"])) {
                 } else {
                     $productPrijs = $product["UnitPrice"] * ($product["TaxRate"] / 100 + 1);
                 }
-                print($product_voorraad);
                 ?>
                 <tr>
                     <td><?php print($productNaam); ?></td>
@@ -83,8 +80,7 @@ if (isset($_SESSION["cart"])) {
                 </tr>
             </form>
             <?php
-            $total += $productPrijs *
-                $_SESSION["qty"][$i];
+            $total += $productPrijs * $_SESSION["qty"][$i];
         }
         ?>
         <tr>

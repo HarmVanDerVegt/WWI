@@ -107,7 +107,7 @@ if ($StockItem["IsChillerStock"] == TRUE) {
 $product_leverancier = $Supplier["SupplierName"];
 
 // JN - NOG KIJKEN NAAR IMPLEMENTATIE DATABASE.
-$product_review = "dit is een review";
+$product_review = "PLACEHOLDER";
 ?>
 
 <!-- Header naam, merk, prijs, voorraad -->
@@ -231,7 +231,7 @@ $product_review = "dit is een review";
                 <p> Misschien zijn deze producten een leuke combinatie met dit product? </p>
                 <div class="card-group">
                     <div class="card">
-                        <img class="card-img-top" src="<?php print $firstLink ?>" alt="Card image cap">
+                        <img class="card-img-top" width="200" height="200" src="<?php print $firstLink ?>" alt="Card image cap">
                         <div class="card-body">
                             <a href="product.php?productID=<?php print($CombiDeal1ID) ?> ">
                                 <h5 class="card-title"> <?php print($CombiDeal1Naam) ?> </h5>
@@ -239,7 +239,7 @@ $product_review = "dit is een review";
                         </div>
                     </div>
                     <div class="card">
-                        <img class="card-img-top" src="<?php print $secondLink ?>" alt="Card image cap">
+                        <img class="card-img-top" width="200" height="200" src="<?php print $secondLink ?>" alt="Card image cap">
                         <div class="card-body">
                             <a href="product.php?productID=<?php print $CombiDeal2ID ?> ">
                                 <h5 class="card-title"> <?php print($CombiDeal2Naam) ?> </h5>
@@ -247,7 +247,7 @@ $product_review = "dit is een review";
                         </div>
                     </div>
                     <div class="card">
-                        <img class="card-img-top" src="<?php print $thirdLink ?>"
+                        <img class="card-img-top" width="200" height="200" src="<?php print $thirdLink ?>"
                              alt="Card image cap">
                         <div class="card-body">
                             <a href="product.php?productID=<?php print $CombiDeal3ID ?> ">

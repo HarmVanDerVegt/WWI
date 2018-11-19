@@ -165,7 +165,7 @@ function InsertNewUser($valuarray)
 
 
 
-// create new city if it does exits
+// create new city if it does not exits
 if (!$cityidresultar ) {
     $maxcityidsql = "select max(CityID) +1 from cities";
     $maxrcityidesult = $db->query($maxcityidsql);
@@ -213,9 +213,9 @@ $peoplesql = "insert into people
                   SET wideworldimporters.people.LogonName = ('$Email'),
                   wideworldimporters.people.HashedPassword = ('$passhash'),
                   PersonID =('$maxidresult'),
-                  FullName = ('$voornaam' ' $achternaam'),
+                  FullName = ('$voornaam ' '$achternaam'),
                   PreferredName =('$voornaam'),
-                  SearchName =('$voornaam'  ' $achternaam'),
+                  SearchName =('$voornaam ' '$achternaam'),
                   IsPermittedToLogon =(1),
                   IsExternalLogonProvider =(0),
                   IsSystemUser = (1),
@@ -227,10 +227,11 @@ $peoplesql = "insert into people
                   ValidTo =('9999-12-31 23:59:59')";
 $db->query($peoplesql);
 
+
 $customersql = " insert into customers 
                     set CustomerID=($customerID),
                     PrimaryContactPersonID=($maxidresult),
-                    CustomerName=('$voornaam' ' $achternaam'),
+                    CustomerName=('$voornaam ' '$achternaam'),
                     BillToCustomerID=($customerID),
                     CustomerCategoryID=(8),
                     DeliveryMethodID=(1),
@@ -253,5 +254,10 @@ $customersql = " insert into customers
                     PhoneNumber=($phone)";
 $db->query($customersql);
 
+//return ($peoplesql.$customersql);
+    $_SESSION["Voornaam"] = $voornaam;
+    $_SESSION["achternaam"] = $achternaam;
+    $_SESSION["Email"] = $Email;
+    echo"<meta http-equiv=\"refresh\" content=\"0; url=http://localhost:63342/WWI/WWI/pages/confirmregister.php\" />";
 
-}
+    }

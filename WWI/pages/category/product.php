@@ -16,7 +16,6 @@ include_once ROOT_PATH . "/controllers/colorController.php";
     <title>Category</title>
 </head>
 <body>
-
 <!-- constanten -->
 <?php
 $height = 200;
@@ -108,8 +107,6 @@ if ($StockItem["IsChillerStock"] == TRUE) {
 $product_leverancier = $Supplier["SupplierName"];
 
 // JN - NOG KIJKEN NAAR IMPLEMENTATIE DATABASE.
-// JN - WACHTEN OP TOEVOEGING BLOB DATABASE.
-$product_afbeelding_path = "../media/noveltyitems.jpg";
 $product_review = "dit is een review";
 ?>
 
@@ -140,10 +137,8 @@ $product_review = "dit is een review";
                     // Indien de voorgestelde prijs bekend is, verandert $product_prijs in de prijs. Indien deze niet bekend is pakt hij de vaste waarden binnen de UnitPrice en vermenigvuldigt hij deze met het TaxRate percentage.
                     if ($StockItem["RecommendedRetailPrice"] != NULL) {
                         $product_prijs = $StockItem["RecommendedRetailPrice"];
-                        print("<b>Prijs: </b>€" . $product_prijs . "<br>");
                     } else {
                         $product_prijs = $StockItem["UnitPrice"] * ($StockItem["TaxRate"] / 100 + 1);
-                        print("<b>Prijs: </b>€" . $product_prijs . "<br>");
                     }
                     if ($product_prijs == NULL) {
                         print("Er is geen prijs voor dit product beschikbaar" . "<br>");
@@ -152,14 +147,28 @@ $product_review = "dit is een review";
                 </td>
                 <!-- bestel knop -->
                 <td>
-                    <form action="\WWI\WWI\pages\ShoppingCart.php" method="post">
+                    <form method="post" action="/WWI/WWI/pages/ShoppingCart.php">
                         <input type="hidden" value="<?php echo($i);?>" name="add">
-                <td><b>hoeveelheid: </b><input type="number" name="hoeveelheid" min="0"></td>
+            <tr>
+                <td><?php echo($StockItemName); ?></td>
                 <td width="10px">&nbsp;</td>
-                <td><input type="submit" class="btn btn-primary" value="Toevoegen aan winkelwagen"></td>
+                <td><?php echo("&euro; " . $product_prijs . " euro"); ?></td>
+                <td width="10px">&nbsp;</td>
+                <td><input type="number" name="hoeveelheid" min="0"></td>
+                <td width="10px">&nbsp;</td>
+                <td><input type="submit"  class="btn btn-sample btn-sample-success btn-block" value="Toevoegen aan winkelwagen"></td>
             </tr>
-                </form>
+            </form>
+                </td>
+            </tr>
             <!-- Toon product afbeelding -->
+            
+            <?php
+            $StockGroups = getStockGroupIDsFromStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
+            $SingleStockGroup = array_rand($StockGroups, 1);
+            $product_afbeelding_path = getImageLinkFromStockGroupID($StockGroups[$SingleStockGroup]);
+            ?>
+            
             <tr>
                 <td>
                     <img class="img-thumbnail" src="<?php print($product_afbeelding_path); ?>"
@@ -175,16 +184,6 @@ $product_review = "dit is een review";
 <!-- product informatie weergeven-->
 <div class="container-fluid">
 
-    <!-- Toon specificaties -->
-    <div class="row">
-        <div class="col-sm-8">
-            <div class="bg-light card">
-                <h4>Specs:</h4>
-                <p><?php print($product_specs); ?></p>
-            </div>
-        </div>
-    </div>
-
     <!-- Toont product reviews -->
     <div class="row">
         <div class="col-sm-8">
@@ -197,18 +196,16 @@ $product_review = "dit is een review";
 
     <!-- Selecteert combideals -->
     <?php
-    //Krijg de categories van dit item, dit kunnen er meerdere zijn.
-    $StockGroups = getStockGroupIDsFromStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
+    //Krijg de categorieën van het getoonde item, dit kunnen er meerdere zijn.
+    $SpecialDealStockGroups = getStockGroupIDsFromStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
 
-    //We halen er nu eentje van op, random.
-    $SingleStockGroup = array_rand($StockGroups, 1);
+    //Verkrijg 1 random geselecteerde categorie van de gegeven categorieën bij de vorige stap.
+    $SpecialDealSingleStockGroup = array_rand($SpecialDealStockGroups, 1);
 
-    //Van deze geselecteerde category halen we alle stock items op. Hiervan tonen we er drie.
-    $CombiDeals = getStockItemsByStockGroupID($StockGroups[$SingleStockGroup]);
+    //Van deze geselecteerde categorie halen we alle stock items op.
+    $CombiDeals = getStockItemsByStockGroupID($SpecialDealStockGroups[$SpecialDealSingleStockGroup]);
 
-    //echo print_r($CombiDeals);
-
-    //Hij haalt een random stockitem uit de lijst.
+    //Van alle stockitems binnen dezelfde categorie als het getoonde item worden nu drie willekeurige producten getoond.
     $CombiDealRand1 = array_rand($CombiDeals, 1);
     $CombiDeal1ID = $CombiDeals[$CombiDealRand1]["StockItemID"];
     $CombiDeal1Naam = $CombiDeals[$CombiDealRand1]["StockItemName"];
@@ -221,9 +218,9 @@ $product_review = "dit is een review";
     $CombiDeal3ID = $CombiDeals[$CombiDealRand3]["StockItemID"];
     $CombiDeal3Naam = $CombiDeals[$CombiDealRand3]["StockItemName"];
 
-    $firstLink = getImageLinkFromStockGroupID($StockGroups[$SingleStockGroup]);
-    $secondLink = getImageLinkFromStockGroupID($StockGroups[$SingleStockGroup]);
-    $thirdLink = getImageLinkFromStockGroupID($StockGroups[$SingleStockGroup]);
+    $firstLink = getImageLinkFromStockGroupID($SpecialDealStockGroups[$SpecialDealSingleStockGroup]);
+    $secondLink = getImageLinkFromStockGroupID($SpecialDealStockGroups[$SpecialDealSingleStockGroup]);
+    $thirdLink = getImageLinkFromStockGroupID($SpecialDealStockGroups[$SpecialDealSingleStockGroup]);
 
     ?>
     <!-- Toon combideals -->

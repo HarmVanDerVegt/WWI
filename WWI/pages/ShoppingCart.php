@@ -12,18 +12,19 @@ include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
 $check = 0;
 
 
+
 #Product toevoegen
-if (NULL != filter_input($_POST["add"], FILTER_SANITIZE_STRING)){
-    $i = filter_input($_POST["add"], FILTER_SANITIZE_STRING);
-    $qty = filter_input($_POST["hoeveelheid"], FILTER_SANITIZE_STRING);
+if (!empty ($_POST["add"])){
+    $i = filter_input(INPUT_POST,"add", FILTER_SANITIZE_STRING);
+    $qty = filter_input(INPUT_POST,"hoeveelheid", FILTER_SANITIZE_STRING);
     $_SESSION["cart"][$i] = $i;
     $_SESSION["qty"][$i] = $qty;
     echo("product toevoegen");
 }
 
 #verwijderen
-if (NULL != filter_input($_POST["delete"], FILTER_SANITIZE_STRING)) {
-    $i = filter_input($_POST["delete"], FILTER_SANITIZE_STRING);
+if (!empty ($_POST["delete"])) {
+    $i = filter_input(INPUT_POST,"delete", FILTER_SANITIZE_STRING);
     $qty = $_SESSION["qty"][$i];
     $_SESSION["qty"][$i] = $qty;
     $_SESSION["amounts"][$i] = 0;
@@ -54,7 +55,7 @@ if (isset($_SESSION["cart"])) {
         $total = 0;
         foreach ($_SESSION["cart"] as $i) {
             ?>
-            <form action="ShoppingCart.php">
+            <form method="post" action="ShoppingCart.php">
                 <input type="hidden" value="<?php echo($i) ?>" name="add">
                 <?php $product = getStockItemByID($i);
                 $productNaam = $product["StockItemName"];

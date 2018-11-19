@@ -23,8 +23,8 @@ if (!empty ($_POST["add"])){
 }
 
 #verwijderen
-if (!empty ($_POST["delete"])) {
-    $i = filter_input(INPUT_POST,"delete", FILTER_SANITIZE_STRING);
+if (!empty ($_GET["delete"])) {
+    $i = filter_input(INPUT_GET,"delete", FILTER_SANITIZE_STRING);
     $qty = $_SESSION["qty"][$i];
     $_SESSION["qty"][$i] = $qty;
     $_SESSION["amounts"][$i] = 0;
@@ -58,24 +58,28 @@ if (isset($_SESSION["cart"])) {
             <form method="post" action="ShoppingCart.php">
                 <input type="hidden" value="<?php echo($i) ?>" name="add">
                 <?php $product = getStockItemByID($i);
+                $productvoorraad = getStockItemHoldingByID($i);
+                $product_voorraad = $productvoorraad["QuantityOnHand"];
                 $productNaam = $product["StockItemName"];
                  if ($product["RecommendedRetailPrice"] != NULL) {
                     $productPrijs = $product["RecommendedRetailPrice"];
                 } else {
                     $productPrijs = $product["UnitPrice"] * ($product["TaxRate"] / 100 + 1);
                 }
+                print($product_voorraad);
                 ?>
                 <tr>
                     <td><?php print($productNaam); ?></td>
                     <td width="10px">&nbsp;</td>
-                    <td><input type="number" name="hoeveelheid" min="0" value="<?php echo($_SESSION["qty"][$i]); ?>">
+                    <td><input type="number" name="hoeveelheid" min="0" max=" <?php print($product_voorraad) ?> " value="<?php echo($_SESSION["qty"][$i]); ?>">
                     </td>
                     <td width="10px">&nbsp;</td>
                     <td><?php echo("€" . $productPrijs * $_SESSION["qty"][$i]); ?></td>
                     <td width="10px">&nbsp;</td>
                     <td><input class="btn btn-sample"   type="submit" value="Update winkelwagen"></td>
                     <td width="10px"></td>
-                    <td><a class="fa fa-trash btn btn-danger" href="?delete=<?php echo($i); ?>"></a></td>
+                    <td><a  class="fa fa-trash btn btn-danger" href="?delete=<?php echo($i); ?>"></a></td>
+<!--                    <td><input type="submit" name="delete=--><?php //echo($i); ?><!--"</td>-->
                 </tr>
             </form>
             <?php

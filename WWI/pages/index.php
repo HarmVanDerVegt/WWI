@@ -59,7 +59,7 @@ if (!defined('ROOT_PATH')) {
                 src="<?php print($afbeelding_specialdeal); ?>"
                 >
         </a>
-        <!-- eind specialdeals -->
+        <!-- eind specialdeals |-->
 
         <br>
         <br>

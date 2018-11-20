@@ -85,7 +85,7 @@
             Aantal producten tonen:
             <select name="aantal_producten">
                 <?php
-                for ($i = 2; $i <= 32; $i *= 2) {
+                for ($i = 3; $i <= 30; $i += 3) {
                     print("<option " . (($i == $aantal_producten_tonen) ? "selected" : "") . ">" . $i . "</option>");
                 }
                 ?>
@@ -114,8 +114,8 @@
                     for ($loop = 0; $loop < $aantal_producten_tonen; $loop++) {
                         // laad gegevens van een rij 
                         $item = mysqli_fetch_assoc($resultaat);
-                        if ($item == NULL)
-                            break;
+                        if ($item == NULL){
+                            break;}
 
                         // --------------------------doe benodige gegevens in variablen   
                         $naam = explode("_", $item["StockItemName"]);
@@ -145,8 +145,8 @@
                         print('<div class="col-md-4">
 						     <div class="card-custom">
                                <div class="card-block">
-                                 <h4 class="card-custom-title text-light">' . $naam[0] . '</h4>
                                  <a href="/WWI/WWI/pages/category/product.php?productID=' . $product_id . '" class="card-link"><img class="card-img-top" src="' . $product_afbeelding_path . ' "  alt="Card image cap" style="max-width:382px;max-height:180px;" ></a>
+                                 <h4 class="card-custom-title text-light">' . $naam[0] . '</h4>
                                  <p class="card-text p-y-1 text-light"> prijs: €' . $prijs . '</p>
                                </div>
                              </div>

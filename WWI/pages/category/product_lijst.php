@@ -127,7 +127,7 @@
                         if ($prijs == NULL) {
                             print("Er is geen prijs voor dit product beschikbaar" . "<br>");
                         }
-                        $merk = $item["brand"];
+                        $merk = $item["Brand"];
                         $gewicht = $item["TypicalWeightPerUnit"];
                         $product_id = $item["StockItemID"];
 

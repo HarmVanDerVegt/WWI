@@ -20,15 +20,15 @@ if (!defined('ROOT_PATH')) {
             <form action="" method="post">
                 <tr>
                     <td>Voornaam:</td>
-                    <td><input type="text" name="voornaam" placeholder="Lex"></td>
+                    <td><input type="text" name="voornaam" placeholder="Voornaam"></td>
                 </tr>
                 <tr>
                     <td>Achternaam:</td>
-                    <td><input type="text" name="achternaam" placeholder="T-Rex"></td>
+                    <td><input type="text" name="achternaam" placeholder="Achternaam"></td>
                 </tr>
                 <tr>
                     <td>E-mail:</td>
-                    <td><input type="email" name="email" placeholder="Lex@T-Rex.nl" required></td>
+                    <td><input type="email" name="email" placeholder="Voorbeeld@email.nl" required></td>
                 </tr>
                 <tr>
                     <td>Bericht:</td>

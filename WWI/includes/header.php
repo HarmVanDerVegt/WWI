@@ -65,12 +65,7 @@
                                 <input type="password" class="form-control" id="FormPassword" name="password"
                                        placeholder="Wachtwoord">
                             </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                                <label class="form-check-label" for="dropdownCheck">
-                                    <div class="text-white">  Onthoud mij </div>
-                                </label>
-                            </div>
+
                             <button type="submit" class="btn btn-sample btn-sample-success">Log in</button>
                         </form>
                         <div class="dropdown-divider"></div>

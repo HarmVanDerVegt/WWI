@@ -13,21 +13,23 @@ include_once(ROOT_PATH . "/controllers/stockGroupsController.php");
 <form action="zoekfunctie.php" method="get">
     <table>
         <tr>
-            <td>naam :</td>
-            <td><input type="text" name="naam"></td>
+            <td>naam: <input type="text" name="naam"></td>
         </tr>
         <tr>
-            <td>    <?php foreach (getSearchTags() as $tag) {
-                    echo("<input type=\"checkbox\" name=\"tag\" value=\"$tag->$tag\"><br>");
+            <td>
+                <?php foreach (getSearchTags() as $tag) {
+                    echo("<p><input type='checkbox' name='tag[]' value=''$tag'>$tag</p>");
                 } ?>
             </td>
         </tr>
         <tr>
             <td>Categorieën :</td>
-            <td><select>
+            <td>
+                <select>
                     <?php foreach (getAllStockGroups() as $categorie) {
-                        echo("<option name='categorie' value=" .$categorie["StockGroupID"] . ">" . $categorie["StockGroupName"] . "</option>");
-                    } ?></select>
+                        echo("<option name='categorie' value='" .$categorie["StockGroupID"] . "'>" . $categorie["StockGroupName"] . "</option>");
+                    } ?>
+                </select>
             </td>
         </tr>
         <tr>

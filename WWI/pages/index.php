@@ -15,28 +15,9 @@ include_once ROOT_PATH . "/controllers/specialDealsController.php";
         <link href="\WWI\WWI\css\bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <title>Wide  World Importers</title>
         <!-- eigen opmaak regels -->
-        <style>
-            img.specialdeals{
-                max-height: 300px;
-                width: 1135px;
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            h2.center{
-                text-align: center;
-                color: white;
-            }
-            div.blue_titel{
-                margin-left: 30px;
-                margin-right: 30px;
-                margin-bottom: 10px;
-                padding-bottom: 5px;
-                padding-top: 5px;
-                background-color: #00BCF3;
-                border-radius: 15px;
-            }
-        </style>
+
+
+        </div>
     </head>
     <body>
         <!-- voegt header toe -->
@@ -52,23 +33,26 @@ include_once ROOT_PATH . "/controllers/specialDealsController.php";
         $StockItem = $SpecialDeal['StockItemID']; //getStockItemBySpecialDealID($SpecialDeal["StockItemID"]);
         $afbeelding_specialdeal = "./media/SpecialDeals/SpecialDealFotoNietBeschikbaar.png";
         ?>
+        <div class="py-5">
+            <div class="container">
+                <div class="row hidden-md-up">
+                    <div class="col-md-12">
+                        <div class="card-custom">
+                            <div class="card-block">
+                                <a href="../pages/category/product.php?productID=<?php print($StockItem); ?>" class="card-link"><img class="card-img-top" src="<?php print($afbeelding_specialdeal); ?>"  alt="Card image cap" style="max-width:1135px;max-height:300px;" ></a>
+                            </div>
+                        </div>
+                    </div>
+                </div><br>
 
-        <!--        <div class='blue_titel'><h2 class="center">Aanbiedingen:</h2></div>-->
-        <a href="../pages/category/product.php?productID=<?php print($StockItem); ?>">
-            <img                       
-                class="specialdeals"
-                src="<?php print($afbeelding_specialdeal); ?>"
-                >
-        </a>
-        <!-- eind specialdeals |-->
+            </div>
+        </div>
+
 
         <br>
         <br>
 
-        <!-- begin categorie knoppen------------------------------------------------------------------------------ -->
-        <!--        <!-- titel -->
-        <!--        <div class='blue_titel'><h2 class="center">category's:</h2></div>-->
-        <!-- category informatie ophalen -->
+
         <?php
 
         // speciale data type voor category informatie

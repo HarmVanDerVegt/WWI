@@ -32,10 +32,12 @@ include_once ROOT_PATH . "/controllers/specialDealsController.php";
         $SpecialDealStockItemID = array_column(getSpecialDealByStockItemID($StockItemID), "StockItemID");
 
         $DiscountPercentage = 0;
-        if ($SpecialDealStockItemID[0] == $StockItemID) {
-            $SpecialDealInfo = getSpecialDealByStockItemID($StockItemID);
-            $DiscountPercentage = array_column($SpecialDealInfo, "DiscountPercentage");
-            $DiscountPercentage = (int)$DiscountPercentage[0];
+        if ($SpecialDealStockItemID != NULL) {
+            if ($SpecialDealStockItemID[0] == $StockItemID) {
+                $SpecialDealInfo = getSpecialDealByStockItemID($StockItemID);
+                $DiscountPercentage = array_column($SpecialDealInfo, "DiscountPercentage");
+                $DiscountPercentage = (int) $DiscountPercentage[0];
+            }
         }
 
 #sessie laden
@@ -161,9 +163,7 @@ include_once ROOT_PATH . "/controllers/specialDealsController.php";
                                     $product_prijs = round($product_prijs, 2);
                                 }
                             } elseif ($StockItem["RecommendedRetailPrice"] == NULL && $DiscountPercentage != (NULL || 0)) {
-                                $product_prijs = ($StockItem["UnitPrice"] * $StockItem["TaxRate"] / 100 + 1)
-                                        / 100
-                                        * ( 100 - $DiscountPercentage);
+                                $product_prijs = ($StockItem["UnitPrice"] * $StockItem["TaxRate"] / 100 + 1) / 100 * ( 100 - $DiscountPercentage);
                                 $product_prijs = round($product_prijs, 2);
                                 print("Dit product is in de aanbieding! Er is een kortingspercentage van " . $DiscountPercentage . " procent over dit product verwerkt!");
                             }

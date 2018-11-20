@@ -4,8 +4,11 @@
 if (!defined('ROOT_PATH')) {
     include("../config.php");
 }
-?>
 
+include_once ROOT_PATH . "/controllers/stockItemController.php";
+include_once ROOT_PATH . "/controllers/specialDealsController.php";
+
+?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -42,8 +45,6 @@ if (!defined('ROOT_PATH')) {
 
         <!-- ophalen gegevens van special deals uit database -->
         <?php
-        include_once ROOT_PATH . "/controllers/stockItemController.php";
-        include_once ROOT_PATH . "/controllers/specialDealsController.php";
         $LowestSpecialDealValue = getLowestSpecialDealID();
         $HighestSpecialDealValue = getHighestSpecialDealID();
 
@@ -52,7 +53,7 @@ if (!defined('ROOT_PATH')) {
         $afbeelding_specialdeal = "./media/SpecialDeals/SpecialDealFotoNietBeschikbaar.png";
         ?>
 
-<!--        <div class='blue_titel'><h2 class="center">Aanbiedingen:</h2></div>-->
+        <!--        <div class='blue_titel'><h2 class="center">Aanbiedingen:</h2></div>-->
         <a href="../pages/category/product.php?productID=<?php print($StockItem); ?>">
             <img                       
                 class="specialdeals"
@@ -65,8 +66,8 @@ if (!defined('ROOT_PATH')) {
         <br>
 
         <!-- begin categorie knoppen------------------------------------------------------------------------------ -->
-<!--        <!-- titel -->
-<!--        <div class='blue_titel'><h2 class="center">category's:</h2></div>-->
+        <!--        <!-- titel -->
+        <!--        <div class='blue_titel'><h2 class="center">category's:</h2></div>-->
         <!-- category informatie ophalen -->
         <?php
 

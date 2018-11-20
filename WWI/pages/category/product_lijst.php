@@ -12,9 +12,6 @@
 
         include_once ROOT_PATH . "/controllers/stockItemController.php";
         ?>
-
-
-
     </head>
     <body>
         <!-- Producten ophalen van database -->
@@ -146,14 +143,11 @@
 						     <div class="card-custom">
                                <div class="card-block">
                                  <a href="/WWI/WWI/pages/category/product.php?productID=' . $product_id . '" class="card-link"><img class="card-img-top" src="' . $product_afbeelding_path . ' "  alt="Card image cap" style="max-width:382px;max-height:180px;" ></a>
-<<<<<<< HEAD
                                  <h4 class="card-custom-title text-light">' . $naam[0] . '</h4>
                                  <p class="card-text p-y-1 text-light"> Prijs: €' . $prijs . ' euro </p>
-=======
                                  <a href="/WWI/WWI/pages/category/product.php?productID=' . $product_id . '" <h4 class="card-custom-title text-light">' . $naam[0] . '</h4> </a>
                                  
                                  <p class="card-text p-y-1 text-light"> €' . $prijs . '</p>
->>>>>>> e4fb8cab6780567b19fb0d40a228c514fa68acaa
                                </div>
                              </div>
                            </div>');

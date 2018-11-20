@@ -156,15 +156,15 @@ include_once ROOT_PATH . "/controllers/specialDealsController.php";
                             if ($StockItem["RecommendedRetailPrice"] != NULL) {
                                 if ($DiscountPercentage != NULL || $DiscountPercentage != 0) {
                                     $product_prijs = ($StockItem["RecommendedRetailPrice"] / 100 * ( 100 - $DiscountPercentage));
-                                    $product_prijs = round($product_prijs, 2);
+                                    $product_prijs = number_format($product_prijs, 2);
                                     print("Dit product is in de aanbieding! Er is een kortingspercentage van " . $DiscountPercentage . " procent over dit product verwerkt!");
                                 } else {
                                     $product_prijs = $StockItem["RecommendedRetailPrice"];
-                                    $product_prijs = round($product_prijs, 2);
+                                    $product_prijs = number_format($product_prijs, 2);
                                 }
                             } elseif ($StockItem["RecommendedRetailPrice"] == NULL && $DiscountPercentage != (NULL || 0)) {
                                 $product_prijs = ($StockItem["UnitPrice"] * $StockItem["TaxRate"] / 100 + 1) / 100 * ( 100 - $DiscountPercentage);
-                                $product_prijs = round($product_prijs, 2);
+                                $product_prijs = number_format($product_prijs, 2);
                                 print("Dit product is in de aanbieding! Er is een kortingspercentage van " . $DiscountPercentage . " procent over dit product verwerkt!");
                             }
                             if ($product_prijs == NULL) {

@@ -12,9 +12,6 @@
 
         include_once ROOT_PATH . "/controllers/stockItemController.php";
         ?>
-
-
-
     </head>
     <body>
         <!-- Producten ophalen van database -->
@@ -38,7 +35,7 @@
 
         // SQL query voor het vinden van de goede producten
         $sql_code = ""
-                . "SELECT SI.StockItemID, SI.StockItemName,SI.brand,SI.UnitPrice,SI.TypicalWeightPerUnit "
+                . "SELECT * "
                 . "FROM stockitems SI "
                 . "JOIN stockitemstockgroups SI_SG "
                 . "ON SI.StockItemID = SI_SG.StockItemID "
@@ -70,7 +67,7 @@
             $aantal_producten_tonen = filter_input(INPUT_GET, "aantal_producten", FILTER_VALIDATE_INT);
         } else {
             // default aantal producten zien
-            $aantal_producten_tonen = 8;
+            $aantal_producten_tonen = 6;
         }
         $paginas = (int) ceil($aantal_producten / $aantal_producten_tonen);
 
@@ -85,21 +82,21 @@
             Aantal producten tonen:
             <select name="aantal_producten">
                 <?php
-                for ($i = 2; $i <= 32; $i *= 2) {
+                for ($i = 6; $i <= 30; $i += 6) {
                     print("<option " . (($i == $aantal_producten_tonen) ? "selected" : "") . ">" . $i . "</option>");
                 }
                 ?>
             </select>
-            <input type="submit" value="laad">
+            <input type="submit" class="btn btn-sample btn-sample-success" value="laad">
             Pagina:
             <?php
-            print("<button type='submit' name='pagina' value='" . (($pagina_nr - 1 > 0) ? $pagina_nr - 1 : 1) . "'><<</button>");
+            print("<button type='submit' class=\"btn btn-sample btn-sample-success\" name='pagina' value='" . (($pagina_nr - 1 > 0) ? $pagina_nr - 1 : 1) . "'><<</button>");
             for ($i = 1; $i <= $paginas; $i++) {
-                print("<input type='submit' name='pagina' value='" . $i . "'");
+                print("<input type='submit' class=\"btn btn-sample btn-sample-success\" name='pagina' value='" . $i . "'");
                 // kleur de geselecteerde knop
-                print(" " . (($i == $pagina_nr) ? "style='background-color:blue; color:white;'" : "") . ">");
+                print(" " . (($i == $pagina_nr) ? "style='background-color:red; color:white;'" : "") . ">");
             }
-            print("<button type='submit' name='pagina' value='" . (($pagina_nr + 1 <= $paginas) ? $pagina_nr + 1 : $paginas) . "'>>></button>");
+            print("<button type='submit' class=\"btn btn-sample btn-sample-success\" name='pagina' value='" . (($pagina_nr + 1 <= $paginas) ? $pagina_nr + 1 : $paginas) . "'>>></button>");
             ?>
         </form>
 
@@ -114,13 +111,20 @@
                     for ($loop = 0; $loop < $aantal_producten_tonen; $loop++) {
                         // laad gegevens van een rij 
                         $item = mysqli_fetch_assoc($resultaat);
-                        if ($item == NULL)
-                            break;
+                        if ($item == NULL){
+                            break;}
 
                         // --------------------------doe benodige gegevens in variablen   
                         $naam = explode("_", $item["StockItemName"]);
-                        $prijs = $item["UnitPrice"];
-                        $merk = $item["brand"];
+                        if ($item["RecommendedRetailPrice"] != NULL) {
+                            $prijs = $item["RecommendedRetailPrice"];
+                        } else {
+                            $prijs = $item["UnitPrice"] * ($item["TaxRate"] / 100 + 1);
+                        }
+                        if ($prijs == NULL) {
+                            print("Er is geen prijs voor dit product beschikbaar" . "<br>");
+                        }
+                        $merk = $item["Brand"];
                         $gewicht = $item["TypicalWeightPerUnit"];
                         $product_id = $item["StockItemID"];
 
@@ -138,9 +142,11 @@
                         print('<div class="col-md-4">
 						     <div class="card-custom">
                                <div class="card-block">
-                                 <h4 class="card-custom-title text-light">' . $naam[0] . '</h4>
                                  <a href="/WWI/WWI/pages/category/product.php?productID=' . $product_id . '" class="card-link"><img class="card-img-top" src="' . $product_afbeelding_path . ' "  alt="Card image cap" style="max-width:382px;max-height:180px;" ></a>
-                                 <p class="card-text p-y-1 text-light"> prijs: €' . $prijs . '</p>
+                                 <h4 class="card-custom-title text-light">' . $naam[0] . '</h4>
+                                 <p class="card-text p-y-1 text-light"> Prijs: €' . $prijs . ' euro </p>
+                                 <a href="/WWI/WWI/pages/category/product.php?productID=' . $product_id . '" <h4 class="card-custom-title text-light">' . $naam[0] . '</h4> </a>
+                                 <p class="card-text p-y-1 text-light"> €' . $prijs . '</p>
                                </div>
                              </div>
                            </div>');

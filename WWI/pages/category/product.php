@@ -9,6 +9,7 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
 include_once ROOT_PATH . "/controllers/supplierController.php";
 include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
 include_once ROOT_PATH . "/controllers/colorController.php";
+include_once ROOT_PATH . "/controllers/specialDealsController.php";
 ?>
 <html>
 <head>
@@ -21,14 +22,26 @@ include_once ROOT_PATH . "/controllers/colorController.php";
 $height = 200;
 $width = 300;
 $StockItem = getStockItemByID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
+$StockItemID = $StockItem["StockItemID"];
 $StockItemName = $StockItem["StockItemName"];
 $Supplier = getSupplierByID($StockItem["SupplierID"]);
 $Color = getColorsByID($StockItem["ColorID"]);
 $Stock = getStockItemHoldingByID($StockItem["StockItemID"]);
-$StockGroup = getStockGroupIDByStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
+$StockGroup = getStockGroupByStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
 $StockGroupID = $StockGroup["StockGroupID"];
+$SpecialDealStockItemID = array_column(getSpecialDealByStockItemID($StockItemID), "StockItemID");
 
+//echo $StockItemID . " X ";
+//echo $SpecialDealStockItemID[0];
 
+$DiscountPercentage = 0;
+if($SpecialDealStockItemID[0] == $StockItemID) {
+    $SpecialDealInfo = getSpecialDealByStockItemID($StockItemID);
+    //print_r($SpecialDealInfo);
+    $DiscountPercentage = array_column($SpecialDealInfo, "DiscountPercentage"); 
+}
+
+print($DiscountPercentage[0]);
 #sessie laden
 $i = filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT);
 if (!isset($_SESSION["total"])) {
@@ -156,7 +169,6 @@ $product_review = "PLACEHOLDER";
                     <form method="post" action="/WWI/WWI/pages/ShoppingCart.php">
                         <input type="hidden" value="<?php echo($i);?>" name="add">
             <tr>
-                <td><?php echo($StockItemName); ?></td>
                 <td width="10px">&nbsp;</td>
                 <td><?php echo("&euro; " . $product_prijs . " euro"); ?></td>
                 <td width="10px">&nbsp;</td>
@@ -243,7 +255,7 @@ $product_review = "PLACEHOLDER";
                 <p> Misschien zijn deze producten een leuke combinatie met dit product? </p>
                 <div class="card-group">
                     <div class="card">
-                        <img class="card-img-top" width="200" height="200" src="<?php print $firstLink ?>" alt="Card image cap">
+                        <img class="card-img-top" height="<?php print($height); ?>px" width="<?php print($width); ?>px" src="<?php print $firstLink ?>" alt="Afbeeldig mist">
                         <div class="card-body">
                             <a href="product.php?productID=<?php print($CombiDeal1ID) ?> ">
                                 <h5 class="card-title"> <?php print($CombiDeal1Naam) ?> </h5>
@@ -251,7 +263,7 @@ $product_review = "PLACEHOLDER";
                         </div>
                     </div>
                     <div class="card">
-                        <img class="card-img-top" width="200" height="200" src="<?php print $secondLink ?>" alt="Card image cap">
+                        <img class="card-img-top" height="<?php print($height); ?>px" width="<?php print($width); ?>px" src="<?php print $secondLink ?>" alt="Afbeelding mist">
                         <div class="card-body">
                             <a href="product.php?productID=<?php print $CombiDeal2ID ?> ">
                                 <h5 class="card-title"> <?php print($CombiDeal2Naam) ?> </h5>
@@ -259,8 +271,7 @@ $product_review = "PLACEHOLDER";
                         </div>
                     </div>
                     <div class="card">
-                        <img class="card-img-top" width="200" height="200" src="<?php print $thirdLink ?>"
-                             alt="Card image cap">
+                        <img class="card-img-top" height="<?php print($height); ?>px" width="<?php print($width); ?>px" src="<?php print $thirdLink ?>" alt="Afbeelding mist">
                         <div class="card-body">
                             <a href="product.php?productID=<?php print $CombiDeal3ID ?> ">
                                 <h5 class="card-title"> <?php print($CombiDeal3Naam) ?> </h5>

@@ -96,6 +96,11 @@ function getSearchTags(){
 }
 
 function getStockItemsByStockGroupID($category_id) {
+
+    if(empty($category_id)){
+        return [];
+    }
+
     $db = createDB();
     $array = [];
     $sql = ""
@@ -145,7 +150,13 @@ function getSearchedItems($details, $tags, $categoryID){
     //Je krijgt nu nog IDs die niet in het eindresultaat horen.
     $details = getStockItemsBySearchDetails($details);
     $tags = getStockItemsByTags($tags);
-    $categoryID = $categoryID[0];
+    if( empty($categoryID)){
+        $categoryID = [];
+    }
+    else {
+        $categoryID = $categoryID[0];
+    }
+
 
     $detailsIDs = array_column($details, "StockItemID");
     $tagsIDs = array_column($tags, "StockItemID");
@@ -221,7 +232,7 @@ function getStockItemsByTags($tags){
 
     $sql = $sql . ")";
 
-    //print $sql;
+    print $sql;
 
     $result = $db->query($sql);
 

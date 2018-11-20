@@ -9,12 +9,17 @@ if (!defined('ROOT_PATH')) {
 <html>
     <head>
         <meta charset="UTF-8">
-        <link href="\WWI\css\bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <title></title>
+        <link href="\WWI\WWI\css\bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <title>Contact</title>
     </head>
     <body>
         <!-- voegt header toe -->
         <?php include(ROOT_PATH . "/includes/header.php"); ?>
+        <br>
+
+<!--        Tabel die gegevens opvraagt-->
+
+        <h3>Stuur ons een bericht</h3>
         <br>
         <table>
             <form action="" method="post">
@@ -28,7 +33,7 @@ if (!defined('ROOT_PATH')) {
                 </tr>
                 <tr>
                     <td>E-mail:</td>
-                    <td><input type="email" name="email" placeholder="Voorbeeld@email.nl" required></td>
+                    <td><input type="email" name="email" placeholder="e-mail" required></td>
                 </tr>
                 <tr>
                     <td>Bericht:</td>
@@ -40,15 +45,37 @@ if (!defined('ROOT_PATH')) {
                 </tr>
             </form>
         </table>
-
+        <br>
+        <h3>About us</h3>
+        Wij zijn WWI. We zijn trots op onze producten en geloven in kwaliteit.<br>
+        In ieder huis vindt een product van WWI zijn thuis.<br>
+        Persoonlijk klantcontact staat bij ons hoog in het vaandel.<br>
+        Wij zijn een importeur en groothandel die producten levert aan
+        verschillende warenhuizen en supermarkten.<br>
+        Time to market is voor Wide World Importers erg belangrijk.<br>
+        <br>
+        <table>
+        <tr>
+            <td><b>contactgegevens</b></td>
+        </tr>
+        <tr>
+            <td><b>Hoofdvestiging:</b></td>
+            <td>Amsterdam</td>
+        </tr>
+        <tr>
+            <td><b>email:</b></td>
+            <td>contact.wideworldimporters@gmail.com</td>
+        </tr>
+        </table>
+<!--        Mailfunctie-->
         <?php
-        $i = 0;
-        if (filter_input(INPUT_POST, "email", FILTER_SANITIZE_STRING) != NULL && filter_input(INPUT_POST, "submit", FILTER_SANITIZE_STRING) == TRUE) {
-            $i++;
-            mail("contact.wideworldimporters@gmail.com", $i, filter_input(INPUT_POST, "bericht", FILTER_SANITIZE_STRING), "FROM: " . filter_input(INPUT_POST, "email", FILTER_SANITIZE_STRING));
-        }
+        //$i = 0;
+        //if (filter_input(INPUT_POST, "email", FILTER_SANITIZE_STRING) != NULL && filter_input(INPUT_POST, "submit", FILTER_SANITIZE_STRING) == TRUE) {
+        //    $i++;
+        //    mail("contact.wideworldimporters@gmail.com", $i, filter_input(INPUT_POST, "bericht", FILTER_SANITIZE_STRING), "FROM: " . filter_input(INPUT_POST, "email", FILTER_SANITIZE_STRING));
         ?>
         <!-- voeg footer toe -->
+        <br>
         <br>
         <?php include(ROOT_PATH . "/includes/footer.php"); ?>
     </body>

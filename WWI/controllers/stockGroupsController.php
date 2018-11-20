@@ -16,7 +16,7 @@ function getStockGroupByID($ID){
     return getRowByIntID("stockGroupID", $tableStockGroups, $ID);
 }
 
-function getStockGroupIDByStockItemID($ID){
+function getStockGroupByStockItemID($ID){
 
 
      return getRowByTwoForeignIDs($ID, "StockItems", "StockItemStockGroups", "StockGroups", "StockItemID", "StockGroupID");

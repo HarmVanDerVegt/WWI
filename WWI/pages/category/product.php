@@ -104,7 +104,13 @@ if ($StockItem["IsChillerStock"] == TRUE) {
 }
 
 // De leverancier van het gekozen product.
-$product_leverancier = $Supplier["SupplierName"];
+if($Supplier["SupplierName"] != NULL) {
+    $product_supplier = $Supplier["SupplierName"];
+    $product_specs .= ("Dit product word geleverd door " . $product_supplier . "<br>");
+} else {
+   $product_supplier = NULL;
+}
+
 
 // JN - NOG KIJKEN NAAR IMPLEMENTATIE DATABASE.
 $product_review = "PLACEHOLDER";
@@ -182,8 +188,14 @@ $product_review = "PLACEHOLDER";
 <br>
 
 <!-- product informatie weergeven-->
-<div class="container-fluid">
-
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="bg-light card">
+                <h4>Productinformatie:</h4>
+                <p><?php print($product_specs); ?></p>
+            </div>
+        </div>
+    </div>
     <!-- Toont product reviews -->
     <div class="row">
         <div class="col-sm-8">

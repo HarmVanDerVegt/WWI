@@ -70,7 +70,7 @@
             $aantal_producten_tonen = filter_input(INPUT_GET, "aantal_producten", FILTER_VALIDATE_INT);
         } else {
             // default aantal producten zien
-            $aantal_producten_tonen = 8;
+            $aantal_producten_tonen = 6;
         }
         $paginas = (int) ceil($aantal_producten / $aantal_producten_tonen);
 
@@ -85,7 +85,7 @@
             Aantal producten tonen:
             <select name="aantal_producten">
                 <?php
-                for ($i = 3; $i <= 30; $i += 3) {
+                for ($i = 6; $i <= 30; $i += 6) {
                     print("<option " . (($i == $aantal_producten_tonen) ? "selected" : "") . ">" . $i . "</option>");
                 }
                 ?>

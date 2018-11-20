@@ -15,7 +15,7 @@ if (!defined('ROOT_PATH')) {
 <?php include(ROOT_PATH . "/includes/header.php"); ?>
 <br>
 <Font size='2' face='verdana,arial,helvetica'>
-    <p><strong>Algemene Voorwaarden Thuiswinkel</strong></p>
+    <p><strong>Algemene Voorwaarden Wide World Importers</strong></p>
     <p><strong>Inhoudsopgave:</strong></p>
     Artikel   1 - Definities<br />
     Artikel   2 - Identiteit van de ondernemer<br />
@@ -44,7 +44,6 @@ if (!defined('ROOT_PATH')) {
         <li><strong>Duurovereenkomst</strong>: een overeenkomst die strekt tot de regelmatige levering van zaken, diensten en/of digitale inhoud gedurende een bepaalde periode; </li>
         <li><strong>Duurzame gegevensdrager</strong>: elk hulpmiddel - waaronder ook begrepen e-mail - dat de consument of ondernemer in staat stelt om informatie die aan hem persoonlijk is gericht, op te slaan op een manier die toekomstige raadpleging of gebruik gedurende een periode die is afgestemd op het doel waarvoor de informatie is bestemd, en die ongewijzigde reproductie van de opgeslagen informatie mogelijk maakt; </li>
         <li><strong>Herroepingsrecht</strong>: de mogelijkheid van de consument om binnen de bedenktijd af te zien van de overeenkomst op afstand; </li>
-        <li><strong>Ondernemer</strong>: de natuurlijke of rechtspersoon die lid is van Thuiswinkel.org en producten, (toegang tot) digitale inhoud en/of diensten op afstand aan consumenten aanbiedt; </li>
         <li><strong>Overeenkomst op afstand</strong>: een overeenkomst die tussen de ondernemer en de consument wordt gesloten in het kader van een georganiseerd systeem voor verkoop op afstand van producten, digitale inhoud en/of diensten, waarbij tot en met het sluiten van de overeenkomst uitsluitend of mede gebruik gemaakt wordt van &eacute;&eacute;n of meer technieken voor communicatie op afstand; </li>
         <li><strong>Modelformulier voor herroeping</strong>: het in Bijlage I van deze voorwaarden opgenomen Europese modelformulier voor herroeping; Bijlage I hoeft niet ter beschikking te worden gesteld als de consument ter zake van zijn bestelling geen herroepingsrecht heeft; </li>
         <li><strong>Techniek voor communicatie op afstand</strong>: middel dat kan worden gebruikt voor het sluiten van een overeenkomst, zonder dat consument en ondernemer gelijktijdig in dezelfde ruimte hoeven te zijn samengekomen. </li>
@@ -236,14 +235,12 @@ if (!defined('ROOT_PATH')) {
     <font>
         <ul>
         <li>Op overeenkomsten tussen de ondernemer en de consument waarop deze algemene voorwaarden betrekking hebben, is uitsluitend Nederlands recht van toepassing. </li>
-        <li>Geschillen tussen de consument en de ondernemer over de totstandkoming of uitvoering van overeenkomsten met betrekking tot door deze ondernemer te leveren of geleverde producten en diensten, kunnen, met inachtneming van het hierna bepaalde, zowel door de consument als de ondernemer worden voorgelegd aan de Geschillencommissie Thuiswinkel, Postbus 90600, 2509 LP te Den Haag (<a href="http://www.sgc.nl/">www.sgc.nl</a>). </li>
+        <li>Geschillen tussen de consument en de ondernemer over de totstandkoming of uitvoering van overeenkomsten met betrekking tot door deze ondernemer te leveren of geleverde producten en diensten, kunnen, met inachtneming van het hierna bepaalde, zowel door de consument als de ondernemer worden voorgelegd aan de Geschillencommissie, Postbus 90600, 2509 LP te Den Haag (<a href="http://www.sgc.nl/">www.sgc.nl</a>). </li>
         <li>Een geschil wordt door de Geschillencommissie slechts in behandeling genomen, indien de consument zijn klacht eerst binnen bekwame tijd aan de ondernemer heeft voorgelegd. </li>
         <li>Leidt de klacht niet tot een oplossing dan moet het geschil uiterlijk&nbsp;12 maanden na de datum waarop de consument de klacht bij de ondernemer indiende, schriftelijk of in een andere door de Commissie te bepalen vorm bij de Geschillencommissie aanhangig worden gemaakt. </li>
         <li>Wanneer de consument een geschil wil voorleggen aan de Geschillencommissie, is de ondernemer aan deze keuze gebonden. Bij voorkeur meldt de consument dit eerst aan de ondernemer.</li>
         <li>Wanneer de ondernemer een geschil wil voorleggen aan de Geschillencommissie, zal de consument binnen vijf weken na een daartoe door de ondernemer schriftelijk gedaan verzoek, schriftelijk dienen uit te spreken of hij zulks ook wenst dan wel het geschil wil laten behandelen door de daartoe bevoegde rechter. Verneemt de ondernemer de keuze van de consument niet binnen de termijn van vijf weken, dan is de ondernemer gerechtigd het geschil voor te leggen aan de bevoegde rechter.&nbsp;</li>
-        <li>De Geschillencommissie doet uitspraak onder de voorwaarden zoals deze zijn vastgesteld in het reglement van de Geschillencommissie (<a href="http://www.degeschillencommissie.nl/over-ons/de-commissies/2404/thuiswinkel">www.degeschillencommissie.nl/over-ons/de-commissies/2404/thuiswinkel</a>). De beslissingen van de Geschillencommissie geschieden bij wege van bindend advies. </li>
         <li>De Geschillencommissie zal een geschil niet behandelen of de behandeling staken, indien aan de ondernemer surseance van betaling is verleend, deze in staat van faillissement is geraakt of zijn bedrijfsactiviteiten feitelijk heeft be&euml;indigd, voordat een geschil door de commissie op de zitting is behandeld en een einduitspraak is gewezen. </li>
-        <li>Indien naast de Geschillencommissie Thuiswinkel een andere erkende of bij de Stichting Geschillencommissies voor Consumentenzaken (SGC) of het Klachteninstituut Financi&euml;le Dienstverlening (Kifid) aangesloten geschillencommissie bevoegd is, is voor geschillen betreffende hoofdzakelijk de methode van verkoop of dienstverlening op afstand de Geschillencommissie Thuiswinkel bij voorkeur bevoegd. Voor alle overige geschillen de andere erkende bij SGC of Kifid aangesloten geschillencommissie. </li>
         </ul>
     </font>
         <?php include(ROOT_PATH . "/includes/footer.php"); ?>

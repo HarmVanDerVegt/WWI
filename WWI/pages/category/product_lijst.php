@@ -38,7 +38,7 @@
 
         // SQL query voor het vinden van de goede producten
         $sql_code = ""
-                . "SELECT SI.StockItemID, SI.StockItemName,SI.brand,SI.UnitPrice,SI.TypicalWeightPerUnit "
+                . "SELECT * "
                 . "FROM stockitems SI "
                 . "JOIN stockitemstockgroups SI_SG "
                 . "ON SI.StockItemID = SI_SG.StockItemID "
@@ -119,7 +119,14 @@
 
                         // --------------------------doe benodige gegevens in variablen   
                         $naam = explode("_", $item["StockItemName"]);
-                        $prijs = $item["UnitPrice"];
+                        if ($item["RecommendedRetailPrice"] != NULL) {
+                            $prijs = $item["RecommendedRetailPrice"];
+                        } else {
+                            $prijs = $item["UnitPrice"] * ($item["TaxRate"] / 100 + 1);
+                        }
+                        if ($prijs == NULL) {
+                            print("Er is geen prijs voor dit product beschikbaar" . "<br>");
+                        }
                         $merk = $item["brand"];
                         $gewicht = $item["TypicalWeightPerUnit"];
                         $product_id = $item["StockItemID"];

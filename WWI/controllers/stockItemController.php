@@ -50,6 +50,8 @@ function getStockItemsBySearchDetails($search) {
         $array[array_values($row)[0]] = $row;
     }
 
+    $db->close();
+
     return $array;
 }
 
@@ -87,6 +89,8 @@ function getSearchTags(){
             $returnTags[] = $unigueTag;
         }
     }
+
+    $db->close();
 
     return $returnTags;
 }
@@ -137,10 +141,9 @@ function getStockGroupIDsFromStockItemID($ID) {
 
 function getSearchedItems($details, $tags, $categoryID){
 
-    //$tags = implode(",", $tags);
-
+    //Haal per zoekterm de StockItemIDs op die er bij horen.
+    //Je krijgt nu nog IDs die niet in het eindresultaat horen.
     $details = getStockItemsBySearchDetails($details);
-    //echo print_r($details);
     $tags = getStockItemsByTags($tags);
     $categoryID = $categoryID[0];
 
@@ -149,27 +152,37 @@ function getSearchedItems($details, $tags, $categoryID){
     $categoryIDs = getStockItemsByStockGroupID($categoryID);
     $categoryIDs = array_column($categoryIDs, "StockItemID");
 
-    //$query = [];
-    //$query = array_union($query, $detailsIDs);
-    //$query = array_union($query, $tagsIDs);
-    //$query = array_union($query, $categoryIDs);
+    //Hier maken we de lijst van alle IDs.
+    $allIDs = array_union($detailsIDs, $tagsIDs);
+    $allIDs = array_union($allIDs, $categoryIDs);
 
+    //Als één of meerdere van de zoektermen leeg is wordt hij gevuld met alle IDs van de andere zoektermen.
+    //Dit doen we omdat je geen doorsnede kan doen op een lege array, dat geeft natuurlijk niks terug.
+    if (empty($detailsIDs)){
+        $detailsIDs = $allIDs;
+    }
+
+    if (empty($tagsIDs)){
+        $tagsIDs = $allIDs;
+    }
+
+    //Hier vragen wij de doorsnede van alle IDs van de zoektermen.
+    //Je krijgt dan alleen de Ids van de StockItems waarvoor alle zoektermen gelden.
     $query = array_intersect($detailsIDs, $tagsIDs, $categoryIDs);
 
     $searchedItems = [];
 
+    //Voor elke ID na de doorsnede halen we het product op.
     foreach ($query as $item){
         $searchedItems[] = getStockItemByID($item);
     }
 
+    //We returnen een array van alle opgezochte StockItems als array.
     return $searchedItems;
-
-    //$query = array_merge($detailsIDs, $tagsIDs);
-
-
 
 }
 
+//Voegt twee arrays samen met overschrijving van dubbele waardes.
 function array_union($array1, $array2){
     //$array1 =                                     [1, 2, 3,    6, 7   ];
     //$array2 =                                     [   2, 3, 5,       8];
@@ -183,6 +196,11 @@ function array_union($array1, $array2){
 }
 
 function getStockItemsByTags($tags){
+
+    if (empty($tags)){
+        return [];
+    }
+
     $db = createDB();
 
     $sql = "SELECT *

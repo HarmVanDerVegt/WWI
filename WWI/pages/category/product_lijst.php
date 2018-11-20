@@ -90,16 +90,16 @@
                 }
                 ?>
             </select>
-            <input type="submit" value="laad">
+            <input type="submit" class="btn btn-sample btn-sample-success" value="laad">
             Pagina:
             <?php
-            print("<button type='submit' name='pagina' value='" . (($pagina_nr - 1 > 0) ? $pagina_nr - 1 : 1) . "'><<</button>");
+            print("<button type='submit' class=\"btn btn-sample btn-sample-success\" name='pagina' value='" . (($pagina_nr - 1 > 0) ? $pagina_nr - 1 : 1) . "'><<</button>");
             for ($i = 1; $i <= $paginas; $i++) {
-                print("<input type='submit' name='pagina' value='" . $i . "'");
+                print("<input type='submit' class=\"btn btn-sample btn-sample-success\" name='pagina' value='" . $i . "'");
                 // kleur de geselecteerde knop
-                print(" " . (($i == $pagina_nr) ? "style='background-color:blue; color:white;'" : "") . ">");
+                print(" " . (($i == $pagina_nr) ? "style='background-color:red; color:white;'" : "") . ">");
             }
-            print("<button type='submit' name='pagina' value='" . (($pagina_nr + 1 <= $paginas) ? $pagina_nr + 1 : $paginas) . "'>>></button>");
+            print("<button type='submit' class=\"btn btn-sample btn-sample-success\" name='pagina' value='" . (($pagina_nr + 1 <= $paginas) ? $pagina_nr + 1 : $paginas) . "'>>></button>");
             ?>
         </form>
 
@@ -147,7 +147,6 @@
                                <div class="card-block">
                                  <a href="/WWI/WWI/pages/category/product.php?productID=' . $product_id . '" class="card-link"><img class="card-img-top" src="' . $product_afbeelding_path . ' "  alt="Card image cap" style="max-width:382px;max-height:180px;" ></a>
                                  <a href="/WWI/WWI/pages/category/product.php?productID=' . $product_id . '" <h4 class="card-custom-title text-light">' . $naam[0] . '</h4> </a>
-                                 
                                  <p class="card-text p-y-1 text-light"> €' . $prijs . '</p>
                                </div>
                              </div>

@@ -35,7 +35,7 @@ if (!empty ($_GET["delete"])) {
 if (isset($_SESSION["cart"])) {
     $check = 1;
     ?>
-
+<br>
     <h2>Winkelwagen</h2>
     <table>
         <tr>
@@ -101,6 +101,9 @@ if ($check == 0) {
     <tr>
         <td colspan="5"><input class="btn btn-sample"   type="submit" value="Afrekenen"></td>
     </tr>
+
+
+    <br>
 <?php }
 
 

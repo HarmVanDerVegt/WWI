@@ -2,7 +2,6 @@
 include_once "../controllers/userController.php";
 
 
-
 $username = $_POST["username"];
 $password = $_POST["password"];
 

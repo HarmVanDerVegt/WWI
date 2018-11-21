@@ -10,10 +10,16 @@ include_once ROOT_PATH . "/controllers/supplierController.php";
 include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
 include_once ROOT_PATH . "/controllers/colorController.php";
 include_once ROOT_PATH . "/controllers/specialDealsController.php";
+include_once(ROOT_PATH . "/controllers/reviewController.php");
+
+if ($_SESSION["IsSystemUser"] = 1) {
+    $MagReviewsMaken = TRUE;
+}
 ?>
 <html>
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <title>Category</title>
     </head>
     <body>
@@ -123,8 +129,14 @@ include_once ROOT_PATH . "/controllers/specialDealsController.php";
         }
 
 
-// JN - NOG KIJKEN NAAR IMPLEMENTATIE DATABASE.
-        $product_review = "PLACEHOLDER";
+// Genereert het reviewsysteem
+
+        $review = filter_input(INPUT_POST, "ster", FILTER_VALIDATE_INT);
+        if (empty($review)) {
+            $review = 3;
+        }
+
+        $product_review = (getCurrentReviewValue($review));
         ?>
 
         <!-- Header naam, merk, prijs, voorraad -->
@@ -172,20 +184,30 @@ include_once ROOT_PATH . "/controllers/specialDealsController.php";
                             }
                             ?>
                         </td>
-                        <!-- Bestel knop -->
-                        <td>
-                            <form method="post" action="/WWI/WWI/pages/ShoppingCart.php">
-                                <input type="hidden" value="<?php echo($i); ?>" name="add">
-                                <tr>
-                                    <td width="10px">&nbsp;</td>
-                                    <td><?php echo("&euro; " . $product_prijs . " euro"); ?></td>
-                                    <td width="10px">&nbsp;</td>
-                                    <td><input type="number" name="hoeveelheid" min="1" max="<?php print($product_voorraad) ?>" required></td>
-                                    <td width="10px">&nbsp;</td>
-                                    <td><input type="submit"  class="btn btn-sample btn-sample-success btn-block" value="Toevoegen aan winkelwagen"></td>
-                                </tr>
-                            </form>
-                        </td>
+
+                        <!-- Toont reviews -->
+
+                    <div class="container">
+                        <div class="row col-3 no-gutters">
+                            <td width=="10px">&nbsp;</td>
+                            <td><?php print($product_review) ?></td>
+                        </div>
+                    </div>
+
+                    <!-- Bestel knop -->
+                    <td>
+                        <form method="post" action="/WWI/WWI/pages/ShoppingCart.php">
+                            <input type="hidden" value="<?php echo($i); ?>" name="add">
+                            <tr>
+                                <td width="10px">&nbsp;</td>
+                                <td><?php echo("&euro; " . $product_prijs . " euro"); ?></td>
+                                <td width="10px">&nbsp;</td>
+                                <td><input type="number" name="hoeveelheid" min="1" max="<?php print($product_voorraad) ?>" required></td>
+                                <td width="10px">&nbsp;</td>
+                                <td><input type="submit"  class="btn btn-sample btn-sample-success btn-block" value="Toevoegen aan winkelwagen"></td>
+                            </tr>
+                        </form>
+                    </td>
                     </tr>
                     <!-- Toon product afbeelding -->
 
@@ -213,15 +235,6 @@ include_once ROOT_PATH . "/controllers/specialDealsController.php";
                 <div class="bg-light card">
                     <h4>Productinformatie:</h4>
                     <p><?php print($product_specs); ?></p>
-                </div>
-            </div>
-        </div>
-        <!-- Toont product reviews -->
-        <div class="row">
-            <div class="col-sm-8">
-                <div class="bg-light card">
-                    <h4>Reviews:</h4>
-                    <p><?php print($product_review); ?></p>
                 </div>
             </div>
         </div>

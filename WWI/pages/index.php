@@ -9,6 +9,8 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
 include_once ROOT_PATH . "/controllers/specialDealsController.php";
 
 ?>
+
+<?php include(ROOT_PATH . "/includes/header.php"); ?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -21,7 +23,7 @@ include_once ROOT_PATH . "/controllers/specialDealsController.php";
     </head>
     <body>
         <!-- voegt header toe -->
-        <?php include(ROOT_PATH . "/includes/header.php"); ?>
+
         <br>
 
         <!-- ophalen gegevens van special deals uit database -->

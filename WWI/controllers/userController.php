@@ -13,7 +13,6 @@ function getUser($logonName, $password){
             WHERE logonName=\"$logonName\"
             ";
 
-    echo $sql;
 
 
 
@@ -22,7 +21,7 @@ function getUser($logonName, $password){
     echo "<br>";
 
     $result = $result->fetch_assoc();
-    print_r ($result);
+
 
 
     $resultww = password_verify($password,$result['HashedPassword']);

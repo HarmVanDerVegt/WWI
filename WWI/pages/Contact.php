@@ -1,15 +1,9 @@
 <!DOCTYPE html>
-<head>
-    <title>Contact</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
-</head>
+
 <?php
 if (!defined('ROOT_PATH')) {
     include("../config.php");
 }
-    include("../controllers/captchaController.php")
-
 ?>
 
 <html>
@@ -23,39 +17,31 @@ if (!defined('ROOT_PATH')) {
         <?php include(ROOT_PATH . "/includes/header.php"); ?>
         <br>
 
-        <!--Tabel die gegevens opvraagt-->
+<!--        Tabel die gegevens opvraagt-->
 
         <h3>Stuur ons een bericht</h3>
         <br>
         <table>
-            <form action="\WWI\WWI\pages\contact.php" method="post" id="contactForm">
+            <form action="" method="post">
                 <tr>
                     <td>Voornaam:</td>
-                    <td><input type="text" id="voornaam" name="voornaam" placeholder="Voornaam" required></td>
+                    <td><input type="text" name="voornaam" placeholder="Voornaam" required></td>
                 </tr>
                 <tr>
                     <td>Achternaam:</td>
-                    <td><input type="text" id="achternaam" name="achternaam" placeholder="Achternaam" required></td>
+                    <td><input type="text" name="achternaam" placeholder="Achternaam" required></td>
                 </tr>
                 <tr>
                     <td>E-mail:</td>
-                    <td><input type="email" id="email" name="email" placeholder="e-mail" required></td>
+                    <td><input type="email" name="email" placeholder="e-mail" required></td>
                 </tr>
                 <tr>
                     <td>Onderwerp:</td>
-                    <td><input type="text" id="onderwerp" name="onderwerp" placeholder="onderwerp" required></td>
+                    <td><input type="text" name="onderwerp" placeholder="onderwerp" required></td>
                 </tr>
                 <tr>
                     <td>Bericht:</td>
-                    <td><textarea name="bericht" id="bericht" rows="4" placeholder="Bericht" required></textarea></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>        <div class="g-recaptcha"
-                                     data-sitekey="6Lf2M3wUAAAAADEnVFqkSY71S3ML6Hc3-Oz7I-S7">
-
-                        </div>
-                    </td>
+                    <td><textarea name="bericht" rows="4" placeholder="Bericht" required></textarea></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -63,7 +49,6 @@ if (!defined('ROOT_PATH')) {
                 </tr>
             </form>
         </table>
-
         <br>
         <h3>Over ons</h3>
         <p>Wij zijn WWI. We zijn trots op onze producten en geloven in kwaliteit.<br>

@@ -14,7 +14,7 @@ if (!defined('ROOT_PATH')) {
 
 <?php
 
-echo ("Hallo ". $_SESSION["Voornaam"]." ". $_SESSION["achternaam"]." U kunt inlogen met ". $_SESSION["Email"]. " en het opgegeven wachtwoord." );
+echo ("Hallo ". $_SESSION["Voornaam"]." ". $_SESSION["achternaam"]." U kunt inloggen met ". $_SESSION["Email"]. " en het opgegeven wachtwoord." );
 ?>
 
 

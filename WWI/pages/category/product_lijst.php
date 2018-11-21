@@ -28,7 +28,7 @@
             if (isset($_SESSION['category'])) {
                 $category_naam = $_SESSION['category'];
             } else {
-                $category_naam = "Mugs";
+                echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $errorpagina . '">';
             }
         }
         $_SESSION["category"] = $category_naam;
@@ -133,7 +133,7 @@
                         $SingleStockGroup = array_rand($StockGroups, 1);
                         $product_afbeelding_path = getImageLinkFromStockGroupID($StockGroups[$SingleStockGroup]);
 
-                        // -------------------------ga naar een nieuwe rij na elke 2 items
+                        // -------------------------ga naar een nieuwe rij na elke 3 items
                         if ($loop % 3 == 0) {
                             print('</div></div></div><div class="py-2"><div class="container"><div class="row hidden-md-up">');
                         }

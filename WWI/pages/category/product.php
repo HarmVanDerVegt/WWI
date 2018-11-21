@@ -58,7 +58,7 @@ include_once ROOT_PATH . "/controllers/specialDealsController.php";
 // Maakt product_specs aan zodat er dingen aan toegevoegd kunnen worden om weer te geven
         $product_specs = "";
 
-// verzamel data van product
+// Verzamel data van product
 // Naam van het product
         $product_naam = $StockItemName;
 
@@ -172,7 +172,7 @@ include_once ROOT_PATH . "/controllers/specialDealsController.php";
                             }
                             ?>
                         </td>
-                        <!-- bestel knop -->
+                        <!-- Bestel knop -->
                         <td>
                             <form method="post" action="/WWI/WWI/pages/ShoppingCart.php">
                                 <input type="hidden" value="<?php echo($i); ?>" name="add">

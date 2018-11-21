@@ -4,7 +4,7 @@ if (!defined('ROOT_PATH')) {
 }
 
 include_once ROOT_PATH . "/controllers/stockItemController.php";
-include(ROOT_PATH . "/includes/header.php");
+include_once(ROOT_PATH . "/includes/header.php");
 ?>
 
 <!-- start zoekfunctie -->
@@ -12,9 +12,6 @@ include(ROOT_PATH . "/includes/header.php");
 
 if (filter_input(INPUT_GET, "Zoeken", FILTER_SANITIZE_STRING) <> "") {
     $sarray = getStockItemsBySearchDetails($Search);
-    if (empty($sarray)){
-        print "Niks gevonden.";
-    }
 }
 ?>
 <table class="table table-striped">
@@ -24,10 +21,16 @@ if (filter_input(INPUT_GET, "Zoeken", FILTER_SANITIZE_STRING) <> "") {
         <th>Link</th>
     </tr>
     <tr>
-        <?php foreach($sarray as $item){ ?>
+        <?php
+        if (empty($sarray)){
+            print "Niks gevonden.";
+        }
+        if (!empty($sarray)){
+            foreach($sarray as $item){ ?>
         <td><?php print $item["StockItemName"] ?></td>
         <?php print("<td>" . '<a href="/WWI/WWI/pages/category/product.php?productID=' . $item["StockItemID"] . '">Link</a></td>'); ?>
     </tr>
-    <?php } ?>
+    <?php }
+    } ?>
 </table>
 <?php include(ROOT_PATH . "/includes/footer.php"); ?>

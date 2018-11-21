@@ -139,7 +139,7 @@ function InsertNewUser($valuarray)
     $Provincie = $valuarray["Provincie"];
     $date = date("Y/m/d");
     if ($password == $verpassword) {
-        $passhash = hash('sha256', $password);
+        $passhash = password_hash($password,  PASSWORD_DEFAULT);
     } else {
         return ("Wachtwoorden zijn niet gelijk");
     }

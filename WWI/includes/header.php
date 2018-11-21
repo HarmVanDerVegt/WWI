@@ -74,6 +74,7 @@
                             <button type=\"submit\" class=\"btn btn-sample btn-sample-success\">Log in</button>
                         </form>" ?>
 
+
         <?php
         include_once ROOT_PATH . "/controllers/userController.php";
 
@@ -105,7 +106,20 @@
             </ul>
         </div>
                         " ?>
+        <?php if ($_SESSION['IsSystemUser'] == 1) {
+            echo "<form method='post' class=\"form-inline my-2 my-lg-0\">
+                <input type='hidden' name='Logout'>
+            <button class=\"btn btn-sample btn-sample-success\" type=\"submit\">Log Uit 
+            </button>
+        </form>";
+        if (filter_input(INPUT_POST, "Logout")){
+            session_start();
+            unset($_SESSION["IsSystemUser"]);  // where $_SESSION["nome"] is your own variable. if you do not have one use only this as follow **session_unset();**
+            header("Location: home.php");
+        }
 
+        }
+        ?>
         <!-- einde login -->
         <!-- zoekveld -->
         <form class="form-inline my-2 my-lg-0" action="/WWI/WWI/pages/Search.php">

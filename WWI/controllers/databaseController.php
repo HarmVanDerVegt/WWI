@@ -139,7 +139,7 @@ function InsertNewUser($valuarray)
     $Provincie = $valuarray["Provincie"];
     $date = date("Y/m/d");
     if ($password == $verpassword) {
-        $passhash = password_hash($password,  PASSWORD_DEFAULT);
+        $passhash = password_hash($password, PASSWORD_DEFAULT);
     } else {
         return ("Wachtwoorden zijn niet gelijk");
     }
@@ -165,7 +165,7 @@ function InsertNewUser($valuarray)
 
 
 
-// create new city if it does not exits
+// Create new city if it does not exist
 if (!$cityidresultar ) {
     $maxcityidsql = "select max(CityID) +1 from cities";
     $maxrcityidesult = $db->query($maxcityidsql);

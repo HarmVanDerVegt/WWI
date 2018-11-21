@@ -14,7 +14,6 @@ include_once ROOT_PATH . "/controllers/specialDealsController.php";
 <html>
     <head>
         <meta charset="UTF-8">
-        <link href="\WWI\WWI\css\bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <title>Wide  World Importers</title>
         <!-- eigen opmaak regels -->
 

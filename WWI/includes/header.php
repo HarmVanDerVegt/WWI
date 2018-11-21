@@ -1,5 +1,5 @@
 <head>
-
+    <link href="\WWI\WWI\css\bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="\WWI\WWI\css\navbar.css" rel="stylesheet" type="text/css"/>
     <link href="\WWI\WWI\css\button.css" rel="stylesheet" type="text/css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -75,7 +75,7 @@
                         </form>" ?>
 
         <?php
-        include_once "../controllers/userController.php";
+        include_once ROOT_PATH . "/controllers/userController.php";
 
 
         $username = filter_input(INPUT_POST, "username");

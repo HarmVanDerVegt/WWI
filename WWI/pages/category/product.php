@@ -17,9 +17,39 @@ if ($_SESSION["IsSystemUser"] = 1) {
 }
 ?>
 <html>
+
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        <title>Category</title>
+    </head>
+    <body>
+        <!-- constanten -->
+        <?php
+        $height = 200;
+        $width = 300;
+        $StockItem = getStockItemByID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
+        $StockItemID = $StockItem["StockItemID"];
+        $StockItemName = $StockItem["StockItemName"];
+        $Supplier = getSupplierByID($StockItem["SupplierID"]);
+        $Color = getColorsByID($StockItem["ColorID"]);
+        $Stock = getStockItemHoldingByID($StockItem["StockItemID"]);
+        $StockGroup = getStockGroupByStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
+        $StockGroupID = $StockGroup["StockGroupID"];
+        $SpecialDealStockItemID = array_column(getSpecialDealByStockItemID($StockItemID), "StockItemID");
+
+        $DiscountPercentage = 0;
+        if ($SpecialDealStockItemID != NULL) {
+            if ($SpecialDealStockItemID[0] == $StockItemID) {
+                $SpecialDealInfo = getSpecialDealByStockItemID($StockItemID);
+                $DiscountPercentage = array_column($SpecialDealInfo, "DiscountPercentage");
+                $DiscountPercentage = (int) $DiscountPercentage[0];
+            }
+        }
+        ?>
+    <head>
+        <link href="\WWI\WWI\css\card.css" rel="stylesheet" type="text/css"/>
+        <meta charset="UTF-8">
         <title>Category</title>
     </head>
     <body>
@@ -64,7 +94,7 @@ if ($_SESSION["IsSystemUser"] = 1) {
 // Maakt product_specs aan zodat er dingen aan toegevoegd kunnen worden om weer te geven
         $product_specs = "";
 
-// Verzamel data van product
+// verzamel data van product
 // Naam van het product
         $product_naam = $StockItemName;
 
@@ -128,7 +158,6 @@ if ($_SESSION["IsSystemUser"] = 1) {
             $product_supplier = NULL;
         }
 
-
 // Genereert het reviewsysteem
 
         $review = filter_input(INPUT_POST, "ster", FILTER_VALIDATE_INT);
@@ -139,15 +168,16 @@ if ($_SESSION["IsSystemUser"] = 1) {
         $product_review = (getCurrentReviewValue($review));
         ?>
 
-        <!-- Header naam, merk, prijs, voorraad -->
+        <!-- Header naam, merk, prijs, voorraad-->
+
         <div class="card">
             <div class="card-body">
-                <!-- Toon naam van product -->
+                <!-- Toon naam van product-->
                 <div class="card-header">
                     <td><h1><?php print($product_naam); ?></h1></td>
                 </div>
                 <table>
-                    <!-- Toon de globale informatie van product -->
+                    <!-- Toon de globale informatie van product-->
                     <tr>
                         <td>
                             <?php
@@ -194,7 +224,7 @@ if ($_SESSION["IsSystemUser"] = 1) {
                         </div>
                     </div>
 
-                    <!-- Bestel knop -->
+                    <!-- bestel knop-->
                     <td>
                         <form method="post" action="/WWI/WWI/pages/ShoppingCart.php">
                             <input type="hidden" value="<?php echo($i); ?>" name="add">
@@ -202,14 +232,15 @@ if ($_SESSION["IsSystemUser"] = 1) {
                                 <td width="10px">&nbsp;</td>
                                 <td><?php echo("&euro; " . $product_prijs . " euro"); ?></td>
                                 <td width="10px">&nbsp;</td>
-                                <td><input type="number" name="hoeveelheid" min="1" max="<?php print($product_voorraad) ?>" required></td>
+                                <td><input type="number" name="hoeveelheid" min="1" max="
+                                           <?php print($product_voorraad) ?>" required></td>
                                 <td width="10px">&nbsp;</td>
                                 <td><input type="submit"  class="btn btn-sample btn-sample-success btn-block" value="Toevoegen aan winkelwagen"></td>
                             </tr>
                         </form>
                     </td>
                     </tr>
-                    <!-- Toon product afbeelding -->
+                    <!-- Toon product afbeelding-->
 
                     <?php
                     $StockGroups = getStockGroupIDsFromStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
@@ -220,7 +251,8 @@ if ($_SESSION["IsSystemUser"] = 1) {
                     <tr>
                         <td>
                             <img class="img-thumbnail" src="<?php print($product_afbeelding_path); ?>"
-                                 alt="Afbeelding <?php print($product_naam); ?>" height="<?php print($height); ?>px"
+                                 alt="Afbeelding <?php print($product_naam); ?>" height="
+                                 <?php print($height); ?>px"
                                  width="<?php print($width); ?>px"/>
                         </td>
                     </tr>
@@ -241,16 +273,16 @@ if ($_SESSION["IsSystemUser"] = 1) {
 
         <!-- Selecteert combideals -->
         <?php
-        //Krijg de categorieën van het getoonde item, dit kunnen er meerdere zijn.
+//Krijg de categorieën van het getoonde item, dit kunnen er meerdere zijn.
         $SpecialDealStockGroups = getStockGroupIDsFromStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
 
-        //Verkrijg 1 random geselecteerde categorie van de gegeven categorieën bij de vorige stap.
+//Verkrijg 1 random geselecteerde categorie van de gegeven categorieën bij de vorige stap.
         $SpecialDealSingleStockGroup = array_rand($SpecialDealStockGroups, 1);
 
-        //Van deze geselecteerde categorie halen we alle stock items op.
+//Van deze geselecteerde categorie halen we alle stock items op.
         $CombiDeals = getStockItemsByStockGroupID($SpecialDealStockGroups[$SpecialDealSingleStockGroup]);
 
-        //Van alle stockitems binnen dezelfde categorie als het getoonde item worden nu drie willekeurige producten getoond.
+//Van alle stockitems binnen dezelfde categorie als het getoonde item worden nu drie willekeurige producten getoond.
         $CombiDealRand1 = array_rand($CombiDeals, 1);
         $CombiDeal1ID = $CombiDeals[$CombiDealRand1]["StockItemID"];
         $CombiDeal1Naam = $CombiDeals[$CombiDealRand1]["StockItemName"];
@@ -268,32 +300,39 @@ if ($_SESSION["IsSystemUser"] = 1) {
         $thirdLink = getImageLinkFromStockGroupID($SpecialDealStockGroups[$SpecialDealSingleStockGroup]);
         ?>
         <!-- Toon combideals -->
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="bg-light card">
+        <div class="py-5">
+            <div class="container">
+                <div class="row hidden-md-up">
                     <h4>Combideals:</h4>
                     <p> Misschien zijn deze producten een leuke combinatie met dit product? </p>
-                    <div class="card-group">
-                        <div class="card">
-                            <img class="card-img-top" height="<?php print($height); ?>px" width="<?php print($width); ?>px" src="<?php print $firstLink ?>" alt="Afbeeldig mist">
-                            <div class="card-body">
-                                <a href="product.php?productID=<?php print($CombiDeal1ID) ?> ">
+                    <div class="col-md-4">
+                        <div class="card-custom">
+                            <div class="card-block">
+                                <img class="card-img-top" maxheight="<?php print($height); ?>px"
+                                    maxwidth="<?php print($width); ?>px" src="<?php print $firstLink ?>" alt="Afbeeldig mist">
+                                    <a href="product.php?productID=<?php print($CombiDeal1ID) ?> ">
                                     <h5 class="card-title"> <?php print($CombiDeal1Naam) ?> </h5>
                                 </a>
                             </div>
                         </div>
-                        <div class="card">
-                            <img class="card-img-top" height="<?php print($height); ?>px" width="<?php print($width); ?>px" src="<?php print $secondLink ?>" alt="Afbeelding mist">
-                            <div class="card-body">
-                                <a href="product.php?productID=<?php print $CombiDeal2ID ?> ">
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-custom">
+                            <div class="card-block">
+                                <img class="card-img-top" maxheight="<?php print($height); ?>px"
+                                    maxwidth="<?php print($width); ?>px" src="<?php print $secondLink ?>" alt="Afbeelding mist">
+                                    <a href="product.php?productID=<?php print $CombiDeal2ID ?> ">
                                     <h5 class="card-title"> <?php print($CombiDeal2Naam) ?> </h5>
                                 </a>
                             </div>
                         </div>
-                        <div class="card">
-                            <img class="card-img-top" height="<?php print($height); ?>px" width="<?php print($width); ?>px" src="<?php print $thirdLink ?>" alt="Afbeelding mist">
-                            <div class="card-body">
-                                <a href="product.php?productID=<?php print $CombiDeal3ID ?> ">
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-custom">
+                            <div class="card-block">
+                                <img class="card-img-top" maxheight="<?php print($height); ?>px"
+                                    maxwidth="<?php print($width); ?>px" src="<?php print $thirdLink ?>" alt="Afbeelding mist">
+                                    <a href="product.php?productID=<?php print $CombiDeal3ID ?> ">
                                     <h5 class="card-title"> <?php print($CombiDeal3Naam) ?> </h5>
                                 </a>
                             </div>

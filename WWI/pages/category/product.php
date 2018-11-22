@@ -5,6 +5,8 @@ if (!defined('ROOT_PATH')) {
 
 // Hier worden de verschillende controllers ingevoegd.
 include(ROOT_PATH . "/includes/header.php");
+include_once ROOT_PATH . "/controllers/productController2.php";
+include_once ROOT_PATH . "/controllers/stockItemController.php";
 ?>
 <html>
     <head>
@@ -20,6 +22,11 @@ include(ROOT_PATH . "/includes/header.php");
         $StockItemName = $StockItem["StockItemName"];
         $height = 200;
         $width = 300;
+        $product_specs = generateProductPageInformation($StockItem);
+        $product_prijs = generatePrice($StockItem);
+        $product_stock = generateStock($StockItem);
+        $product_afbeelding_path = generatePhoto($StockItem);
+        $product_review = generateReviews($StockItem);
 
         // sessie laden
         $i = filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT);

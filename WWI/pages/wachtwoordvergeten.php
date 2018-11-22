@@ -19,4 +19,9 @@ if (!defined('ROOT_PATH')) {
 </body>
 </html>
 
+
+<?php
+$email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_STRING);
+mail($email, "wachtwoord reset", , "FROM: noreply@WWI.nl");
+?>
 <?php include(ROOT_PATH . "/includes/footer.php"); ?>

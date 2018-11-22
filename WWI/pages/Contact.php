@@ -63,7 +63,8 @@ include("../controllers/captchaController.php")
                     <?php if (verifyReCaptcha() == false) { ?>
                         <p>Captcha niet gelukt.</p>
                         <div class="g-recaptcha"
-                             data-sitekey="6Lf2M3wUAAAAADEnVFqkSY71S3ML6Hc3-Oz7I-S7">
+                             data-sitekey="6Lf2M3wUAAAAADEnVFqkSY71S3ML6Hc3-Oz7I-S7"
+                             aria-required="true">
                         </div>
                     <?php }
                 } ?>

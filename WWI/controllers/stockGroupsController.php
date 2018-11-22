@@ -33,8 +33,8 @@ function getImageLinkFromStockGroupID($ID){
 
     $categoryName = strtolower($categoryName);
 
-//    $returnstring = "../media/" . $categoryName . ".jpg";
-    $returnstring = "media/" . $categoryName . ".jpg";
+    $returnstring = "../media/" . $categoryName . ".jpg";
+    //$returnstring = "media/" . $categoryName . ".jpg";
 
     return $returnstring;
 }

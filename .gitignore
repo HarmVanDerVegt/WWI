@@ -5,3 +5,6 @@
 .idea/dataSources.local.xml
 WWI/.idea/
 .idea/deployment.xml
+nbproject/project.properties
+nbproject/project.xml
+nbproject/private/private.properties

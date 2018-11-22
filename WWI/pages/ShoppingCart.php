@@ -11,11 +11,12 @@ include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
 
 //$_SESSION["cart"] wordt gebruikt om te kijken hoeveel verschillende producten er in de winkelwagen zitten
 //$_SESSION["hoeveelheid"] wordt gebruikt hoeveel eenheden er per product zijn geselecteerd
+//$_SESSION["totaal"] is de totaalprijs van alle producten
 //$i Is de ID van het product
 
 #check of de winkelwagen leeg is
 $check = 0;
-
+$_SESSION["hoeveelheid"] = 0;
 
 #Product toevoegen
 if (!empty ($_POST["add"])) {
@@ -43,6 +44,8 @@ if (isset($_SESSION["cart"])) {
         <tr>
             <th>Product</th>
             <th width="10px">&nbsp;</th>
+            <th>Productprijs</th>
+            <th width="10px"></th>
             <th>Hoeveelheid</th>
             <th width="10px">&nbsp;</th>
             <th>Subtotaal</th>
@@ -53,12 +56,12 @@ if (isset($_SESSION["cart"])) {
         </tr>
         <?php
         //        totaalprijs = 0
-        $totaal = 0;
+        $_SESSION["totaal"] = 0;
 
         //        nagaan hoeveel producten er in de winkelwagen zitten
         foreach ($_SESSION["cart"] as $i) {
             ?>
-            <form method="post" action="ShoppingCart.php">
+            <form method="post" action="Bestelling.php">
                 <input type="hidden" value="<?php echo($i) ?>" name="add">
 
                 <!--product ophalen-->
@@ -67,9 +70,9 @@ if (isset($_SESSION["cart"])) {
                 $productvoorraad = getStockItemHoldingByID($i);
                 $product_voorraad = $productvoorraad["QuantityOnHand"];
                 $productNaam = $product["StockItemName"];
-//                if(!isset($_SESSION["hoeveelheid"])){
-//                    $_SESSION["hoeveelheid"] = [1];
-//                }
+                //                if(!isset($_SESSION["hoeveelheid"])){
+                //                    $_SESSION["hoeveelheid"] = [1];
+                //                }
 
                 // prijs ophalen
 
@@ -83,6 +86,8 @@ if (isset($_SESSION["cart"])) {
                     <!--productnaam, producthoeveelheid weergeven-->
                     <td><?php print($productNaam); ?></td>
                     <td width="10px">&nbsp;</td>
+                    <td><?php print($productPrijs); ?></td>
+                    <td width="10px"></td>
                     <td><input type="number" name="hoeveelheid" min="1" max="<?php print($product_voorraad) ?>"
                                value="<?php print($_SESSION["hoeveelheid"][$i]); ?>" required>
                     </td>
@@ -96,15 +101,19 @@ if (isset($_SESSION["cart"])) {
                     <!--product verwijderen-->
                     <td><a class="fa fa-trash btn btn-danger" href="?delete=<?php echo($i); ?>"></a></td>
                 </tr>
-            </form>
             <?php
 //            totaalprijs weergeven
-            $totaal += $productPrijs * $_SESSION["hoeveelheid"][$i];
+            $_SESSION["totaal"] += $productPrijs * $_SESSION["hoeveelheid"][$i];
         }
         ?>
         <tr>
-            <td colspan="7">Totaal : €<?php echo($totaal); ?></td>
+            <td colspan="7">Totaal : €<?php echo($_SESSION["totaal"]); ?></td>
+            <td colspan="5"></td>
+            <?php if ($_SESSION["totaal"] > 0) { ?>
+                <td colspan="5"><input class="btn btn-sample" type="submit" value="Afrekenen"></td>
+            <?php } ?>
         </tr>
+            </form>
     </table>
 <?php } ?>
 
@@ -112,19 +121,9 @@ if (isset($_SESSION["cart"])) {
 //winkelwagen is leeg bericht
 if ($check == 0) {
     print("<h3>Uw winkelwagen is leeg!</h3><br>");
-} else {
-    ?>
-    <!--Afrekenen knop-->
-    <tr>
-        <td colspan="5"></td>
-    </tr>
-    <tr>
-        <td colspan="5"><input class="btn btn-sample" type="submit" value="Afrekenen"></td>
-    </tr>
-
-
-    <br>
-<?php }
-
+}
+?>
+<br>
+<?php
 //footer includen
 include(ROOT_PATH . "/includes/footer.php"); ?>

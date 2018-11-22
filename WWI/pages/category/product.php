@@ -24,7 +24,7 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
         $width = 300;
         $product_specs = generateProductPageInformation($StockItem);
         $product_prijs = generatePrice($StockItem);
-        $product_stock = generateStock($StockItem);
+        $product_voorraad = generateStock($StockItem);
         $product_afbeelding_path = generatePhoto($StockItem);
         $product_review = generateReviews($StockItem);
 

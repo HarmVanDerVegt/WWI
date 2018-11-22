@@ -3,11 +3,13 @@
     <title>Contact</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script src="../js/captcha.js"></script>
 </head>
 <?php
 if (!defined('ROOT_PATH')) {
     include("../config.php");
 }
+
 include("../controllers/captchaController.php")
 
 ?>
@@ -27,8 +29,8 @@ include("../controllers/captchaController.php")
 
 <h3>Stuur ons een bericht</h3>
 <br>
-<table>
-    <form action="\WWI\WWI\pages\contact.php" method="post" id="contactForm">
+<form action="\WWI\WWI\pages\contact.php" method="post" id="contactForm">
+    <table>
         <tr>
             <td>Voornaam:</td>
             <td><input type="text" id="voornaam" name="voornaam" placeholder="Voornaam" required></td>
@@ -51,18 +53,28 @@ include("../controllers/captchaController.php")
         </tr>
         <tr>
             <td></td>
-            <td>        <div class="g-recaptcha"
+            <td>
+                <?php $error = ""; ?>
+                <?php if (!isset($_POST["captcha"])) { ?>
+                    <div class="g-recaptcha"
+                         data-sitekey="6Lf2M3wUAAAAADEnVFqkSY71S3ML6Hc3-Oz7I-S7">
+                    </div>
+                <?php } else { ?>
+                    <?php if (verifyReCaptcha() == false) { ?>
+                        <p>Captcha niet gelukt.</p>
+                        <div class="g-recaptcha"
                              data-sitekey="6Lf2M3wUAAAAADEnVFqkSY71S3ML6Hc3-Oz7I-S7">
-
-                </div>
+                        </div>
+                    <?php }
+                } ?>
             </td>
         </tr>
         <tr>
             <td></td>
             <td><input type="submit" value="Verzenden!" class="btn btn-sample"></td>
         </tr>
-    </form>
-</table>
+    </table>
+</form>
 
 <br>
 <h3>Over ons</h3>

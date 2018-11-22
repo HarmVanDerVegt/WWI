@@ -28,8 +28,6 @@ if (!empty ($_POST["add"])) {
 #verwijderen
 if (!empty ($_GET["delete"])) {
     $i = filter_input(INPUT_GET, "delete", FILTER_SANITIZE_STRING);
-    $hoeveelheid = $_SESSION["hoeveelheid"][$i];
-    $_SESSION["hoeveelheid"][$i] = $hoeveelheid;
     unset($_SESSION["cart"][$i]);
 }
 
@@ -69,6 +67,9 @@ if (isset($_SESSION["cart"])) {
                 $productvoorraad = getStockItemHoldingByID($i);
                 $product_voorraad = $productvoorraad["QuantityOnHand"];
                 $productNaam = $product["StockItemName"];
+                if(!isset($_SESSION["hoeveelheid"])){
+                    $_SESSION["hoeveelheid"] = [1];
+                }
 
                 // prijs ophalen
 

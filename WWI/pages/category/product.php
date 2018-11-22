@@ -21,6 +21,17 @@ include_once ROOT_PATH . "/controllers/specialDealsController.php";
 <?php
 $height = 200;
 $width = 300;
+
+// Checkt of er daadwerkelijk een product is meegegeven en redirect anders naar een errorpagina.
+
+$errorpagina = "../error.php";
+
+if ($StockItem["StockItemID"] == NULL || $StockItem["StockItemID"] == 0) {
+    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $errorpagina . '">';
+    return null;
+}
+
+
 $StockItem = getStockItemByID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
 $StockItemID = $StockItem["StockItemID"];
 $StockItemName = $StockItem["StockItemName"];
@@ -46,13 +57,6 @@ if (!isset($_SESSION["total"])) {
     $_SESSION["total"] = 0;
     $_SESSION["qty"][$i] = 0;
     $_SESSION["amounts"][$i] = 0;
-}
-// Checkt of er daadwerkelijk een product is meegegeven en redirect anders naar een errorpagina.
-
-$errorpagina = "../error.php";
-
-if ($StockItem["StockItemID"] == NULL || 0) {
-    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $errorpagina . '">';
 }
 
 // Maakt product_specs aan zodat er dingen aan toegevoegd kunnen worden om weer te geven

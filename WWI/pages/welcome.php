@@ -17,6 +17,13 @@ include_once ROOT_PATH . "/controllers/specialDealsController.php";
 
 <?php include_once(ROOT_PATH . "/includes/header.php");
 
+if (!defined('ROOT_PATH')) {
+    include("../config.php");
+}
+if (($_SESSION['IsSystemUser']) <> 1 ){
+    echo "<meta http-equiv=\"refresh\" content=\"0; url=http://localhost:63342/WWI/WWI/pages/index.php\" />";
+}
+
 echo $_SESSION['IsEmployee']."IsEmployee <BR>";
 echo $_SESSION['IsSystemUser']."IsSystemUser <BR>";
 echo $_SESSION['PreferredName']."PreferredName <BR>";

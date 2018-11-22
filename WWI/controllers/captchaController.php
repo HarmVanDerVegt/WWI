@@ -1,10 +1,19 @@
 <?php
-function verifyReCaptcha($captcha){
+
+if(isset($_POST['action']) && !empty($_POST['action'])) {
+    $action = $_POST['action'];
+    switch($action) {
+        case 'verifyCaptcha' : verifyReCaptcha();
+            break;
+    }
+}
+
+function verifyReCaptcha(){
     $url = 'https://www.google.com/recaptcha/api/siteverify';
 
     $data = [
         'secret' => '6LcgLnwUAAAAAJU57bQETa1WfSdYiRPG_7NHmP -S',
-        'response' => $captcha
+        'response' => $_POST["captcha"]
     ];
 
     $options = [

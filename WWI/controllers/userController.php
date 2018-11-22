@@ -18,17 +18,17 @@ function getUser($logonName, $password){
 
     $result = $db->query($sql);
 
-    echo "<br>";
-
     $result = $result->fetch_assoc();
 
 
 
     $resultww = password_verify($password,$result['HashedPassword']);
     if($resultww == TRUE){
-    return $result;}
+        $db->close();
+
+        return $result;}
     else{
+        $db->close();
         echo "ww is verkeerd";
     }
-    $db->close();
 }

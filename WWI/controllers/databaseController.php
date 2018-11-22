@@ -116,6 +116,8 @@ function getRowByTwoForeignIDs($value, $table1, $table2, $table3, $joinID, $join
             ON t2.$joinID2 = t3.$joinID2
             WHERE t1.$joinID = $value";
 
+    //echo $sql;
+
     $result = $db->query($sql);
     $returnValue = $result->fetch_assoc();
 
@@ -164,52 +166,51 @@ function InsertNewUser($valuarray)
     $cityidresultar = $cityid->fetch_assoc();
 
 
+    // Create new city if it does not exist
+    if (!$cityidresultar) {
+        $maxcityidsql = "select max(CityID) +1 from cities";
+        $maxrcityidesult = $db->query($maxcityidsql);
+        $maxcityidresultar = $maxrcityidesult->fetch_assoc();
+        foreach ($maxcityidresultar as $maxcityarresult) {
+            $cityidresult = $maxcityarresult;
+        }
 
-// Create new city if it does not exist
-if (!$cityidresultar ) {
-    $maxcityidsql = "select max(CityID) +1 from cities";
-    $maxrcityidesult = $db->query($maxcityidsql);
-    $maxcityidresultar = $maxrcityidesult->fetch_assoc();
-    foreach ($maxcityidresultar as $maxcityarresult) {
-        $cityidresult = $maxcityarresult;
-    }
-
-    $getprovincieid = "select StateProvinceID 
+        $getprovincieid = "select StateProvinceID 
                           from stateprovinces 
                           where StateProvinceName 
                           like '%$Provincie%'";
-    $getprovincieidresult = $db->query($getprovincieid);
-    $getprovincieidresultar = $getprovincieidresult->fetch_assoc();
-    foreach ($getprovincieidresultar as $provinceidresultar) {
-        $provinceid = $provinceidresultar;
-    }
-    $createcitysql = "insert into cities
+        $getprovincieidresult = $db->query($getprovincieid);
+        $getprovincieidresultar = $getprovincieidresult->fetch_assoc();
+        foreach ($getprovincieidresultar as $provinceidresultar) {
+            $provinceid = $provinceidresultar;
+        }
+        $createcitysql = "insert into cities
                           set CityID=($cityidresult),
                           CityName=('$woonplaats'), 
                           StateProvinceID=($provinceid),
                           LastEditedBy=(1),
                           ValidFrom =('$date 01:00:00'),
                           ValidTo =('9999-12-31 23:59:59')";
-    $db->query($createcitysql);
-    $citysql = "select CityID 
+        $db->query($createcitysql);
+        $citysql = "select CityID 
                 from cities 
                 where CityName 
                 like '%$woonplaats%'";
-    $cityid = $db->query($citysql);
-    $cityidresultar = $cityid->fetch_assoc();
-}
-//array to value conversion
-foreach ($maxidresultar as $maxarresult) {
-    $maxidresult = $maxarresult;
-}
-foreach ($cityidresultar as $cityarresult) {
-    $cityidresult = $cityarresult;
-}
-foreach ($customerresultar as $customerarresult) {
-    $customerID = $customerarresult;
-}
+        $cityid = $db->query($citysql);
+        $cityidresultar = $cityid->fetch_assoc();
+    }
+    //array to value conversion
+    foreach ($maxidresultar as $maxarresult) {
+        $maxidresult = $maxarresult;
+    }
+    foreach ($cityidresultar as $cityarresult) {
+        $cityidresult = $cityarresult;
+    }
+    foreach ($customerresultar as $customerarresult) {
+        $customerID = $customerarresult;
+    }
 
-$peoplesql = "insert into people
+    $peoplesql = "insert into people
                   SET wideworldimporters.people.LogonName = ('$Email'),
                   wideworldimporters.people.HashedPassword = ('$passhash'),
                   PersonID =('$maxidresult'),
@@ -225,10 +226,10 @@ $peoplesql = "insert into people
                   LastEditedBy =(1),
                   ValidFrom =('$date  01:00:00'),
                   ValidTo =('9999-12-31 23:59:59')";
-$db->query($peoplesql);
+    $db->query($peoplesql);
 
 
-$customersql = " insert into customers 
+    $customersql = " insert into customers 
                     set CustomerID=($customerID),
                     PrimaryContactPersonID=($maxidresult),
                     CustomerName=('$voornaam ' '$achternaam'),
@@ -252,12 +253,12 @@ $customersql = " insert into customers
                     ValidTo =('9999-12-31 23:59:59'),
                     IsOnCreditHold=(0),
                     PhoneNumber=($phone)";
-$db->query($customersql);
+    $db->query($customersql);
 
-//return ($peoplesql.$customersql);
+    //return ($peoplesql.$customersql);
     $_SESSION["Voornaam"] = $voornaam;
     $_SESSION["achternaam"] = $achternaam;
     $_SESSION["Email"] = $Email;
-    echo"<meta http-equiv=\"refresh\" content=\"0; url=http://localhost:63342/WWI/WWI/pages/confirmregister.php\" />";
+    echo "<meta http-equiv=\"refresh\" content=\"0; url=http://localhost:63342/WWI/WWI/pages/confirmregister.php\" />";
 
-    }
+}

@@ -29,6 +29,7 @@ function getUser($logonName, $password){
         return $result;}
     else{
         $db->close();
+
         echo "ww is verkeerd";
     }
 }

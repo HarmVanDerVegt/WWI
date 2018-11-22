@@ -45,13 +45,13 @@
         <!-- login -->
         <?php
 
-        if(!isset($_SESSION["IsSystemUser"])){
+        if (!isset($_SESSION["IsSystemUser"])) {
             $_SESSION["IsSystemUser"] = 0;
         }
 
-        if ($_SESSION['IsSystemUser'] == 1){
-            echo "<a class='text-white'> Hallo ".$_SESSION['PreferredName']. "</a>";
-        }?>
+        if ($_SESSION['IsSystemUser'] == 1) {
+            echo "<a class='text-white'> Hallo " . $_SESSION['PreferredName'] . "</a>";
+        } ?>
         <?php if ($_SESSION['IsSystemUser'] == 0)
             echo "
         <div class=\"navbar-right\" id=\"navbarSupportedContent\">
@@ -105,7 +105,7 @@
             echo "
                         <div class=\"dropdown-divider\"></div>
                         <a href=\"/WWI/WWI/pages/Register.php\" class=\"dropdown-item\" href=\"#\">Nieuw hier? Registreren</a>
-                        <a class=\"dropdown-item\" href=\"#\">Wachtwoord vergeten?</a>
+                        <a class=\"dropdown-item\" href=\"/WWI/WWI/pages/wachtwoordvergeten.php\">Wachtwoord vergeten?</a>
                     </div>
 
                 </li>
@@ -118,13 +118,13 @@
             <button class=\"btn btn-sample btn-sample-success\" type=\"submit\">Log Uit 
             </button>
         </form>";
-          $logout =  filter_input(INPUT_POST, "Logout");
-        if ($logout== "TRUE" ){
+            $logout = filter_input(INPUT_POST, "Logout");
+            if ($logout == "TRUE") {
 
-            unset($_SESSION["IsSystemUser"]);  // where $_SESSION["nome"] is your own variable. if you do not have one use only this as follow **session_unset();**
-            echo "<meta http-equiv=\"refresh\" content=\"0; url=http://localhost:63342/WWI/WWI/pages/index.php\" />";
-            session_destroy();
-        }
+                unset($_SESSION["IsSystemUser"]);  // where $_SESSION["nome"] is your own variable. if you do not have one use only this as follow **session_unset();**
+                echo "<meta http-equiv=\"refresh\" content=\"0; url=http://localhost:63342/WWI/WWI/pages/index.php\" />";
+                session_destroy();
+            }
 
         }
         ?>

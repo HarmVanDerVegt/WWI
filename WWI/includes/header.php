@@ -63,7 +63,7 @@
                         Login
                     </a>
                     <div class=\"dropdown-menu\">
-                        <a class=\"dropdown-item\" href=\"#\"></a>\"
+                        <a class=\"dropdown-item\" href=\"#\"></a>
 
                         <form class=\"px-4 py-3\" method=\"post\" >
                             <div class=\"form-group\">

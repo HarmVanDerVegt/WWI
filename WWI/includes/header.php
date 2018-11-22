@@ -114,14 +114,15 @@
                         " ?>
         <?php if ($_SESSION['IsSystemUser'] == 1) {
             echo "<form method='post' class=\"form-inline my-2 my-lg-0\">
-                <input type='hidden' name='Logout'>
+                <input type='hidden' value='TRUE' name='Logout'>
             <button class=\"btn btn-sample btn-sample-success\" type=\"submit\">Log Uit 
             </button>
         </form>";
-        if (filter_input(INPUT_POST, "Logout")){
-            session_start();
+          $logout =  filter_input(INPUT_POST, "Logout");
+        if ($logout== "TRUE" ){
+            session_destroy();
             unset($_SESSION["IsSystemUser"]);  // where $_SESSION["nome"] is your own variable. if you do not have one use only this as follow **session_unset();**
-            header("Location: home.php");
+            echo "<meta http-equiv=\"refresh\" content=\"0; url=http://localhost:63342/WWI/WWI/pages/index.php\" />";
         }
 
         }

@@ -8,28 +8,29 @@ include_once ROOT_PATH . "/controllers/colorController.php";
 include_once ROOT_PATH . "/controllers/specialDealsController.php";
 include_once ROOT_PATH . "/controllers/reviewController.php";
 
-function generateProductPageInformation($StockItem) {
-    // Constanten
+// Constanten
 
-    $height = 200;
-    $width = 300;
-    $StockItemID = $StockItem["StockItemID"];
-    $Supplier = getSupplierByID($StockItem["SupplierID"]);
-    $Color = getColorsByID($StockItem["ColorID"]);
-    $Stock = getStockItemHoldingByID($StockItem["StockItemID"]);
-    $StockGroup = getStockGroupByStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
-    $StockGroupID = $StockGroup["StockGroupID"];
-    $SpecialDealStockItemID = array_column(getSpecialDealByStockItemID($StockItemID), "StockItemID");
+$StockItem = getStockItemByID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
+$height = 200;
+$width = 300;
+$StockItemID = $StockItem["StockItemID"];
+$Supplier = getSupplierByID($StockItem["SupplierID"]);
+$Color = getColorsByID($StockItem["ColorID"]);
+$Stock = getStockItemHoldingByID($StockItem["StockItemID"]);
+$StockGroup = getStockGroupByStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
+$StockGroupID = $StockGroup["StockGroupID"];
+$SpecialDealStockItemID = array_column(getSpecialDealByStockItemID($StockItemID), "StockItemID");
 
-    $DiscountPercentage = 0;
-    if ($SpecialDealStockItemID != NULL) {
-        if ($SpecialDealStockItemID[0] == $StockItemID) {
-            $SpecialDealInfo = getSpecialDealByStockItemID($StockItemID);
-            $DiscountPercentage = array_column($SpecialDealInfo, "DiscountPercentage");
-            $DiscountPercentage = (int) $DiscountPercentage[0];
-        }
+$DiscountPercentage = 0;
+if ($SpecialDealStockItemID != NULL) {
+    if ($SpecialDealStockItemID[0] == $StockItemID) {
+        $SpecialDealInfo = getSpecialDealByStockItemID($StockItemID);
+        $DiscountPercentage = array_column($SpecialDealInfo, "DiscountPercentage");
+        $DiscountPercentage = (int) $DiscountPercentage[0];
     }
+}
 
+function generateProductPageInformation($StockItem) {
     // Maakt product_specs aan zodat er dingen aan toegevoegd kunnen worden om weer te geven
     $product_specs = "";
 
@@ -64,7 +65,7 @@ function generateProductPageInformation($StockItem) {
     }
 
     // Indien de kleur bekend is, verandert $product_kleur naar de kleur. Anders is deze NULL
-    if ($Color["ColorName"] != NUlL) {
+    if ($Color["ColorName"] != NULL) {
         $product_kleur = $Color["ColorName"];
         $product_specs .= ("Dit product is " . $product_kleur . "<br>");
     } else {
@@ -151,6 +152,6 @@ function generateReviews($StockItem) {
     }
 
     $product_review = getCurrentReviewValue($review);
-    
+
     return $product_review;
 }

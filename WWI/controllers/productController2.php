@@ -21,15 +21,6 @@ $StockGroup = getStockGroupByStockItemID(filter_input(INPUT_GET, "productID", FI
 $StockGroupID = $StockGroup["StockGroupID"];
 $SpecialDealStockItemID = array_column(getSpecialDealByStockItemID($StockItemID), "StockItemID");
 
-$DiscountPercentage = 0;
-if ($SpecialDealStockItemID != NULL) {
-    if ($SpecialDealStockItemID[0] == $StockItemID) {
-        $SpecialDealInfo = getSpecialDealByStockItemID($StockItemID);
-        $DiscountPercentage = array_column($SpecialDealInfo, "DiscountPercentage");
-        $DiscountPercentage = (int) $DiscountPercentage[0];
-    }
-}
-
 function generateProductPageInformation($StockItem) {
     // Maakt product_specs aan zodat er dingen aan toegevoegd kunnen worden om weer te geven
     $product_specs = "";
@@ -98,27 +89,42 @@ function generateProductPageInformation($StockItem) {
     return $product_specs;
 }
 
+function generateDiscountPercentage() {
+    $DiscountPercentage = 0;
+    if ($SpecialDealStockItemID != NULL) {
+        if ($SpecialDealStockItemID[0] == $StockItemID) {
+            $SpecialDealInfo = getSpecialDealByStockItemID($StockItemID);
+            $DiscountPercentage = array_column($SpecialDealInfo, "DiscountPercentage");
+            $DiscountPercentage = (int) $DiscountPercentage[0];
+        }
+    }
+    return $DiscountPercentage;
+}
+
+function generateDiscountTextIfApplicable($StockItem) {
+    $DiscountPercentage = generateDiscountPercentage();
+    if ($DiscountPercentage != NULL && $DiscountPercentage != 0) {
+        $product_discount_text = ("Dit product is in de aanbieding! Er is een kortingspercentage van " . $DiscountPercentage . " procent over dit product verwerkt!");
+    }
+}
+
 function generatePrice($StockItem) {
 
     // Indien de voorgestelde prijs bekend is, verandert $product_prijs in de prijs. Indien deze niet bekend is pakt hij de vaste waarden binnen de UnitPrice en vermenigvuldigt hij deze met het TaxRate percentage.
     // Tevens checkt deze functie of het product in de aanbieding is en past dit toe.
 
+    $DiscountPercentage = generateDiscountPercentage();
+
     if ($StockItem["RecommendedRetailPrice"] != NULL) {
-        if ($DiscountPercentage != NULL || $DiscountPercentage != 0) {
-            $product_prijs = ($StockItem["RecommendedRetailPrice"] / 100 * ( 100 - $DiscountPercentage));
-            $product_prijs = number_format($product_prijs, 2);
-            print("Dit product is in de aanbieding! Er is een kortingspercentage van " . $DiscountPercentage . " procent over dit product verwerkt!");
+        if ($DiscountPercentage != NULL && $DiscountPercentage != 0) {
+            $product_prijs = number_format(($StockItem["RecommendedRetailPrice"] / 100 * ( 100 - $DiscountPercentage)), 2);
         } else {
-            $product_prijs = $StockItem["RecommendedRetailPrice"];
-            $product_prijs = number_format($product_prijs, 2);
+            $product_prijs = number_format($StockItem["RecommendedRetailPrice"], 2);
         }
     } elseif ($StockItem["RecommendedRetailPrice"] == NULL && $DiscountPercentage != (NULL || 0)) {
-        $product_prijs = ($StockItem["UnitPrice"] * $StockItem["TaxRate"] / 100 + 1) / 100 * ( 100 - $DiscountPercentage);
-        $product_prijs = number_format($product_prijs, 2);
-        print("Dit product is in de aanbieding! Er is een kortingspercentage van " . $DiscountPercentage . " procent over dit product verwerkt!");
-    }
-    if ($product_prijs == NULL) {
-        print("Er is geen prijs voor dit product beschikbaar" . "<br>");
+        $product_prijs = number_format(($StockItem["UnitPrice"] * $StockItem["TaxRate"] / 100 + 1) / 100 * ( 100 - $DiscountPercentage), 2);
+    } else {
+        $product_prijs = ("Er is geen prijs voor dit product beschikbaar" . "<br>");
     }
 
     return $product_prijs;

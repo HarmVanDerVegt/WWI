@@ -26,13 +26,14 @@ $width = 300;
 
 $errorpagina = "../error.php";
 
+
+$StockItem = getStockItemByID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
+
 if ($StockItem["StockItemID"] == NULL || $StockItem["StockItemID"] == 0) {
     echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $errorpagina . '">';
     return null;
 }
 
-
-$StockItem = getStockItemByID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
 $StockItemID = $StockItem["StockItemID"];
 $StockItemName = $StockItem["StockItemName"];
 $Supplier = getSupplierByID($StockItem["SupplierID"]);

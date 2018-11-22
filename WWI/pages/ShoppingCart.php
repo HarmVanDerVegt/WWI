@@ -67,9 +67,9 @@ if (isset($_SESSION["cart"])) {
                 $productvoorraad = getStockItemHoldingByID($i);
                 $product_voorraad = $productvoorraad["QuantityOnHand"];
                 $productNaam = $product["StockItemName"];
-                if(!isset($_SESSION["hoeveelheid"])){
-                    $_SESSION["hoeveelheid"] = [1];
-                }
+//                if(!isset($_SESSION["hoeveelheid"])){
+//                    $_SESSION["hoeveelheid"] = [1];
+//                }
 
                 // prijs ophalen
 

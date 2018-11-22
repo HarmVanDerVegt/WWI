@@ -11,7 +11,8 @@
     <div class="footer-custom">
         <div class="container" class="footer-custom">
 
-            <div class="text-center py-3 text-white"> <a href="/WWI/WWI/pages/Register.php">Registreren</a>      <a href="/WWI/WWI/pages/Voorwaarden.php">Voorwaarden</a>          <a href="/WWI/WWI/pages/Contact.php">Contact</a></div>
+            <div class="text-center py-3 text-white">
+                <?php  if ($_SESSION['IsSystemUser'] == 0){echo ('  <a href=\'/WWI/WWI/pages/Register.php\'>Registreren</a> ');}?><a      <a href="/WWI/WWI/pages/Voorwaarden.php">Voorwaarden</a>          <a href="/WWI/WWI/pages/Contact.php">Contact</a></div>
         </div>
     </div>
 

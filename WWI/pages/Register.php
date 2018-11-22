@@ -12,6 +12,7 @@ if (!defined('ROOT_PATH')) {
     <!-- voegt header toe -->
 <?php include(ROOT_PATH . "/includes/header.php"); ?>
     <!-- start van reg form -->
+<br>
     <div class="card mx-auto" style="width: 36rem;">
         <div class="card-body mx-auto">
             <div class="signup-form">
@@ -70,6 +71,7 @@ if (!defined('ROOT_PATH')) {
             </div>
         </div>
     </div>
+<br>
     <!-- start van reg form to array form -->
 <?php
 $Register = array();

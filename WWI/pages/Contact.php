@@ -29,7 +29,7 @@ include("../controllers/captchaController.php")
 
 <h3>Stuur ons een bericht</h3>
 <br>
-<form action="\WWI\WWI\pages\contact.php" method="post" id="contactForm">
+<form action="\WWI\WWI\pages\BerichtContact.php" method="post" id="contactForm">
     <table>
         <tr>
             <td>Voornaam:</td>
@@ -65,6 +65,7 @@ include("../controllers/captchaController.php")
                         <div class="g-recaptcha"
                              data-sitekey="6Lf2M3wUAAAAADEnVFqkSY71S3ML6Hc3-Oz7I-S7"
                              aria-required="true">
+            <td><input type="submit" value="Verzenden!" class="btn btn-sample"></td>
                         </div>
                     <?php }
                 } ?>
@@ -72,7 +73,6 @@ include("../controllers/captchaController.php")
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" value="Verzenden!" class="btn btn-sample"></td>
         </tr>
     </table>
 </form>
@@ -99,12 +99,6 @@ include("../controllers/captchaController.php")
     </tr>
 </table>
 <!--        Mailfunctie-->
-<?php
-
-if (filter_input(INPUT_POST, "email", FILTER_SANITIZE_STRING) != NULL && filter_input(INPUT_POST, "submit", FILTER_SANITIZE_STRING) == TRUE) {
-    mail("contact.wideworldimporters@gmail.com", filter_input(INPUT_POST, "onderwerp", FILTER_SANITIZE_STRING), filter_input(INPUT_POST, "bericht", FILTER_SANITIZE_STRING), "FROM: " . filter_input(INPUT_POST, "email", FILTER_SANITIZE_STRING));
-}
-?>
 <!-- voeg footer toe -->
 <br>
 <br>

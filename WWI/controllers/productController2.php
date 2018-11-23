@@ -13,15 +13,19 @@ include_once ROOT_PATH . "/controllers/reviewController.php";
 $StockItem = getStockItemByID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
 $height = 200;
 $width = 300;
+$StockItem = getStockItemByID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
 $StockItemID = $StockItem["StockItemID"];
-$Supplier = getSupplierByID($StockItem["SupplierID"]);
-$Color = getColorsByID($StockItem["ColorID"]);
-$Stock = getStockItemHoldingByID($StockItem["StockItemID"]);
 $StockGroup = getStockGroupByStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
 $StockGroupID = $StockGroup["StockGroupID"];
 $SpecialDealStockItemID = array_column(getSpecialDealByStockItemID($StockItemID), "StockItemID");
 
 function generateProductPageInformation($StockItem) {
+    $StockItem = getStockItemByID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
+    $StockItemID = $StockItem["StockItemID"];
+    $Stock = getStockItemHoldingByID($StockItem["StockItemID"]);
+    $StockGroup = getStockGroupByStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
+    $StockGroupID = $StockGroup["StockGroupID"];
+
     // Maakt product_specs aan zodat er dingen aan toegevoegd kunnen worden om weer te geven
     $product_specs = "";
 
@@ -56,7 +60,8 @@ function generateProductPageInformation($StockItem) {
     }
 
     // Indien de kleur bekend is, verandert $product_kleur naar de kleur. Anders is deze NULL
-    if ($Color["ColorName"] != NULL) {
+    $Color = getColorsByID($StockItem["ColorID"]);
+    if ($Color = getColorsByID($StockItem["ColorID"]) != NULL) {
         $product_kleur = $Color["ColorName"];
         $product_specs .= ("Dit product is " . $product_kleur . "<br>");
     } else {
@@ -79,7 +84,8 @@ function generateProductPageInformation($StockItem) {
     }
 
     // De leverancier van het gekozen product.
-    if ($Supplier["SupplierName"] != NULL) {
+    $Supplier = getSupplierByID($StockItem["SupplierID"]);
+    if ($Supplier = getSupplierByID($StockItem["SupplierID"]) != NULL) {
         $product_supplier = $Supplier["SupplierName"];
         $product_specs .= ("Dit product word geleverd door " . $product_supplier . "<br>");
     } else {
@@ -90,6 +96,9 @@ function generateProductPageInformation($StockItem) {
 }
 
 function generateDiscountPercentage() {
+    $StockItem = getStockItemByID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
+    $StockItemID = $StockItem["StockItemID"];
+    $SpecialDealStockItemID = array_column(getSpecialDealByStockItemID($StockItemID), "StockItemID");
     $DiscountPercentage = 0;
     if ($SpecialDealStockItemID != NULL) {
         if ($SpecialDealStockItemID[0] == $StockItemID) {
@@ -132,6 +141,7 @@ function generatePrice($StockItem) {
 
 function generateStock($StockItem) {
 // Indien de voorraad meer dan 0 is, is er voorraad, verandert $product_voorraad naar de voorraad. Anders is deze NULL
+    $Stock = getStockItemHoldingByID($StockItem["StockItemID"]);
     if ($Stock["QuantityOnHand"] > 0) {
         $product_voorraad = $Stock["QuantityOnHand"];
         $product_voorraad = ("<b>voorraad: </b>" . $product_voorraad) . " eenheden " . "<br>";
@@ -157,18 +167,18 @@ function generateReviews($StockItem) {
         $product_review = 3;
     }
 
-    $product_review = getCurrentReviewValue($review);
+    $product_review = getCurrentReviewValue($product_review);
 
     return $product_review;
 }
 
-function generateCombiDealCards($combiDeals){
+function generateCombiDealCards($combiDeals) {
 
     $html = "";
 
     $html .= "<div class='card-group'>";
 
-    foreach ($combiDeals as $combiDeal){
+    foreach ($combiDeals as $combiDeal) {
 
         //$category = array_rand(getStockGroupIDsFromStockItemID($combiDeal["StockItemID"]));
         $category = $combiDeal["StockGroupID"];
@@ -192,7 +202,7 @@ function generateCombiDealCards($combiDeals){
     return $html;
 }
 
-function generateCombiDeals($stockItem){
+function generateCombiDeals($stockItem) {
 
     //Haal alle categories van dit product op.
     $categories = getStockGroupIDsFromStockItemID($stockItem["StockItemID"]);
@@ -210,8 +220,8 @@ function generateCombiDeals($stockItem){
 
     $combiDeals = [];
 
-    foreach ($combiDealsID as $combiDeal){
-        $combiDeals []= $categoryItems[$combiDeal];
+    foreach ($combiDealsID as $combiDeal) {
+        $combiDeals [] = $categoryItems[$combiDeal];
     }
 
     return $combiDeals;

@@ -12,7 +12,7 @@
         <div class="container" class="footer-custom">
 
             <div class="text-center py-3 text-white">
-                <?php  if ($_SESSION['IsSystemUser'] == 0){echo ('  <a href=\'/WWI/WWI/pages/Register.php\'>Registreren</a> ');}?><a      <a href="/WWI/WWI/pages/Voorwaarden.php">Voorwaarden</a>          <a href="/WWI/WWI/pages/Contact.php">Contact</a></div>
+                     <a href="/WWI/WWI/pages/Voorwaarden.php">Voorwaarden</a>          <a href="/WWI/WWI/pages/Contact.php">Contact</a><?php  if ($_SESSION['IsSystemUser'] == 0){echo ('  <a href=\'/WWI/WWI/pages/Register.php\'>Registreren</a> ');} if ($_SESSION['IsSystemUser'] == 1){echo ('  <a href=\'/WWI/WWI/pages/welcome.php\'>Mijn WWI</a> ');}?> </div>
         </div>
     </div>
 

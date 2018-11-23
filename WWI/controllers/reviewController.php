@@ -31,13 +31,13 @@ function getUserSpecificReviewByStockItemID($CustomerID, $StockItemID) {
 
     $result = $db->query($sql);
 
-    while ($row = $result->fetch_assoc()) {
-        $array[array_values($row)[0]] = $row;
-    }
+//    while ($row = $result->fetch_assoc()) {
+//        $array[array_values($row)[0]] = $row;
+//    }
 
     $db->close();
 
-    return $array;
+    return $result;
 }
 
 function createFilledStar($ID) {

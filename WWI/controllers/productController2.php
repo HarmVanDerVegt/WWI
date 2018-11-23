@@ -8,95 +8,114 @@ include_once ROOT_PATH . "/controllers/colorController.php";
 include_once ROOT_PATH . "/controllers/specialDealsController.php";
 include_once ROOT_PATH . "/controllers/reviewController.php";
 
-// Constanten
-
-$StockItem = getStockItemByID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
-$height = 200;
-$width = 300;
-$StockItem = getStockItemByID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
-$StockItemID = $StockItem["StockItemID"];
-$StockGroup = getStockGroupByStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
-$StockGroupID = $StockGroup["StockGroupID"];
-$SpecialDealStockItemID = array_column(getSpecialDealByStockItemID($StockItemID), "StockItemID");
-
 function generateProductPageInformation($StockItem) {
-    $StockItem = getStockItemByID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
     $StockItemID = $StockItem["StockItemID"];
+
+    //Haal voorraad op. TODO: Doen we dit niet ergens anders?
     $Stock = getStockItemHoldingByID($StockItem["StockItemID"]);
-    $StockGroup = getStockGroupByStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
+
+    //Haal de category van het product op.
+    $StockGroup = getStockGroupByStockItemID($StockItemID);
     $StockGroupID = $StockGroup["StockGroupID"];
 
     // Maakt product_specs aan zodat er dingen aan toegevoegd kunnen worden om weer te geven
     $product_specs = "";
 
-    // Verzamel data van product
-    // Indien het merk bekend is, verandert $product_merk in het merknaam. Anders is deze NULL
-    if ($StockItem["Brand"] != NULL) {
-        $product_merk = $StockItem["Brand"];
-        $product_specs .= ("Merk " . $product_merk . "<br>");
-    } else {
-        $product_merk = FALSE;
-    }
+    $product_specs .= "Merk: " . getBrand($StockItem) . "<br>";
 
-    // Indien de grootte bekend is, verandert $product_grootte in de grootte. Anders is deze NULL
-    if ($StockItem["Size"] != NULL) {
-        $product_grootte = $StockItem["Size"];
-        $product_specs .= ("Dit product is " . $product_grootte . "<br>");
-    } else {
-        $product_grootte = NULL;
-    }
+    $product_specs .= "Dit product is: " . getSize($StockItem) . "<br>";
 
-    // Gemiddelde gewicht per eenheid van het product.
-    $product_gewicht = $StockItem["TypicalWeightPerUnit"];
-    if ($product_gewicht != NULL) {
-        $product_specs = ("Het gewoonlijke gewicht per eenheid is: ");
-        if ($product_gewicht >= 1 || $product_gewicht > ceil($product_gewicht) && $product_gewicht < ceil($product_gewicht)) {
-            $product_specs .= (round($product_gewicht, 1) . " kilo" . "<br>");
-        } elseif ($product_gewicht >= 1) {
-            $product_specs .= ($product_gewicht . " kilo" . "<br>");
-        } else {
-            $product_specs .= ($product_gewicht . " gram" . "<br>");
-        }
-    }
+    $product_specs .= "Het gewoonlijke gewicht per eenheid is: " . getWeight($StockItem) . "<br>";
 
-    // Indien de kleur bekend is, verandert $product_kleur naar de kleur. Anders is deze NULL
-    $Color = getColorsByID($StockItem["ColorID"]);
-    if ($Color = getColorsByID($StockItem["ColorID"]) != NULL) {
-        $product_kleur = $Color["ColorName"];
-        $product_specs .= ("Dit product is " . $product_kleur . "<br>");
-    } else {
-        $product_kleur = NULL;
-    }
+    $product_specs .= "Dit product is: " . getColor($StockItem) . "<br>";
 
-    // Indien er opmerkingen voor het product vanuit marketing zijn zullen deze in de variabele $marketing_commentaar gestopt worden.
-    if ($StockItem["MarketingComments"] != NULL) {
-        $marketing_commentaar = $StockItem["MarketingComments"];
-        $product_specs .= ($marketing_commentaar . "<br>");
-    } else {
-        $marketing_commentaar = NULL;
-    }
+    $product_specs .= getMarketingComments($StockItem) . "<br>";
 
     // Indien het gekozen product een koelproduct is, word $product_is_koelproduct TRUE. Anders is deze FALSE.
+    //TODO: placeholder voor temperatuur
     if ($StockItem["IsChillerStock"] == TRUE) {
         $product_specs .= ("Dit is een koelproduct" . "<br>");
     } else {
         $product_is_koelproduct = FALSE;
     }
 
-    // De leverancier van het gekozen product.
-    $Supplier = getSupplierByID($StockItem["SupplierID"]);
-    if ($Supplier = getSupplierByID($StockItem["SupplierID"]) != NULL) {
-        $product_supplier = $Supplier["SupplierName"];
-        $product_specs .= ("Dit product word geleverd door " . $product_supplier . "<br>");
-    } else {
-        $product_supplier = NULL;
-    }
+    $product_specs .= "Dit product word geleverd door: " . getSupplier($StockItem) . "<br>";
 
     return $product_specs;
 }
 
-function generateDiscountPercentage() {
-    $StockItem = getStockItemByID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
+function getSupplier($StockItem)
+{
+    $Supplier = getSupplierByID($StockItem["SupplierID"]);
+    if ($Supplier != NULL) {
+        $product_supplier = $Supplier["SupplierName"];
+    } else {
+        $product_supplier = NULL;
+    }
+    return $product_supplier;
+}
+
+function getMarketingComments($StockItem)
+{
+    if ($StockItem["MarketingComments"] != NULL) {
+        $marketing_commentaar = $StockItem["MarketingComments"];
+    } else {
+        $marketing_commentaar = NULL;
+    }
+    return $marketing_commentaar;
+}
+
+function getColor($StockItem)
+{
+    $Color = getColorsByID($StockItem["ColorID"]);
+    if ($Color != NULL) {
+        $product_kleur = $Color["ColorName"];
+    } else {
+        $product_kleur = NULL;
+    }
+    return $product_kleur;
+}
+
+function getWeight($StockItem)
+{
+    $product_gewicht = $StockItem["TypicalWeightPerUnit"];
+    $gewicht_tekst = "";
+    if ($product_gewicht != NULL) {
+        if ($product_gewicht >= 1 || $product_gewicht > ceil($product_gewicht) && $product_gewicht < ceil($product_gewicht)) {
+            $gewicht_tekst .= (round($product_gewicht, 1) . " kilo" . "<br>");
+        } elseif ($product_gewicht >= 1) {
+            $gewicht_tekst .= ($product_gewicht . " kilo");
+        } else {
+            $gewicht_tekst .= ($product_gewicht . " gram");
+        }
+    }
+    return $gewicht_tekst;
+}
+
+function getSize($StockItem)
+{
+    if ($StockItem["Size"] != NULL) {
+        $product_grootte = $StockItem["Size"];
+        //$product_specs .= ("Dit product is " . $product_grootte . "<br>");
+    } else {
+        $product_grootte = NULL;
+    }
+    return $product_grootte;
+}
+
+function getBrand($StockItem)
+{
+    if ($StockItem["Brand"] != NULL) {
+        $product_merk = $StockItem["Brand"];
+        //$product_specs .= ("Merk " . $product_merk . "<br>");
+    } else {
+        $product_merk = FALSE;
+    }
+    return $product_merk;
+
+}
+
+function generateDiscountPercentage($StockItem) {
     $StockItemID = $StockItem["StockItemID"];
     $SpecialDealStockItemID = array_column(getSpecialDealByStockItemID($StockItemID), "StockItemID");
     $DiscountPercentage = 0;
@@ -111,10 +130,12 @@ function generateDiscountPercentage() {
 }
 
 function generateDiscountTextIfApplicable($StockItem) {
-    $DiscountPercentage = generateDiscountPercentage();
+    $DiscountPercentage = generateDiscountPercentage($StockItem);
+    $product_discount_text = "";
     if ($DiscountPercentage != NULL && $DiscountPercentage != 0) {
-        $product_discount_text = ("Dit product is in de aanbieding! Er is een kortingspercentage van " . $DiscountPercentage . " procent over dit product verwerkt!");
+        $product_discount_text .= ("Dit product is in de aanbieding! Er is een kortingspercentage van " . $DiscountPercentage . " procent over dit product verwerkt!");
     }
+    return $product_discount_text;
 }
 
 function generatePrice($StockItem) {
@@ -122,7 +143,7 @@ function generatePrice($StockItem) {
     // Indien de voorgestelde prijs bekend is, verandert $product_prijs in de prijs. Indien deze niet bekend is pakt hij de vaste waarden binnen de UnitPrice en vermenigvuldigt hij deze met het TaxRate percentage.
     // Tevens checkt deze functie of het product in de aanbieding is en past dit toe.
 
-    $DiscountPercentage = generateDiscountPercentage();
+    $DiscountPercentage = generateDiscountPercentage($StockItem);
 
     if ($StockItem["RecommendedRetailPrice"] != NULL) {
         if ($DiscountPercentage != NULL && $DiscountPercentage != 0) {
@@ -164,6 +185,7 @@ function generatePhoto($StockItem) {
 function generateReviews($StockItem) {
     $product_review = filter_input(INPUT_POST, "ster", FILTER_VALIDATE_INT);
     if (empty($product_review)) {
+        //Verander naar gemiddelde!
         $product_review = 3;
     }
 

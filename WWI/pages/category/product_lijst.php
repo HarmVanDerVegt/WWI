@@ -28,7 +28,8 @@
             if (isset($_SESSION['category'])) {
                 $category_naam = $_SESSION['category'];
             } else {
-                echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $errorpagina . '">';
+                $category_naam = 'Mugs';
+                // onhandig voor testen !!! echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $errorpagina . '">';
             }
         }
         $_SESSION["category"] = $category_naam;

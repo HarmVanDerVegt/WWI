@@ -28,15 +28,17 @@ if (!defined('ROOT_PATH')) {
 <br>
 
 <?php
-// Checks if form has been submitted
+//RACAPTCHA
+// Checked of de form is ingevuld
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    function post_captcha($user_response) {
+    function post_captcha($user_response)
+    {
         $fields_string = '';
         $fields = array(
             'secret' => '6Ld1snwUAAAAAGmSnzS4R_rwtlxNulBSW1l8Z-zY',
             'response' => $user_response
         );
-        foreach($fields as $key=>$value)
+        foreach ($fields as $key => $value)
             $fields_string .= $key . '=' . $value . '&';
         $fields_string = rtrim($fields_string, '&');
 
@@ -56,15 +58,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $res = post_captcha($_POST['g-recaptcha-response']);
 
     if (!$res['success']) {
-        // What happens when the reCAPTCHA is not properly set up
-        echo 'reCAPTCHA error: Check to make sure your keys match the registered domain and are in the correct locations. You may also want to doublecheck your code for typos or syntax errors.';
-    } else {
-        // If CAPTCHA is successful...
-
-        // Paste mail function or whatever else you want to happen here!
-        echo '<br><p>CAPTCHA was completed successfully!</p><br>';
+        echo 'reCAPTCHA error';
     }
-} else { ?>
+}
+//EINDE RECAPTCHA
+?>
+
+<!--Tabel voor invoeren contactgegevens-->
 <form action="\WWI\WWI\pages\BerichtContact.php" method="post" id="i-recaptcha">
     <table>
         <tr>
@@ -89,14 +89,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </tr>
         <tr>
             <td></td>
-            <td><button class="g-recaptcha btn btn-sample" data-sitekey="6Ld1snwUAAAAAGkYDP8K5vQOCsW4dn9DKW7dV43C" data-callback="onSubmit">
-                    Verzenden
-                </button></td>
+            <!--recaptcha verwerken in de submit button-->
+            <div class="g-recaptcha"
+                 data-sitekey="6Ld1snwUAAAAAGkYDP8K5vQOCsW4dn9DKW7dV43C"
+                 data-callback="onSubmit"
+                 data-size="invisible">
+            </div>
+            <!--Verzend knop-->
+            <td><input type="submit" class="btn btn-sample" value="Verzenden"></td>
         </tr>
     </table>
 </form>
-<?php } ?>
 <br>
+<!--Over ons pagina-->
 <h3>Over ons</h3>
 <p>Wij zijn WWI. We zijn trots op onze producten en geloven in kwaliteit.<br>
     In ieder huis vindt een product van WWI zijn thuis.<br>
@@ -117,10 +122,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <td>contact.wideworldimporters@gmail.com</td>
     </tr>
 </table>
-<!--        Mailfunctie-->
 <!-- voeg footer toe -->
 <br>
 <br>
 <?php include(ROOT_PATH . "/includes/footer.php"); ?>
 </body>
-</html>

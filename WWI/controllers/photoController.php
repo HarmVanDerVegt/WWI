@@ -36,6 +36,8 @@ function laad_afbeelding($id) {
 // in: $foto_lijst verwacht een array met bae64 codes van type string
 // uit: de functie geeft geen waarde terug
 function show_afbeelding($foto_lijst) {
+    // zorgt dat het een standaard ruimte inneemt
+    print('<div style="width:400px; height: 400px;">');
     // belangrijke variablen
     $aantal_afbeeldingen = count($foto_lijst);
 
@@ -83,6 +85,7 @@ function show_afbeelding($foto_lijst) {
     else{
         print("Er zijn geen fotos voor dit product beschikbaar<br>");
     }
+    print('</div>');
 }
 ?>
 <!--

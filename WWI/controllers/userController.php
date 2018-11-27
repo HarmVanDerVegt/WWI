@@ -33,3 +33,10 @@ function getUser($logonName, $password){
         echo "ww is verkeerd";
     }
 }
+
+
+function getCustomerByID($ID){
+
+
+    return getRowByIntID('CustomerID','Customers',  $ID);
+}

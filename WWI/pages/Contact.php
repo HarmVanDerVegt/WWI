@@ -22,10 +22,6 @@ if (!defined('ROOT_PATH')) {
 <!-- voegt header toe -->
 <?php include(ROOT_PATH . "/includes/header.php"); ?>
 <br>
-<!--Tabel die gegevens opvraagt-->
-
-<h3>Stuur ons een bericht</h3>
-<br>
 
 <?php
 //RACAPTCHA
@@ -65,6 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <!--Tabel voor invoeren contactgegevens-->
+<div class="card mx-auto" style="width: 36rem;">
+    <h3>Stuur ons een bericht</h3>
 <form action="\WWI\WWI\pages\BerichtContact.php" method="post" id="i-recaptcha">
     <table>
         <tr>
@@ -100,8 +98,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </tr>
     </table>
 </form>
+</div>
 <br>
 <!--Over ons pagina-->
+<div class="card mx-auto" style="width: 36rem;">
 <h3>Over ons</h3>
 <p>Wij zijn WWI. We zijn trots op onze producten en geloven in kwaliteit.<br>
     In ieder huis vindt een product van WWI zijn thuis.<br>
@@ -109,7 +109,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     Wij zijn een importeur en groothandel die producten levert aan
     verschillende warenhuizen en supermarkten.<br>
     Time to market is voor Wide World Importers erg belangrijk.</p><br>
-<table>
+</div>
+<br>
+<div class="card mx-auto" style="width: 36rem;">
+    <table>
     <tr>
         <td><b>contactgegevens</b></td>
     </tr>
@@ -122,6 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <td>contact.wideworldimporters@gmail.com</td>
     </tr>
 </table>
+</div>
 <!-- voeg footer toe -->
 <br>
 <br>

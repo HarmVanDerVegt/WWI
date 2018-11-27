@@ -92,6 +92,7 @@
             $returnar = getUser($username, $password);
 
 
+            $_SESSION['USID'] = $returnar["PersonID"];
             $_SESSION['IsEmployee'] = $returnar["IsEmployee"];
             $_SESSION['IsSystemUser'] = $returnar["IsSystemUser"];
             $_SESSION['PreferredName'] = $returnar["PreferredName"];
@@ -121,9 +122,10 @@
             $logout = filter_input(INPUT_POST, "Logout");
             if ($logout == "TRUE") {
 
-                unset($_SESSION["IsSystemUser"]);  // where $_SESSION["nome"] is your own variable. if you do not have one use only this as follow **session_unset();**
-                echo "<meta http-equiv=\"refresh\" content=\"0; url=http://localhost:63342/WWI/WWI/pages/index.php\" />";
-                session_destroy();
+                $_SESSION = array();
+                header("Location: index.php");
+
+
             }
 
         }

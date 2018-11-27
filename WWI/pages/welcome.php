@@ -12,8 +12,8 @@ if (!defined('ROOT_PATH')) {
     include_once("../config.php");
 }
 
-include_once ROOT_PATH . "/controllers/stockItemController.php";
-include_once ROOT_PATH . "/controllers/specialDealsController.php";
+include_once ROOT_PATH . "/controllers/databaseController.php";
+
 $debug =0;
 ?>
 <?php include_once(ROOT_PATH . "/includes/header.php");
@@ -30,7 +30,20 @@ if ($debug == 1) {
     echo $_SESSION['PreferredName'] . "PreferredName <BR>";
     echo $_SESSION['FullName'] . "FullName <BR>";
     echo $_SESSION['LogonName'] . "LogonName <BR>";
+    echo $_SESSION['USID'] . "LogonName <BR>";
+
 }
+
+
+$customerdata = getCustomerByID($_SESSION['USID']);
+    foreach ($customerdata as $arresult) {
+        $customers = $arresult;
+
+    }
+
+
+print_r( $customers);
+echo '<BR>';
 ?>
 <div class="py-5">
     <div class="container">
@@ -55,6 +68,11 @@ if ($debug == 1) {
                         <?php
                         echo "<a class=\"text-light\"> Volledige Naam: ".$_SESSION['FullName'] . "</a> <BR>";
                         echo "<a class=\"text-light\"> Email: ".$_SESSION['LogonName'] . " </a> <BR>";
+                        echo "<a class=\"text-light\"> Volledige Naam: ".$_SESSION['FullName'] . "</a> <BR>";
+                        echo "<a class=\"text-light\"> Email: ".$_SESSION['LogonName'] . " </a> <BR>";
+                        echo "<a class=\"text-light\"> Volledige Naam: ".$_SESSION['FullName'] . "</a> <BR>";
+                        echo "<a class=\"text-light\"> Email: ".$_SESSION['LogonName'] . " </a> <BR>";
+
 
 
 

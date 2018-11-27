@@ -7,11 +7,16 @@ if (!defined('ROOT_PATH')) {
 include(ROOT_PATH . "/includes/header.php");
 include_once ROOT_PATH . "/controllers/productController2.php";
 include_once ROOT_PATH . "/controllers/stockItemController.php";
+
+include_once ROOT_PATH . "/controllers/photoController.php";
 ?>
 <html>
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <title>Category</title>
     </head>
     <body>
@@ -44,7 +49,6 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
         }
 
 // verzamel data van product
-
         // Naam van het product
         $product_naam = $StockItemName;
         ?>
@@ -87,9 +91,10 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
                     <!-- Toon product afbeelding -->
                     <tr>
                         <td>
-                            <img class="img-thumbnail" src="<?php print($product_afbeelding_path); ?>"
+                            <?php show_afbeelding(laad_afbeelding(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT))); ?>
+                            <!-- <img class="img-thumbnail" src="<?php print($product_afbeelding_path); ?>"
                                  alt="Afbeelding <?php print($product_naam); ?>" height="<?php print($height); ?>px"
-                                 width="<?php print($width); ?>px"/>
+                                 width="<?php print($width); ?>px"/> -->
                         </td>
                     </tr>
                 </table>

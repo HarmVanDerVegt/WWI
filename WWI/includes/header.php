@@ -80,7 +80,7 @@
                             <button type=\"submit\" class=\"btn btn-sample btn-sample-success\">Log in</button>
                         </form>" ?>
 
-
+<!--     login proces   -->
         <?php
         include_once ROOT_PATH . "/controllers/userController.php";
 
@@ -113,6 +113,7 @@
             </ul>
         </div>
                         " ?>
+<!--        logout / show user name-->
         <?php if ($_SESSION['IsSystemUser'] == 1) {
             echo "<form method='post' class=\"form-inline my-2 my-lg-0\">
                 <input type='hidden' value='TRUE' name='Logout'>
@@ -134,7 +135,7 @@
         <!-- einde login -->
         <!-- zoekveld -->
         <form class="form-inline my-2 my-lg-0" action="/WWI/WWI/pages/Search.php">
-            <input class="form-control mr-sm-2" type="search" placeholder="Zoeken" aria-label="Search" name="Zoeken"
+            <input class="form-control mr-sm-2" type="search" placeholder="Zoeken" aria-label="Search" name="name"
                    id="Zoeken">
             <button class="btn btn-sample btn-sample-success" type="submit">Zoeken <i class="fa fa-search"></i>
             </button>

@@ -31,7 +31,7 @@ function getRowByIntID($ID, $table, $value)
             FROM $table
             WHERE $ID = $value";
 
-    
+
     //Voert de statement uit.
     $result = $db->query($sql);
 

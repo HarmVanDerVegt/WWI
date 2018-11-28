@@ -106,7 +106,7 @@
             echo "
                         <div class=\"dropdown-divider\"></div>
                         <a href=\"/WWI/WWI/pages/Register.php\" class=\"dropdown-item\" href=\"#\">Nieuw hier? Registreren</a>
-                        <a class=\"dropdown-item\" href=\"/WWI/WWI/pages/wachtwoordvergeten.php\">Wachtwoord vergeten?</a>
+                        <a class=\"dropdown-item\" href=\"/WWI/WWI/pages/wachtwoordvergeten.php?crsf=" . $_SESSION["token"] . "\">Wachtwoord vergeten?</a>
                     </div>
 
                 </li>

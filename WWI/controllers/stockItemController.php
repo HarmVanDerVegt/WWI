@@ -39,6 +39,7 @@ function getStockItemBySpecialDealID($ID) {
 //Geeft een stockItem als array terug, met als keys StockItemID en StockItemName.
 function getStockItemsBySearchDetails($search) {
     $db = createDB();
+    $search = mysqli_escape_string($db, $search);
     $array = array();
     $sql = "SELECT *
             FROM stockitems

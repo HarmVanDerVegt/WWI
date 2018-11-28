@@ -17,10 +17,8 @@ if (!defined('ROOT_PATH')) {
     include("../config.php");
 }
 
-?>
-
-<!-- voegt header toe -->
-<?php include(ROOT_PATH . "/includes/header.php"); ?>
+// voegt header toe
+include(ROOT_PATH . "/includes/header.php"); ?>
 <br>
 
 <?php

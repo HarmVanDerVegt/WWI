@@ -34,17 +34,18 @@ function laad_afbeelding($id) {
 
 // doel: geef de afbeeldingen weer
 // in: $foto_lijst verwacht een array met bae64 codes van type string
+//     $y en $x om de groote te bepalen van de afbeelding
 // uit: de functie geeft geen waarde terug
-function show_afbeelding($foto_lijst) {
+function show_afbeelding($foto_lijst,$y=400,$x=400) {
     // zorgt dat het een standaard ruimte inneemt
-    print('<div style="width:400px; height: 400px;">');
+    print('<div style="width:'.$y.'px; height: '.$x.'px;">');
     // belangrijke variablen
     $aantal_afbeeldingen = count($foto_lijst);
 
     if ($aantal_afbeeldingen > 0) {
         // begin afbeelding element
         print('<div class="slideshow">
-           <div class="container" style="height: 400px; width: 400px;"> 
+           <div class="container" style="height: '.$y.'px; width: '.$x.'px;"> 
            <div id="myCarousel" class="carousel slide" data-ride="carousel">');
 
         // indicators
@@ -61,7 +62,7 @@ function show_afbeelding($foto_lijst) {
         $i = 0;
         foreach ($foto_lijst as $foto) {
             print('<div class="item ' . (($i == 0) ? 'active' : '') . '">
-               <img src="data:image/jpeg;base64,' . $foto . '" style="width:400px; maxwidth: 400px;"/>
+               <img src="data:image/jpeg;base64,' . $foto . '" style="width:'.$y.'px; maxwidth: '.$x.'px;"/>
                </div>');
             $i = 1;
         }

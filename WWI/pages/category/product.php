@@ -90,7 +90,7 @@ include_once ROOT_PATH . "/controllers/photoController.php";
                     <!-- Toon product afbeelding -->
                     <tr>
                         <td>
-                            <?php show_afbeelding(laad_afbeelding(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT))); ?>
+                            <?php show_afbeelding(laad_afbeelding(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT)),200,200); ?>
                             <!-- <img class="img-thumbnail" src="<?php print($product_afbeelding_path); ?>"
                                  alt="Afbeelding <?php print($product_naam); ?>" height="<?php print($height); ?>px"
                                  width="<?php print($width); ?>px"/> -->

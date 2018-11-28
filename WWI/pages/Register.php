@@ -3,16 +3,61 @@ if (!defined('ROOT_PATH')) {
     include("../config.php");
 }
 ?>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <link href="\WWI\WWI\css\button.css" rel="stylesheet" type="text/css"/>
-    <link href="\WWI\WWI\css\register.css" rel="stylesheet" type="text/css"/>
 
-
+    <head>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <link href="\WWI\WWI\css\button.css" rel="stylesheet" type="text/css"/>
+        <link href="\WWI\WWI\css\register.css" rel="stylesheet" type="text/css"/>
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+        <script>
+            function onSubmit(token) {
+                document.getElementById("i-recaptcha").submit();
+            }
+        </script>
+    </head>
     <!-- voegt header toe -->
-<?php include(ROOT_PATH . "/includes/header.php"); ?>
+<?php include(ROOT_PATH . "/includes/header.php");
+
+
+//RACAPTCHA toevoegen
+// Checked of de form is ingevuld
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    function post_captcha($user_response)
+    {
+        $fields_string = '';
+        $fields = array(
+            'secret' => '6Ld1snwUAAAAAGmSnzS4R_rwtlxNulBSW1l8Z-zY',
+            'response' => $user_response
+        );
+        foreach ($fields as $key => $value)
+            $fields_string .= $key . '=' . $value . '&';
+        $fields_string = rtrim($fields_string, '&');
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://www.google.com/recaptcha/api/siteverify');
+        curl_setopt($ch, CURLOPT_POST, count($fields));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, True);
+
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        return json_decode($result, true);
+    }
+
+    // Call the function post_captcha
+    $res = post_captcha($_POST['g-recaptcha-response']);
+
+    if (!$res['success']) {
+        echo 'reCAPTCHA error';
+    }
+}
+//EINDE RECAPTCHA
+?>
+
     <!-- start van reg form -->
-<br>
+    <br>
     <div class="card mx-auto" style="width: 36rem;">
         <div class="card-body mx-auto">
             <div class="signup-form">
@@ -64,6 +109,12 @@ if (!defined('ROOT_PATH')) {
                         <label class="checkbox-inline"><input type="checkbox" required="required"> Ik accepteer de <a
                                     href="../pages/Voorwaarden.php">Algemene Voorwaarden</a></label>
                     </div>
+                    <!--recaptcha verwerken in de submit button-->
+                    <div class="g-recaptcha"
+                         data-sitekey="6Ld1snwUAAAAAGkYDP8K5vQOCsW4dn9DKW7dV43C"
+                         data-callback="onSubmit"
+                         data-size="invisible">
+                    </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-sample btn-sample-success btn-block">Registreer nu</button>
                     </div>
@@ -71,7 +122,7 @@ if (!defined('ROOT_PATH')) {
             </div>
         </div>
     </div>
-<br>
+    <br>
     <!-- start van reg form to array form -->
 <?php
 $Register = array();
@@ -88,22 +139,21 @@ $Register["bevestig_wachtwoord"] = filter_input(INPUT_POST, 'bevestig_wachtwoord
 $Register["Phone"] = filter_input(INPUT_POST, 'Phone');
 $Register["Provincie"] = filter_input(INPUT_POST, 'Provincie');
 
-if(!empty($Register["Voornaam"])){
-if ($Register["Wachtwoord"] <> $Register["bevestig_wachtwoord"]) {
-    echo("wachtwoorden zijn niet gelijk");
-}
-else {
-    if (strlen($Register["Wachtwoord"]) < 7) {
-        echo ("wachtwoord te kort");
+if (!empty($Register["Voornaam"])) {
+    if ($Register["Wachtwoord"] <> $Register["bevestig_wachtwoord"]) {
+        echo("wachtwoorden zijn niet gelijk");
+    } else {
+        if (strlen($Register["Wachtwoord"]) < 7) {
+            echo("wachtwoord te kort");
+        } else {
+            echo InsertNewUser($Register);
+
+        }
     }
-    else {
-       echo InsertNewUser($Register);
-
-    }   }}
+}
 
 
+?>
 
-    ?>
 
-
-    <?php include(ROOT_PATH . "/includes/footer.php"); ?>
+<?php include(ROOT_PATH . "/includes/footer.php"); ?>

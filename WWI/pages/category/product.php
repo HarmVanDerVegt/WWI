@@ -35,13 +35,12 @@ include_once ROOT_PATH . "/controllers/photoController.php";
 
         // sessie laden
         $i = filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT);
-        if (!isset($_SESSION["total"])) {
-            $_SESSION["total"] = 0;
-            $_SESSION["qty"][$i] = 0;
-            $_SESSION["amounts"][$i] = 0;
-        }
+//        if (!isset($_SESSION["total"])) {
+//            $_SESSION["total"] = 0;
+//            $_SESSION["qty"][$i] = 0;
+//            $_SESSION["amounts"][$i] = 0;
+//        }
         // Checkt of er daadwerkelijk een product is meegegeven en redirect anders naar een errorpagina.
-
         $errorpagina = "../error.php";
 
         if ($StockItem["StockItemID"] == NULL || 0) {
@@ -91,7 +90,7 @@ include_once ROOT_PATH . "/controllers/photoController.php";
                     <!-- Toon product afbeelding -->
                     <tr>
                         <td>
-                            <?php show_afbeelding(laad_afbeelding(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT))); ?>
+                            <?php show_afbeelding(laad_afbeelding(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT)),200,200); ?>
                             <!-- <img class="img-thumbnail" src="<?php print($product_afbeelding_path); ?>"
                                  alt="Afbeelding <?php print($product_naam); ?>" height="<?php print($height); ?>px"
                                  width="<?php print($width); ?>px"/> -->

@@ -39,6 +39,7 @@ function getRowByIntID($ID, $table, $value)
     //Dit geeft dus maar één rij terug.
     $result = $result->fetch_assoc();
     $db->close();
+
     return $result;
 }
 
@@ -161,8 +162,7 @@ function InsertNewUser($valuarray)
 
     $citysql = "select CityID 
                 from cities 
-                where CityName 
-                like '%$woonplaats%'";
+                where CityName = '$woonplaats'";
     $cityid = $db->query($citysql);
     $cityidresultar = $cityid->fetch_assoc();
 

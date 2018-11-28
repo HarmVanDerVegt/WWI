@@ -10,7 +10,7 @@ include_once ROOT_PATH . "/controllers/specialDealsController.php";
 
 ?>
 
-<?php include(ROOT_PATH . "/includes/header.php"); ?>
+<?php include_once(ROOT_PATH . "/includes/header.php"); ?>
 <html>
     <head>
         <meta charset="UTF-8">

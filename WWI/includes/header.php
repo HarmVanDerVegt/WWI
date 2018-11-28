@@ -80,7 +80,7 @@
                             <button type=\"submit\" class=\"btn btn-sample btn-sample-success\">Log in</button>
                         </form>" ?>
 
-
+<!--     login proces   -->
         <?php
         include_once ROOT_PATH . "/controllers/userController.php";
 
@@ -106,13 +106,14 @@
             echo "
                         <div class=\"dropdown-divider\"></div>
                         <a href=\"/WWI/WWI/pages/Register.php\" class=\"dropdown-item\" href=\"#\">Nieuw hier? Registreren</a>
-                        <a class=\"dropdown-item\" href=\"/WWI/WWI/pages/wachtwoordvergeten.php\">Wachtwoord vergeten?</a>
+                        <a class=\"dropdown-item\" href=\"/WWI/WWI/pages/wachtwoordvergeten.php?crsf=" . $_SESSION["token"] . "\">Wachtwoord vergeten?</a>
                     </div>
 
                 </li>
             </ul>
         </div>
                         " ?>
+<!--        logout / show user name-->
         <?php if ($_SESSION['IsSystemUser'] == 1) {
             echo "<form method='post' class=\"form-inline my-2 my-lg-0\">
                 <input type='hidden' value='TRUE' name='Logout'>
@@ -122,10 +123,9 @@
             $logout = filter_input(INPUT_POST, "Logout");
             if ($logout == "TRUE") {
 
-                $_SESSION = array();
-                session_destroy();
-                header("Location: index.php");
 
+                session_destroy();
+                header("Location: /WWI/WWI/pages/index.php");
 
             }
 
@@ -134,7 +134,7 @@
         <!-- einde login -->
         <!-- zoekveld -->
         <form class="form-inline my-2 my-lg-0" action="/WWI/WWI/pages/Search.php">
-            <input class="form-control mr-sm-2" type="search" placeholder="Zoeken" aria-label="Search" name="Zoeken"
+            <input class="form-control mr-sm-2" type="search" placeholder="Zoeken" aria-label="Search" name="name"
                    id="Zoeken">
             <button class="btn btn-sample btn-sample-success" type="submit">Zoeken <i class="fa fa-search"></i>
             </button>

@@ -38,5 +38,12 @@ function getUser($logonName, $password){
 function getCustomerByID($ID){
 
 
-    return getRowByIntID('CustomerID','Customers',  $ID);
+    return getRowByIntID('PrimaryContactPersonID','Customers',  $ID);
+}
+
+function getCityByID($ID){
+
+
+    return getRowByIntID('CityID','cities',  $ID);
+
 }

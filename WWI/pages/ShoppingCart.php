@@ -16,7 +16,6 @@ include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
 
 #check of de winkelwagen leeg is
 $check = 0;
-$_SESSION["hoeveelheid"] = 0;
 
 #Product toevoegen
 if (!empty ($_POST["add"])) {
@@ -70,9 +69,9 @@ if (isset($_SESSION["cart"])) {
                 $productvoorraad = getStockItemHoldingByID($i);
                 $product_voorraad = $productvoorraad["QuantityOnHand"];
                 $productNaam = $product["StockItemName"];
-                //                if(!isset($_SESSION["hoeveelheid"])){
-                //                    $_SESSION["hoeveelheid"] = [1];
-                //                }
+                                if(!isset($_SESSION["hoeveelheid"])){
+                                    $_SESSION["hoeveelheid"] = [1];
+                                }
 
                 // prijs ophalen
 

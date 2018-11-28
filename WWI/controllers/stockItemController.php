@@ -176,6 +176,9 @@ function getSearchedItems($details, $tags, $categoryID){
     if (empty($tagsIDs)){
         $tagsIDs = $allIDs;
     }
+    if (empty($categoryIDs)){
+        $categoryIDs = $allIDs;
+    }
 
     //Hier vragen wij de doorsnede van alle IDs van de zoektermen.
     //Je krijgt dan alleen de Ids van de StockItems waarvoor alle zoektermen gelden.

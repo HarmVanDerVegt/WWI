@@ -11,6 +11,7 @@
         }
 
         include_once ROOT_PATH . "/controllers/stockItemController.php";
+        include_once ROOT_PATH . "/controllers/photoController.php";
         ?>
     </head>
     <body>
@@ -132,7 +133,9 @@
                         // -------------------------- Zoek een productfoto 
                         $StockGroups = getStockGroupIDsFromStockItemID($product_id);
                         $SingleStockGroup = array_rand($StockGroups, 1);
-                        $product_afbeelding_path = getImageLinkFromStockGroupID($StockGroups[$SingleStockGroup]);
+                        //$product_afbeelding_path = getImageLinkFromStockGroupID($StockGroups[$SingleStockGroup]);
+                        $a=laad_afbeelding($product_id);
+                        $product_afbeelding_path = "data:image/jpeg;base64,".array_pop($a);
 
                         // -------------------------ga naar een nieuwe rij na elke 3 items
                         if ($loop % 3 == 0) {

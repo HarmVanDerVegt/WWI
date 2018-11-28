@@ -1,26 +1,28 @@
+<!-- fix path -->
+<?php
+if (!defined('ROOT_PATH')) {
+    include("../../config.php");
+}
+
+include_once ROOT_PATH . "/controllers/stockItemController.php";
+include_once ROOT_PATH . "/controllers/photoController.php";
+?>
+<?php include_once(ROOT_PATH . "/includes/header.php"); ?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <link href="\WWI\WWI\css\card.css" rel="stylesheet" type="text/css"/>
-        <title>Product Lijst</title>
-        <!-- fix path -->
-        <?php
-        if (!defined('ROOT_PATH')) {
-            include("../../config.php");
-        }
 
-        include_once ROOT_PATH . "/controllers/stockItemController.php";
-        include_once ROOT_PATH . "/controllers/photoController.php";
-        ?>
+
     </head>
     <body>
         <!-- Producten ophalen van database -->
         <?php
         // -------------variablen
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
+
         // Zoek meegegeven variable van url
         // Category id naam ophalen
         if (filter_has_var(INPUT_GET, "category")) {
@@ -49,15 +51,12 @@
         $sql_connectie = mysqli_connect('localhost', 'root', '', 'wideworldimporters');
 
         // Check of de connectie succesvol is
-        if (!$sql_connectie) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
         // items opvragen uit sql data base
         $resultaat = mysqli_query($sql_connectie, $sql_code);
         ?>
 
         <!-- inhoud pagina------------------------------------------ -->
-        <?php include(ROOT_PATH . "/includes/header.php"); ?>
+
         <br>
         <!-- Titel van pagina -->
         <h1>Categorie: <?php print($category_naam); ?></h1>

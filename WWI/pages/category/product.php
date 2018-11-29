@@ -68,7 +68,28 @@ include_once ROOT_PATH . "/controllers/photoController.php";
                             ?>
                             <div class="container">
                                 <div class="row col-3 no-gutters">
-                                    <?php print($product_review); ?>
+                                    <?php
+                                    print($product_review);
+
+                                    // Checkt of de review wel is ingevuld
+                                    if (isset($_POST["ster"])) {
+                                        $reviewvalue = $_POST["ster"];
+                                    }
+
+                                    // Checkt of er wel een user is ingelogd
+                                    if (isset($_SESSION['USID'])) {
+                                        $userID = $_SESSION['USID'];
+                                    }
+
+                                    // Insert de gegeven review in de database
+                                    if (isset($reviewvalue) && (isset($userID))) {
+                                        insertReviewValue($userID, $StockItemID, $reviewvalue);
+                                    }
+
+                                    // Geeft de gemiddelde reviewwaarde van dit product terug
+                                    $reviewgemiddelde = getAverageReviewValue(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
+                                    print($reviewgemiddelde);
+                                    ?>
                                 </div>
                             </div>
                         </td>
@@ -90,7 +111,7 @@ include_once ROOT_PATH . "/controllers/photoController.php";
                     <!-- Toon product afbeelding -->
                     <tr>
                         <td>
-                            <?php show_afbeelding(laad_afbeelding(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT)),200,200); ?>
+<?php show_afbeelding(laad_afbeelding(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT)), 200, 200); ?>
                             <!-- <img class="img-thumbnail" src="<?php print($product_afbeelding_path); ?>"
                                  alt="Afbeelding <?php print($product_naam); ?>" height="<?php print($height); ?>px"
                                  width="<?php print($width); ?>px"/> -->
@@ -112,33 +133,33 @@ include_once ROOT_PATH . "/controllers/photoController.php";
         </div>
 
         <!-- Selecteert combideals -->
-        <?php
+<?php
 //Krijg de categorieën van het getoonde item, dit kunnen er meerdere zijn.
-        $SpecialDealStockGroups = getStockGroupIDsFromStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
+$SpecialDealStockGroups = getStockGroupIDsFromStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
 
 //Verkrijg 1 random geselecteerde categorie van de gegeven categorieën bij de vorige stap.
-        $SpecialDealSingleStockGroup = array_rand($SpecialDealStockGroups, 1);
+$SpecialDealSingleStockGroup = array_rand($SpecialDealStockGroups, 1);
 
 //Van deze geselecteerde categorie halen we alle stock items op.
-        $CombiDeals = getStockItemsByStockGroupID($SpecialDealStockGroups[$SpecialDealSingleStockGroup]);
+$CombiDeals = getStockItemsByStockGroupID($SpecialDealStockGroups[$SpecialDealSingleStockGroup]);
 
 //Van alle stockitems binnen dezelfde categorie als het getoonde item worden nu drie willekeurige producten getoond.
-        $CombiDealRand1 = array_rand($CombiDeals, 1);
-        $CombiDeal1ID = $CombiDeals[$CombiDealRand1]["StockItemID"];
-        $CombiDeal1Naam = $CombiDeals[$CombiDealRand1]["StockItemName"];
+$CombiDealRand1 = array_rand($CombiDeals, 1);
+$CombiDeal1ID = $CombiDeals[$CombiDealRand1]["StockItemID"];
+$CombiDeal1Naam = $CombiDeals[$CombiDealRand1]["StockItemName"];
 
-        $CombiDealRand2 = array_rand($CombiDeals, 1);
-        $CombiDeal2ID = $CombiDeals[$CombiDealRand2]["StockItemID"];
-        $CombiDeal2Naam = $CombiDeals[$CombiDealRand2]["StockItemName"];
+$CombiDealRand2 = array_rand($CombiDeals, 1);
+$CombiDeal2ID = $CombiDeals[$CombiDealRand2]["StockItemID"];
+$CombiDeal2Naam = $CombiDeals[$CombiDealRand2]["StockItemName"];
 
-        $CombiDealRand3 = array_rand($CombiDeals, 1);
-        $CombiDeal3ID = $CombiDeals[$CombiDealRand3]["StockItemID"];
-        $CombiDeal3Naam = $CombiDeals[$CombiDealRand3]["StockItemName"];
+$CombiDealRand3 = array_rand($CombiDeals, 1);
+$CombiDeal3ID = $CombiDeals[$CombiDealRand3]["StockItemID"];
+$CombiDeal3Naam = $CombiDeals[$CombiDealRand3]["StockItemName"];
 
-        $firstLink = getImageLinkFromStockGroupID($SpecialDealStockGroups[$SpecialDealSingleStockGroup]);
-        $secondLink = getImageLinkFromStockGroupID($SpecialDealStockGroups[$SpecialDealSingleStockGroup]);
-        $thirdLink = getImageLinkFromStockGroupID($SpecialDealStockGroups[$SpecialDealSingleStockGroup]);
-        ?>
+$firstLink = getImageLinkFromStockGroupID($SpecialDealStockGroups[$SpecialDealSingleStockGroup]);
+$secondLink = getImageLinkFromStockGroupID($SpecialDealStockGroups[$SpecialDealSingleStockGroup]);
+$thirdLink = getImageLinkFromStockGroupID($SpecialDealStockGroups[$SpecialDealSingleStockGroup]);
+?>
         <!-- Toon combideals -->
         <div class="row">
             <div class="col-lg-8">
@@ -178,6 +199,6 @@ include_once ROOT_PATH . "/controllers/photoController.php";
         <br>
         <!-- voeg footer toe -->
         <br>
-        <?php include(ROOT_PATH . "/includes/footer.php"); ?>
+<?php include(ROOT_PATH . "/includes/footer.php"); ?>
     </body>
 </html>

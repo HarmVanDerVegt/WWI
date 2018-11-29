@@ -71,19 +71,46 @@ function getCurrentReviewValue($reviewwaarde) {
     if ($reviewwaarde <= 0 || $reviewwaarde > 5) {
         return;
     }
-    
+
     $ongevuld = 5 - $reviewwaarde;
     $gevuld = 5 - $ongevuld;
-    
+
     $html = "";
 
-    for($i = 1; $i <= $gevuld; $i++) {
+    for ($i = 1; $i <= $gevuld; $i++) {
         $html .= createFilledStar($i);
     }
-    
-    for($i = ($gevuld + 1); $i <= ($ongevuld + $gevuld); $i++) {
+
+    for ($i = ($gevuld + 1); $i <= ($ongevuld + $gevuld); $i++) {
         $html .= createUnfilledStar($i);
     }
-    
+
     return $html;
+}
+
+function insertReviewValue($userid, $stockitemID, $reviewvalue) {
+
+    $db = createDB();
+    $sql = ""
+            . "INSERT INTO review (PersonID, StockItemID, Waarde)  "
+            . "VALUES ( '" . $userid . ", " . $stockitemID . ", " . $reviewvalue . "' )  ";
+
+    // Nog een if statement nodig om te checken of hij al ingevuld is.
+    // In dat geval moet hij niet opnieuw geinsert worden maar overschreven worden.
+}
+
+function getAverageReviewValue($stockitemID) {
+
+    $db = createDB();
+    $array = [];
+    $sql = ""
+            . "SELECT AVG(Waarde) "
+            . "FROM review "
+            . "WHERE StockItemID = '" . $stockitemID . "' ";
+
+    $result = $db->query($sql);
+
+    $db->close();
+
+    return "Klanten geven dit product gemiddeld een " . $result;
 }

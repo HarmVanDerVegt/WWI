@@ -41,35 +41,35 @@ function getUserSpecificReviewByStockItemID($CustomerID, $StockItemID) {
 }
 
 function createFilledStar($ID) {
-    $html = "<div class='col-sm'>
+    $html = "
                 <form method=\"post\">
             <input type='hidden' name=\"ster\" value=\"$ID\" />
-            <button style=\"background:transparent; border-style:hidden\">
+            <button style=\"float: left; padding-left: 0; background:transparent; border-style:hidden\">
             <i class=\"fas fa-star\"></i>
             </button>
             </form>
-            </div>";
+            ";
     return $html;
 }
 
 function createUnfilledStar($ID) {
-    $html = "<div class='col-sm'>
+    $html = "
                 <form method=\"post\">
             <input type='hidden' name=\"ster\" value=\"$ID\" />
-            <button style=\"background:transparent; border-style:hidden\">
+            <button style=\"float: left; padding-left: 0; background:transparent; border-style:hidden\">
             <i class=\"far fa-star\"></i>
             </button>
             </form>
-            </div>";
+            ";
     return $html;
 }
 
 function getCurrentReviewValue($reviewwaarde) {
     if (is_int($reviewwaarde) == false) {
-        return;
+        return null;
     }
     if ($reviewwaarde <= 0 || $reviewwaarde > 5) {
-        return;
+        return null;
     }
 
     $ongevuld = 5 - $reviewwaarde;

@@ -123,10 +123,9 @@
             $logout = filter_input(INPUT_POST, "Logout");
             if ($logout == "TRUE") {
 
-                $_SESSION = array();
-                session_destroy();
-                header("Location: index.php");
 
+                session_destroy();
+                header("Location: /WWI/WWI/pages/index.php");
 
             }
 

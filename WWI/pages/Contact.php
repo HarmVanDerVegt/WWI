@@ -1,8 +1,14 @@
+<?php
+if (!defined('ROOT_PATH')) {
+    include("../config.php");
+}
+
+?>
+<?php include(ROOT_PATH . "/includes/header.php"); ?>
 <!DOCTYPE html>
 <head>
     <title>Contact</title>
     <meta charset="UTF-8">
-    <link href="\WWI\WWI\css\bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <script>
@@ -20,7 +26,7 @@ if (!defined('ROOT_PATH')) {
 ?>
 
 <!-- voegt header toe -->
-<?php include(ROOT_PATH . "/includes/header.php"); ?>
+
 <br>
 
 <?php

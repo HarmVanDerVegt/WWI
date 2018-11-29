@@ -1,5 +1,6 @@
 <!-- functies voor afbeeldingen uit database te tonen ---------------------------------- -->
 <?php
+
 // doel: laad afbeeldingen van database
 // in: $id verwacht een stockitemID
 // uit: geeft een array met strings terug die base64 codes bevat van afbeeldingen
@@ -61,8 +62,8 @@ function show_afbeelding($foto_lijst,$y=400,$x=400) {
         print('<div class="carousel-inner">');
         $i = 0;
         foreach ($foto_lijst as $foto) {
-            print('<div class="item ' . (($i == 0) ? 'active' : '') . '">
-               <img src="data:image/jpeg;base64,' . $foto . '" style="width:'.$y.'px; maxwidth: '.$x.'px;"/>
+            print('<div class="carousel-item ' . (($i == 0) ? 'active' : '') . '">
+               <img src="data:image/jpeg;base64,' . $foto . '" style="width:'.$y.'px; max-width: '.$x.'px;"/>
                </div>');
             $i = 1;
         }
@@ -70,12 +71,12 @@ function show_afbeelding($foto_lijst,$y=400,$x=400) {
 
         // knoppen
         if ($aantal_afbeeldingen > 1) {
-            print('<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left"></span>
+            print('<a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
                 <span class="sr-only">Previous</span>
                </a>
-               <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right"></span>
+               <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
                 <span class="sr-only">Next</span>
                </a>');
         }

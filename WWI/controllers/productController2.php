@@ -109,7 +109,7 @@ function getBrand($StockItem)
         $product_merk = $StockItem["Brand"];
         //$product_specs .= ("Merk " . $product_merk . "<br>");
     } else {
-        $product_merk = FALSE;
+        $product_merk = "Dit product heeft geen merk.";
     }
     return $product_merk;
 
@@ -154,7 +154,7 @@ function generatePrice($StockItem) {
     } elseif ($StockItem["RecommendedRetailPrice"] == NULL && $DiscountPercentage != (NULL || 0)) {
         $product_prijs = number_format(($StockItem["UnitPrice"] * $StockItem["TaxRate"] / 100 + 1) / 100 * ( 100 - $DiscountPercentage), 2);
     } else {
-        $product_prijs = ("Er is geen prijs voor dit product beschikbaar" . "<br>");
+        $product_prijs = ("--,--" . "<br>");
     }
 
     return $product_prijs;
@@ -165,7 +165,7 @@ function generateStock($StockItem) {
     $Stock = getStockItemHoldingByID($StockItem["StockItemID"]);
     if ($Stock["QuantityOnHand"] > 0) {
         $product_voorraad = $Stock["QuantityOnHand"];
-        $product_voorraad = ("<b>voorraad: </b>" . $product_voorraad) . " eenheden " . "<br>";
+        //$product_voorraad = ("<b>voorraad: </b>" . $product_voorraad) . " eenheden " . "<br>";
     } else {
         $product_voorraad = NULL;
         $product_voorraad = ("Dit product is momenteel niet op voorraad");
@@ -182,10 +182,11 @@ function generatePhoto($StockItem) {
     return($product_afbeelding_path);
 }
 
-function generateReviews($StockItem) {
+function generateReviews() {
+    //TODO: Maak gebruik van stockitems
     $product_review = filter_input(INPUT_POST, "ster", FILTER_VALIDATE_INT);
     if (empty($product_review)) {
-        //Verander naar gemiddelde!
+        //TODO: Verander naar gemiddelde!
         $product_review = 3;
     }
 
@@ -213,21 +214,21 @@ function generateCombiDealCards($combiDeals) {
                         src='" . $link . "'
                         alt='Afbeelding mist'>";
         $html .= "<div class='card-body'>";
-        $html .= "<a href='category/product.php?productID=" . $combiDeal["StockItemID"] . "'>";
-        $html .= "<h5 class='card-title>" . $combiDeal["StockItemName"] . "</h5>";
+        $html .= "<a href='product.php?productID=" . $combiDeal["StockItemID"] . "'>";
+        $html .= "<h5 class='card-title'>" . $combiDeal["StockItemName"] . "</h5>";
         $html .= "</a>";
         $html .= "</div>";
         $html .= "</div>";
     }
-    //$html .="</div>";
+    $html .= "</div>";
 
     return $html;
 }
 
-function generateCombiDeals($stockItem) {
+function generateCombiDeals($StockItem) {
 
     //Haal alle categories van dit product op.
-    $categories = getStockGroupIDsFromStockItemID($stockItem["StockItemID"]);
+    $categories = getStockGroupIDsFromStockItemID($StockItem["StockItemID"]);
 
     //Kies een willekeurige categorie uit.
     $singleCategoryKey = array_rand($categories);

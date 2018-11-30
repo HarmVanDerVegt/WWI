@@ -24,8 +24,8 @@ function getProductsByPurchaseorderID($ID)
 }
 
 
-$array = getBestellingByPurchaseorderID(17);
-$productenarray = getProductsByPurchaseorderID(17);
+$array = getBestellingByPurchaseorderID(1);
+$productenarray = getProductsByPurchaseorderID(1);
 $totaal = 0;
 
 ?>

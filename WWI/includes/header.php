@@ -91,14 +91,21 @@
         if (isset($password)) {
             $returnar = getUser($username, $password);
 
+            if ($returnar["Succes"] == TRUE){
+                $_SESSION['USID'] = $returnar["PersonID"];
+                $_SESSION['IsEmployee'] = $returnar["IsEmployee"];
+                $_SESSION['IsSystemUser'] = $returnar["IsSystemUser"];
+                $_SESSION['PreferredName'] = $returnar["PreferredName"];
+                $_SESSION['FullName'] = $returnar["FullName"];
+                $_SESSION['LogonName'] = $returnar["LogonName"];
 
-            $_SESSION['USID'] = $returnar["PersonID"];
-            $_SESSION['IsEmployee'] = $returnar["IsEmployee"];
-            $_SESSION['IsSystemUser'] = $returnar["IsSystemUser"];
-            $_SESSION['PreferredName'] = $returnar["PreferredName"];
-            $_SESSION['FullName'] = $returnar["FullName"];
-            $_SESSION['LogonName'] = $returnar["LogonName"];
-            echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/welcome.php\" />";
+                echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/welcome.php\" />";
+            }
+            else{
+                echo ("gebruikersnaam of wachtwoord is verkeerd");
+            }
+
+
         }
 
         ?>

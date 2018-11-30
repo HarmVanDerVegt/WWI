@@ -12,6 +12,8 @@ if (!defined('ROOT_PATH')) {
 
 include_once ROOT_PATH . "/controllers/Payment/vendor/autoload.php";
 
+$paymentID = 123456;
+$paymentVAL = 19.99;
 
 
 $mollie = new \Mollie\Api\MollieApiClient();
@@ -20,11 +22,11 @@ $mollie->setApiKey("test_hxu2rAAxCECgD3DNeNnVG9jzJWhMtg");
 $payment = $mollie->payments->create([
     "amount" => [
         "currency" => "EUR",
-        "value" => "10.00"
+        "value" => "$paymentVAL"
     ],
-    "description" => "Payment TST",
-    "redirectUrl" => "http://localhost:63342/WWI/WWI/pages/CrmPay.php",
-    "webhookUrl"  => "https://webshop.example.org/mollie-webhook/",
+    "description" => "$paymentID",
+    "redirectUrl" => "https://www.windesheim.nl/",
+    "webhookUrl"  => "https://www.google.nl/",
     "method"      => "ideal"
 ]);
 

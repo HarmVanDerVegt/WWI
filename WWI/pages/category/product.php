@@ -69,6 +69,7 @@ include_once ROOT_PATH . "/controllers/photoController.php";
                             <div class="container">
                                 <div class="row col-3 no-gutters">
                                     <?php
+                                    // Zorgt voor het volledige sterrensysteem.
                                     print($product_review);
 
                                     // Checkt of de review wel is ingevuld

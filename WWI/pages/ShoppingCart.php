@@ -59,19 +59,22 @@ if (isset($_SESSION["cart"])) {
 
         //        nagaan hoeveel producten er in de winkelwagen zitten
         foreach ($_SESSION["cart"] as $i) {
-            ?>
-            <form method="post" action="Bestelling.php">
-                <input type="hidden" value="<?php echo($i) ?>" name="add">
+        ?>
+        <form method="post" action="Bestelling.php">
+            <input type="hidden" value="<?php echo($i) ?>" name="add">
 
-                <!--product ophalen-->
+            <!--product ophalen-->
 
-                <?php $product = getStockItemByID($i);
-                $productvoorraad = getStockItemHoldingByID($i);
-                $product_voorraad = $productvoorraad["QuantityOnHand"];
-                $productNaam = $product["StockItemName"];
-                                if(!isset($_SESSION["hoeveelheid"])){
-                                    $_SESSION["hoeveelheid"] = [1];
-                                }
+            <?php $product = getStockItemByID($i);
+            $productvoorraad = getStockItemHoldingByID($i);
+            $product_voorraad = $productvoorraad["QuantityOnHand"];
+            $productNaam = $product["StockItemName"];
+
+            if ($productNaam != "") {
+
+                if (!isset($_SESSION["hoeveelheid"])) {
+                    $_SESSION["hoeveelheid"] = [1];
+                }
 
                 // prijs ophalen
 
@@ -85,14 +88,14 @@ if (isset($_SESSION["cart"])) {
                     <!--productnaam, producthoeveelheid weergeven-->
                     <td><?php print($productNaam); ?></td>
                     <td width="10px">&nbsp;</td>
-                    <td><?php print(number_format($productPrijs,2)); ?></td>
+                    <td><?php print(number_format($productPrijs, 2)); ?></td>
                     <td width="10px"></td>
                     <td><input type="number" name="hoeveelheid" min="1" max="<?php print($product_voorraad) ?>"
                                value="<?php print($_SESSION["hoeveelheid"][$i]); ?>" required>
                     </td>
                     <td width="10px">&nbsp;</td>
                     <!--prijs weergeven-->
-                    <td><?php echo("€" . number_format($productPrijs * $_SESSION["hoeveelheid"][$i],2)); ?></td>
+                    <td><?php echo("€" . number_format($productPrijs * $_SESSION["hoeveelheid"][$i], 2)); ?></td>
                     <td width="10px">&nbsp;</td>
                     <!--winkelwagen updaten-->
                     <td><input class="btn btn-sample" type="submit" value="Update winkelwagen"></td>
@@ -100,19 +103,20 @@ if (isset($_SESSION["cart"])) {
                     <!--product verwijderen-->
                     <td><a class="fa fa-trash btn btn-danger" href="?delete=<?php echo($i); ?>"></a></td>
                 </tr>
-            <?php
-//            totaalprijs weergeven
+                <?php
+            }
+            //            totaalprijs weergeven
             $_SESSION["totaal"] += $productPrijs * $_SESSION["hoeveelheid"][$i];
-        }
-        ?>
-        <tr>
-            <td colspan="7">Totaal : €<?php echo(number_format($_SESSION["totaal"],2)); ?></td>
-            <td colspan="5"></td>
-            <?php if ($_SESSION["totaal"] > 0) { ?>
-                <td colspan="5"><input class="btn btn-sample" type="submit" value="Afrekenen"></td>
-            <?php } ?>
-        </tr>
-            </form>
+            }
+            ?>
+            <tr>
+                <td colspan="7">Totaal : €<?php echo(number_format($_SESSION["totaal"], 2)); ?></td>
+                <td colspan="5"></td>
+                <?php if ($_SESSION["totaal"] > 0) { ?>
+                    <td colspan="5"><input class="btn btn-sample" type="submit" value="Afrekenen"></td>
+                <?php } ?>
+            </tr>
+        </form>
     </table>
 <?php } ?>
 

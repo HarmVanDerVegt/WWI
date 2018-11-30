@@ -23,7 +23,7 @@ $payment = $mollie->payments->create([
         "value" => "10.00"
     ],
     "description" => "Payment TST",
-    "redirectUrl" => "ges/Confirm%20payment.php",
+    "redirectUrl" => "http://localhost:63342/WWI/WWI/pages/CrmPay.php",
     "webhookUrl"  => "https://webshop.example.org/mollie-webhook/",
     "method"      => "ideal"
 ]);

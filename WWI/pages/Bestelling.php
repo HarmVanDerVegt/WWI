@@ -32,35 +32,39 @@ include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
                 //product ophalen
                 $product = getStockItemByID($i);
                 $productvoorraad = getStockItemHoldingByID($i);
+
                 $product_voorraad = $productvoorraad["QuantityOnHand"];
                 $productNaam = $product["StockItemName"];
-                $_SESSION["hoeveelheid"][$i] = filter_input(INPUT_POST, "hoeveelheid", FILTER_SANITIZE_STRING);
-                //prijs ophalen
-                if ($product["RecommendedRetailPrice"] != NULL) {
-                    $productPrijs = $product["RecommendedRetailPrice"];
-                } else {
-                    $productPrijs = $product["UnitPrice"] * ($product["TaxRate"] / 100 + 1);
-                }
-                ?>
+                if ($productNaam != "") {
 
-                <tr>
-                    <td><?php print($productNaam); ?></td>
-                    <td width="10px">&nbsp;</td>
-                    <td><?php print($productPrijs); ?></td>
-                    <td width="10px"></td>
-                    <td><?php print($_SESSION["hoeveelheid"][$i]); ?></td>
-                    <td width="10px">&nbsp;</td>
-                    <!--prijs weergeven-->
-                    <td><?php echo("€" . $productPrijs * $_SESSION["hoeveelheid"][$i]); ?></td>
-                    <td width="10px">&nbsp;</td>
-                </tr>
-                <?php
-                //            totaalprijs weergeven
-                $_SESSION["totaal"] += $productPrijs * $_SESSION["hoeveelheid"][$i];
+                    $_SESSION["hoeveelheid"][$i] = filter_input(INPUT_POST, "hoeveelheid", FILTER_SANITIZE_STRING);
+                    //prijs ophalen
+                    if ($product["RecommendedRetailPrice"] != NULL) {
+                        $productPrijs = $product["RecommendedRetailPrice"];
+                    } else {
+                        $productPrijs = $product["UnitPrice"] * ($product["TaxRate"] / 100 + 1);
+                    }
+                    ?>
+
+                    <tr>
+                        <td><?php print($productNaam); ?></td>
+                        <td width="10px">&nbsp;</td>
+                        <td><?php print(number_format($productPrijs, 2)); ?></td>
+                        <td width="10px"></td>
+                        <td><?php print($_SESSION["hoeveelheid"][$i]); ?></td>
+                        <td width="10px">&nbsp;</td>
+                        <!--prijs weergeven-->
+                        <td><?php echo("€" . number_format($productPrijs * $_SESSION["hoeveelheid"][$i], 2)); ?></td>
+                        <td width="10px">&nbsp;</td>
+                    </tr>
+                    <?php
+                    //            totaalprijs weergeven
+                    $_SESSION["totaal"] += $productPrijs * $_SESSION["hoeveelheid"][$i];
+                }
             }
             ?>
             <tr>
-                <td colspan="7">Totaal : €<?php echo($_SESSION["totaal"]); ?></td>
+                <td colspan="7">Totaal : €<?php echo(number_format($_SESSION["totaal"], 2)); ?></td>
                 <td><input type="submit" value="Verder met bestellen" class="btn btn-sample"></td>
             </tr>
         </form>

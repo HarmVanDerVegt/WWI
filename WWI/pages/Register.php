@@ -3,12 +3,11 @@ if (!defined('ROOT_PATH')) {
     include("../config.php");
 }
 ?>
-
+<?php include(ROOT_PATH . "/includes/header.php"); ?>
     <head>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         <link href="\WWI\WWI\css\button.css" rel="stylesheet" type="text/css"/>
         <link href="\WWI\WWI\css\register.css" rel="stylesheet" type="text/css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src='https://www.google.com/recaptcha/api.js'></script>
         <script>
             function onSubmit(token) {
@@ -16,10 +15,8 @@ if (!defined('ROOT_PATH')) {
             }
         </script>
     </head>
-    <!-- voegt header toe -->
-<?php include(ROOT_PATH . "/includes/header.php");
 
-
+<?php
 //RACAPTCHA toevoegen
 // Checked of de form is ingevuld
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -61,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="card mx-auto" style="width: 36rem;">
         <div class="card-body mx-auto">
             <div class="signup-form">
-                <form method="post">
+                <form method="post" id="i-recaptcha">
                     <p class="hint-text">Registreer voor een account.</p>
                     <div class="form-group">
                         <div class="row">

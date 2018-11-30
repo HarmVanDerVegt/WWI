@@ -16,7 +16,7 @@ if (!defined('ROOT_PATH')) {
     include("../config.php");
 }
 if (($_SESSION['IsSystemUser']) <> 1) {
-    echo "<meta http-equiv=\"refresh\" content=\"0; url=http://localhost:63342/WWI/WWI/pages/index.php\" />";
+    echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/index.php\" />";
 }
 $customerdata = getCustomerByID($_SESSION['USID']);
 $Cityname = getCityByID($customerdata['DeliveryCityID']);

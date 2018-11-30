@@ -7,6 +7,7 @@ if (!defined('ROOT_PATH')) {
 
 include_once ROOT_PATH . "/controllers/stockItemController.php";
 include_once ROOT_PATH . "/controllers/specialDealsController.php";
+include_once ROOT_PATH . "/controllers/photoController.php";
 
 ?>
 
@@ -32,7 +33,9 @@ include_once ROOT_PATH . "/controllers/specialDealsController.php";
 
         $SpecialDeal = getSpecialDealByID(rand($LowestSpecialDealValue, $HighestSpecialDealValue));
         $StockItem = $SpecialDeal['StockItemID']; //getStockItemBySpecialDealID($SpecialDeal["StockItemID"]);
-        $afbeelding_specialdeal = "./media/SpecialDeals/SpecialDealFotoNietBeschikbaar.png";
+        $a=laad_afbeelding($StockItem);
+        $afbeelding_specialdeal = "data:image/jpeg;base64,".array_pop($a);
+        // $afbeelding_specialdeal = "./media/SpecialDeals/SpecialDealFotoNietBeschikbaar.png";
         ?>
         <div class="py-5">
             <div class="container">

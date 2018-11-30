@@ -98,7 +98,7 @@
             $_SESSION['PreferredName'] = $returnar["PreferredName"];
             $_SESSION['FullName'] = $returnar["FullName"];
             $_SESSION['LogonName'] = $returnar["LogonName"];
-            echo "<meta http-equiv=\"refresh\" content=\"0; url=http://localhost:63342/WWI/WWI/pages/welcome.php\" />";
+            echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/welcome.php\" />";
         }
 
         ?>

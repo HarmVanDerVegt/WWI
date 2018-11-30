@@ -76,8 +76,10 @@ function getRowByForeignID($value, $table1, $table2, $joinID, $joinID2)
 
     $array = [];
 
+    $i = 0;
     while ($row = $result->fetch_assoc()) {
-        $array[array_values($row)[0]] = $row;
+        $array[$i] = $row;
+        $i++;
     }
     return $array;
 }

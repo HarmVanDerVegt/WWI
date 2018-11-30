@@ -265,3 +265,28 @@ function InsertNewUser($valuarray)
     echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/confirmregister.php\" />";
 
 }
+
+//Controller voor Bestelstatus
+function getQuantityByPurchaseOrderID($value, $table1, $table2, $joinID, $joinID2)
+{
+
+    $db = createDB();
+
+    $sql = "SELECT *, COUNT(*) as Quantity
+            FROM $table1 AS t1
+            JOIN $table2 AS t2
+            ON t1.$joinID = t2.$joinID2
+            WHERE t1.$joinID = $value
+            GROUP BY stockitemID";
+    print($sql);
+    $result = $db->query($sql);
+
+    $array = [];
+
+    $i = 0;
+    while ($row = $result->fetch_assoc()) {
+        $array[$i] = $row;
+        $i++;
+    }
+    return $array;
+}

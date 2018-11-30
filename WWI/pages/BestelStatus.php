@@ -20,11 +20,12 @@ function getBestellingByPurchaseorderID($ID)
 function getProductsByPurchaseorderID($ID)
 {
 
-    return getRowByForeignID($ID, "purchaseorders", "purchaseorderlines", "PurchaseOrderID", "PurchaseOrderID");
+    return getQuantityByPurchaseOrderID($ID, "purchaseorders", "purchaseorderlines", "PurchaseOrderID", "PurchaseOrderID");
 }
 
-$array = getBestellingByPurchaseorderID(2033);
-$productenarray = getProductsByPurchaseorderID(2033);
+
+$array = getBestellingByPurchaseorderID(17);
+$productenarray = getProductsByPurchaseorderID(17);
 $totaal = 0;
 
 ?>
@@ -91,7 +92,7 @@ $totaal = 0;
 
             $productprijs = $product['ExpectedUnitPricePerOuter'];
             $productprijs = number_format($productprijs, 2);
-            $hoeveelheid = 1;//$product['Quantity'];
+            $hoeveelheid = $product['Quantity'];
             $subtotaal = number_format($productprijs * $hoeveelheid, 2);
             ?>
 

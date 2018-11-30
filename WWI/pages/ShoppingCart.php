@@ -85,14 +85,14 @@ if (isset($_SESSION["cart"])) {
                     <!--productnaam, producthoeveelheid weergeven-->
                     <td><?php print($productNaam); ?></td>
                     <td width="10px">&nbsp;</td>
-                    <td><?php print($productPrijs); ?></td>
+                    <td><?php print(number_format($productPrijs,2)); ?></td>
                     <td width="10px"></td>
                     <td><input type="number" name="hoeveelheid" min="1" max="<?php print($product_voorraad) ?>"
                                value="<?php print($_SESSION["hoeveelheid"][$i]); ?>" required>
                     </td>
                     <td width="10px">&nbsp;</td>
                     <!--prijs weergeven-->
-                    <td><?php echo("€" . $productPrijs * $_SESSION["hoeveelheid"][$i]); ?></td>
+                    <td><?php echo("€" . number_format($productPrijs * $_SESSION["hoeveelheid"][$i],2)); ?></td>
                     <td width="10px">&nbsp;</td>
                     <!--winkelwagen updaten-->
                     <td><input class="btn btn-sample" type="submit" value="Update winkelwagen"></td>
@@ -106,7 +106,7 @@ if (isset($_SESSION["cart"])) {
         }
         ?>
         <tr>
-            <td colspan="7">Totaal : €<?php echo($_SESSION["totaal"]); ?></td>
+            <td colspan="7">Totaal : €<?php echo(number_format($_SESSION["totaal"],2)); ?></td>
             <td colspan="5"></td>
             <?php if ($_SESSION["totaal"] > 0) { ?>
                 <td colspan="5"><input class="btn btn-sample" type="submit" value="Afrekenen"></td>

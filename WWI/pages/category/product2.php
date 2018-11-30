@@ -30,8 +30,8 @@ $CombiDeals = generateCombiDeals($StockItem);
 <div class="container">
     <h4><?php print $StockItem["StockItemName"] ?></h4>
     <div class="row">
-        <div class="col-6 offset-6">
-            <div style=""><?php print generateReviews() ?></div>
+        <div class="col-6 offset-6" style="padding-bottom: 10px">
+            <div style="padding-bottom: 10px"><?php print generateReviews() ?></div>
         </div>
     </div>
     <div class="row">
@@ -40,8 +40,8 @@ $CombiDeals = generateCombiDeals($StockItem);
         </div>
         <div class="col-6">
             <div class="row">
-                <div class="col">
-                    <?php print "<b>Prijs:</b> €" . generatePrice($StockItem); ?>
+                <div class="col" style="padding-bottom: 10px">
+                    <?php print "<b>Prijs:</b> €" . number_format(generatePrice($StockItem), 2); ?>
                     <br>
                     <?php print "<b>Voorraad:</b> " . generateStock($StockItem) . " eenheden"; ?>
                     <br>
@@ -57,22 +57,14 @@ $CombiDeals = generateCombiDeals($StockItem);
             </div>
         </div>
     </div>
+    <br>
+    <div class="row">
+        <div class="col">
+            <?php print generateProductPageInformation($StockItem); ?>
+        </div>
+    </div>
 </div>
-
-<!--<div class="container">-->
-<!--    <div class="row">-->
-<!--        <div class="bg-light card">-->
-<!--            <h4>Combideals:</h4>-->
-<!--            <p> Misschien zijn deze producten een leuke combinatie met dit product? </p>-->
-<!--            <div class="card">-->
-<!--                <div class="card-body">-->
-<!--                    <h5 class="card-title">Hoi</h5>-->
-<!--                    <p class="card-text">Hoi2</p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+<br>
 <div class="container">
     <div class="row">
         <div class="bg-light card">
@@ -82,6 +74,7 @@ $CombiDeals = generateCombiDeals($StockItem);
         </div>
     </div>
 </div>
+<br>
 </body>
 
 <?php include_once ROOT_PATH . "/includes/footer.php"; ?>

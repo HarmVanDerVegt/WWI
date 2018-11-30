@@ -23,7 +23,9 @@ function generateProductPageInformation($StockItem) {
 
     $product_specs .= "Merk: " . getBrand($StockItem) . "<br>";
 
-    $product_specs .= "Dit product is: " . getSize($StockItem) . "<br>";
+    if (getSize($StockItem) != null){
+        $product_specs .= "Dit product is: " . getSize($StockItem) . "<br>";
+    }
 
     $product_specs .= "Het gewoonlijke gewicht per eenheid is: " . getWeight($StockItem) . "<br>";
 

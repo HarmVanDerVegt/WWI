@@ -21,16 +21,16 @@ function getUser($logonName, $password){
     $result = $result->fetch_assoc();
 
 
-
+    $db->close();
     $resultww = password_verify($password,$result['HashedPassword']);
     if($resultww == TRUE){
-        $db->close();
 
+        $result['Succes']= $resultww;
         return $result;}
-    else{
-        $db->close();
+        else{
+            $result['Succes']= FALSE;
 
-        echo "ww is verkeerd";
+
     }
 }
 

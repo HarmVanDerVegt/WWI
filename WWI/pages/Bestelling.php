@@ -11,8 +11,11 @@ include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
 
     <p>Zijn dit uw geselecteerde producten?<br>
         <b>Let Op!</b> U kunt uw producten hierna niet meer wijzigen.</p>
+<form action="ShoppingCart.php">
+    <input type="submit" class="btn btn-sample" value="Terug naar de winkelwagen">
+</form>
     <table class="table-striped table-sm">
-        <form action="Bestelling.php" method="post">
+        <form action="Afrekenen.php" method="post">
             <tr class="table-primary">
                 <th>Product</th>
                 <th width="10px">&nbsp;</th>
@@ -61,13 +64,22 @@ include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
                     //            totaalprijs weergeven
                     $_SESSION["totaal"] += $productPrijs * $_SESSION["hoeveelheid"][$i];
                 }
-            }
+
             ?>
-            <tr>
+            <!--Hidden values meegeven-->
+            <input type="hidden" name="productNaam" value="<?php $productNaam[$i]; ?>">
+            <input type="hidden" name="productID" value="<?php $product[$i]; ?> ">
+            <input type="hidden" name="hoeveelheid" value="<?php $_SESSION["hoeveelheid"][$i]; ?>">
+            <input type="hidden" name="productprijs" value="<?php $productPrijs[$i]; ?>">
+            <input type="hidden" name="totaal" value="<?php $_SESSION["totaal"]; ?>">
+            <?php } ?>
+                <tr>
                 <td colspan="7">Totaal : €<?php echo(number_format($_SESSION["totaal"], 2)); ?></td>
                 <td><input type="submit" value="Verder met bestellen" class="btn btn-sample"></td>
             </tr>
         </form>
     </table>
+
+
     <!--footer includen-->
 <?php include(ROOT_PATH . "/includes/footer.php"); ?>

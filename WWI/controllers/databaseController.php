@@ -278,7 +278,7 @@ function getQuantityByPurchaseOrderID($value, $table1, $table2, $joinID, $joinID
             ON t1.$joinID = t2.$joinID2
             WHERE t1.$joinID = $value
             GROUP BY stockitemID";
-    print($sql);
+
     $result = $db->query($sql);
 
     $array = [];

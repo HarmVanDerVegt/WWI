@@ -25,8 +25,8 @@ include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
 
 
             <?php
-            $i = filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT);
-            $_SESSION["cart"][$i] = $i;
+           // $i = filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT);
+           // $_SESSION["cart"][$i] = $i;
 
             foreach ($_SESSION["cart"] as $i) {
                 //product ophalen
@@ -37,7 +37,7 @@ include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
                 $productNaam = $product["StockItemName"];
                 if ($productNaam != "") {
 
-                    $_SESSION["hoeveelheid"][$i] = filter_input(INPUT_POST, "hoeveelheid", FILTER_SANITIZE_STRING);
+                    //$_SESSION["hoeveelheid"][$i] = filter_input(INPUT_POST, "hoeveelheid", FILTER_SANITIZE_STRING);
                     //prijs ophalen
                     if ($product["RecommendedRetailPrice"] != NULL) {
                         $productPrijs = $product["RecommendedRetailPrice"];

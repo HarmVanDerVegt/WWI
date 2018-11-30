@@ -262,6 +262,6 @@ function InsertNewUser($valuarray)
     $_SESSION["Voornaam"] = $voornaam;
     $_SESSION["achternaam"] = $achternaam;
     $_SESSION["Email"] = $Email;
-    echo "<meta http-equiv=\"refresh\" content=\"0; url=http://localhost:63342/WWI/WWI/pages/confirmregister.php\" />";
+    echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/confirmregister.php\" />";
 
 }

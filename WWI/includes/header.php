@@ -48,6 +48,9 @@
         if (!isset($_SESSION["IsSystemUser"])) {
             $_SESSION["IsSystemUser"] = 0;
         }
+        if (!isset($_SESSION["IsEmployee"])) {
+            $_SESSION["IsEmployee"] = 0;
+        }
 
         if ($_SESSION['IsSystemUser'] == 1) {
             echo "<a class='text-white'> Hallo " . $_SESSION['PreferredName'] . "</a>";

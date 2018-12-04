@@ -27,45 +27,45 @@ if (!defined('ROOT_PATH')) {
 
     <br>
 
-<?php
+    <?php
 //RACAPTCHA
 // Checked of de form is ingevuld
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    function post_captcha($user_response) {
-        $fields_string = '';
-        $fields = array(
-            'secret' => '6Ld1snwUAAAAAGmSnzS4R_rwtlxNulBSW1l8Z-zY',
-            'response' => $user_response
-        );
-        foreach ($fields as $key => $value)
-            $fields_string .= $key . '=' . $value . '&';
-        $fields_string = rtrim($fields_string, '&');
+        function post_captcha($user_response) {
+            $fields_string = '';
+            $fields = array(
+                'secret' => '6Ld1snwUAAAAAGmSnzS4R_rwtlxNulBSW1l8Z-zY',
+                'response' => $user_response
+            );
+            foreach ($fields as $key => $value)
+                $fields_string .= $key . '=' . $value . '&';
+            $fields_string = rtrim($fields_string, '&');
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://www.google.com/recaptcha/api/siteverify');
-        curl_setopt($ch, CURLOPT_POST, count($fields));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, True);
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, 'https://www.google.com/recaptcha/api/siteverify');
+            curl_setopt($ch, CURLOPT_POST, count($fields));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, True);
 
-        $result = curl_exec($ch);
-        curl_close($ch);
+            $result = curl_exec($ch);
+            curl_close($ch);
 
-        return json_decode($result, true);
-    }
+            return json_decode($result, true);
+        }
 
-    // Call the function post_captcha
-    $res = post_captcha($_POST['g-recaptcha-response']);
+        // Call the function post_captcha
+        if (isset($_POST['g-recaptcha-response'])) {
+            $res = post_captcha($_POST['g-recaptcha-response']);
 
-    if (isset($res)) {
 
-        if (!$res['success']) {
-            echo 'reCAPTCHA error';
+            if (!$res['success']) {
+                echo 'reCAPTCHA error';
+            }
         }
     }
-}
 //EINDE RECAPTCHA
-?>
+    ?>
 
     <!--Tabel voor invoeren contactgegevens-->
     <div class="card mx-auto" style="width: 36rem;">
@@ -136,5 +136,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- voeg footer toe -->
     <br>
     <br>
-<?php include(ROOT_PATH . "/includes/footer.php"); ?>
+    <?php include(ROOT_PATH . "/includes/footer.php"); ?>
 </body>

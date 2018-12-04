@@ -15,9 +15,7 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
 <?php
 include_once(ROOT_PATH . "/includes/header.php");
 
-if (!defined('ROOT_PATH')) {
-    include("../config.php");
-}
+
 if (($_SESSION['IsSystemUser']) <> 1) {
     echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/index.php\" />";
 }

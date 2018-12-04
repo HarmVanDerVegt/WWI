@@ -12,8 +12,8 @@ if (!defined('ROOT_PATH')) {
 
 include_once ROOT_PATH . "/controllers/Payment/vendor/autoload.php";
 
-$paymentID = 123456;
-$paymentVAL = 19.99;
+$paymentID = $_POST['purchaseorderID'];
+$paymentVAL = $_POST['Totaalprijs'];
 
 
 $mollie = new \Mollie\Api\MollieApiClient();
@@ -25,7 +25,7 @@ $payment = $mollie->payments->create([
         "value" => "$paymentVAL"
     ],
     "description" => "$paymentID",
-    "redirectUrl" => "https://www.windesheim.nl/",
+    "redirectUrl" => "https://www.google.nl/",
     "webhookUrl"  => "https://www.google.nl/",
     "method"      => "ideal"
 ]);

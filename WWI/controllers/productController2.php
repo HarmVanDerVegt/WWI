@@ -184,18 +184,30 @@ function generatePhoto($StockItem) {
     return($product_afbeelding_path);
 }
 
-function generateReviews() {
+function generateReviews($StockItem) {
     //TODO: Maak gebruik van stockitems
-    $product_review = filter_input(INPUT_POST, "ster", FILTER_VALIDATE_INT);
+    $product_review = getAverageReviewValue($StockItem);
     if (empty($product_review)) {
-        //TODO: Verander naar gemiddelde!
-        $product_review = 3;
+        $product_review = round(getAverageReviewValue($StockItem));
+        If ($product_review <= 0){
+            $product_review = 1;
+        }
+        if ($product_review >= 5){
+            $product_review = 5;
+        }
     }
 
     $product_review = getCurrentReviewValue($product_review);
 
     return $product_review;
 }
+
+function generateUserReview($ReviewWaarde){
+    $ReviewWaarde = round($ReviewWaarde);
+
+    return getCurrentReviewValue($ReviewWaarde);
+}
+
 
 function generateCombiDealCards($combiDeals) {
 

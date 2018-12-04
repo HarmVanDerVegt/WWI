@@ -8,6 +8,7 @@ include_once ROOT_PATH . "/includes/header.php";
 include_once ROOT_PATH . "/controllers/productController2.php";
 include_once ROOT_PATH . "/controllers/stockItemController.php";
 include_once ROOT_PATH . "/controllers/photoController.php";
+include_once ROOT_PATH . "/controllers/reviewController.php";
 ?>
 <html>
 <head>
@@ -31,7 +32,17 @@ $CombiDeals = generateCombiDeals($StockItem);
     <h4><?php print $StockItem["StockItemName"] ?></h4>
     <div class="row">
         <div class="col-6 offset-6" style="padding-bottom: 10px">
-            <div style="padding-bottom: 10px"><?php print generateReviews() ?></div>
+            <div style="padding-bottom: 10px">
+            <?php if (isset($_SESSION["USID"])){
+                if (getUserSpecificReviewByStockItemID($_SESSION["USID"], $StockItem["StockItemID"]) != null){
+                    print generateUserReview(getUserSpecificReviewByStockItemID($_SESSION["USID"], $StockItem["StockItemID"])["Waarde"]);
+                } else{
+                    print generateReviews($StockItem["StockItemID"]) . "(" . number_format(getAverageReviewValue($StockItem["StockItemID"]), 1) . ")";
+                }
+            } else {
+                print generateReviews($StockItem["StockItemID"]) . "(" . number_format(getAverageReviewValue($StockItem["StockItemID"]), 1) . ")";
+            }; ?>
+            </div>
         </div>
     </div>
     <div class="row">

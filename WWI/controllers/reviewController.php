@@ -22,18 +22,13 @@ function getAllReviews() {
 function getUserSpecificReviewByStockItemID($CustomerID, $StockItemID) {
 
     $db = createDB();
-    $array = [];
     $sql = ""
-            . "SELECT * "
+            . "SELECT Waarde "
             . "FROM review "
             . "WHERE customerID = '" . $CustomerID . "' "
             . "AND stockitemID = '" . $StockItemID . "' ";
 
     $result = $db->query($sql);
-
-//    while ($row = $result->fetch_assoc()) {
-//        $array[array_values($row)[0]] = $row;
-//    }
 
     $db->close();
 
@@ -85,18 +80,17 @@ function getCurrentReviewValue($reviewwaarde) {
         $html .= createUnfilledStar($i);
     }
 
+
     return $html;
 }
 
 function insertReviewValue($userid, $stockitemID, $reviewvalue) {
 
     $db = createDB();
-    $sql = ""
-            . "INSERT INTO review (PersonID, StockItemID, Waarde)  "
-            . "VALUES ( '" . $userid . ", " . $stockitemID . ", " . $reviewvalue . "' )  ";
+    $sql = "INSERT INTO review (PersonID, StockItemID, Waarde)
+            VALUES ( '" . $userid . ", " . $stockitemID . ", " . $reviewvalue . "' )
+            ON DUPLICATE KEY UPDATE Waarde=$reviewvalue";
 
-    // Nog een if statement nodig om te checken of hij al ingevuld is.
-    // In dat geval moet hij niet opnieuw geinsert worden maar overschreven worden.
 }
 
 function getAverageReviewValue($stockitemID) {
@@ -104,7 +98,7 @@ function getAverageReviewValue($stockitemID) {
     $db = createDB();
     $array = [];
     $sql = ""
-            . "SELECT AVG(Waarde) "
+            . "SELECT AVG(Waarde) average "
             . "FROM review "
             . "WHERE StockItemID = '" . $stockitemID . "' ";
 
@@ -112,5 +106,5 @@ function getAverageReviewValue($stockitemID) {
 
     $db->close();
 
-    return "Klanten geven dit product gemiddeld een " . $result;
+    return $result["average"];
 }

@@ -38,15 +38,17 @@ if (isset($_POST["review"])){
     <div class="row">
         <div class="col-6 offset-6" style="padding-bottom: 10px">
             <div style="padding-bottom: 10px">
-            <?php if (isset($_SESSION["USID"])){
+            <?php
+            $addendum = "(" . number_format(getAverageReviewValue($StockItem["StockItemID"]), 1) . "), " . getReviewCountByStockItemID($StockItem) . " reviews";
+            if (isset($_SESSION["USID"])){
                 $reviewValue = getUserSpecificReviewByStockItemID($_SESSION["USID"], $StockItem["StockItemID"]);
                 if ($reviewValue != null){
-                    print generateUserReview($reviewValue) . "(" . number_format(getAverageReviewValue($StockItem["StockItemID"]), 1) . ")";
+                    print generateUserReview($reviewValue) . $addendum;
                 } else{
-                    print generateReviews($StockItem["StockItemID"]) . "(" . number_format(getAverageReviewValue($StockItem["StockItemID"]), 1) . ")";
+                    print generateReviews($StockItem["StockItemID"]) . $addendum;
                 }
             } else {
-                print generateReviews($StockItem["StockItemID"]) . "(" . number_format(getAverageReviewValue($StockItem["StockItemID"]), 1) . ")";
+                print generateReviews($StockItem["StockItemID"]) . $addendum;
             }; ?>
             </div>
         </div>

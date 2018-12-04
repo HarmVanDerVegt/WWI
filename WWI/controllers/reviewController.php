@@ -115,3 +115,19 @@ function getAverageReviewValue($stockitemID) {
 
     return $result["average"];
 }
+
+function getReviewCountByStockItemID($StockItem){
+    $db = createDB();
+
+    $sql = "SELECT COUNT(*) count
+            FROM reviews
+            WHERE StockItemID=" . $StockItem["StockItemID"];
+
+    $result = $db->query($sql);
+
+    $result = $result->fetch_assoc();
+
+    $db->close();
+
+    return $result["count"];
+}

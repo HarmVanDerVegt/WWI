@@ -7,8 +7,10 @@ if (!defined('ROOT_PATH')) {
 include(ROOT_PATH . "/includes/header.php");
 include_once(ROOT_PATH . "/controllers/stockItemController.php");
 include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
-?>
 
+
+if($_SESSION["totaal"] > 0){
+?>
     <p>Zijn dit uw geselecteerde producten?<br>
         <b>Let Op!</b> U kunt uw producten hierna niet meer wijzigen.</p>
     <form action="ShoppingCart.php">
@@ -65,7 +67,14 @@ include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
             </tr>
         </form>
     </table>
+<?php }else{ ?>
+    <a href="../pages/index.php"><h1>Er is helaas iets misgegaan, probeer het nog eens.</h1></a>
 
+    <?php
+}
+
+
+?>
 
     <!--footer includen-->
 <?php include(ROOT_PATH . "/includes/footer.php"); ?>

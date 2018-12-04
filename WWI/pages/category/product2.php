@@ -26,6 +26,11 @@ $StockItem = getStockItemByID(filter_input(INPUT_GET, "productID", FILTER_VALIDA
 $Stock = getStockItemHoldingByID($StockItem["StockItemID"])["QuantityOnHand"];
 $CombiDeals = generateCombiDeals($StockItem);
 
+if (isset($_POST["review"])){
+    if (isset($_SESSION["USID"])){
+        insertReviewValue($_SESSION["USID"], $StockItem["StockItemID"], $_POST["ster"]);
+    }
+}
 ?>
 
 <div class="container">
@@ -34,8 +39,9 @@ $CombiDeals = generateCombiDeals($StockItem);
         <div class="col-6 offset-6" style="padding-bottom: 10px">
             <div style="padding-bottom: 10px">
             <?php if (isset($_SESSION["USID"])){
-                if (getUserSpecificReviewByStockItemID($_SESSION["USID"], $StockItem["StockItemID"]) != null){
-                    print generateUserReview(getUserSpecificReviewByStockItemID($_SESSION["USID"], $StockItem["StockItemID"])["Waarde"]);
+                $reviewValue = getUserSpecificReviewByStockItemID($_SESSION["USID"], $StockItem["StockItemID"]);
+                if ($reviewValue != null){
+                    print generateUserReview($reviewValue) . "(" . number_format(getAverageReviewValue($StockItem["StockItemID"]), 1) . ")";
                 } else{
                     print generateReviews($StockItem["StockItemID"]) . "(" . number_format(getAverageReviewValue($StockItem["StockItemID"]), 1) . ")";
                 }

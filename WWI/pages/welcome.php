@@ -10,7 +10,7 @@ include_once ROOT_PATH . "/controllers/databaseController.php";
 include_once ROOT_PATH . "/controllers/userController.php";
 include_once ROOT_PATH . "/controllers/stockItemController.php";
 
-$debug = 0;
+
 ?>
 <?php
 include_once(ROOT_PATH . "/includes/header.php");
@@ -24,16 +24,6 @@ if (($_SESSION['IsSystemUser']) <> 1) {
 $customerdata = getCustomerByID($_SESSION['USID']);
 $Cityname = getCityByID($customerdata['DeliveryCityID']);
 
-if ($debug == 1) {
-    echo $_SESSION['IsEmployee'] . "IsEmployee <BR>";
-    echo $_SESSION['IsSystemUser'] . "IsSystemUser <BR>";
-    echo $_SESSION['PreferredName'] . "PreferredName <BR>";
-    echo $_SESSION['FullName'] . "FullName <BR>";
-    echo $_SESSION['LogonName'] . "LogonName <BR>";
-    echo $_SESSION['USID'] . "LogonName <BR>";
-    print_r($_SESSION . '<br>');
-    print_r($customerdata);
-}
 
 
 
@@ -177,18 +167,6 @@ echo '<BR>';
                 </div>
             </div>
 
-
-            <!--            <div class="col-md-6">-->
-            <!--                <div class="card-custom"">-->
-            <!--                    <div class="card-block">-->
-            <!--                        <h4 class="card-custom-title text-light">Wijzigen</h4>-->
-            <!--                        <!-- wijzigen klant gegevens -->
-            <!---->
-            <!---->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
-            <!--        </div><br>-->
 
 
         </div>

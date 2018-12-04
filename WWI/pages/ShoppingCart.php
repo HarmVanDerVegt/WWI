@@ -104,9 +104,9 @@ if (isset($_SESSION["cart"])) {
                     <td><a class="fa fa-trash btn btn-danger" href="?delete=<?php echo($i); ?>"></a></td>
                 </tr>
                 <?php
+                $_SESSION["totaal"] += $productPrijs * $_SESSION["hoeveelheid"][$i];
             }
             //            totaalprijs weergeven
-            $_SESSION["totaal"] += $productPrijs * $_SESSION["hoeveelheid"][$i];
             }
             ?>
             <tr>

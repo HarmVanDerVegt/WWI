@@ -44,11 +44,14 @@
         <!-- einde dropdown category -->
         <!-- login -->
         <?php
-
+// set session vallues als er geen gebruiker is ingelogd
         if (!isset($_SESSION["IsSystemUser"])) {
             $_SESSION["IsSystemUser"] = 0;
         }
-
+        if (!isset($_SESSION["IsEmployee"])) {
+            $_SESSION["IsEmployee"] = 0;
+        }
+// welcome gebruiker
         if ($_SESSION['IsSystemUser'] == 1) {
             echo "<a class='text-white'> Hallo " . $_SESSION['PreferredName'] . "</a>";
         } ?>
@@ -127,6 +130,7 @@
             <button class=\"btn btn-sample btn-sample-success\" type=\"submit\">Log Uit 
             </button>
         </form>";
+//            logout functie
             $logout = filter_input(INPUT_POST, "Logout");
             if ($logout == "TRUE") {
 
@@ -145,12 +149,13 @@
                    id="Zoeken">
             <button class="btn btn-sample btn-sample-success" type="submit">Zoeken <i class="fa fa-search"></i>
             </button>
-
+<!-- winkelwagen-->
         </form>
         <form class="form-inline my-2 my-lg-0" action="/WWI/WWI/pages/ShoppingCart.php">
             <button class="btn btn-sample btn-sample-success" type="submit">Winkelwagen <i
                         class="fa fa-shopping-cart"></i></button>
         </form>
+<!--        contact pagina-->
         <form class="form-inline my-2 my-lg-0" action="/WWI/WWI/pages/Contact.php">
             <button class="btn btn-sample btn-sample-success" type="submit">Contact</button>
         </form>

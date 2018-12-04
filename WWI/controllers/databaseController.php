@@ -130,8 +130,8 @@ function getRowByTwoForeignIDs($value, $table1, $table2, $table3, $joinID, $join
     return $returnValue;
 }
 
-function InsertNewUser($valuarray)
-{
+function InsertNewUser($valuarray){
+//    verkrijg data van array
     $voornaam = $valuarray["Voornaam"];
     $achternaam = $valuarray["Achternaam"];
     $straat = $valuarray["Straat"];
@@ -144,6 +144,8 @@ function InsertNewUser($valuarray)
     $phone = $valuarray["Phone"];
     $Provincie = $valuarray["Provincie"];
     $date = date("Y/m/d");
+
+//    controlleer ww
     if ($password == $verpassword) {
         $passhash = password_hash($password, PASSWORD_DEFAULT);
     } else {
@@ -153,15 +155,17 @@ function InsertNewUser($valuarray)
     if (isset($phone)) {
         $phone = 000000;
     }
+//     start database connectie
     $db = createDB();
+//    verkrijg personid van database
     $maxsql = "select max(PersonID) +1 from people";
     $maxresult = $db->query($maxsql);
     $maxidresultar = $maxresult->fetch_assoc();
-
+// verkrijg customerid van database
     $customeridsql = "select max(CustomerID) +1 from customers";
     $customerresult = $db->query($customeridsql);
     $customerresultar = $customerresult->fetch_assoc();
-
+//verkrijg cityid van database
     $citysql = "select CityID 
                 from cities 
                 where CityName = '$woonplaats'";
@@ -177,7 +181,7 @@ function InsertNewUser($valuarray)
         foreach ($maxcityidresultar as $maxcityarresult) {
             $cityidresult = $maxcityarresult;
         }
-
+// verkijg provincieid van database
         $getprovincieid = "select StateProvinceID 
                           from stateprovinces 
                           where StateProvinceName 
@@ -187,6 +191,7 @@ function InsertNewUser($valuarray)
         foreach ($getprovincieidresultar as $provinceidresultar) {
             $provinceid = $provinceidresultar;
         }
+//        voeg stad toe als deze niet bestaat
         $createcitysql = "insert into cities
                           set CityID=($cityidresult),
                           CityName=('$woonplaats'), 
@@ -194,6 +199,7 @@ function InsertNewUser($valuarray)
                           LastEditedBy=(1),
                           ValidFrom =('$date 01:00:00'),
                           ValidTo =('9999-12-31 23:59:59')";
+//        verkijg de id van de nieuwe city
         $db->query($createcitysql);
         $citysql = "select CityID 
                 from cities 
@@ -212,7 +218,7 @@ function InsertNewUser($valuarray)
     foreach ($customerresultar as $customerarresult) {
         $customerID = $customerarresult;
     }
-
+// voeg de waardes toe aan de people table
     $peoplesql = "insert into people
                   SET wideworldimporters.people.LogonName = ('$Email'),
                   wideworldimporters.people.HashedPassword = ('$passhash'),
@@ -231,7 +237,7 @@ function InsertNewUser($valuarray)
                   ValidTo =('9999-12-31 23:59:59')";
     $db->query($peoplesql);
 
-
+// voeg de waardes toe aan de cumtomers table
     $customersql = " insert into customers 
                     set CustomerID=($customerID),
                     PrimaryContactPersonID=($maxidresult),

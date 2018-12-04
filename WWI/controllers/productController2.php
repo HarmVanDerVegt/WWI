@@ -8,7 +8,8 @@ include_once ROOT_PATH . "/controllers/colorController.php";
 include_once ROOT_PATH . "/controllers/specialDealsController.php";
 include_once ROOT_PATH . "/controllers/reviewController.php";
 
-function generateProductPageInformation($StockItem) {
+function generateProductPageInformation($StockItem)
+{
     $StockItemID = $StockItem["StockItemID"];
 
     //Haal voorraad op. TODO: Doen we dit niet ergens anders?
@@ -23,7 +24,7 @@ function generateProductPageInformation($StockItem) {
 
     $product_specs .= "Merk: " . getBrand($StockItem) . "<br>";
 
-    if (getSize($StockItem) != null){
+    if (getSize($StockItem) != null) {
         $product_specs .= "Dit product is: " . getSize($StockItem) . "<br>";
     }
 
@@ -117,7 +118,8 @@ function getBrand($StockItem)
 
 }
 
-function generateDiscountPercentage($StockItem) {
+function generateDiscountPercentage($StockItem)
+{
     $StockItemID = $StockItem["StockItemID"];
     $SpecialDealStockItemID = array_column(getSpecialDealByStockItemID($StockItemID), "StockItemID");
     $DiscountPercentage = 0;
@@ -125,13 +127,14 @@ function generateDiscountPercentage($StockItem) {
         if ($SpecialDealStockItemID[0] == $StockItemID) {
             $SpecialDealInfo = getSpecialDealByStockItemID($StockItemID);
             $DiscountPercentage = array_column($SpecialDealInfo, "DiscountPercentage");
-            $DiscountPercentage = (int) $DiscountPercentage[0];
+            $DiscountPercentage = (int)$DiscountPercentage[0];
         }
     }
     return $DiscountPercentage;
 }
 
-function generateDiscountTextIfApplicable($StockItem) {
+function generateDiscountTextIfApplicable($StockItem)
+{
     $DiscountPercentage = generateDiscountPercentage($StockItem);
     $product_discount_text = "";
     if ($DiscountPercentage != NULL && $DiscountPercentage != 0) {
@@ -140,7 +143,8 @@ function generateDiscountTextIfApplicable($StockItem) {
     return $product_discount_text;
 }
 
-function generatePrice($StockItem) {
+function generatePrice($StockItem)
+{
 
     // Indien de voorgestelde prijs bekend is, verandert $product_prijs in de prijs. Indien deze niet bekend is pakt hij de vaste waarden binnen de UnitPrice en vermenigvuldigt hij deze met het TaxRate percentage.
     // Tevens checkt deze functie of het product in de aanbieding is en past dit toe.
@@ -149,12 +153,12 @@ function generatePrice($StockItem) {
 
     if ($StockItem["RecommendedRetailPrice"] != NULL) {
         if ($DiscountPercentage != NULL && $DiscountPercentage != 0) {
-            $product_prijs = number_format(($StockItem["RecommendedRetailPrice"] / 100 * ( 100 - $DiscountPercentage)), 2);
+            $product_prijs = number_format(($StockItem["RecommendedRetailPrice"] / 100 * (100 - $DiscountPercentage)), 2);
         } else {
             $product_prijs = number_format($StockItem["RecommendedRetailPrice"], 2);
         }
     } elseif ($StockItem["RecommendedRetailPrice"] == NULL && $DiscountPercentage != (NULL || 0)) {
-        $product_prijs = number_format(($StockItem["UnitPrice"] * $StockItem["TaxRate"] / 100 + 1) / 100 * ( 100 - $DiscountPercentage), 2);
+        $product_prijs = number_format(($StockItem["UnitPrice"] * $StockItem["TaxRate"] / 100 + 1) / 100 * (100 - $DiscountPercentage), 2);
     } else {
         $product_prijs = ("--,--" . "<br>");
     }
@@ -162,7 +166,8 @@ function generatePrice($StockItem) {
     return $product_prijs;
 }
 
-function generateStock($StockItem) {
+function generateStock($StockItem)
+{
 // Indien de voorraad meer dan 0 is, is er voorraad, verandert $product_voorraad naar de voorraad. Anders is deze NULL
     $Stock = getStockItemHoldingByID($StockItem["StockItemID"]);
     if ($Stock["QuantityOnHand"] > 0) {
@@ -176,20 +181,28 @@ function generateStock($StockItem) {
     return $product_voorraad;
 }
 
-function generatePhoto($StockItem) {
+function generatePhoto($StockItem)
+{
     $StockGroups = getStockGroupIDsFromStockItemID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
     $SingleStockGroup = array_rand($StockGroups, 1);
     $product_afbeelding_path = getImageLinkFromStockGroupID($StockGroups[$SingleStockGroup]);
 
-    return($product_afbeelding_path);
+    return ($product_afbeelding_path);
 }
 
-function generateReviews() {
-    //TODO: Maak gebruik van stockitems
-    $product_review = filter_input(INPUT_POST, "ster", FILTER_VALIDATE_INT);
-    if (empty($product_review)) {
-        //TODO: Verander naar gemiddelde!
-        $product_review = 3;
+function generateReviews($StockItem)
+{
+
+    $ReviewWaarde = getAverageReviewValue($StockItem);
+    $product_review = (float)$ReviewWaarde;
+
+    $product_review = round($product_review);
+    $product_review = (int)$product_review;
+    If ($product_review <= 0) {
+        $product_review = 1;
+    }
+    if ($product_review >= 5) {
+        $product_review = 5;
     }
 
     $product_review = getCurrentReviewValue($product_review);
@@ -197,7 +210,25 @@ function generateReviews() {
     return $product_review;
 }
 
-function generateCombiDealCards($combiDeals) {
+function generateUserReview($ReviewWaarde)
+{
+
+    //$ReviewWaarde = 3;
+    $ReviewWaarde = (int)$ReviewWaarde;
+
+    If ($ReviewWaarde <= 0) {
+        $ReviewWaarde = 1;
+    }
+    if ($ReviewWaarde >= 5) {
+        $ReviewWaarde = 5;
+    }
+
+    return getCurrentReviewValue($ReviewWaarde);
+}
+
+
+function generateCombiDealCards($combiDeals)
+{
 
     $html = "";
 
@@ -227,7 +258,8 @@ function generateCombiDealCards($combiDeals) {
     return $html;
 }
 
-function generateCombiDeals($StockItem) {
+function generateCombiDeals($StockItem)
+{
 
     //Haal alle categories van dit product op.
     $categories = getStockGroupIDsFromStockItemID($StockItem["StockItemID"]);

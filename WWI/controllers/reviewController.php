@@ -22,29 +22,26 @@ function getAllReviews() {
 function getUserSpecificReviewByStockItemID($CustomerID, $StockItemID) {
 
     $db = createDB();
-    $array = [];
     $sql = ""
-            . "SELECT * "
-            . "FROM review "
-            . "WHERE customerID = '" . $CustomerID . "' "
-            . "AND stockitemID = '" . $StockItemID . "' ";
+            . "SELECT Waarde "
+            . "FROM reviews "
+            . "WHERE personID = " . $CustomerID . " "
+            . "AND stockitemID = " . $StockItemID . " ";
 
     $result = $db->query($sql);
 
-//    while ($row = $result->fetch_assoc()) {
-//        $array[array_values($row)[0]] = $row;
-//    }
+    $result = $result->fetch_assoc();
 
     $db->close();
 
-    return $result;
+    return $result["Waarde"];
 }
 
 function createFilledStar($ID) {
     $html = "
                 <form method=\"post\">
             <input type='hidden' name=\"ster\" value=\"$ID\" />
-            <button style=\"float: left; padding-left: 0; background:transparent; border-style:hidden\">
+            <button name='review' value='click' style=\"float: left; padding-left: 0; background:transparent; border-style:hidden\">
             <i class=\"fas fa-star\"></i>
             </button>
             </form>
@@ -56,7 +53,7 @@ function createUnfilledStar($ID) {
     $html = "
                 <form method=\"post\">
             <input type='hidden' name=\"ster\" value=\"$ID\" />
-            <button style=\"float: left; padding-left: 0; background:transparent; border-style:hidden\">
+            <button name='review' value='click' style=\"float: left; padding-left: 0; background:transparent; border-style:hidden\">
             <i class=\"far fa-star\"></i>
             </button>
             </form>
@@ -85,18 +82,20 @@ function getCurrentReviewValue($reviewwaarde) {
         $html .= createUnfilledStar($i);
     }
 
+
     return $html;
 }
 
 function insertReviewValue($userid, $stockitemID, $reviewvalue) {
 
     $db = createDB();
-    $sql = ""
-            . "INSERT INTO review (PersonID, StockItemID, Waarde)  "
-            . "VALUES ( '" . $userid . ", " . $stockitemID . ", " . $reviewvalue . "' )  ";
+    $sql = "INSERT INTO reviews (PersonID, StockItemID, Waarde)
+            VALUES ( " . $userid . ", " . $stockitemID . ", " . $reviewvalue . " )
+            ON DUPLICATE KEY UPDATE Waarde=$reviewvalue";
 
-    // Nog een if statement nodig om te checken of hij al ingevuld is.
-    // In dat geval moet hij niet opnieuw geinsert worden maar overschreven worden.
+    $db->query($sql);
+
+    $db->close();
 }
 
 function getAverageReviewValue($stockitemID) {
@@ -104,13 +103,31 @@ function getAverageReviewValue($stockitemID) {
     $db = createDB();
     $array = [];
     $sql = ""
-            . "SELECT AVG(Waarde) "
-            . "FROM review "
+            . "SELECT AVG(Waarde) average "
+            . "FROM reviews "
             . "WHERE StockItemID = '" . $stockitemID . "' ";
 
     $result = $db->query($sql);
 
+    $result = $result->fetch_assoc();
+
     $db->close();
 
-    return "Klanten geven dit product gemiddeld een " . $result;
+    return $result["average"];
+}
+
+function getReviewCountByStockItemID($StockItem){
+    $db = createDB();
+
+    $sql = "SELECT COUNT(*) count
+            FROM reviews
+            WHERE StockItemID=" . $StockItem["StockItemID"];
+
+    $result = $db->query($sql);
+
+    $result = $result->fetch_assoc();
+
+    $db->close();
+
+    return $result["count"];
 }

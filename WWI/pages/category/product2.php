@@ -8,6 +8,7 @@ include_once ROOT_PATH . "/includes/header.php";
 include_once ROOT_PATH . "/controllers/productController2.php";
 include_once ROOT_PATH . "/controllers/stockItemController.php";
 include_once ROOT_PATH . "/controllers/photoController.php";
+include_once ROOT_PATH . "/controllers/reviewController.php";
 ?>
 <html>
 <head>
@@ -25,13 +26,31 @@ $StockItem = getStockItemByID(filter_input(INPUT_GET, "productID", FILTER_VALIDA
 $Stock = getStockItemHoldingByID($StockItem["StockItemID"])["QuantityOnHand"];
 $CombiDeals = generateCombiDeals($StockItem);
 
+if (isset($_POST["review"])){
+    if (isset($_SESSION["USID"])){
+        insertReviewValue($_SESSION["USID"], $StockItem["StockItemID"], $_POST["ster"]);
+    }
+}
 ?>
 
 <div class="container">
     <h4><?php print $StockItem["StockItemName"] ?></h4>
     <div class="row">
         <div class="col-6 offset-6" style="padding-bottom: 10px">
-            <div style="padding-bottom: 10px"><?php print generateReviews() ?></div>
+            <div style="padding-bottom: 10px">
+            <?php
+            $addendum = "(" . number_format(getAverageReviewValue($StockItem["StockItemID"]), 1) . "), " . getReviewCountByStockItemID($StockItem) . " reviews";
+            if (isset($_SESSION["USID"])){
+                $reviewValue = getUserSpecificReviewByStockItemID($_SESSION["USID"], $StockItem["StockItemID"]);
+                if ($reviewValue != null){
+                    print generateUserReview($reviewValue) . $addendum;
+                } else{
+                    print generateReviews($StockItem["StockItemID"]) . $addendum;
+                }
+            } else {
+                print generateReviews($StockItem["StockItemID"]) . $addendum;
+            }; ?>
+            </div>
         </div>
     </div>
     <div class="row">

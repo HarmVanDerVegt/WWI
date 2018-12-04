@@ -236,7 +236,7 @@ function getStockItemsByTags($tags){
 
     $sql = $sql . ")";
 
-    print $sql;
+
 
     $result = $db->query($sql);
 

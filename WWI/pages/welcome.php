@@ -178,18 +178,6 @@ echo '<BR>';
             </div>
 
 
-            <!--            <div class="col-md-6">-->
-            <!--                <div class="card-custom"">-->
-            <!--                    <div class="card-block">-->
-            <!--                        <h4 class="card-custom-title text-light">Wijzigen</h4>-->
-            <!--                        <!-- wijzigen klant gegevens -->
-            <!---->
-            <!---->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
-            <!--        </div><br>-->
-
 
         </div>
     </div>

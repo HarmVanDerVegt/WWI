@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     {
         $fields_string = '';
         $fields = array(
-            'secret' => '6Ld1snwUAAAAAGmSnzS4R_rwtlxNulBSW1l8Z-zY',
+            'secret' => '6LeBu34UAAAAAH_UVWbnUQlJ3AB-8bWQX9CYnats',
             'response' => $user_response
         );
         foreach ($fields as $key => $value)
@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <!--recaptcha verwerken in de submit button-->
                     <div class="g-recaptcha"
-                         data-sitekey="6Ld1snwUAAAAAGkYDP8K5vQOCsW4dn9DKW7dV43C"
+                         data-sitekey="6LeBu34UAAAAAMS6VILfMPHn3i1-EHgC8FcSUfv6"
                          data-callback="onSubmit"
                          data-size="invisible">
                     </div>

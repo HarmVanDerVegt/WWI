@@ -11,9 +11,9 @@ include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
 
     <p>Zijn dit uw geselecteerde producten?<br>
         <b>Let Op!</b> U kunt uw producten hierna niet meer wijzigen.</p>
-<form action="ShoppingCart.php">
-    <input type="submit" class="btn btn-sample" value="Terug naar de winkelwagen">
-</form>
+    <form action="ShoppingCart.php">
+        <input type="submit" class="btn btn-sample" value="Terug naar de winkelwagen">
+    </form>
     <table class="table-striped table-sm">
         <form action="Afrekenen.php" method="post">
             <tr class="table-primary">
@@ -28,9 +28,6 @@ include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
 
 
             <?php
-           // $i = filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT);
-           // $_SESSION["cart"][$i] = $i;
-
             foreach ($_SESSION["cart"] as $i) {
                 //product ophalen
                 $product = getStockItemByID($i);
@@ -40,12 +37,10 @@ include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
                 $productNaam = $product["StockItemName"];
                 if ($productNaam != "") {
 
-                    //$_SESSION["hoeveelheid"][$i] = filter_input(INPUT_POST, "hoeveelheid", FILTER_SANITIZE_STRING);
-                    //prijs ophalen
                     if ($product["RecommendedRetailPrice"] != NULL) {
                         $productPrijs = $product["RecommendedRetailPrice"];
                     } else {
-                        $productPrijs = $product["UnitPrice"] * ($product["TaxRate"] / 100 + 1);
+                        $productPrijs = $product["UnitPrice"] * ($pduct["TaxRate"] / 100 + 1);
                     }
                     ?>
 
@@ -61,20 +56,11 @@ include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
                         <td width="10px">&nbsp;</td>
                     </tr>
                     <?php
-                    //            totaalprijs weergeven
-                    $_SESSION["totaal"] += $productPrijs * $_SESSION["hoeveelheid"][$i];
                 }
-
-            ?>
-            <!--Hidden values meegeven-->
-            <input type="hidden" name="productNaam" value="<?php $productNaam[$i]; ?>">
-            <input type="hidden" name="productID" value="<?php $product[$i]; ?> ">
-            <input type="hidden" name="hoeveelheid" value="<?php $_SESSION["hoeveelheid"][$i]; ?>">
-            <input type="hidden" name="productprijs" value="<?php $productPrijs[$i]; ?>">
-            <input type="hidden" name="totaal" value="<?php $_SESSION["totaal"]; ?>">
-            <?php } ?>
-                <tr>
-                <td colspan="7">Totaal : €<?php echo(number_format($_SESSION["totaal"], 2)); ?></td>
+            } ?>
+            <tr>
+                <td>Totaal : €<?php echo(number_format($_SESSION["totaal"], 2)); ?></td>
+                <td></td>
                 <td><input type="submit" value="Verder met bestellen" class="btn btn-sample"></td>
             </tr>
         </form>

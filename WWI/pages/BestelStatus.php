@@ -23,11 +23,14 @@ function getProductsByPurchaseorderID($ID)
     return getQuantityByPurchaseOrderID($ID, "purchaseorders", "purchaseorderlines", "PurchaseOrderID", "PurchaseOrderID");
 }
 
-
-$array = getBestellingByPurchaseorderID(1);
-$productenarray = getProductsByPurchaseorderID(1);
+$OrderID = filter_input(INPUT_POST, "purchaseorderID", FILTER_SANITIZE_STRING);
+$array = getBestellingByPurchaseorderID($OrderID);
+$productenarray = getProductsByPurchaseorderID($OrderID);
 $totaal = 0;
-
+$bezorgdatum = $array['OrderDate'];
+$bezorgdatum = strtotime($bezorgdatum);
+$bezorgdatum = strtotime("+2 day", $bezorgdatum);
+$bezorgdatum = date('Y-m-d', $bezorgdatum);
 ?>
 
 <div class="mx-auto" style="width: 36rem;">
@@ -35,9 +38,9 @@ $totaal = 0;
 
 
     <?php
-    $vandaag = date("Y/m/d");
-    $morgen = date("Y/m/d", time() + 86400);
-    if ($vandaag > $array['ExpectedDeliveryDate']) {
+    $vandaag = date("Y-m-d");
+    $morgen = date("Y-m-d", time() + 86400);
+    if ($vandaag > $bezorgdatum) {
     ?>
     <i class="fa fa-cubes" style="font-size:50px;color: aqua"></i>
     <i class="fa fa-arrow-right" style="font-size:50px;color: aqua"></i>
@@ -47,10 +50,11 @@ $totaal = 0;
     <p>Uw bestelling is bezorgd!</p><br>
     <p>De verwachte bezorgdatum was:
         <?php
-        print("<b>" . $array['ExpectedDeliveryDate'] . "</b></p><br>");
+        print("<b>" . $bezorgdatum . "</b></p><br>");
         ?>
 
-        <?php } elseif ($morgen == $array['ExpectedDeliveryDate']) {
+        <?php }
+    elseif ($morgen == $bezorgdatum) {
         ?>
         <i class="fa fa-cubes" style="font-size:50px;color: aqua"></i>
         <i class="fa fa-arrow-right" style="font-size:50px;color: aqua"></i>
@@ -60,7 +64,7 @@ $totaal = 0;
     <p>Uw bestelling is onderweg!</p><br>
     <p>De verwachte bezorgdatum is:
         <?php
-        print("<b>" . $array['ExpectedDeliveryDate'] . "</b></p><br>");
+        print("<b>" . $bezorgdatum . "</b></p><br>");
         } else { ?>
         <i class="fa fa-cubes" style="font-size:50px;color: aqua"></i>
         <i class="fa fa-arrow-right" style="font-size:50px"></i>
@@ -70,7 +74,7 @@ $totaal = 0;
     <p>Uw bestelling is nog in behandeling!</p><br>
     <p>De verwachte bezorgdatum is:
         <?php
-        print("<b>" . $array['ExpectedDeliveryDate'] . "</b></p><br>");
+        print("<b>" . $bezorgdatum . "</b></p><br>");
         } ?>
 </div>
 

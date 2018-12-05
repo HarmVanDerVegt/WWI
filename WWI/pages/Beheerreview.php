@@ -20,14 +20,14 @@ if (($_SESSION['IsSystemUser']) <> 1 and $_SESSION['IsEmployee'] <> 1) {
     echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/index.php\" />";
 }
 
-$stockitem = filter_input(INPUT_GET, "StockItemID");
+$stockitemID = filter_input(INPUT_GET, "StockItemID");
 
 
-echo $stockitem;
 
-$sarray = getreviewbystockid($stockitem);
 
-print ($sarray);
+$sarray = getProductSpecificReviewByStockItemID($stockitemID);
+echo "<br>";
+print_r ($sarray);
 
 ?>
 <?php include(ROOT_PATH . "/includes/footer.php"); ?>

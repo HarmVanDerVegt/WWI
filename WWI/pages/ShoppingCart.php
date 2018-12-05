@@ -40,26 +40,30 @@ if (isset($_SESSION["cart"])) {
     <!--tabel voor de winkelwagen-->
     <h2>Winkelwagen</h2>
     <table>
-        <tr>
-            <th>Product</th>
-            <th width="10px">&nbsp;</th>
-            <th>Productprijs</th>
-            <th width="10px"></th>
-            <th>Hoeveelheid</th>
-            <th width="10px">&nbsp;</th>
-            <th>Subtotaal</th>
-            <th width="10px">&nbsp;</th>
-            <th>Updaten</th>
-            <th width="10px"></th>
-            <th>Product verwijderen</th>
-        </tr>
-        <?php
-        //        totaalprijs = 0
-        $_SESSION["totaal"] = 0;
+    <tr>
+        <th>Product</th>
+        <th width="10px">&nbsp;</th>
+        <th>Productprijs</th>
+        <th width="10px"></th>
+        <th>Hoeveelheid</th>
+        <th width="10px">&nbsp;</th>
+        <th>Subtotaal</th>
+        <th width="10px">&nbsp;</th>
+        <th>Updaten</th>
+        <th width="10px"></th>
+        <th>Product verwijderen</th>
+    </tr>
+    <?php
+    //        totaalprijs = 0
+    $_SESSION["totaal"] = 0;
 
-        //        nagaan hoeveel producten er in de winkelwagen zitten
-        foreach ($_SESSION["cart"] as $i) {
-        ?>
+    //        nagaan hoeveel producten er in de winkelwagen zitten
+    foreach ($_SESSION["cart"] as $i) {
+        if ($_SESSION["hoeveelheid"][$i] > getStockItemHoldingByID($i)["QuantityOnHand"]) {
+            ?>
+            <meta http-equiv="refresh" content="=0;URL=error.php"/>
+        <?php } else {
+            ?>
             <input type="hidden" value="<?php echo($i) ?>" name="add">
 
             <!--product ophalen-->
@@ -106,10 +110,10 @@ if (isset($_SESSION["cart"])) {
                 $_SESSION["totaal"] += $productPrijs * $_SESSION["hoeveelheid"][$i];
             }
             //            totaalprijs weergeven
-            }
-            ?>
+        }
+        ?>
         <form method="post" action="Bestelling.php">
-        <tr>
+            <tr>
                 <td colspan="7">Totaal : €<?php echo(number_format($_SESSION["totaal"], 2)); ?></td>
                 <td colspan="5"></td>
                 <?php if ($_SESSION["totaal"] > 0) { ?>
@@ -117,9 +121,9 @@ if (isset($_SESSION["cart"])) {
                 <?php } ?>
             </tr>
         </form>
-    </table>
-<?php }
-
+        </table>
+    <?php }
+}
 //winkelwagen is leeg bericht
 if ($check == 0) {
     print("<h3>Uw winkelwagen is leeg!</h3><br>");

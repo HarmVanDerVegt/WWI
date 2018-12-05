@@ -27,7 +27,7 @@ if (($_SESSION['IsSystemUser']) <> 1 and $_SESSION['IsEmployee'] <> 1) {
     echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/index.php\" />";
 }
 ?>
-    <br>
+  <center>
 <table>
     <tr>
         <th>ProductID</th>
@@ -55,7 +55,7 @@ foreach ($stockitems as $stockarray) {
 
 ?>
 </table>
-
+  </center>
     <br>
 
 

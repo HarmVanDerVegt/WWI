@@ -131,3 +131,7 @@ function getReviewCountByStockItemID($StockItem){
 
     return $result["count"];
 }
+
+function getreviewbystockid($id){
+  return  getRowByIntID("StockItemID", "reviews", $id);
+}

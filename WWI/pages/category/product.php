@@ -28,7 +28,7 @@ $Stock = getStockItemHoldingByID($StockItem["StockItemID"])["QuantityOnHand"];
 $CombiDeals = generateCombiDeals($StockItem);
 
 if (isset($_POST["review"])){
-    if (isset($_SESSION["USID"])){
+    if (isset($_SESSION["USID"]) and $_SESSION["IsEmployee"] == 0){
         insertReviewValue($_SESSION["USID"], $StockItem["StockItemID"], $_POST["ster"]);
     }
 }
@@ -41,7 +41,7 @@ if (isset($_POST["review"])){
             <div style="padding-bottom: 10px">
             <?php
             $addendum = "(" . number_format(getAverageReviewValue($StockItem["StockItemID"]), 1) . "), " . getReviewCountByStockItemID($StockItem) . " reviews";
-            if (isset($_SESSION["USID"])){
+            if (isset($_SESSION["USID"])) {
                 $reviewValue = getUserSpecificReviewByStockItemID($_SESSION["USID"], $StockItem["StockItemID"]);
                 if ($reviewValue != null){
                     print generateUserReview($reviewValue) . $addendum;

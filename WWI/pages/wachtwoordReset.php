@@ -9,8 +9,8 @@ $ID = filter_input(INPUT_GET, "userID", FILTER_SANITIZE_STRING);
 $token = filter_input(INPUT_GET, "token", FILTER_SANITIZE_STRING);
 
 $tokenValidity = checkRecoveryToken($token, $ID);
-if($tokenValidity){
-?>
+if ($tokenValidity) {
+    ?>
     <div class="card mx-auto" style="width: 36rem;">
         <div class="card-body mx-auto">
             <div class="signup-form">
@@ -27,12 +27,17 @@ if($tokenValidity){
             </div>
         </div>
     </div>
-<?php }else{ ?>
+<?php } else { ?>
     <meta http-equiv="refresh" content="=0;URL=error.php"/>
- <?php   }
-    $password = filter_input(INPUT_GET, wachtwoord, FILTER_SANITIZE_STRING);
-    $passwordCheck = filter_input(INPUT_GET, bevestig_wachtwoord, FILTER_SANITIZE_STRING);
-if(isset(resetPassword( ,)))
+<?php }
+$password = filter_input(INPUT_GET, wachtwoord, FILTER_SANITIZE_STRING);
+$passwordCheck = filter_input(INPUT_GET, bevestig_wachtwoord, FILTER_SANITIZE_STRING);
+if (isset($password) && isset($passwordCheck)) {
+    if ($password != $passwordCheck) {
+        print("<p>wachtwoorden komen niet overeen</p>");
+    } else {
+        resetPassword($ID, $password);
+    }
+}
 
-
-<?php include_once ROOT_PATH . "/includes/footer.php"; ?>
+include_once ROOT_PATH . "/includes/footer.php"; ?>

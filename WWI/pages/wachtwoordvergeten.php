@@ -5,6 +5,7 @@ if (!defined('ROOT_PATH')) {
 
 include(ROOT_PATH . "/includes/header.php"); ?>
 
+
 <html>
 <body>
 <div class="mx-auto" style="width: 36rem;">

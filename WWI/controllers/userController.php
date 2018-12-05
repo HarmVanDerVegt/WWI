@@ -38,6 +38,28 @@ function getUserByID($ID){
     return getRowByIntID("PersonID", "people", $ID);
 }
 
+function getUserByLogOnName($email){
+
+    //Initieert de database.
+    $db = createDB();
+
+    //Prepared de SQL statement.
+    $sql = "SELECT PersonID
+            FROM people
+            WHERE LogonName = '$email'";
+
+    //Voert de statement uit.
+    $result = $db->query($sql);
+
+    //Geeft de eerste rij terug als array en gaat naar de volgende rij, die er niet is.
+    //Dit geeft dus maar één rij terug.
+    $result = $result->fetch_assoc();
+    $db->close();
+
+    return $result["PersonID"];
+
+}
+
 
 function getCustomerByID($ID){
 

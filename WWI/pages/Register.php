@@ -46,9 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Call the function post_captcha
     $res = post_captcha($_POST['g-recaptcha-response']);
 
-    if (!$res['success']) {
-        echo 'reCAPTCHA error';
-    }
+
 }
 //EINDE RECAPTCHA
 ?>
@@ -62,34 +60,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <p class="hint-text">Registreer voor een account.</p>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-xs-6"><input type="text" class="form-control" name="Voornaam"
+                            <div class="col-xs-6"><input type="text" class="form-control" name="Voornaam" value="<?php if (!empty($_POST["Voornaam"])) {echo $_POST["Voornaam"];} ?>"
                                                          placeholder="Voornaam" required="required"></div>
-                            <div class="col-xs-6"><input type="text" class="form-control" name="Achternaam"
+                            <div class="col-xs-6"><input type="text" class="form-control" name="Achternaam" value="<?php if (!empty($_POST["Achternaam"])) {echo $_POST["Achternaam"];} ?>"
                                                          placeholder="Achternaam" required="required"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-xs-8"><input type="text" class="form-control" name="Straat"
+                            <div class="col-xs-8"><input type="text" class="form-control" name="Straat" value="<?php if (!empty($_POST["Straat"])) {echo $_POST["Straat"];} ?>"
                                                          placeholder="Straat" required="required"></div>
-                            <div class="col-xs-4"><input type="text" class="form-control" name="Huisnummer"
+                            <div class="col-xs-4"><input type="text" class="form-control" name="Huisnummer" value="<?php if (!empty($_POST["Huisnummer"])) {echo $_POST["Huisnummer"];} ?>"
                                                          placeholder="Nr." required="required"></div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="postcode" placeholder="Postcode"
+                        <input type="text" class="form-control" name="postcode" placeholder="Postcode" value="<?php if (!empty($_POST["postcode"])) {echo $_POST["postcode"];} ?>"
                                required="required">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="woonplaats" placeholder="Woonplaats"
+                        <input type="text" class="form-control" name="woonplaats" placeholder="Woonplaats" value="<?php if (!empty($_POST["woonplaats"])) {echo $_POST["woonplaats"];} ?>"
                                required="required">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="Provincie" placeholder="Provincie"
+                        <input type="text" class="form-control" name="Provincie" placeholder="Provincie" value="<?php if (!empty($_POST["Provincie"])) {echo $_POST["Provincie"];} ?>"
                                required="required">
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control" name="email" placeholder="Email" required="required">
+                        <input type="email" class="form-control" name="email" placeholder="Email" required="required" value="<?php if (!empty($_POST["email"])) {echo $_POST["email"];} ?>">
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" name="wachtwoord" placeholder="Wachtwoord"
@@ -100,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                placeholder="Bevestig Wachtwoord" required="required">
                     </div>
                     <div class="form-group">
-                        <input type="tel" class="form-control" name="Phone" placeholder="Telefoonnummer">
+                        <input type="tel" class="form-control" name="Phone" placeholder="Telefoonnummer" value="<?php if (!empty($Register["Phone"])) {echo $Register["Phone"];} ?>" >
                     </div>
                     <div class="form-group">
                         <label class="checkbox-inline"><input type="checkbox" required="required"> Ik accepteer de <a
@@ -135,8 +133,19 @@ $Register["Wachtwoord"] = filter_input(INPUT_POST, 'wachtwoord');
 $Register["bevestig_wachtwoord"] = filter_input(INPUT_POST, 'bevestig_wachtwoord');
 $Register["Phone"] = filter_input(INPUT_POST, 'Phone');
 $Register["Provincie"] = filter_input(INPUT_POST, 'Provincie');
+if (empty($Register["Voornaam"])
+    or empty($Register["Achternaam"])
+    or empty($Register["Straat"])
+    or empty($Register["Huisnummer"])
+    or empty($Register["Postcode"])
+    or empty($Register["Email"])
+    or empty($Register["Wachtwoord"])
+    or empty($Register["bevestig_wachtwoord"])
+    or empty($Register["Provincie"])){
+    echo "vul alle velden";
+}
 
-if (!empty($Register["Voornaam"])) {
+elseif (!empty($Register["Voornaam"])) {
     if ($Register["Wachtwoord"] <> $Register["bevestig_wachtwoord"]) {
         echo("wachtwoorden zijn niet gelijk");
     } else {

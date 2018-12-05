@@ -131,3 +131,27 @@ function getReviewCountByStockItemID($StockItem){
 
     return $result["count"];
 }
+
+function getreviewbystockid($id){
+  return  getRowByIntID("StockItemID", "reviews", $id);
+}
+
+function getProductSpecificReviewByStockItemID($StockItemID) {
+
+    $db = createDB();
+    $sql = ""
+        . "SELECT * "
+        . "FROM reviews "
+        . "WHERE stockitemID = " . $StockItemID . " ";
+    echo $sql;
+    $result = $db->query($sql);
+
+    $array = [];
+    while ($row = $result->fetch_assoc()) {
+        $array[array_values($row)[0]] = $row;
+    }
+
+    $db->close();
+
+    return $result;
+}

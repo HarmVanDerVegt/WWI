@@ -44,7 +44,7 @@ foreach ($stockitems as $stockarray) {
                 <tr>
                 <td>".$stockarray['StockItemID']."</td>
                 <td>".$stockarray['StockItemName']."</td>
-                <td>Link</td>
+                <td><a href=\"/WWI/WWI/pages/Beheerreview.php?StockItemID=" . $stockarray['StockItemID'] . "\"><h4 class=\"card-custom-title \"> beheer </h4></a></td>
                 </tr>");
 
 

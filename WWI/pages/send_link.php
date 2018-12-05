@@ -4,7 +4,6 @@ if (!defined('ROOT_PATH')) {
 }
 
 include(ROOT_PATH . "/includes/header.php"); ?>
-    <html>
     <body>
     <?php
     $email = filter_input(INPUT_GET, 'email', FILTER_SANITIZE_EMAIL);
@@ -24,7 +23,4 @@ include(ROOT_PATH . "/includes/header.php"); ?>
 
     ?>
     </body>
-    </html>
-
-
 <?php include(ROOT_PATH . "/includes/footer.php"); ?>

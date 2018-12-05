@@ -23,7 +23,7 @@ include_once ROOT_PATH . "/controllers/photoController.php";
     </head>
     <body>
         <!-- voegt header toe -->
-
+        
         <br>
 
         <!-- ophalen gegevens van special deals uit database -->

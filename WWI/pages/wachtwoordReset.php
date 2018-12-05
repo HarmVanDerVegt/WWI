@@ -13,6 +13,7 @@ if ($tokenValidity) {
     ?>
     <div class="card mx-auto" style="width: 36rem;">
         <div class="card-body mx-auto">
+            <form method="post" action="wachtwoordresetbevestiging.php">
             <div class="signup-form">
                 <div class="form-group">
                     Nieuwe wachtwoord:<input type="password" class="form-control" name="wachtwoord"
@@ -25,19 +26,11 @@ if ($tokenValidity) {
                     <input style="width: 200px;" type="submit" class="btn btn-sample" value="Reset wachtwoord">
                 </div>
             </div>
+            </form>
         </div>
     </div>
 <?php } else { ?>
     <meta http-equiv="refresh" content="=0;URL=error.php"/>
 <?php }
-$password = filter_input(INPUT_GET, wachtwoord, FILTER_SANITIZE_STRING);
-$passwordCheck = filter_input(INPUT_GET, bevestig_wachtwoord, FILTER_SANITIZE_STRING);
-if (isset($password) && isset($passwordCheck)) {
-    if ($password != $passwordCheck) {
-        print("<p>wachtwoorden komen niet overeen</p>");
-    } else {
-        resetPassword($ID, $password);
-    }
-}
 
 include_once ROOT_PATH . "/includes/footer.php"; ?>

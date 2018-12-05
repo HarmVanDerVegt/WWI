@@ -32,15 +32,15 @@ foreach ($_SESSION["cart"] as $i) {
 }
 ?>
 
-<h1>Uw bestelling is afgerond</h1>
+<h1>Kies uw betaalmethode</h1>
 
 <form action="BestelStatus.php" method="post">
     <input type="hidden" name="purchaseorderID" value="<?php print $orderID; ?>">
     <!--    <input type="hidden" name="purchaseorderlineID" value="--><?php //$orderlineID; ?><!--">-->
-    <input type="submit" class="btn btn-sample" value="Bekijk uw bestelstatus">
+    <input type="submit" class="btn btn-sample" value="Ga door naar het proces na het betalen">
 </form>
 <form action="Mollie.php" method="post">
     <input type="hidden" name="purchaseorderID" value="<?php print $orderID; ?>">
     <input type="hidden" name="Totaalprijs" value="<?php print ($_SESSION["totaal"]); ?>">
-    <input type="submit" class="btn btn-sample" value="Betalen">
+    <input type="submit" class="btn btn-sample" value="Dummy Betalen">
 </form>

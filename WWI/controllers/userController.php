@@ -2,9 +2,8 @@
 include_once "databaseController.php";
 
 
-
-
-function getUser($logonName, $password){
+function getUser($logonName, $password)
+{
 //start database connectie
     $db = createDB();
 
@@ -15,30 +14,30 @@ function getUser($logonName, $password){
             ";
 
 
-
-
     $result = $db->query($sql);
 // waarde van array to string
     $result = $result->fetch_assoc();
 
 // controlleren van het wachtwoord en sluiten database connectie
     $db->close();
-    $resultww = password_verify($password,$result['HashedPassword']);
-    if($resultww == TRUE){
+    $resultww = password_verify($password, $result['HashedPassword']);
+    if ($resultww == TRUE) {
 
-        $result['Succes']= $resultww;
-        return $result;}
-        else{
-            $result['Succes']= FALSE;
+        $result['Succes'] = $resultww;
+        return $result;
+    } else {
+        $result['Succes'] = FALSE;
     }
     return false;
 }
 
-function getUserByID($ID){
+function getUserByID($ID)
+{
     return getRowByIntID("PersonID", "people", $ID);
 }
 
-function getUserByLogOnName($email){
+function getUserByLogOnName($email)
+{
 
     //Initieert de database.
     $db = createDB();
@@ -61,25 +60,28 @@ function getUserByLogOnName($email){
 }
 
 
-function getCustomerByID($ID){
+function getCustomerByID($ID)
+{
 
 //verkijg een cumtomer bij customerID
-    return getRowByIntID('PrimaryContactPersonID','Customers',  $ID);
+    return getRowByIntID('PrimaryContactPersonID', 'Customers', $ID);
 }
 
-function getCityByID($ID){
+function getCityByID($ID)
+{
 
 //verkijg een cumtomer bij cityID
-    return getRowByIntID('CityID','cities',  $ID);
+    return getRowByIntID('CityID', 'cities', $ID);
 
 }
 
-function insertRecoveryToken($token, $ID){
+function insertRecoveryToken($token, $ID)
+{
 
     $db = createDB();
 
     $user = getUserByID($ID)["PersonID"];
-    if( $user == null){
+    if ($user == null) {
         $user = 5;
     }
 
@@ -102,7 +104,8 @@ function insertRecoveryToken($token, $ID){
     return true;
 }
 
-function mailRecoveryToken($token, $mail, $ID){
+function mailRecoveryToken($token, $mail, $ID)
+{
 
     $link = "htpp://localhost/WWI/WWI/pages/wachtwoordvergeten.php?token=" . $token . "&userID=" . $ID;
 
@@ -122,7 +125,8 @@ function mailRecoveryToken($token, $mail, $ID){
     return mail($mail, "Wachtwoord vergeten", $message);
 }
 
-function checkRecoveryToken($token, $ID){
+function checkRecoveryToken($token, $ID)
+{
     $db = createDB();
 
     $token = "\"" . $token . "\"";
@@ -136,11 +140,25 @@ function checkRecoveryToken($token, $ID){
     $result = $result->fetch_assoc();
 
     //Check of 24 uur verstreken zijn.
-    if ($result["ValidTo"] < date("y-m-d-H-i")){
+    if ($result["ValidTo"] < date("y-m-d-H-i")) {
         return false;
     }
 
     $db->close();
 
     return $result["Token"] == $token;
+}
+
+function resetPassword($ID, $password)
+{
+    $password = password_hash($password, PASSWORD_DEFAULT);
+    $db = createDB();
+
+    $sql = "UPDATE people SET hashedpassword = '$password' WHERE PersonID = '$ID'";
+
+     $result = $db->query($sql);
+
+    $db->close();
+
+    return $result;
 }

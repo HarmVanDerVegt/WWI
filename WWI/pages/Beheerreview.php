@@ -8,6 +8,7 @@ include_once ROOT_PATH . "/controllers/userController.php";
 include_once ROOT_PATH . "/controllers/stockItemController.php";
 include_once ROOT_PATH . "/controllers/reviewController.php";
 
+
 $debug = 0;
 ?>
 <?php
@@ -30,9 +31,16 @@ $sarray = getProductSpecificReviewByStockItemID($stockitemID);
 
 ?>
     <br>
+    <script>
+        function buttonpopup() {
+            confirm("Weet u het zeker?");
+        }
+    </script>
+    <link href="\WWI\WWI\css\button.css" rel="stylesheet" type="text/css"/>
+    <?php $arraystock = (getStockItemByID($stockitemID)); echo ($arraystock['StockItemName']) ; ?>
+    <br>
     <table>
         <tr>
-            <th>ProductID</th>
             <th>Gebruiker</th>
             <th>Reviews</th>
             <th>Delete</th>
@@ -46,7 +54,6 @@ $sarray = getProductSpecificReviewByStockItemID($stockitemID);
 
             echo("  
                 <tr>
-                <td>" . $reviews['StockItemID'] . "</td>
                 <td>" . $reviews['PersonID'] . "</td>
                 <td>" . $reviews['Waarde'] . "</td>
                 <td>
@@ -55,9 +62,9 @@ $sarray = getProductSpecificReviewByStockItemID($stockitemID);
                 <input type='hidden' value='" .$reviews['StockItemID'] ."' name='StockID'>
                 <input type='hidden' value='" .$reviews['PersonID'] ."' name='PersoonID'>
                 <input type='hidden' value='" .$reviews['Waarde'] ."' name='Waarde'>
-                <button class=\"btn btn - sample btn - sample - success\" type=\"submit\">Delete
-                </button>
+                <button class=\"btn btn - sample btn - sample - success\" onclick=\"buttonpopup()\" type=\"submit\">Delete</button>
                 </form>
+                
                 </td>
                 </tr>");
         }

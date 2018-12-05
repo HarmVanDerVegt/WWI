@@ -1,0 +1,1 @@
+UPDATE `wideworldimporters`.`people` t SET t.`IsEmployee` = 1 WHERE t.`PersonID` = 3311

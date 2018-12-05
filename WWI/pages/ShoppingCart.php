@@ -60,7 +60,6 @@ if (isset($_SESSION["cart"])) {
         //        nagaan hoeveel producten er in de winkelwagen zitten
         foreach ($_SESSION["cart"] as $i) {
         ?>
-        <form method="post" action="Bestelling.php">
             <input type="hidden" value="<?php echo($i) ?>" name="add">
 
             <!--product ophalen-->
@@ -109,7 +108,8 @@ if (isset($_SESSION["cart"])) {
             //            totaalprijs weergeven
             }
             ?>
-            <tr>
+        <form method="post" action="Bestelling.php">
+        <tr>
                 <td colspan="7">Totaal : €<?php echo(number_format($_SESSION["totaal"], 2)); ?></td>
                 <td colspan="5"></td>
                 <?php if ($_SESSION["totaal"] > 0) { ?>
@@ -118,9 +118,8 @@ if (isset($_SESSION["cart"])) {
             </tr>
         </form>
     </table>
-<?php } ?>
+<?php }
 
-<?php
 //winkelwagen is leeg bericht
 if ($check == 0) {
     print("<h3>Uw winkelwagen is leeg!</h3><br>");

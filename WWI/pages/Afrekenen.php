@@ -7,102 +7,13 @@ if (!defined('ROOT_PATH')) {
 include(ROOT_PATH . "/includes/header.php");
 include_once(ROOT_PATH . "/controllers/stockItemController.php");
 include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
+include_once ROOT_PATH . "/controllers/OrderController.php";
 
-function GetPurchaseOrderID()
-{
-    //Initieert de database.
-    $db = createDB();
 
-    //Nieuwe orderID aanmaken
-    $orderID = "SELECT max(PurchaseOrderID) +1 AS ID FROM PurchaseOrders";
-    $MAXorderID = $db->query($orderID);
-    $maxID = $MAXorderID->fetch_assoc();
-    $db->close();
-    return $maxID["ID"];
-}
-
-function GetPurchaseOrderlineID()
-{
-    //Initieert de database.
-    $db = createDB();
-
-    //Nieuwe orderID aanmaken
-    $orderID = "SELECT max(PurchaseOrderlineID) +1 AS ID FROM PurchaseOrderlines";
-    $MAXorderID = $db->query($orderID);
-    $maxOrderlineID = $MAXorderID->fetch_assoc();
-    $db->close();
-    return $maxOrderlineID["ID"];
-}
-
-function InsertIntoPurchaseorders($maxID, $datum)
-{
-//Initieert de database.
-    $db = createDB();
-
-//Prepared de SQL statement.
-    $sql = "INSERT INTO purchaseorders 
-        (PurchaseOrderID,
-         SupplierID,
-         Orderdate, 
-         DeliveryMethodID, 
-         ContactPersonID,
-         LastEditedBy,
-         IsOrderFinalized, 
-         LastEditedWhen)
-        VALUES ($maxID,
-                1,
-                '$datum',
-                1,
-                1,
-                1,
-                1,
-                '$datum')";
-
-//Voert de statement uit.
-    $result = $db->query($sql);
-
-//Geeft de eerste rij terug als array en gaat naar de volgende rij, die er niet is.
-//Dit geeft dus maar één rij terug.
-    $db->close();
-
-    return $result;
-}
-
-function InsertIntoPurchaseorderlines($orderID, $orderlineID, $StockitemID, $productnaam, $productprijs, $datum)
-{
-//Initieert de database.
-    $db = createDB();
-
-//Geeft een error als de value geen int is.
-    //$value = (int)$value;
-
-//Prepared de SQL statement
-    $sql = "INSERT INTO purchaseorderlines 
-VALUES ($orderlineID, 
-        $orderID, 
-        $StockitemID,
-        '1',
-        '$productnaam',
-        '1',
-        '1',
-        $productprijs,
-        '$datum',
-        '1',
-        '1',
-        '$datum')";
-
-//Voert de statement uit.
-    $result = $db->query($sql);
-
-//Geeft de eerste rij terug als array en gaat naar de volgende rij, die er niet is.
-//Dit geeft dus maar één rij terug.
-    $db->close();
-
-    return $result;
-}
 
 $datum = date("Y/m/d");
 $orderID = GetPurchaseOrderID();
+$bezorgdatum = date("Y-m-d" , time() + 1209600);
 
 
 foreach ($_SESSION["cart"] as $i) {
@@ -117,7 +28,7 @@ foreach ($_SESSION["cart"] as $i) {
         } else {
             $productPrijs = $product["UnitPrice"] * ($pduct["TaxRate"] / 100 + 1);
         }
-        InsertIntoPurchaseorders($orderID, $datum);
+        InsertIntoPurchaseorders($orderID, $datum, $bezorgdatum);
         InsertIntoPurchaseorderlines($orderID, $orderlineID, $productID, $productnaam, $productPrijs, $datum);
     }
 }

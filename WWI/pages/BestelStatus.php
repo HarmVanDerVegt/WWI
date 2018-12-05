@@ -7,30 +7,20 @@ if (!defined('ROOT_PATH')) {
 }
 include_once ROOT_PATH . "/controllers/databaseController.php";
 include_once ROOT_PATH . "/controllers/stockItemController.php";
+include_once ROOT_PATH . "/controllers/OrderController.php";
+
+
 
 // voegt header toe
 include(ROOT_PATH . "/includes/header.php");
 
 
-function getBestellingByPurchaseorderID($ID)
-{
-    return getRowByIntID("PurchaseorderID", "purchaseorders", $ID);
-}
-
-function getProductsByPurchaseorderID($ID)
-{
-
-    return getQuantityByPurchaseOrderID($ID, "purchaseorders", "purchaseorderlines", "PurchaseOrderID", "PurchaseOrderID");
-}
 
 $OrderID = filter_input(INPUT_POST, "purchaseorderID", FILTER_SANITIZE_STRING);
 $array = getBestellingByPurchaseorderID($OrderID);
 $productenarray = getProductsByPurchaseorderID($OrderID);
 $totaal = 0;
-$bezorgdatum = $array['OrderDate'];
-$bezorgdatum = strtotime($bezorgdatum);
-$bezorgdatum = strtotime("+2 day", $bezorgdatum);
-$bezorgdatum = date('Y-m-d', $bezorgdatum);
+$bezorgdatum = $array['ExpectedDeliveryDate'];
 ?>
 
 <div class="mx-auto" style="width: 36rem;">

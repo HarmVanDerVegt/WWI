@@ -7,6 +7,8 @@ if (!defined('ROOT_PATH')) {
 include(ROOT_PATH . "/includes/header.php");
 include_once(ROOT_PATH . "/controllers/stockItemController.php");
 include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
+include_once ROOT_PATH . "/controllers/OrderController.php";
+
 
 
 if($_SESSION["totaal"] > 0){

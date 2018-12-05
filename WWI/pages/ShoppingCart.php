@@ -28,9 +28,10 @@ if (!empty ($_POST["add"])) {
 #verwijderen
 if (!empty ($_GET["delete"])) {
     $i = filter_input(INPUT_GET, "delete", FILTER_SANITIZE_STRING);
-    unset($_SESSION["cart"][$i]);
+    if (isset($_SESSION["cart"][$i])) {
+        unset($_SESSION["cart"][$i]);
+    }
 }
-
 
 #winkelwagen
 if (isset($_SESSION["cart"])) {
@@ -62,6 +63,7 @@ if (isset($_SESSION["cart"])) {
         if ($_SESSION["hoeveelheid"][$i] > getStockItemHoldingByID($i)["QuantityOnHand"]) {
             ?>
             <meta http-equiv="refresh" content="=0;URL=error.php"/>
+            <?php unset($_SESSION["cart"][$i]); ?>
         <?php } else {
             ?>
             <input type="hidden" value="<?php echo($i) ?>" name="add">

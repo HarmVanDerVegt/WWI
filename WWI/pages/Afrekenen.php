@@ -32,7 +32,7 @@ foreach ($_SESSION["cart"] as $i) {
 }
 ?>
 
-<h1>Uw bestelling is afgerond</h1>
+<h1>Kies uw betaalmethode</h1>
 
 <form action="BestelStatus.php" method="post">
     <input type="hidden" name="purchaseorderID" value="<?php print $orderID; ?>">

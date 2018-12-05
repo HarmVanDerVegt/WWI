@@ -74,7 +74,7 @@ if ($_SESSION['IsSystemUser'] == 1) {
     <tr>
         <td>Totaal : €<?php echo(number_format($_SESSION["totaal"], 2)); ?></td>
         <td></td>
-        <td><input type="submit" value="Verder met bestellen" class="btn btn-sample"></td>
+        <td><input type="submit" <?php if ( $_SESSION['IsEmployee'] == 1){echo 'disabled';} ?> value="Verder met bestellen" class="btn btn-sample"></td>
     </tr>
     </form>
     </table>

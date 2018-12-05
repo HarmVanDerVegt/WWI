@@ -9,6 +9,7 @@ include_once ROOT_PATH . "/controllers/productController.php";
 include_once ROOT_PATH . "/controllers/stockItemController.php";
 include_once ROOT_PATH . "/controllers/photoController.php";
 include_once ROOT_PATH . "/controllers/reviewController.php";
+include_once ROOT_PATH . "/controllers/rpiTempController.php";
 ?>
 <html>
 <head>
@@ -63,6 +64,7 @@ if (isset($_POST["review"])){
                     <?php print "<b>Prijs:</b> €" . number_format(generatePrice($StockItem), 2); ?>
                     <br>
                     <?php print "<b>Voorraad:</b> " . generateStock($StockItem) . " eenheden"; ?>
+                    <?php if(isGekoeld($StockItem["StockItemID"])) print("<br><b>gemiddelde tempratuur in koeling:</b>".gemidelde_tempratuur()); ?>
                     <br>
                     <form method="post" action="/WWI/WWI/pages/ShoppingCart.php">
                         <input type="hidden" value="<?php echo($StockItem["StockItemID"]); ?>" name="add">

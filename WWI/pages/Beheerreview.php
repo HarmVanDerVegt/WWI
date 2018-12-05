@@ -31,11 +31,6 @@ $sarray = getProductSpecificReviewByStockItemID($stockitemID);
 
 ?>
     <br>
-    <script>
-        function buttonpopup() {
-            confirm("Weet u het zeker?");
-        }
-    </script>
     <link href="\WWI\WWI\css\button.css" rel="stylesheet" type="text/css"/>
     <?php $arraystock = (getStockItemByID($stockitemID)); echo ($arraystock['StockItemName']) ; ?>
     <br>
@@ -62,7 +57,7 @@ $sarray = getProductSpecificReviewByStockItemID($stockitemID);
                 <input type='hidden' value='" .$reviews['StockItemID'] ."' name='StockID'>
                 <input type='hidden' value='" .$reviews['PersonID'] ."' name='PersoonID'>
                 <input type='hidden' value='" .$reviews['Waarde'] ."' name='Waarde'>
-                <button class=\"btn btn - sample btn - sample - success\" onclick=\"buttonpopup()\" type=\"submit\">Delete</button>
+                <button class=\"btn btn - sample btn - sample - success\" onclick=\"return confirm('Weet u het zeker?');\" type=\"submit\">Delete</button>
                 </form>
                 
                 </td>

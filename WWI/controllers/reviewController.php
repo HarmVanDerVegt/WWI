@@ -143,7 +143,7 @@ function getProductSpecificReviewByStockItemID($StockItemID) {
         . "SELECT * "
         . "FROM reviews "
         . "WHERE stockitemID = " . $StockItemID . " ";
-    echo $sql;
+
     $result = $db->query($sql);
 
     $array = [];
@@ -154,4 +154,12 @@ function getProductSpecificReviewByStockItemID($StockItemID) {
     $db->close();
 
     return $result;
+}
+
+function deletereview($personid,$stockitemid,$waarde){
+    $db = createDB();
+    $sql = " " ."delete from reviews where PersonID = " . $personid . " and StockItemID = " . $stockitemid . " and Waarde = " . $waarde . " ";
+
+    return $db->query($sql);
+
 }

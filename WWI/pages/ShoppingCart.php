@@ -113,6 +113,7 @@ if (isset($_SESSION["cart"])) {
             }
             //            totaalprijs weergeven
         }
+    }
         ?>
         <form method="post" action="Bestelling.php">
             <tr>
@@ -124,10 +125,10 @@ if (isset($_SESSION["cart"])) {
             </tr>
         </form>
         </table>
-    <?php }
+    <?php
 }
 //winkelwagen is leeg bericht
-if ($check == 0) {
+if ($check == 0 || $_SESSION["totaal"] <= 0) {
     print("<h3>Uw winkelwagen is leeg!</h3><br>");
 }
 ?>

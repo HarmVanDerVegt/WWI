@@ -12,7 +12,7 @@ include_once ROOT_PATH . "/controllers/OrderController.php";
 
 $datum = date("Y/m/d");
 $orderID = GetPurchaseOrderID();
-
+$bezorgdatum = date("Y-m-d", time() + 1209600);
 
 foreach ($_SESSION["cart"] as $i) {
     for ($a = 0; $a < $_SESSION["hoeveelheid"][$i]; $a++) {
@@ -26,7 +26,7 @@ foreach ($_SESSION["cart"] as $i) {
         } else {
             $productPrijs = $product["UnitPrice"] * ($pduct["TaxRate"] / 100 + 1);
         }
-        InsertIntoPurchaseorders($orderID, $datum);
+        InsertIntoPurchaseorders($orderID, $datum, $bezorgdatum);
         InsertIntoPurchaseorderlines($orderID, $orderlineID, $productID, $productnaam, $productPrijs, $datum);
     }
 }

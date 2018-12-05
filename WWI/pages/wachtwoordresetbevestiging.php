@@ -11,7 +11,7 @@ include_once ROOT_PATH . "/controllers/UserController.php";
 
 <h1>JAJA het is gelukt or <3</h1>
 <?php
-$ID = filter_input(INPUT_GET, "userID", FILTER_SANITIZE_STRING);
+$ID = filter_input(INPUT_POST, "userID", FILTER_SANITIZE_STRING);
 $password = filter_input(INPUT_POST, 'wachtwoord', FILTER_SANITIZE_STRING);
 $passwordCheck = filter_input(INPUT_POST, 'bevestig_wachtwoord', FILTER_SANITIZE_STRING);
 if (isset($password) && isset($passwordCheck)) {

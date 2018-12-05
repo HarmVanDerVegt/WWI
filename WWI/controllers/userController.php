@@ -95,8 +95,6 @@ function insertRecoveryToken($token, $ID)
     $sql = "INSERT INTO WachtwoordTokens
             VALUES($user, $token, $today, $tomorrow)";
 
-    print $sql;
-
     $db->query($sql);
 
     $db->close();
@@ -129,7 +127,7 @@ function checkRecoveryToken($token, $ID)
 {
     $db = createDB();
 
-    $token = "\"" . $token . "\"";
+    //$token = "\"" . $token . "\"";
 
     $sql = "SELECT Token, ValidTo
             FROM WachtwoordTokens
@@ -155,7 +153,7 @@ function resetPassword($ID, $password)
     $db = createDB();
 
     $sql = "UPDATE people SET hashedpassword = '$password' WHERE PersonID = '$ID'";
-
+    
      $result = $db->query($sql);
 
     $db->close();

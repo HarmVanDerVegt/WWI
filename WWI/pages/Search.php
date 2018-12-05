@@ -106,7 +106,10 @@ if (!isset($_GET["categoryID"])) {
 
 $items = getSearchedItems($_GET["name"], $_GET["tag"], $_GET["categoryID"]);
 
-if (!isset($items)) {
+if (empty($_GET["name"]) &&  empty($_GET["tag"])  &&  empty($_GET["categoryID"])){
+    echo 'Vul op ten minste een veld in';
+}
+else  {
     echo("
 
     <div class=\"py-2\">

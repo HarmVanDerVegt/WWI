@@ -144,7 +144,7 @@
         <!-- einde login -->
         <!-- zoekveld -->
         <form class="form-inline my-2 my-lg-0" action="/WWI/WWI/pages/Search.php">
-            <input class="form-control mr-sm-2" type="search" placeholder="Zoeken" aria-label="Search" name="name"
+            <input class="form-control mr-sm-2" type="search" placeholder="Zoeken" required aria-label="Search" name="name"
                    id="Zoeken">
             <button class="btn btn-sample btn-sample-success" type="submit">Zoeken <i class="fa fa-search"></i>
             </button>

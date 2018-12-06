@@ -93,7 +93,8 @@ function insertRecoveryToken($token, $ID)
     $token = "\"" . $token . "\"";
 
     $sql = "INSERT INTO WachtwoordTokens
-            VALUES($user, $token, $today, $tomorrow)";
+            VALUES($user, $token, $today, $tomorrow)
+            ON DUPLICATE KEY UPDATE WachtwoordTokens=$token";
 
     $db->query($sql);
 

@@ -7,6 +7,7 @@ include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
 include_once ROOT_PATH . "/controllers/colorController.php";
 include_once ROOT_PATH . "/controllers/specialDealsController.php";
 include_once ROOT_PATH . "/controllers/reviewController.php";
+include_once ROOT_PATH . "/controllers/rpiTempController.php";
 
 function generateProductPageInformation($StockItem)
 {
@@ -22,27 +23,35 @@ function generateProductPageInformation($StockItem)
     // Maakt product_specs aan zodat er dingen aan toegevoegd kunnen worden om weer te geven
     $product_specs = "";
 
-    $product_specs .= "Merk: " . getBrand($StockItem) . "<br>";
-
-    if (getSize($StockItem) != null) {
-        $product_specs .= "Dit product is: " . getSize($StockItem) . "<br>";
+    if (getBrand($StockItem) != null){
+        $product_specs .= "Merk: " . getBrand($StockItem) . "<br>";
     }
 
-    $product_specs .= "Het gewoonlijke gewicht per eenheid is: " . getWeight($StockItem) . "<br>";
+    if (getSize($StockItem) != null) {
+        $product_specs .= "De grootte van dit product is: " . getSize($StockItem) . "<br>";
+    }
 
-    $product_specs .= "Dit product is: " . getColor($StockItem) . "<br>";
+    if (getWeight($StockItem) != null){
+        $product_specs .= "Het gewicht per eenheid is: " . getWeight($StockItem) . "<br>";
+    }
 
-    $product_specs .= getMarketingComments($StockItem) . "<br>";
+    if (getColor($StockItem) != null){
+        $product_specs .= "De kleur van het product is: " . getColor($StockItem) . "<br>";
+    }
+
+    if (getMarketingComments($StockItem) != null){
+        $product_specs .= getMarketingComments($StockItem) . "<br>";
+    }
 
     // Indien het gekozen product een koelproduct is, word $product_is_koelproduct TRUE. Anders is deze FALSE.
     //TODO: placeholder voor temperatuur
     if ($StockItem["IsChillerStock"] == TRUE) {
-        $product_specs .= ("Dit is een koelproduct" . "<br>");
-    } else {
-        $product_is_koelproduct = FALSE;
+        $product_specs .= ("Temperatuur in koeling:" . gemiddelde_temperatuur() . "<br>");
     }
 
-    $product_specs .= "Dit product word geleverd door: " . getSupplier($StockItem) . "<br>";
+    if (getSupplier($StockItem) != null){
+        $product_specs .= "Dit product word geleverd door: " . getSupplier($StockItem) . "<br>";
+    }
 
     return $product_specs;
 }
@@ -112,7 +121,7 @@ function getBrand($StockItem)
         $product_merk = $StockItem["Brand"];
         //$product_specs .= ("Merk " . $product_merk . "<br>");
     } else {
-        $product_merk = "Dit product heeft geen merk.";
+        $product_merk = null;
     }
     return $product_merk;
 

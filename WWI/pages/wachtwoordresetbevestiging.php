@@ -31,3 +31,5 @@ if ($tokenValidity) {
     ?>
     <meta http-equiv="refresh" content="=0;URL=error.php"/>
 <?php } ?>
+
+<?php include(ROOT_PATH . "/includes/footer.php"); ?>

@@ -234,8 +234,7 @@ function InsertNewUser($valuarray){
         $db->query($createcitysql);
         $citysql = "select CityID 
                 from cities 
-                where CityName 
-                like '%$woonplaats%'";
+                where CityName = '$woonplaats'";
         $cityid = $db->query($citysql);
         $cityidresultar = $cityid->fetch_assoc();
     }

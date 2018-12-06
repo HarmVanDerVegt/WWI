@@ -57,7 +57,6 @@ include_once ROOT_PATH . "/controllers/photoController.php";
     }
 
     // laad category data
-    include('data/category_data.php');
     ?>
     <!-- laat de product categoryen zien -->
     <?php
@@ -68,15 +67,15 @@ include_once ROOT_PATH . "/controllers/photoController.php";
     print('<div class="container">');
     print('<div class="row">');
     ?>
-    <!-- Rest van de categorieën -->
     <?php
-    foreach ($category as $item) {
+
+    foreach (getAllStockGroups() as $category){
         // toon kaart met naam en foto van category
-        print('<div class="col-6 col-sm-4" >');
+        print('<div class="col-6 col-sm-4">');
         print('<div class="card">');
-        print('<a href="' . $item->link . '" class="btn btn-sample btn-sample-success" role="button">');
-        print('<strong>' . $item->category . '</strong><br>');
-        print('<img src="' . $item->foto_path . '" alt="' . $item->category . '" height="' . $height . 'px" width="' . $width . 'px">');
+        print('<a href="' . getStockGroupLink($category) . '" class="btn btn-sample btn-sample-success" role="button">');
+        print('<strong>' . $category["StockGroupName"] . '</strong><br>');
+        print('<img src="' . getImageLinkFromStockGroupID2($category["StockGroupID"]) . '" height=100px" width="100px">');
         print('</a>');
         print('</div>');
         print('</div>');
@@ -84,8 +83,6 @@ include_once ROOT_PATH . "/controllers/photoController.php";
     print('</div>');
     print('</div>');
     ?>
-    <!-- einde category knoppen------------------------------------------------------------------------------ -->
-    <!-- voeg footer toe -->
     <br>
     <?php include(ROOT_PATH . "/includes/footer.php"); ?>
 </body>

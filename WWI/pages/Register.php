@@ -83,9 +83,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                required="required">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="Provincie" placeholder="Provincie" value="<?php if (!empty($_POST["Provincie"])) {echo $_POST["Provincie"];} ?>"
-                               required="required">
+                        <label for="sel1">Kies een provincie:</label>
+                        <select class="form-control"  name='Provincie'  required="required" id="sel1">
+                            <option value="Drenthe"> Drenthe</option>
+                            <option value="Flevoland"> Flevoland</option>
+                            <option value="Friesland"> Friesland</option>
+                            <option value="Gelderland"> Gelderland</option>
+                            <option value="Groningen"> Groningen</option>
+                            <option value="Limburg"> Limburg</option>
+                            <option value="Noord-Brabant"> Noord-Brabant</option>
+                            <option value="Noord-Holland"> Noord-Holland</option>
+                            <option value="Overijssel"> Overijssel</option>
+                            <option value="Utrecht"> Utrecht</option>
+                            <option value="Zeeland"> Zeeland</option>
+                            <option value="Zuid-Holland" > Zuid-Holland</option>
+                        </select>
                     </div>
+
                     <div class="form-group">
                         <input type="email" class="form-control" name="email" placeholder="Email" required="required" value="<?php if (!empty($_POST["email"])) {echo $_POST["email"];} ?>">
                     </div>
@@ -133,19 +147,9 @@ $Register["Wachtwoord"] = filter_input(INPUT_POST, 'wachtwoord');
 $Register["bevestig_wachtwoord"] = filter_input(INPUT_POST, 'bevestig_wachtwoord');
 $Register["Phone"] = filter_input(INPUT_POST, 'Phone');
 $Register["Provincie"] = filter_input(INPUT_POST, 'Provincie');
-if (empty($Register["Voornaam"])
-    or empty($Register["Achternaam"])
-    or empty($Register["Straat"])
-    or empty($Register["Huisnummer"])
-    or empty($Register["Postcode"])
-    or empty($Register["Email"])
-    or empty($Register["Wachtwoord"])
-    or empty($Register["bevestig_wachtwoord"])
-    or empty($Register["Provincie"])){
-    echo "vul alle velden";
-}
 
-elseif (!empty($Register["Voornaam"])) {
+
+if (!empty($Register["Voornaam"])) {
     if ($Register["Wachtwoord"] <> $Register["bevestig_wachtwoord"]) {
         echo("wachtwoorden zijn niet gelijk");
     } else {

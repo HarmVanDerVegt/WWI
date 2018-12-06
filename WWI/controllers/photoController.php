@@ -1,4 +1,3 @@
-<!-- functies voor afbeeldingen uit database te tonen ---------------------------------- -->
 <?php
 
 // doel: laad afbeeldingen van database
@@ -9,7 +8,7 @@ function laad_afbeelding($id) {
     $id = filter_var($id,FILTER_SANITIZE_NUMBER_INT);
     
     // maak connectie
-    $sql_connectie = mysqli_connect('localhost', 'root', '', 'wideworldimporters');
+    $sql_connectie = mysqli_connect('localhost', 'root', 'Q9sZbU9Tp9uvugE', 'wideworldimporters');
 
 
     if ($sql_connectie) { // check of connectie maken sucessvol was
@@ -39,7 +38,7 @@ function laad_afbeelding($id) {
 // uit: de functie geeft geen waarde terug
 function show_afbeelding($foto_lijst,$y=400,$x=400) {
     // zorgt dat het een standaard ruimte inneemt
-    print('<div style="width:'.$y.'px; height: '.$x.'px;">');
+    print('<div style="height:'.$y.'px; width: '.$x.'px;">');
     // belangrijke variablen
     $aantal_afbeeldingen = count($foto_lijst);
 
@@ -63,7 +62,7 @@ function show_afbeelding($foto_lijst,$y=400,$x=400) {
         $i = 0;
         foreach ($foto_lijst as $foto) {
             print('<div class="carousel-item ' . (($i == 0) ? 'active' : '') . '">
-               <img src="data:image/jpeg;base64,' . $foto . '" style="width:'.$y.'px; max-width: '.$x.'px;"/>
+               <img src="data:image/jpeg;base64,' . $foto . '" style="width:'.$x.'px; max-height: '.$y.'px;"/>
                </div>');
             $i = 1;
         }
@@ -90,7 +89,4 @@ function show_afbeelding($foto_lijst,$y=400,$x=400) {
     print('</div>');
 }
 ?>
-<!--
-    voor het tonnen van afbeeldingen uit de database doe je:
-        show_afbeelding(laad_afbeelding(17));
--->
+

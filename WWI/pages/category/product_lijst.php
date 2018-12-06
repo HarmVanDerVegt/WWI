@@ -48,7 +48,7 @@ include_once ROOT_PATH . "/controllers/photoController.php";
                 . "WHERE SG.StockGroupName='" . $category_naam . "' ";
 
         // Connect met sql server
-        $sql_connectie = mysqli_connect('localhost', 'root', '', 'wideworldimporters');
+        $sql_connectie = mysqli_connect('localhost', 'root', 'Q9sZbU9Tp9uvugE', 'wideworldimporters');
 
         // Check of de connectie succesvol is
         // items opvragen uit sql data base

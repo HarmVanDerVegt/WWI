@@ -10,12 +10,10 @@
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark">
     <a href="/WWI/WWI/pages/index.php"><img class="img-thumbnail" src="/WWI/WWI/pages/media/wwi-ls.png" height="250px"
-                                            width="90px"/>
-        <!--<a class="navbar-brand" href="#">WWI</a>-->
+                                            width="90px"/></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <!-- dropdown category -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
@@ -25,7 +23,6 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <?php
-                        //include_once "../config.php";
                         include_once ROOT_PATH . "/controllers/stockGroupsController.php";
                         $categorynavbarar = getAllStockGroups();
                         foreach ($categorynavbarar as $categorynavbar) {
@@ -40,19 +37,17 @@
                 </li>
             </ul>
         </div>
-        <!-- einde dropdown category -->
-        <!-- login -->
         <?php
-// set session vallues als er geen gebruiker is ingelogd
+    // set session values als er geen gebruiker is ingelogd
         if (!isset($_SESSION["IsSystemUser"])) {
             $_SESSION["IsSystemUser"] = 0;
         }
         if (!isset($_SESSION["IsEmployee"])) {
             $_SESSION["IsEmployee"] = 0;
         }
-// welcome gebruiker
+    // welcome gebruiker
         if ($_SESSION['IsSystemUser'] == 1) {
-            echo "<a class='text-white'> Hallo " . $_SESSION['PreferredName'] . "</a>";
+            echo "<p class='text-white'> Hallo " . $_SESSION['PreferredName'] . "</p>";
         } ?>
         <?php if ($_SESSION['IsSystemUser'] == 0)
             echo "
@@ -82,7 +77,6 @@
                             <button type=\"submit\" class=\"btn btn-sample btn-sample-success\">Log in</button>
                         </form>" ?>
 
-<!--     login proces   -->
         <?php
         include_once ROOT_PATH . "/controllers/userController.php";
 
@@ -106,8 +100,6 @@
             else{
                 echo ("gebruikersnaam of wachtwoord is verkeerd");
             }
-
-
         }
 
         ?>
@@ -115,50 +107,39 @@
             echo "
                         <div class=\"dropdown-divider\"></div>
                         <a href=\"/WWI/WWI/pages/Register.php\" class=\"dropdown-item\" href=\"#\">Nieuw hier? Registreren</a>
-                        <a class=\"dropdown-item\" href=\"/WWI/WWI/pages/wachtwoordvergeten.php?crsf=" . $_SESSION["token"] . "\">Wachtwoord vergeten?</a>
+                        <a class=\"dropdown-item\" href=\"/WWI/WWI/pages/wachtwoordvergeten.php?csrf=" . $_SESSION["csrf"] . "\">Wachtwoord vergeten?</a>
                     </div>
-
                 </li>
             </ul>
-        </div>
-                        " ?>
-<!--        logout / show user name-->
+        </div>" ?>
+
         <?php if ($_SESSION['IsSystemUser'] == 1) {
             echo "<form method='post' class=\"form-inline my-2 my-lg-0\">
                 <input type='hidden' value='TRUE' name='Logout'>
-            <button class=\"btn btn-sample btn-sample-success\" type=\"submit\">Log Uit 
-            </button>
+            <button class=\"btn btn-sample btn-sample-success\" type=\"submit\">Log Uit</button>
         </form>";
-//            logout functie
+
             $logout = filter_input(INPUT_POST, "Logout");
             if ($logout == "TRUE") {
-
-
                 session_destroy();
                 header("Location: /WWI/WWI/pages/index.php");
-
             }
-
         }
         ?>
-        <!-- einde login -->
         <!-- zoekveld -->
         <form class="form-inline my-2 my-lg-0" action="/WWI/WWI/pages/Search.php">
             <input class="form-control mr-sm-2" type="search" placeholder="Zoeken" required aria-label="Search" name="name"
                    id="Zoeken">
             <button class="btn btn-sample btn-sample-success" type="submit">Zoeken <i class="fa fa-search"></i>
             </button>
-<!-- winkelwagen-->
+    <!-- winkelwagen-->
         </form>
         <form class="form-inline my-2 my-lg-0" action="/WWI/WWI/pages/ShoppingCart.php">
             <button class="btn btn-sample btn-sample-success" type="submit">Winkelwagen <i
                         class="fa fa-shopping-cart"></i></button>
         </form>
-<!--        contact pagina-->
+    <!--        contact pagina-->
         <form class="form-inline my-2 my-lg-0" action="/WWI/WWI/pages/Contact.php">
             <button class="btn btn-sample btn-sample-success" type="submit">Contact</button>
         </form>
-
-        <!-- einde zoekveld -->
-
 </nav>

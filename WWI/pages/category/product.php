@@ -28,7 +28,7 @@ $Stock = getStockItemHoldingByID($StockItem["StockItemID"])["QuantityOnHand"];
 $CombiDeals = generateCombiDeals($StockItem);
 
 if (isset($_POST["review"])){
-    if (isset($_SESSION["USID"])){
+    if (isset($_SESSION["USID"]) and $_SESSION["IsEmployee"] == 0){
         insertReviewValue($_SESSION["USID"], $StockItem["StockItemID"], $_POST["ster"]);
     }
 }
@@ -41,7 +41,7 @@ if (isset($_POST["review"])){
             <div style="padding-bottom: 10px">
             <?php
             $addendum = "(" . number_format(getAverageReviewValue($StockItem["StockItemID"]), 1) . "), " . getReviewCountByStockItemID($StockItem) . " reviews";
-            if (isset($_SESSION["USID"])){
+            if (isset($_SESSION["USID"])) {
                 $reviewValue = getUserSpecificReviewByStockItemID($_SESSION["USID"], $StockItem["StockItemID"]);
                 if ($reviewValue != null){
                     print generateUserReview($reviewValue) . $addendum;
@@ -61,10 +61,18 @@ if (isset($_POST["review"])){
         <div class="col-6">
             <div class="row">
                 <div class="col" style="padding-bottom: 10px">
-                    <?php print "<b>Prijs:</b> €" . number_format(generatePrice($StockItem), 2); ?>
+                    <?php  if (generateDiscountPercentage($StockItem) != null){
+                        print "<b>Prijs:</b><strike> €" . number_format(generatePrice($StockItem), 2)."</strike><br>";
+                    echo generateDiscountTextIfApplicable($StockItem) . "<br>";
+                        print "<b>Nieuwe Prijs:</b> €" . number_format(generateDiscountPrice($StockItem), 2);
+                    }?>
+                    <?php  if (generateDiscountPercentage($StockItem) == null){
+                        print "<b>Prijs:</b> €" . number_format(generatePrice($StockItem), 2);
+
+                    }?>
+
                     <br>
                     <?php print "<b>Voorraad:</b> " . generateStock($StockItem) . " eenheden"; ?>
-                    <?php if(isGekoeld($StockItem["StockItemID"])) print("<br><b>gemiddelde tempratuur in koeling:</b>".gemidelde_tempratuur()); ?>
                     <br>
                     <form method="post" action="/WWI/WWI/pages/ShoppingCart.php">
                         <input type="hidden" value="<?php echo($StockItem["StockItemID"]); ?>" name="add">

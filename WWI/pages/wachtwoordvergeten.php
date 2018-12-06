@@ -3,7 +3,13 @@ if (!defined('ROOT_PATH')) {
     include("../config.php");
 }
 
-include(ROOT_PATH . "/includes/header.php"); ?>
+include(ROOT_PATH . "/includes/header.php");
+
+//$csrf = filter_input(INPUT_GET, "csrf", FILTER_SANITIZE_STRING);
+
+//if($_SESSION["CSRF"] != $csrf){ ?>
+<!--    <meta http-equiv="refresh" content="=0;URL=error.php"/>-->
+<!--<?php //} ?>-->
 
 <html>
 <body>
@@ -32,6 +38,9 @@ include(ROOT_PATH . "/includes/header.php"); ?>
         </table>
     </form>
 </div>
+
+<?php include(ROOT_PATH . "/includes/footer.php"); ?>
 </body>
 </html>
+
 

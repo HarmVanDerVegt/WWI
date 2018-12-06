@@ -18,6 +18,7 @@ if ($tokenValidity) {
             <form method="post" action="wachtwoordresetbevestiging.php">
             <div class="signup-form">
                 <input type="hidden" name="userID" value="<?php echo $ID ?>">
+                <input type="hidden" name="token" value="<?php echo $token ?>">
                 <div class="form-group">
                     Nieuwe wachtwoord:<input type="password" class="form-control" name="wachtwoord"
                                              placeholder="Nieuw Wachtwoord"

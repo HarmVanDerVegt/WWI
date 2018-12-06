@@ -16,7 +16,7 @@ include(ROOT_PATH . "/includes/header.php");
 
 
 
-$OrderID = filter_input(INPUT_POST, "purchaseorderID", FILTER_SANITIZE_STRING);
+$OrderID = filter_input(INPUT_POST, "OrderID", FILTER_SANITIZE_STRING);
 $array = getBestellingByPurchaseorderID($OrderID);
 $productenarray = getProductsByPurchaseorderID($OrderID);
 $totaal = 0;

@@ -115,7 +115,7 @@ function insertIntoPeoplePurchaseOrders($PersonID, $PurchaseOrderID)
 //Prepared de SQL statement
     $sql = "INSERT INTO peoplepurchaseorders 
             (PersonID, PurchaseOrderID) 
-            VALUES ($PersonID, $OrderID)";
+            VALUES ($PersonID, $PurchaseOrderID)";
 
 //Voert de statement uit.
     $result = $db->query($sql);

@@ -48,7 +48,6 @@ echo '<BR>';
                     print "<div class=\"card\">";
                     print "Bestelling : <b>" . $index . "</b><br>";
                     print "Besteld op : " . $array['OrderDate'] . "<br>";
-                    print "prijs : €" . $_SESSION["totaal"][$index] . "<br>";
                     ?>
                     <form action="BestelStatus.php">
                         <input type="hidden" value="<?php print $index; ?>" name="OrderID">

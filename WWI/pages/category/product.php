@@ -64,7 +64,6 @@ if (isset($_POST["review"])){
                     <?php print "<b>Prijs:</b> €" . number_format(generatePrice($StockItem), 2); ?>
                     <br>
                     <?php print "<b>Voorraad:</b> " . generateStock($StockItem) . " eenheden"; ?>
-                    <?php if(isGekoeld($StockItem["StockItemID"])) print("<br><b>gemiddelde tempratuur in koeling:</b>".gemidelde_tempratuur()); ?>
                     <br>
                     <form method="post" action="/WWI/WWI/pages/ShoppingCart.php">
                         <input type="hidden" value="<?php echo($StockItem["StockItemID"]); ?>" name="add">

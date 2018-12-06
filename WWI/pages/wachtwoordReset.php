@@ -8,6 +8,8 @@ include_once ROOT_PATH . "/controllers/UserController.php";
 $ID = filter_input(INPUT_GET, "userID", FILTER_SANITIZE_STRING);
 $token = filter_input(INPUT_GET, "token", FILTER_SANITIZE_STRING);
 
+//print $token;
+
 $tokenValidity = checkRecoveryToken($token, $ID);
 if ($tokenValidity) {
     ?>
@@ -15,6 +17,7 @@ if ($tokenValidity) {
         <div class="card-body mx-auto">
             <form method="post" action="wachtwoordresetbevestiging.php">
             <div class="signup-form">
+                <input type="hidden" name="userID" value="<?php echo $ID ?>">
                 <div class="form-group">
                     Nieuwe wachtwoord:<input type="password" class="form-control" name="wachtwoord"
                                              placeholder="Nieuw Wachtwoord"

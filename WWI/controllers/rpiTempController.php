@@ -1,28 +1,27 @@
 <?php
 
-function maak_connectie() {
-    // Connect met sql server
-    return mysqli_connect('localhost', 'root', '', 'wideworldimporters');
-}
+include_once ROOT_PATH . "/controllers/databaseController.php";
 
 // geeft de gemidelde tempratuur van alle sensors
 // uit: tempratuur
-function gemidelde_tempratuur(){
+function gemiddelde_temperatuur(){
     // geef commando
     $sql_code = "SELECT Temperature FROM coldroomtemperatures";
     
     // roep database aan
-    $db = maak_connectie();
+    $db = createDB();
     $resultaat = mysqli_query($db, $sql_code);
-    $db = NULL;
-    
-    // bereken het gemidelde
+
+    // bereken het gemiddelde
     $som=0;
     $i=0;
     while($rij = mysqli_fetch_assoc($resultaat)){
         $som += $rij["Temperature"];
         $i++;
     }
+
+    $db->close();
+
     return ($som/$i);
 }
 
@@ -30,7 +29,7 @@ function gemidelde_tempratuur(){
 // geeft de meest recente tempratuur van een speciefieke sensor
 // in: $id als integer
 // uit: tempratuur
-function tempratuur($id) {
+function temperatuur($id) {
     // filter $id van verkeerde input
     $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
 
@@ -40,9 +39,9 @@ function tempratuur($id) {
                  LIMIT 1";
 
     // roep database aan
-    $db = maak_connectie();
+    $db = createDB();
     $resultaat = mysqli_query($db, $sql_code);
-    $db = NULL;
+    $db->close();
     
     // geef huidige tempratuur
     return mysqli_fetch_assoc($resultaat)["Temperature"];
@@ -61,9 +60,9 @@ function isGekoeld($stockitemID){
                  AND stockitemID=".$stockitemID;
 
     // roep database aan
-    $db = maak_connectie();
+    $db = createDB();
     $resultaat = mysqli_query($db, $sql_code);
-    $db = NULL;
+    $db->close();
     
     // check of opgegeven stockitem gekoeld wordt
     if(mysqli_num_rows($resultaat) > 0){

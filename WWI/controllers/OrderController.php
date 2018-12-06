@@ -136,7 +136,7 @@ function UpdateStock($productID, $hoeveelheid)
     $sql = "UPDATE stockitemholdings
             SET QuantityOnHand = QuantityOnHand - ".$hoeveelheid."
             WHERE StockItemID = ".$productID;
-    echo $sql;
+
 //Voert de statement uit.
     $result = $db->query($sql);
 

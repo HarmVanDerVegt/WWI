@@ -8,6 +8,7 @@ if (!defined('ROOT_PATH')) {
 include(ROOT_PATH . "/includes/header.php");
 include_once(ROOT_PATH . "/controllers/stockItemController.php");
 include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
+include_once(ROOT_PATH . "/controllers/productController.php");
 
 //$_SESSION["cart"] wordt gebruikt om te kijken hoeveel verschillende producten er in de winkelwagen zitten
 //$_SESSION["hoeveelheid"] wordt gebruikt hoeveel eenheden er per product zijn geselecteerd
@@ -83,8 +84,8 @@ if (isset($_SESSION["cart"])) {
 
                 // prijs ophalen
 
-                if ($product["RecommendedRetailPrice"] != NULL) {
-                    $productPrijs = $product["RecommendedRetailPrice"];
+                if (($i) != NULL) {
+                    $productPrijs = generateDiscountPrice($product);
                 } else {
                     $productPrijs = $product["UnitPrice"] * ($product["TaxRate"] / 100 + 1);
                 }

@@ -13,9 +13,7 @@ include(ROOT_PATH . "/includes/header.php");
 $PersonID = $_SESSION["USID"];
 $Orders = getOrderByPersonID($PersonID);
 
-foreach ($Orders
-
-as $order){
+foreach ($Orders as $order){
 ?>
 <div class="card">
     <?php

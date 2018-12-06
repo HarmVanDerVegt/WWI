@@ -27,12 +27,13 @@ include_once ROOT_PATH . "/controllers/rpiTempController.php";
 
         if (isset($_POST["ster"])) {
             $reviewwaarde = filter_input(INPUT_POST, "ster", FILTER_VALIDATE_INT);
-            if ($reviewwaarde >= 1 || $reviewwaarde <= 5) {
+            $reviewwaarde = (int) $reviewwaarde;
+            if ($reviewwaarde >= 1 && $reviewwaarde <= 5) {
                 if (isset($_SESSION["USID"]) and $_SESSION["IsEmployee"] == 0) {
-                    insertReviewValue($_SESSION["USID"], $StockItem["StockItemID"], $_POST["ster"]);
+                    insertReviewValue($_SESSION["USID"], $StockItem["StockItemID"], $reviewwaarde);
                 }
             } else {
-                echo '<META HTTP-EQUIV="refresh" content="0;URL="error.php">';
+                echo '<META HTTP-EQUIV="refresh" content="=0;URL=../error.php">';
             }
         }
         ?>

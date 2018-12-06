@@ -90,7 +90,7 @@ function insertReviewValue($userid, $stockitemID, $reviewvalue) {
 
     $db = createDB();
 
-    if ($reviewvalue >= 1 || $reviewvalue <= 5) {
+    if ($reviewvalue >= 1 && $reviewvalue <= 5) {
 
         $sql = "INSERT INTO reviews (PersonID, StockItemID, Waarde)
             VALUES ( " . $userid . ", " . $stockitemID . ", " . $reviewvalue . " )
@@ -101,7 +101,7 @@ function insertReviewValue($userid, $stockitemID, $reviewvalue) {
         $db->close();
         
     } else {
-        return '<META HTTP-EQUIV="refresh" content="0;URL="error.php">';
+        return '<META HTTP-EQUIV="refresh" content="=0;URL=../error.php>';
     }
 }
 

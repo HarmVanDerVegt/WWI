@@ -66,6 +66,10 @@ $sarray = getProductSpecificReviewByStockItemID($stockitemID);
             $delete = filter_input(INPUT_POST, "delete");
             $stockitemID = filter_input(INPUT_POST, "StockID");
             $persoonid = filter_input(INPUT_POST, "PersoonID");
+            if($reviewwaarde < 1 || $reviewwaarde > 5) { 
+                deletereview($persoonid, $stockitemID, $reviewwaarde);
+                echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/Beheerreview.php?StockItemID=" . $stockitemID . "\"  />";
+            }
             $reviewwaarde = filter_input(INPUT_POST, "Waarde");
             if ($delete == "TRUE") {
                 deletereview($persoonid, $stockitemID, $reviewwaarde);

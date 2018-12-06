@@ -33,9 +33,7 @@ foreach ($_SESSION["cart"] as $i) {
         insertIntoPeoplePurchaseOrders($PersonID ,$orderID);
     }
 }
-unset($_SESSION["cart"]);
-unset($_SESSION["hoeveelheid"]);
-unset($_SESSION["totaal"]);
+
 ?>
 
 <h1>Kies uw betaalmethode</h1>
@@ -49,4 +47,10 @@ unset($_SESSION["totaal"]);
     <input type="submit" class="btn btn-sample" value="Dummy Betalen">
 </form>
 
+<?php
+
+unset($_SESSION["cart"]);
+unset($_SESSION["hoeveelheid"]);
+unset($_SESSION["totaal"]);
+?>
 <?php include(ROOT_PATH . "/includes/footer.php"); ?>

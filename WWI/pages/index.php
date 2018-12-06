@@ -18,8 +18,13 @@ include_once ROOT_PATH . "/controllers/photoController.php";
     $LowestSpecialDealValue = getLowestSpecialDealID();
     $HighestSpecialDealValue = getHighestSpecialDealID();
 
-    $SpecialDeal = getSpecialDealByID(rand($LowestSpecialDealValue, $HighestSpecialDealValue));
-    $StockItem = $SpecialDeal['StockItemID'];
+    $SpecialDeals = getAllSpecialDeals();
+    $StockItems = array_column($SpecialDeals, "StockItemID");
+
+    $StockItemImages = [];
+    foreach ($StockItems as $StockItem) {
+        $StockItemImages = array_merge(laad_afbeelding($StockItem, 1), $StockItemImages);
+    }
 
     ?>
     <div class="py-5">
@@ -28,7 +33,7 @@ include_once ROOT_PATH . "/controllers/photoController.php";
                 <div class="col-md-12">
                     <div class="card-custom">
                         <div class="card-block">
-                            <a href="../pages/category/product.php?productID=<?php print($StockItem); ?>" class="card-link"><?php show_afbeelding(laad_afbeelding($StockItem), 300, 1135); ?></a>
+                            <?php show_afbeelding($StockItemImages, 300, 1135, $StockItems); ?>
                         </div>
                     </div>
                 </div>

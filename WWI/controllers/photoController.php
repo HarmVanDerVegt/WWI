@@ -3,7 +3,7 @@
 // doel: laad afbeeldingen van database
 // in: $id verwacht een stockitemID
 // uit: geeft een array met strings terug die base64 codes bevat van afbeeldingen
-function laad_afbeelding($id) {
+function laad_afbeelding($id, $max_images=999) {
     // voorkom sql injectie door $id te testen of het een int is
     $id = filter_var($id,FILTER_SANITIZE_NUMBER_INT);
     
@@ -18,7 +18,7 @@ function laad_afbeelding($id) {
         // maak een array met afbeeldingen in base64 formaat
         $lijst = array();
         $i = 0;
-        while ($row = mysqli_fetch_array($res)) {
+        while ($row = mysqli_fetch_array($res) and $i < $max_images) {
             $lijst[$i++] = base64_encode($row['photo']);
         }
 
@@ -36,7 +36,7 @@ function laad_afbeelding($id) {
 // in: $foto_lijst verwacht een array met bae64 codes van type string
 //     $y en $x om de groote te bepalen van de afbeelding
 // uit: de functie geeft geen waarde terug
-function show_afbeelding($foto_lijst,$y=400,$x=400) {
+function show_afbeelding($foto_lijst,$y=400,$x=400, $links = []) {
     // zorgt dat het een standaard ruimte inneemt
     print('<div style="height:'.$y.'px; width: '.$x.'px;">');
     // belangrijke variablen
@@ -61,10 +61,15 @@ function show_afbeelding($foto_lijst,$y=400,$x=400) {
         print('<div class="carousel-inner">');
         $i = 0;
         foreach ($foto_lijst as $foto) {
-            print('<div class="carousel-item ' . (($i == 0) ? 'active' : '') . '">
+            $links != [] ?
+               print('<div class="carousel-item ' . (($i == 0) ? 'active' : '') . '">
+               <a href="/WWI/WWI/pages/category/product.php?productID=' . $links[$i] . ' " ><img src="data:image/jpeg;base64,' . $foto . '" style="width:'.$x.'px; max-height: '.$y.'px;"/></a>
+               </div>')
+               :
+               print('<div class="carousel-item ' . (($i == 0) ? 'active' : '') . '">
                <img src="data:image/jpeg;base64,' . $foto . '" style="width:'.$x.'px; max-height: '.$y.'px;"/>
                </div>');
-            $i = 1;
+            $i++;
         }
         print('</div>');
 

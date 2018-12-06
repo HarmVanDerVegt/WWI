@@ -89,13 +89,20 @@ function getCurrentReviewValue($reviewwaarde) {
 function insertReviewValue($userid, $stockitemID, $reviewvalue) {
 
     $db = createDB();
-    $sql = "INSERT INTO reviews (PersonID, StockItemID, Waarde)
+
+    if ($reviewvalue >= 1 || $reviewvalue <= 5) {
+
+        $sql = "INSERT INTO reviews (PersonID, StockItemID, Waarde)
             VALUES ( " . $userid . ", " . $stockitemID . ", " . $reviewvalue . " )
             ON DUPLICATE KEY UPDATE Waarde=$reviewvalue";
 
-    $db->query($sql);
+        $db->query($sql);
 
-    $db->close();
+        $db->close();
+        
+    } else {
+        return '<META HTTP-EQUIV="refresh" content="0;URL="error.php">';
+    }
 }
 
 function getAverageReviewValue($stockitemID) {
@@ -116,7 +123,7 @@ function getAverageReviewValue($stockitemID) {
     return $result["average"];
 }
 
-function getReviewCountByStockItemID($StockItem){
+function getReviewCountByStockItemID($StockItem) {
     $db = createDB();
 
     $sql = "SELECT COUNT(*) count
@@ -132,17 +139,17 @@ function getReviewCountByStockItemID($StockItem){
     return $result["count"];
 }
 
-function getreviewbystockid($id){
-  return  getRowByIntID("StockItemID", "reviews", $id);
+function getreviewbystockid($id) {
+    return getRowByIntID("StockItemID", "reviews", $id);
 }
 
 function getProductSpecificReviewByStockItemID($StockItemID) {
 
     $db = createDB();
     $sql = ""
-        . "SELECT * "
-        . "FROM reviews "
-        . "WHERE stockitemID = " . $StockItemID . " ";
+            . "SELECT * "
+            . "FROM reviews "
+            . "WHERE stockitemID = " . $StockItemID . " ";
 
     $result = $db->query($sql);
 
@@ -156,10 +163,9 @@ function getProductSpecificReviewByStockItemID($StockItemID) {
     return $result;
 }
 
-function deletereview($personid,$stockitemid,$waarde){
+function deletereview($personid, $stockitemid, $waarde) {
     $db = createDB();
-    $sql = " " ."delete from reviews where PersonID = " . $personid . " and StockItemID = " . $stockitemid . " and Waarde = " . $waarde . " ";
+    $sql = " " . "delete from reviews where PersonID = " . $personid . " and StockItemID = " . $stockitemid . " and Waarde = " . $waarde . " ";
 
     return $db->query($sql);
-
 }

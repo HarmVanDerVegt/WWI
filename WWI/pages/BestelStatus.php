@@ -87,7 +87,7 @@ $bezorgdatum = $array['ExpectedDeliveryDate'];
             $productprijs = $product['ExpectedUnitPricePerOuter'];
             $productprijs = number_format($productprijs, 2);
             $hoeveelheid = $product['Quantity'];
-            $subtotaal = (float)number_format($productprijs * $hoeveelheid, 2);
+            $subtotaal = number_format($productprijs * $hoeveelheid, 2);
             ?>
 
             <tr>
@@ -103,7 +103,7 @@ $bezorgdatum = $array['ExpectedDeliveryDate'];
             </tr>
             <?php
             //            totaalprijs weergeven
-            $totaal += $subtotaal;
+            $totaal += (float)$subtotaal;
         }
         ?>
         <tr>

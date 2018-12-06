@@ -5,11 +5,11 @@ if (!defined('ROOT_PATH')) {
 
 include(ROOT_PATH . "/includes/header.php");
 
-$csrf = filter_input(INPUT_GET, "csrf", FILTER_SANITIZE_STRING);
+//$csrf = filter_input(INPUT_GET, "csrf", FILTER_SANITIZE_STRING);
 
-if($_SESSION["CSRF"] != $csrf){ ?>
-    <meta http-equiv="refresh" content="=0;URL=error.php"/>
-<?php } ?>
+//if($_SESSION["CSRF"] != $csrf){ ?>
+<!--    <meta http-equiv="refresh" content="=0;URL=error.php"/>-->
+<!--<?php //} ?>-->
 
 <html>
 <body>

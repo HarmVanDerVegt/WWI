@@ -305,7 +305,8 @@ function InsertNewUser($valuarray){
                     IsOnCreditHold=(0),
                     PhoneNumber=($phone)";
     $db->query($customersql);
-    //return ($peoplesql.$customersql);
+
+
     $_SESSION["Voornaam"] = $voornaam;
     $_SESSION["achternaam"] = $achternaam;
     $_SESSION["Email"] = $Email;

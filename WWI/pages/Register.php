@@ -83,9 +83,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                required="required">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="Provincie" placeholder="Provincie" value="<?php if (!empty($_POST["Provincie"])) {echo $_POST["Provincie"];} ?>"
-                               required="required">
+                        <label for="sel1">Kies een provincie:</label>
+                        <select class="form-control"  name='Provincie'  required="required" id="sel1">
+                            <option value="Drenthe"> Drenthe</option>
+                            <option value="Flevoland"> Flevoland</option>
+                            <option value="Friesland"> Friesland</option>
+                            <option value="Gelderland"> Gelderland</option>
+                            <option value="Groningen"> Groningen</option>
+                            <option value="Limburg"> Limburg</option>
+                            <option value="Noord-Brabant"> Noord-Brabant</option>
+                            <option value="Noord-Holland"> Noord-Holland</option>
+                            <option value="Overijssel"> Overijssel</option>
+                            <option value="Utrecht"> Utrecht</option>
+                            <option value="Zeeland"> Zeeland</option>
+                            <option value="Zuid-Holland" > Zuid-Holland</option>
+                        </select>
                     </div>
+
                     <div class="form-group">
                         <input type="email" class="form-control" name="email" placeholder="Email" required="required" value="<?php if (!empty($_POST["email"])) {echo $_POST["email"];} ?>">
                     </div>

@@ -10,7 +10,7 @@
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark">
     <a href="/WWI/WWI/pages/index.php"><img class="img-thumbnail" src="/WWI/WWI/pages/media/wwi-ls.png" height="250px"
-                                            width="90px"/>
+                                            width="90px"/></a>
         <!--<a class="navbar-brand" href="#">WWI</a>-->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
             <span class="navbar-toggler-icon"></span>

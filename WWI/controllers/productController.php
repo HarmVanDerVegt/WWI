@@ -79,7 +79,7 @@ function getMarketingComments($StockItem)
 
 function getColor($StockItem)
 {
-    $Color = getColorsByID($StockItem["ColorID"]);
+    $Color = getColorByID($StockItem["ColorID"]);
     if ($Color != NULL) {
         $product_kleur = $Color["ColorName"];
     } else {

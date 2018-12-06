@@ -9,7 +9,7 @@ include(ROOT_PATH . "/includes/header.php");
 if (NULL != (filter_input(INPUT_POST, 'voornaam', FILTER_SANITIZE_STRING)) &&
     NULL != (filter_input(INPUT_POST, 'achternaam', FILTER_SANITIZE_STRING)) &&
     NULL != (filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING)) &&
-    NULL != (filter_input(INPUT_POST, 'berich', FILTER_SANITIZE_STRING)) &&
+    NULL != (filter_input(INPUT_POST, 'bericht', FILTER_SANITIZE_STRING)) &&
     NULL != (filter_input(INPUT_POST, 'onderwerp', FILTER_SANITIZE_STRING))) {
     ?>
     <p><h3>Hartelijk dank voor uw bericht, kunnen we u verder helpen?</h3></p>

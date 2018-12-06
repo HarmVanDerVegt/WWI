@@ -139,11 +139,13 @@ function getOrderByPersonID($PersonID){
 //Voert de statement uit.
     $result = $db->query($sql);
 
-//Geeft de eerste rij terug als array en gaat naar de volgende rij, die er niet is.
-    $result = $result->fetch_assoc();
+    $array = [];
 
-//Dit geeft dus maar één rij terug.
+    while ($row = $result->fetch_assoc()){
+        $array [array_values($row)[0]]= $row;
+    }
+
     $db->close();
 
-    return $result;
+    return $array;
 }

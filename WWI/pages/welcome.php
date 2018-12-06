@@ -9,6 +9,7 @@ if (!defined('ROOT_PATH')) {
 include_once ROOT_PATH . "/controllers/databaseController.php";
 include_once ROOT_PATH . "/controllers/userController.php";
 include_once ROOT_PATH . "/controllers/stockItemController.php";
+include_once ROOT_PATH . "/controllers/OrderController.php";
 
 
 ?>
@@ -32,7 +33,7 @@ echo '<BR>';
                 <div class="card-custom"
                 ">
                 <div class="card-block">
-                    <h4 class="card-custom-title text-light">Bestellingen</h4>
+                    <h4 class="card-custom-title">Bestellingen</h4>
                     <?php
                     $PersonID = $_SESSION["USID"];
                     $Orders = getOrderByPersonID($PersonID);
@@ -40,20 +41,18 @@ echo '<BR>';
                     if (empty($Orders)) {
                         print "<p>Er zijn geen bestellingen beschikbaar</p>";
                     } else {
-                    foreach ($Orders
-
-                    as $order) {
+                    foreach ($Orders as $index=>$order) {
                     ?>
                     <?php
-                    $array = getBestellingByPurchaseorderID($order);
+                    $array = getBestellingByPurchaseorderID($index);
                     print "<div class=\"card\">";
-                    print "Bestelling : <b>" . $order . "</b><br>";
+                    print "Bestelling : <b>" . $index . "</b><br>";
                     print "Besteld op : " . $array['OrderDate'] . "<br>";
-                    print "prijs : €" . $_SESSION["totaal"] . "<br>";
+                    print "prijs : €" . $_SESSION["totaal"][$index] . "<br>";
                     ?>
                     <form action="BestelStatus.php">
-                        <input type="hidden" value="<?php print $order; ?>" name="OrderID" "
-                        <input type="submit" class="btn btn-sample" value="Selecteren">
+                        <input type="hidden" value="<?php print $index; ?>" name="OrderID">
+                        <button type="submit" class="btn btn-sample" value="Selecteren">Selecteren</button>
                     </form>
                 </div>
                 <?php }
@@ -72,11 +71,11 @@ echo '<BR>';
             <h4 class="card-custom-title text-light">Gegevens</h4>
             <!-- klant gegevens -->
             <?php
-            echo "<body class=\"text-light\"> Volledige Naam: " . $_SESSION['FullName'] . "</body> <BR>";
-            echo "<body class=\"text-light\"> Email: " . $_SESSION['LogonName'] . " </body> <BR>";
-            echo "<body class=\"text-light\"> Straat: " . $customerdata['DeliveryAddressLine1'] . " </body> <BR>";
-            echo "<body class=\"text-light\"> Postcode: " . $customerdata['DeliveryPostalCode'] . " </body> <BR>";
-            echo "<body class=\"text-light\"> Woonplaats: " . $Cityname['CityName'] . " </body> <BR>";
+            echo "<body> Volledige Naam: " . $_SESSION['FullName'] . "</body> <BR>";
+            echo "<body> Email: " . $_SESSION['LogonName'] . " </body> <BR>";
+            echo "<body> Straat: " . $customerdata['DeliveryAddressLine1'] . " </body> <BR>";
+            echo "<body> Postcode: " . $customerdata['DeliveryPostalCode'] . " </body> <BR>";
+            echo "<body> Woonplaats: " . $Cityname['CityName'] . " </body> <BR>";
             ?>
         </div>
     </div>

@@ -32,6 +32,9 @@ foreach ($_SESSION["cart"] as $i) {
         insertIntoPeoplePurchaseOrders($PersonID ,$orderID);
     }
 }
+unset($_SESSION["cart"]);
+unset($_SESSION["hoeveelheid"]);
+unset($_SESSION["totaal"]);
 ?>
 
 <h1>Kies uw betaalmethode</h1>

@@ -16,7 +16,7 @@ include(ROOT_PATH . "/includes/header.php");
 
 
 
-$OrderID = filter_input(INPUT_POST, "OrderID", FILTER_SANITIZE_STRING);
+$OrderID = filter_input(INPUT_GET, "OrderID", FILTER_SANITIZE_STRING);
 $array = getBestellingByPurchaseorderID($OrderID);
 $productenarray = getProductsByPurchaseorderID($OrderID);
 $totaal = 0;
@@ -87,7 +87,7 @@ $bezorgdatum = $array['ExpectedDeliveryDate'];
             $productprijs = $product['ExpectedUnitPricePerOuter'];
             $productprijs = number_format($productprijs, 2);
             $hoeveelheid = $product['Quantity'];
-            $subtotaal = number_format($productprijs * $hoeveelheid, 2);
+            $subtotaal = (float)number_format($productprijs * $hoeveelheid, 2);
             ?>
 
             <tr>

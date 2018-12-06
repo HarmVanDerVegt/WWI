@@ -10,7 +10,7 @@ function getAllColors(){
     return getAllRows($tablecolors);
 }
 
-function getColorsByID($ID){
+function getColorByID($ID){
     global $tablecolors;
     
     return getRowByIntID("ColorID", $tablecolors, $ID);

@@ -8,6 +8,7 @@ include(ROOT_PATH . "/includes/header.php");
 include_once(ROOT_PATH . "/controllers/stockItemController.php");
 include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
 include_once ROOT_PATH . "/controllers/OrderController.php";
+include_once ROOT_PATH . "/controllers/productController.php";
 
 
 if ($_SESSION['IsSystemUser'] == 1) {
@@ -48,11 +49,12 @@ if ($_SESSION['IsSystemUser'] == 1) {
                 $productNaam = $product["StockItemName"];
                 if ($productNaam != "") {
 
-                    if ($product["RecommendedRetailPrice"] != NULL) {
-                        $productPrijs = $product["RecommendedRetailPrice"];
+                    if (($i) != NULL) {
+                        $productPrijs = generateDiscountPrice($product);
                     } else {
-                        $productPrijs = $product["UnitPrice"] * ($pduct["TaxRate"] / 100 + 1);
+                        $productPrijs = $product["UnitPrice"] * ($product["TaxRate"] / 100 + 1);
                     }
+
                     ?>
 
                     <tr>

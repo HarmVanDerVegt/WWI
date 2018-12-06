@@ -15,7 +15,6 @@ $datum = date("Y/m/d");
 $orderID = GetPurchaseOrderID();
 $bezorgdatum = date("Y-m-d", time() + 1209600);
 $PersonID = $_SESSION["USID"];
-$_SESSION["$orderID"] = $_SESSION["totaal"];
 
 foreach ($_SESSION["cart"] as $i) {
     for ($a = 0; $a < $_SESSION["hoeveelheid"][$i]; $a++) {

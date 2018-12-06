@@ -23,7 +23,6 @@ if (empty($Orders)) {
         print "<div class=\"card\">";
         print "Bestelling : <b>" . $order . "</b><br>";
         print "Besteld op : " . $array['OrderDate'] . "<br>";
-        print "prijs : €" . $_SESSION["$orderID"] . "<br>";
         ?>
         <form action="BestelStatus.php">
             <input type="hidden" value="<?php print $order; ?>" name="OrderID" "

@@ -18,7 +18,7 @@ if ($tokenValidity) {
         if ($password != $passwordCheck) {
             ?>
             <meta http-equiv="refresh" content="=0;URL=wachtwoordReset.php?token=<?php print$token;?>&userID=<?php print$ID;?>&error='Wachtwoorden komen niet overeen!'"/>
-
+            <META HTTP-EQUIV="refresh" content="=0;URL=../error.php">
         <?php } else {
             resetPassword($ID, $password); ?>
             <p>Uw wachtwoord is aangepast.</p>

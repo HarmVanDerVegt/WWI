@@ -13,6 +13,7 @@ include_once ROOT_PATH . "/controllers/OrderController.php";
 $datum = date("Y/m/d");
 $orderID = GetPurchaseOrderID();
 $bezorgdatum = date("Y-m-d", time() + 1209600);
+$PersonID = $_SESSION["USID"];
 
 foreach ($_SESSION["cart"] as $i) {
     for ($a = 0; $a < $_SESSION["hoeveelheid"][$i]; $a++) {
@@ -28,15 +29,14 @@ foreach ($_SESSION["cart"] as $i) {
         }
         InsertIntoPurchaseorders($orderID, $datum, $bezorgdatum);
         InsertIntoPurchaseorderlines($orderID, $orderlineID, $productID, $productnaam, $productPrijs, $datum);
+        insertIntoPeoplePurchaseOrders($PersonID ,$orderID);
     }
 }
 ?>
 
 <h1>Kies uw betaalmethode</h1>
 
-<form action="BestelStatus.php" method="post">
-    <input type="hidden" name="purchaseorderID" value="<?php print $orderID; ?>">
-    <!--    <input type="hidden" name="purchaseorderlineID" value="--><?php //$orderlineID; ?><!--">-->
+<form action="Orders.php" method="post">
     <input type="submit" class="btn btn-sample" value="Ga door naar het proces na het betalen">
 </form>
 <form action="Mollie.php" method="post">

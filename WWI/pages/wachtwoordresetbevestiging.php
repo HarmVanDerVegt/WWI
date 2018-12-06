@@ -5,19 +5,25 @@ if (!defined('ROOT_PATH')) {
 ?>
 <?php include(ROOT_PATH . "/includes/header.php");
 include_once ROOT_PATH . "/controllers/UserController.php";
-?>
 
+$ID = filter_input(INPUT_GET, "userID", FILTER_SANITIZE_STRING);
+$token = filter_input(INPUT_GET, "token", FILTER_SANITIZE_STRING);
+$tokenValidity = checkRecoveryToken($token, $ID);
 
-
-<h1>JAJA het is gelukt or <3</h1>
-<?php
-$ID = filter_input(INPUT_POST, "userID", FILTER_SANITIZE_STRING);
 $password = filter_input(INPUT_POST, 'wachtwoord', FILTER_SANITIZE_STRING);
 $passwordCheck = filter_input(INPUT_POST, 'bevestig_wachtwoord', FILTER_SANITIZE_STRING);
-if (isset($password) && isset($passwordCheck)) {
-    if ($password != $passwordCheck) {
-        print("<p>wachtwoorden komen niet overeen</p>");
-    } else {
-        resetPassword($ID, $password);
+if ($tokenValidity) {
+    if (isset($password) && isset($passwordCheck)) {
+        if ($password != $passwordCheck) {
+            print("<p>wachtwoorden komen niet overeen</p>");
+        } else {
+            resetPassword($ID, $password); ?>
+            <p>Uw wachtwoord is aangepast.</p>
+            <a href="index.php">Ga terug naar de startpagina...</a>
+            <?php
+        }
     }
-}
+} else {
+    ?>
+    <meta http-equiv="refresh" content="=0;URL=error.php"/>
+<?php } ?>

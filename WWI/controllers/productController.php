@@ -23,7 +23,7 @@ function generateProductPageInformation($StockItem)
     // Maakt product_specs aan zodat er dingen aan toegevoegd kunnen worden om weer te geven
     $product_specs = "";
 
-    if (getBrand($StockItem) != null){
+    if (getBrand($StockItem) != null) {
         $product_specs .= "Merk: " . getBrand($StockItem) . "<br>";
     }
 
@@ -31,15 +31,15 @@ function generateProductPageInformation($StockItem)
         $product_specs .= "De grootte van dit product is: " . getSize($StockItem) . "<br>";
     }
 
-    if (getWeight($StockItem) != null){
+    if (getWeight($StockItem) != null) {
         $product_specs .= "Het gewicht per eenheid is: " . getWeight($StockItem) . "<br>";
     }
 
-    if (getColor($StockItem) != null){
+    if (getColor($StockItem) != null) {
         $product_specs .= "De kleur van het product is: " . getColor($StockItem) . "<br>";
     }
 
-    if (getMarketingComments($StockItem) != null){
+    if (getMarketingComments($StockItem) != null) {
         $product_specs .= getMarketingComments($StockItem) . "<br>";
     }
 
@@ -49,7 +49,7 @@ function generateProductPageInformation($StockItem)
         $product_specs .= ("Temperatuur in koeling:" . gemiddelde_temperatuur() . "<br>");
     }
 
-    if (getSupplier($StockItem) != null){
+    if (getSupplier($StockItem) != null) {
         $product_specs .= "Dit product word geleverd door: " . getSupplier($StockItem) . "<br>";
     }
 
@@ -147,12 +147,35 @@ function generateDiscountTextIfApplicable($StockItem)
     $DiscountPercentage = generateDiscountPercentage($StockItem);
     $product_discount_text = "";
     if ($DiscountPercentage != NULL && $DiscountPercentage != 0) {
-        $product_discount_text .= ("Dit product is in de aanbieding! Er is een kortingspercentage van " . $DiscountPercentage . " procent over dit product verwerkt!");
+        $product_discount_text .= ("" . $DiscountPercentage . "% korting!");
     }
     return $product_discount_text;
 }
 
 function generatePrice($StockItem)
+{
+
+    // Indien de voorgestelde prijs bekend is, verandert $product_prijs in de prijs. Indien deze niet bekend is pakt hij de vaste waarden binnen de UnitPrice en vermenigvuldigt hij deze met het TaxRate percentage.
+    // Tevens checkt deze functie of het product in de aanbieding is en past dit toe.
+
+    $DiscountPercentage = generateDiscountPercentage($StockItem);
+
+    if ($StockItem["RecommendedRetailPrice"] != NULL) {
+        if ($DiscountPercentage != NULL && $DiscountPercentage != 0) {
+            $product_prijs = number_format($StockItem["RecommendedRetailPrice"] , 2);
+        } else {
+            $product_prijs = number_format($StockItem["RecommendedRetailPrice"], 2);
+        }
+    } elseif ($StockItem["RecommendedRetailPrice"] == NULL && $DiscountPercentage != (NULL || 0)) {
+        $product_prijs = number_format(($StockItem["UnitPrice"] * $StockItem["TaxRate"] / 100 + 1) / 100 * (100 - $DiscountPercentage), 2);
+    } else {
+        $product_prijs = ("--,--" . "<br>");
+    }
+
+    return $product_prijs;
+}
+
+function generateDiscountPrice($StockItem)
 {
 
     // Indien de voorgestelde prijs bekend is, verandert $product_prijs in de prijs. Indien deze niet bekend is pakt hij de vaste waarden binnen de UnitPrice en vermenigvuldigt hij deze met het TaxRate percentage.

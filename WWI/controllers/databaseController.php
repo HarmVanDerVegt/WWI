@@ -3,7 +3,7 @@
 function createDB()
 {
     // Create connection
-    $dbcon = mysqli_connect('localhost', 'root', '', 'wideworldimporters');
+    $dbcon = mysqli_connect('localhost', 'root', 'Q9sZbU9Tp9uvugE', 'wideworldimporters');
 
     // Check connection
     if ($dbcon->connect_error) {

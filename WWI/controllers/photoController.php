@@ -8,7 +8,7 @@ function laad_afbeelding($id) {
     $id = filter_var($id,FILTER_SANITIZE_NUMBER_INT);
     
     // maak connectie
-    $sql_connectie = mysqli_connect('localhost', 'root', '', 'wideworldimporters');
+    $sql_connectie = mysqli_connect('localhost', 'root', 'Q9sZbU9Tp9uvugE', 'wideworldimporters');
 
 
     if ($sql_connectie) { // check of connectie maken sucessvol was

@@ -1,0 +1,2 @@
+mysql -u root
+SET PASSWORD FOR 'root'@'localhost' = PASSWORD('Q9sZbU9Tp9uvugE');

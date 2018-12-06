@@ -34,8 +34,45 @@ function getImageLinkFromStockGroupID($ID){
     $categoryName = strtolower($categoryName);
 
     $returnstring = "../media/" . $categoryName . ".jpg";
-    //$returnstring = "media/" . $categoryName . ".jpg";
-
     return $returnstring;
+}
+
+function getImageLinkFromStockGroupID2($ID){
+    $category = getStockGroupByID($ID);
+
+    $categoryName = $category["StockGroupName"];
+
+    $categoryName = str_replace(" ", "", $categoryName);
+    $categoryName = str_replace("-", "", $categoryName);
+
+    $categoryName = strtolower($categoryName);
+
+    $returnstring = "media/" . $categoryName . ".jpg";
+    return $returnstring;
+}
+
+function getStockGroupByName($name){
+    $name = "\"" . $name . "\"";
+
+    $db = createDB();
+
+    $sql = "SELECT *
+            FROM StockGroups
+            WHERE StockGroupName=$name";
+
+    print $sql;
+
+    $result = $db->query($sql);
+
+    $result = $result->fetch_assoc();
+
+    return $result;
+}
+
+function getStockGroupLink($StockGroup){
+    $name = $StockGroup["StockGroupName"];
+    $link = "category/product_lijst.php?category=$name";
+
+    return $link;
 }
 ?>

@@ -17,8 +17,8 @@ if ($tokenValidity) {
     if (isset($password) && isset($passwordCheck)) {
         if ($password != $passwordCheck) {
             ?>
-            <meta http-equiv="refresh" content="=0;URL=wachtwoordReset.php?token=<?php print$token;?>&userID=<?php print$ID;?>&error='wachtwoorden_komen_niet_overeen'"/>
-
+            <meta http-equiv="refresh" content="=0;URL=wachtwoordReset.php?token=<?php print$token;?>&userID=<?php print$ID;?>&error='Wachtwoorden komen niet overeen!'"/>
+            <META HTTP-EQUIV="refresh" content="=0;URL=../error.php">
         <?php } else {
             resetPassword($ID, $password); ?>
             <p>Uw wachtwoord is aangepast.</p>
@@ -26,7 +26,7 @@ if ($tokenValidity) {
             <?php
         }
     } else {
-        <meta http-equiv="refresh" content="=0;URL=wachtwoordReset.php?token=<?php print$token;?>&userID=<?php print$ID;?>&error='wachtwoorden_moeten_ingevuld_zijn'"/>
+        ?><meta http-equiv="refresh" content="=0;URL=wachtwoordReset.php?token=<?php print$token;?>&userID=<?php print$ID;?>&error='wachtwoorden_moeten_ingevuld_zijn'"/><?php
     }
 } else {
     ?>

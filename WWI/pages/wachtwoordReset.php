@@ -21,16 +21,14 @@ if ($tokenValidity) {
         <div class="card-body mx-auto">
             <form method="post" action="wachtwoordresetbevestiging.php">
                 <div class="signup-form">
-                    <input type="hidden" name="userID" value="<?php echo $ID ?>">
-                    <input type="hidden" name="token" value="<?php echo $token ?>">
                     <div class="form-group">
+                        <input type="hidden" name="userID" value="<?php echo $ID ?>">
+                        <input type="hidden" name="token" value="<?php echo $token ?>">
                         Nieuwe wachtwoord:<input type="password" class="form-control" name="wachtwoord"
                                                  placeholder="Nieuw Wachtwoord"
-                                                 required="required">
-                    </div>
-                    <div class="form-group">
+                                                 required>
                         Bevestig wachtwoord:<input type="password" class="form-control" name="bevestig_wachtwoord"
-                                                   placeholder="Bevestig Wachtwoord" required="required"><br>
+                                                   placeholder="Bevestig Wachtwoord" required><br>
                         <input style="width: 200px;" type="submit" class="btn btn-sample" value="Reset wachtwoord">
                     </div>
                 </div>

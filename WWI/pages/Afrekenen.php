@@ -32,6 +32,7 @@ foreach ($_SESSION["cart"] as $i) {
         InsertIntoPurchaseorders($orderID, $datum, $bezorgdatum);
         InsertIntoPurchaseorderlines($orderID, $orderlineID, $productID, $productnaam, $productPrijs, $datum);
         insertIntoPeoplePurchaseOrders($PersonID ,$orderID);
+        UpdateStock($productID, 1);
     }
 }
 

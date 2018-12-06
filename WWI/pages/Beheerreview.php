@@ -25,29 +25,27 @@ $stockitemID = filter_input(INPUT_GET, "StockItemID");
 
 
 $sarray = getProductSpecificReviewByStockItemID($stockitemID);
-
-
 ?>
-    <center>
-        <br>
-        <link href="\WWI\WWI\css\button.css" rel="stylesheet" type="text/css"/>
-        <?php $arraystock = (getStockItemByID($stockitemID));
-        echo($arraystock['StockItemName']); ?>
-        <br>
-        <table>
-            <tr>
-                <th>Gebruiker</th>
-                <th>Reviews</th>
-                <th>Delete</th>
-            </tr>
+<center>
+    <br>
+    <link href="\WWI\WWI\css\button.css" rel="stylesheet" type="text/css"/>
+<?php $arraystock = (getStockItemByID($stockitemID));
+echo($arraystock['StockItemName']);
+?>
+    <br>
+    <table>
+        <tr>
+            <th>Gebruiker</th>
+            <th>Reviews</th>
+            <th>Delete</th>
+        </tr>
 
-            <?php
+        <?php
+        $stockitems = getAllStockItems();
+        foreach ($sarray as $reviews) {
 
-            $stockitems = getAllStockItems();
-            foreach ($sarray as $reviews) {
 
-
-                echo("  
+            echo("  
                 <tr>
                 <td>" . $reviews['PersonID'] . "</td>
                 <td>" . $reviews['Waarde'] . "</td>
@@ -62,28 +60,24 @@ $sarray = getProductSpecificReviewByStockItemID($stockitemID);
                 
                 </td>
                 </tr>");
-            }
-            $delete = filter_input(INPUT_POST, "delete");
-            $stockitemID = filter_input(INPUT_POST, "StockID");
-            $persoonid = filter_input(INPUT_POST, "PersoonID");
-            if($reviewwaarde < 1 || $reviewwaarde > 5) { 
-                deletereview($persoonid, $stockitemID, $reviewwaarde);
-                echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/Beheerreview.php?StockItemID=" . $stockitemID . "\"  />";
-            }
-            $reviewwaarde = filter_input(INPUT_POST, "Waarde");
-            if ($delete == "TRUE") {
-                deletereview($persoonid, $stockitemID, $reviewwaarde);
-                echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/Beheerreview.php?StockItemID=" . $stockitemID . "\"  />";
+        }
+        $delete = filter_input(INPUT_POST, "delete");
+        $stockitemID = filter_input(INPUT_POST, "StockID");
+        $persoonid = filter_input(INPUT_POST, "PersoonID");
+        $reviewwaarde = filter_input(INPUT_POST, "Waarde");
+        if ($reviewwaarde < 1 || $reviewwaarde > 5) {
+            deletereview($persoonid, $stockitemID, $reviewwaarde);
+            echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/Beheerreview.php?StockItemID=" . $stockitemID . "\"  />";
+        }
+        if ($delete == "TRUE") {
+            deletereview($persoonid, $stockitemID, $reviewwaarde);
+            echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/Beheerreview.php?StockItemID=" . $stockitemID . "\"  />";
+        }
+        ?>
 
+    </table>
+</center>
 
-            }
-
-
-            ?>
-
-        </table>
-    </center>
-
-    <br>
+<br>
 
 <?php include(ROOT_PATH . "/includes/footer.php"); ?>

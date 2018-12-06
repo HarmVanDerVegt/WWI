@@ -23,8 +23,7 @@ include_once ROOT_PATH . "/controllers/photoController.php";
 
     $SpecialDeal = getSpecialDealByID(rand($LowestSpecialDealValue, $HighestSpecialDealValue));
     $StockItem = $SpecialDeal['StockItemID'];
-    //  $a=laad_afbeelding($StockItem);
-    // $afbeelding_specialdeal = "data:image/jpeg;base64,".array_pop($a);
+
     ?>
     <div class="py-5">
         <div class="container">

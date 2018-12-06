@@ -61,7 +61,16 @@ if (isset($_POST["review"])){
         <div class="col-6">
             <div class="row">
                 <div class="col" style="padding-bottom: 10px">
-                    <?php print "<b>Prijs:</b> €" . number_format(generatePrice($StockItem), 2); ?>
+                    <?php  if (generateDiscountPercentage($StockItem) != null){
+                        print "<b>Prijs:</b><strike> €" . number_format(generatePrice($StockItem), 2)."</strike><br>";
+                    echo generateDiscountTextIfApplicable($StockItem) . "<br>";
+                        print "<b>Nieuwe Prijs:</b> €" . number_format(generateDiscountPrice($StockItem), 2);
+                    }?>
+                    <?php  if (generateDiscountPercentage($StockItem) == null){
+                        print "<b>Prijs:</b> €" . number_format(generatePrice($StockItem), 2);
+
+                    }?>
+
                     <br>
                     <?php print "<b>Voorraad:</b> " . generateStock($StockItem) . " eenheden"; ?>
                     <br>

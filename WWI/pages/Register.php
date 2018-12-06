@@ -147,19 +147,9 @@ $Register["Wachtwoord"] = filter_input(INPUT_POST, 'wachtwoord');
 $Register["bevestig_wachtwoord"] = filter_input(INPUT_POST, 'bevestig_wachtwoord');
 $Register["Phone"] = filter_input(INPUT_POST, 'Phone');
 $Register["Provincie"] = filter_input(INPUT_POST, 'Provincie');
-if (empty($Register["Voornaam"])
-    or empty($Register["Achternaam"])
-    or empty($Register["Straat"])
-    or empty($Register["Huisnummer"])
-    or empty($Register["Postcode"])
-    or empty($Register["Email"])
-    or empty($Register["Wachtwoord"])
-    or empty($Register["bevestig_wachtwoord"])
-    or empty($Register["Provincie"])){
-    echo "vul alle velden";
-}
 
-elseif (!empty($Register["Voornaam"])) {
+
+if (!empty($Register["Voornaam"])) {
     if ($Register["Wachtwoord"] <> $Register["bevestig_wachtwoord"]) {
         echo("wachtwoorden zijn niet gelijk");
     } else {

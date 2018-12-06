@@ -176,6 +176,18 @@ function InsertNewUser($valuarray){
     $Provincie = $valuarray["Provincie"];
     $date = date("Y/m/d");
 
+    if (empty($valuarray["Voornaam"])
+        or empty($valuarray["Achternaam"])
+        or empty($valuarray["Straat"])
+        or empty($valuarray["Huisnummer"])
+        or empty($valuarray["Postcode"])
+        or empty($valuarray["Email"])
+        or empty($valuarray["Wachtwoord"])
+        or empty($valuarray["bevestig_wachtwoord"])
+        or empty($valuarray["Provincie"])){
+        echo "vul alle velden";
+    }
+
 //    controlleer ww
     if ($password == $verpassword) {
         $passhash = password_hash($password, PASSWORD_DEFAULT);

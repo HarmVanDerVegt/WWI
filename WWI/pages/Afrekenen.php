@@ -9,6 +9,7 @@ include(ROOT_PATH . "/includes/header.php");
 include_once(ROOT_PATH . "/controllers/stockItemController.php");
 include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
 include_once ROOT_PATH . "/controllers/OrderController.php";
+include_once ROOT_PATH . "/controllers/productController.php";
 
 
 $datum = date("Y/m/d");
@@ -24,7 +25,7 @@ foreach ($_SESSION["cart"] as $i) {
         $productID = $i;
         $hoeveelheid = $_SESSION["hoeveelheid"][$i];
         if (getStockItemByID($i)["RecommendedRetailPrice"] != NULL) {
-            $productPrijs = getStockItemByID($i)["RecommendedRetailPrice"];
+            $productPrijs = generateDiscountPrice($product = getStockItemByID($i));
         } else {
             $productPrijs = $product["UnitPrice"] * ($pduct["TaxRate"] / 100 + 1);
         }

@@ -63,8 +63,7 @@ $categories = getAllStockGroups();
                             echo "<option   value='$tag'>$tag</option>";
                         } ?>
                     </select></td>
-                <td><select name='categoryID'>
-                        <option value=""> Geen Categorie</option>
+                <td>
                         <?php foreach (getAllStockGroups() as $category) {
                             echo("<option  value='" . $category["StockGroupID"] . "'>" . $category["StockGroupName"] . "</option>");
                         } ?>

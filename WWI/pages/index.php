@@ -12,10 +12,7 @@ include_once ROOT_PATH . "/controllers/photoController.php";
 
 <?php include_once(ROOT_PATH . "/includes/header.php"); ?>
 <body>
-    <!-- voegt header toe -->
-
     <br>
-
     <!-- ophalen gegevens van special deals uit database -->
     <?php
     $LowestSpecialDealValue = getLowestSpecialDealID();
@@ -35,40 +32,16 @@ include_once ROOT_PATH . "/controllers/photoController.php";
                         </div>
                     </div>
                 </div>
-            </div><br>
-
+            </div>
+            <br>
         </div>
     </div>
-
-
     <br>
     <br>
-
-
     <?php
-
-    // speciale data type voor category informatie
-    class category_type {
-
-        public $category = "";
-        public $foto_path = "";
-        public $link = "";
-
-    }
-
-    // laad category data
-    ?>
-    <!-- laat de product categoryen zien -->
-    <?php
-    // variablen
-    $height = 100;
-    $width = 100;
     // genereer html code die de category's laat zien
     print('<div class="container">');
     print('<div class="row">');
-    ?>
-    <?php
-
     foreach (getAllStockGroups() as $category){
         // toon kaart met naam en foto van category
         print('<div class="col-6 col-sm-4">');

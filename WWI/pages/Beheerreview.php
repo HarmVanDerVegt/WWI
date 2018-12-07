@@ -24,14 +24,15 @@ if (($_SESSION['IsSystemUser']) <> 1 and $_SESSION['IsEmployee'] <> 1) {
 $stockitemID = filter_input(INPUT_GET, "StockItemID");
 
 
+
+
 $sarray = getProductSpecificReviewByStockItemID($stockitemID);
-?>
-<center>
+
+
+?><center>
     <br>
     <link href="\WWI\WWI\css\button.css" rel="stylesheet" type="text/css"/>
-<?php $arraystock = (getStockItemByID($stockitemID));
-echo($arraystock['StockItemName']);
-?>
+<?php $arraystock = (getStockItemByID($stockitemID)); echo ($arraystock['StockItemName']) ; ?>
     <br>
     <table>
         <tr>
@@ -41,9 +42,14 @@ echo($arraystock['StockItemName']);
         </tr>
 
         <?php
+
         $stockitems = getAllStockItems();
         foreach ($sarray as $reviews) {
+            if ($reviews['Waarde'] <= 1 and $reviews['Waarde'] >= 5) {
+                deletereview($reviews['PersonID'],$reviews['StockItemID'],$reviews['Waarde']);
+                echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/Beheerreview.php?StockItemID=" . $stockitemID . "\"  />";
 
+            }
 
             echo("  
                 <tr>
@@ -52,9 +58,9 @@ echo($arraystock['StockItemName']);
                 <td>
                 <form method='post' class=\"form - inline my - 2 my - lg - 0\">
                 <input type='hidden' value='TRUE' name='delete'>
-                <input type='hidden' value='" . $reviews['StockItemID'] . "' name='StockID'>
-                <input type='hidden' value='" . $reviews['PersonID'] . "' name='PersoonID'>
-                <input type='hidden' value='" . $reviews['Waarde'] . "' name='Waarde'>
+                <input type='hidden' value='" .$reviews['StockItemID'] ."' name='StockID'>
+                <input type='hidden' value='" .$reviews['PersonID'] ."' name='PersoonID'>
+                <input type='hidden' value='" .$reviews['Waarde'] ."' name='Waarde'>
                 <button class=\"btn btn - sample btn - sample - success\" onclick=\"return confirm('Weet u het zeker?');\" type=\"submit\">Delete</button>
                 </form>
                 
@@ -65,19 +71,25 @@ echo($arraystock['StockItemName']);
         $stockitemID = filter_input(INPUT_POST, "StockID");
         $persoonid = filter_input(INPUT_POST, "PersoonID");
         $reviewwaarde = filter_input(INPUT_POST, "Waarde");
-        if ($reviewwaarde < 1 || $reviewwaarde > 5) {
-            deletereview($persoonid, $stockitemID, $reviewwaarde);
-            echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/Beheerreview.php?StockItemID=" . $stockitemID . "\"  />";
-        }
+
         if ($delete == "TRUE") {
-            deletereview($persoonid, $stockitemID, $reviewwaarde);
+            deletereview($persoonid,$stockitemID,$reviewwaarde);
             echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/Beheerreview.php?StockItemID=" . $stockitemID . "\"  />";
+
+
+
         }
+
+
+
+
+
+
+
+
         ?>
-
     </table>
-</center>
-
-<br>
+    </center>
+    <br>
 
 <?php include(ROOT_PATH . "/includes/footer.php"); ?>

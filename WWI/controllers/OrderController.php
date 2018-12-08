@@ -120,8 +120,6 @@ function insertIntoPeoplePurchaseOrders($PersonID, $PurchaseOrderID)
 //Voert de statement uit.
     $result = $db->query($sql);
 
-//Geeft de eerste rij terug als array en gaat naar de volgende rij, die er niet is.
-//Dit geeft dus maar één rij terug.
     $db->close();
 
     return $result;
@@ -129,19 +127,14 @@ function insertIntoPeoplePurchaseOrders($PersonID, $PurchaseOrderID)
 
 function UpdateStock($productID, $hoeveelheid)
 {
-    //Initieert de database.
     $db = createDB();
 
-//Prepared de SQL statement
     $sql = "UPDATE stockitemholdings
             SET QuantityOnHand = QuantityOnHand - ".$hoeveelheid."
             WHERE StockItemID = ".$productID;
 
-//Voert de statement uit.
     $result = $db->query($sql);
 
-//Geeft de eerste rij terug als array en gaat naar de volgende rij, die er niet is.
-//Dit geeft dus maar één rij terug.
     $db->close();
 
     return $result;

@@ -6,6 +6,7 @@ if (!defined('ROOT_PATH')) {
 include_once ROOT_PATH . "/controllers/stockItemController.php";
 include_once(ROOT_PATH . "/includes/header.php");
 include_once ROOT_PATH . "/controllers/photoController.php";
+include_once ROOT_PATH . "/controllers/stockGroupsController.php";
 ?>
 
     <!--<!-- start zoekfunctie -->
@@ -40,45 +41,44 @@ include_once ROOT_PATH . "/controllers/photoController.php";
 
 
 <?php
-include_once "../controllers/stockItemController.php";
-include_once "../controllers/stockGroupsController.php";
 
 $categories = getAllStockGroups();
 
 ?>
     <link href="\WWI\WWI\css\card.css" rel="stylesheet" type="text/css"/>
-    <center>
-        <table>
-            <form>
-            <tr>
-                <th>Naam:</th>
-                <th>Tags</th>
-                <th>Categorie</th>
-            </tr>
-            <tr>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-6">
+                <form>
+                    <table>
+                        <tr>
+                            <th>Naam:</th>
+                            <th>Tags</th>
+                            <th>Categorie</th>
+                        </tr>
+                        <tr>
 
-                <td><input type="search" name="name" value='<?php echo $_GET['name'] ?>'/></td>
-                <td><select name='tag[]' multiple>
-                        <?php foreach (getSearchTags() as $tag) {
-                            echo "<option   value='$tag'>$tag</option>";
-                        } ?>
-                    </select></td>
-                <td>
-                        <?php foreach (getAllStockGroups() as $category) {
-                            echo("<option  value='" . $category["StockGroupID"] . "'>" . $category["StockGroupName"] . "</option>");
-                        } ?>
-                    </select>
-                    <button type="submit" class="btn btn-sample btn-sample-success">Zoeken</button>
+                            <td><input type="search" name="name" value='<?php echo $_GET['name'] ?>'/></td>
+                            <td><select name='tag[]' multiple>
+                                    <?php foreach (getSearchTags() as $tag) {
+                                        echo "<option   value='$tag'>$tag</option>";
+                                    } ?>
+                                </select></td>
+                            <td><select name="categoryID">
+                                    <?php foreach (getAllStockGroups() as $category) {
+                                        echo("<option  value='" . $category["StockGroupID"] . "'>" . $category["StockGroupName"] . "</option>");
+                                    } ?>
+                                </select>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-sample btn-sample-success">Zoeken</button>
 
-                </td>
-            </form>
-        </table>
-
-    </center>
-
-
-
-
+                            </td>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
 <?php
 
 //if (isset($_GET["name"])){
@@ -105,10 +105,9 @@ if (!isset($_GET["categoryID"])) {
 
 $items = getSearchedItems($_GET["name"], $_GET["tag"], $_GET["categoryID"]);
 
-if (empty($_GET["name"]) &&  empty($_GET["tag"])  &&  empty($_GET["categoryID"])){
+if (empty($_GET["name"]) && empty($_GET["tag"]) && empty($_GET["categoryID"])) {
     echo 'Vul op ten minste een veld in';
-}
-else  {
+} else {
     echo("
 
     <div class=\"py-2\">
@@ -163,16 +162,15 @@ else  {
     echo("</div>
                       </div>
                      </div>");
-    }
-    ?>
+}
+?>
 
 
+<?php
 
-    <?php
+if (empty($items)) {
+    echo "<p>Geen producten gevonden</p>";
+}
 
-    if (empty($items)) {
-        echo "<p>Geen producten gevonden</p>";
-    }
-
-    ?>
-    <?php include(ROOT_PATH . "/includes/footer.php"); ?>
+?>
+<?php include(ROOT_PATH . "/includes/footer.php"); ?>

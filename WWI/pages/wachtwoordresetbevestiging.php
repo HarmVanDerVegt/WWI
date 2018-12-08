@@ -16,21 +16,18 @@ $passwordCheck = filter_input(INPUT_POST, 'bevestig_wachtwoord', FILTER_SANITIZE
 if ($tokenValidity) {
     if (isset($password) && isset($passwordCheck)) {
         if ($password != $passwordCheck) {
-            ?>
-            <meta http-equiv="refresh" content="=0;URL=wachtwoordReset.php?token=<?php print$token;?>&userID=<?php print$ID;?>&error='Wachtwoorden komen niet overeen!'"/>
-            <META HTTP-EQUIV="refresh" content="=0;URL=../error.php">
-        <?php } else {
+            print("<p>Er is iets fout gegaan, volg nog een keer de link in de mail die u ontvangen heeft.</p>");
+        } else {
             resetPassword($ID, $password); ?>
             <p>Uw wachtwoord is aangepast.</p>
             <a href="index.php">Ga terug naar de startpagina...</a>
             <?php
         }
     } else {
-        ?><meta http-equiv="refresh" content="=0;URL=wachtwoordReset.php?token=<?php print$token;?>&userID=<?php print$ID;?>&error='wachtwoorden_moeten_ingevuld_zijn'"/><?php
+        print("<p>Er is iets fout gegaa, volg nog een keer de link in de mail die u ontvangen heeft.</p>");
     }
 } else {
-    ?>
-    <meta http-equiv="refresh" content="=0;URL=error.php"/>
-<?php } ?>
+    print("<p>Er is iets fout gegaa, volg nog een keer de link in de mail die u ontvangen heeft.</p>");
+} ?>
 
 <?php include(ROOT_PATH . "/includes/footer.php"); ?>

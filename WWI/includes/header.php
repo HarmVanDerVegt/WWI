@@ -47,7 +47,7 @@
         }
     // welcome gebruiker
         if ($_SESSION['IsSystemUser'] == 1) {
-            echo "<p class='text-white'> Hallo " . $_SESSION['PreferredName'] . "</p>";
+            echo "<a href='welcome.php' class='text-white'> Hallo " . $_SESSION['PreferredName'] . "  </a>";
         } ?>
         <?php if ($_SESSION['IsSystemUser'] == 0)
             echo "
@@ -116,7 +116,7 @@
         <?php if ($_SESSION['IsSystemUser'] == 1) {
             echo "<form method='post' class=\"form-inline my-2 my-lg-0\">
                 <input type='hidden' value='TRUE' name='Logout'>
-            <button class=\"btn btn-sample btn-sample-success\" type=\"submit\">Log Uit</button>
+            <button style='margin-left: 5px' class=\"btn btn-sample btn-sample-success\" type=\"submit\">Log Uit</button>
         </form>";
 
             $logout = filter_input(INPUT_POST, "Logout");
@@ -128,18 +128,18 @@
         ?>
         <!-- zoekveld -->
         <form class="form-inline my-2 my-lg-0" action="/WWI/WWI/pages/Search.php">
-            <input class="form-control mr-sm-2" type="search" placeholder="Zoeken" required aria-label="Search" name="name"
+            <input style="margin-left: 5px" class="form-control mr-sm-2" type="search" placeholder="Zoeken" required aria-label="Search" name="name"
                    id="Zoeken">
-            <button class="btn btn-sample btn-sample-success" type="submit">Zoeken <i class="fa fa-search"></i>
+            <button style="margin-left: 5px" class="btn btn-sample btn-sample-success" type="submit">Zoeken <i class="fa fa-search"></i>
             </button>
     <!-- winkelwagen-->
         </form>
         <form class="form-inline my-2 my-lg-0" action="/WWI/WWI/pages/ShoppingCart.php">
-            <button class="btn btn-sample btn-sample-success" type="submit">Winkelwagen <i
+            <button style="margin-left: 5px" class="btn btn-sample btn-sample-success" type="submit">Winkelwagen <i
                         class="fa fa-shopping-cart"></i></button>
         </form>
     <!--        contact pagina-->
         <form class="form-inline my-2 my-lg-0" action="/WWI/WWI/pages/Contact.php">
-            <button class="btn btn-sample btn-sample-success" type="submit">Contact</button>
+            <button style="margin-left: 5px" class="btn btn-sample btn-sample-success" type="submit">Contact</button>
         </form>
 </nav>

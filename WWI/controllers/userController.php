@@ -106,7 +106,7 @@ function insertRecoveryToken($token, $ID)
 function mailRecoveryToken($token, $mail, $ID)
 {
 
-    $link = "http://localhost:63342/WWI/WWI/pages/wachtwoordReset.php?token=" . $token . "&userID=" . $ID;
+    $link = "http://localhost:8080/WWI/WWI/pages/wachtwoordReset.php?token=" . $token . "&userID=" . $ID;
 
     $message = "Beste gebruiker,\n
                 \n

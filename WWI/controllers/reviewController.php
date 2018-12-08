@@ -147,9 +147,9 @@ function getProductSpecificReviewByStockItemID($StockItemID) {
 
     $db = createDB();
     $sql = ""
-            . "SELECT * "
-            . "FROM reviews "
-            . "WHERE stockitemID = " . $StockItemID . " ";
+        . "SELECT * "
+        . "FROM reviews "
+        . "WHERE stockitemID = " . $StockItemID . " ";
 
     $result = $db->query($sql);
 

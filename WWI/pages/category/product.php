@@ -80,7 +80,7 @@ if (isset($_POST["ster"])) {
                     ?>
 
                     <br>
-                    <?php print "<b>Voorraad:</b> " . generateStock($StockItem) . " eenheden"; ?>
+                    <?php print "<b>Voorraad:</b> " . generateStock($StockItem) ; ?>
                     <br>
                     <form method="post" action="/WWI/WWI/pages/ShoppingCart.php">
                         <input type="hidden" value="<?php echo($StockItem["StockItemID"]); ?>" name="add">

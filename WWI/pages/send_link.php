@@ -14,7 +14,6 @@ include_once ROOT_PATH . "/controllers/UserController.php";
         print("<p>Er is iets fout gegaan, volg nog een keer de link in de mail die u ontvangen heeft.</p>");
     } else {
         $ID = getUserByLogOnName($email);
-        echo $ID;
         if (empty($ID)) {
             echo "aldsfjlakdsjsfladksfj";
             print("<meta http-equiv=\"refresh\" content=\"0;URL=wachtwoordvergeten.php\" />");

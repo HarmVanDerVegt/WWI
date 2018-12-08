@@ -9,7 +9,6 @@ function createDB()
     if ($dbcon->connect_error) {
         die("Connection failed: " . $dbcon->connect_error);
     }
-    //echo "succes";
 
     return $dbcon;
 }
@@ -23,10 +22,6 @@ function getRowByIntID($ID, $table, $value)
     //Initieert de database.
     $db = createDB();
 
-    //Geeft een error als de value geen int is.
-    $value = (int)$value;
-
-    //Prepared de SQL statement.
     $sql = "SELECT *
             FROM $table
             WHERE $ID = $value";
@@ -51,8 +46,11 @@ function getAllRows($table)
 
     $result = $db->query($sql);
 
+    //Dit gaat een array van arrays teruggeven
     $array = [];
 
+    //Voor elk result stoppen we het in de array
+    //MEt als index de value van de eerste column, wat een primary key is.
     while ($row = $result->fetch_assoc()) {
         $array[array_values($row)[0]] = $row;
     }
@@ -92,7 +90,11 @@ function getHighestAttributeByIntID($ID, $table)
 
     $result = $db->query($sql);
 
-    return $result->fetch_assoc()["hoogste"];
+    $result = $result->fetch_assoc()["hoogste"];
+
+    $db->close();
+
+    return $result;
 }
 
 function getLowestAttributeByIntID($ID, $table)
@@ -103,7 +105,11 @@ function getLowestAttributeByIntID($ID, $table)
 
     $result = $db->query($sql);
 
-    return $result->fetch_assoc()["laagste"];
+    $result = $result->fetch_assoc()["laagste"];
+
+    $db->close();
+
+    return $result;
 }
 
 function getRowByTwoForeignIDs($value, $table1, $table2, $table3, $joinID, $joinID2)
@@ -118,8 +124,6 @@ function getRowByTwoForeignIDs($value, $table1, $table2, $table3, $joinID, $join
             JOIN $table3 AS t3
             ON t2.$joinID2 = t3.$joinID2
             WHERE t1.$joinID = $value";
-
-    //echo $sql;
 
     $result = $db->query($sql);
     $returnValue = $result->fetch_assoc();
@@ -152,5 +156,8 @@ function getQuantityByPurchaseOrderID($value, $table1, $table2, $joinID, $joinID
         $array[$i] = $row;
         $i++;
     }
+
+    $db->close();
+
     return $array;
 }

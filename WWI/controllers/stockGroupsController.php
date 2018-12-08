@@ -23,6 +23,7 @@ function getStockGroupByStockItemID($ID){
 
 }
 
+//Maakt een path naar een pagina van de naam van de meegevene categorie.
 function getImageLinkFromStockGroupID($ID){
     $category = getStockGroupByID($ID);
 
@@ -34,6 +35,7 @@ function getImageLinkFromStockGroupID($ID){
     $categoryName = strtolower($categoryName);
 
     $returnstring = "../media/" . $categoryName . ".jpg";
+
     return $returnstring;
 }
 
@@ -59,8 +61,6 @@ function getStockGroupByName($name){
     $sql = "SELECT *
             FROM StockGroups
             WHERE StockGroupName=$name";
-
-    print $sql;
 
     $result = $db->query($sql);
 

@@ -4,12 +4,7 @@ if (!defined('ROOT_PATH')) {
 }
 
 include(ROOT_PATH . "/includes/header.php");
-
-//$csrf = filter_input(INPUT_GET, "csrf", FILTER_SANITIZE_STRING);
-
-//if($_SESSION["CSRF"] != $csrf){ ?>
-<!--    <meta http-equiv="refresh" content="=0;URL=error.php"/>-->
-<!--<?php //} ?>-->
+?>
 
 <html>
 <body>
@@ -29,8 +24,9 @@ include(ROOT_PATH . "/includes/header.php");
                 <td><input type="email" name="emailControle" placeholder="me@example.com" required><br><br></td>
             </tr>
             <tr>
-            <td></td>
-            <td><p><font size="1.5">(</font><font size="1.5" color="blue">*</font><font size="1.5">) is verplicht</font></p></td>
+                <td></td>
+                <td><p><font size="1.5">(</font><font size="1.5" color="blue">*</font><font size="1.5">) is
+                            verplicht</font></p></td>
             </tr>
             <tr>
                 <td><input type="submit" name="submit_email" value="Verander wachtwoord" class="btn btn-sample"></td>

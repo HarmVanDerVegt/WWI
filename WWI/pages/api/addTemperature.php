@@ -8,7 +8,8 @@
 
 include_once ROOT_PATH . "/controllers/databaseController.php";
 
-function getMaxTemperatureID(){
+function getMaxTemperatureID()
+{
     $db = createDB();
 
     $sql = "SELECT MAX(ColdRoomTemperatureID) max
@@ -29,7 +30,7 @@ $token = filter_input(INPUT_GET, "token", FILTER_SANITIZE_STRING);
 $sensor = filter_input(INPUT_GET, "sensor", FILTER_SANITIZE_NUMBER_INT);
 $temperature = filter_input(INPUT_GET, "temperature", FILTER_SANITIZE_NUMBER_FLOAT);
 
-if ($verificationToken != $token){
+if ($verificationToken != $token) {
     return "Niet geldig!";
 }
 
@@ -44,3 +45,5 @@ $sql = "INSERT INTO coldroomtemperatures
         VALUES($ID, $sensor, $today, $temperature, $today, $validTo)";
 
 $db->query($sql);
+
+return "Succes!";

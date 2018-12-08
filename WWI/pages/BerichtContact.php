@@ -22,8 +22,8 @@ if (NULL != (filter_input(INPUT_POST, 'voornaam', FILTER_SANITIZE_STRING)) &&
 } else {
     ?>
     <a href="../pages/index.php"><h1>Er is helaas iets misgegaan, probeer het nog eens.</h1></a>
-    <?php }
+<?php }
 
 
 //footer includen
-    include(ROOT_PATH . "/includes/footer.php"); ?>
+include(ROOT_PATH . "/includes/footer.php"); ?>

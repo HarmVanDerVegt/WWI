@@ -26,10 +26,7 @@ include_once ROOT_PATH . "/controllers/UserController.php";
         $token = md5(uniqid(mt_rand(), true));
         insertRecoveryToken($token, $ID);
         mailRecoveryToken($token, $email, $ID);
-
     }
-
-
     ?>
     </body>
 <?php include(ROOT_PATH . "/includes/footer.php"); ?>

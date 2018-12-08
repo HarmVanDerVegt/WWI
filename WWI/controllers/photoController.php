@@ -3,10 +3,11 @@
 // doel: laad afbeeldingen van database
 // in: $id verwacht een stockitemID
 // uit: geeft een array met strings terug die base64 codes bevat van afbeeldingen
-function laad_afbeelding($id, $max_images=999) {
+function laad_afbeelding($id, $max_images = 999)
+{
     // voorkom sql injectie door $id te testen of het een int is
-    $id = filter_var($id,FILTER_SANITIZE_NUMBER_INT);
-    
+    $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+
     // maak connectie
     $sql_connectie = mysqli_connect('localhost', 'root', 'Q9sZbU9Tp9uvugE', 'wideworldimporters');
 
@@ -36,16 +37,17 @@ function laad_afbeelding($id, $max_images=999) {
 // in: $foto_lijst verwacht een array met bae64 codes van type string
 //     $y en $x om de groote te bepalen van de afbeelding
 // uit: de functie geeft geen waarde terug
-function show_afbeelding($foto_lijst,$y=400,$x=400, $links = []) {
+function show_afbeelding($foto_lijst, $y = 400, $x = 400, $links = [])
+{
     // zorgt dat het een standaard ruimte inneemt
-    print('<div style="height:'.$y.'px; width: '.$x.'px;">');
+    print('<div style="height:' . $y . 'px; width: ' . $x . 'px;">');
     // belangrijke variablen
     $aantal_afbeeldingen = count($foto_lijst);
 
     if ($aantal_afbeeldingen > 0) {
         // begin afbeelding element
         print('<div class="slideshow">
-           <div class="container" style="height: '.$y.'px; width: '.$x.'px;"> 
+           <div class="container" style="height: ' . $y . 'px; width: ' . $x . 'px;"> 
            <div id="myCarousel" class="carousel slide" data-ride="carousel">');
 
         // indicators
@@ -62,12 +64,12 @@ function show_afbeelding($foto_lijst,$y=400,$x=400, $links = []) {
         $i = 0;
         foreach ($foto_lijst as $foto) {
             $links != [] ?
-               print('<div class="carousel-item ' . (($i == 0) ? 'active' : '') . '">
-               <a href="/WWI/WWI/pages/category/product.php?productID=' . $links[$i] . ' " ><img src="data:image/jpeg;base64,' . $foto . '" style="width:'.$x.'px; max-height: '.$y.'px;"/></a>
+                print('<div class="carousel-item ' . (($i == 0) ? 'active' : '') . '">
+               <a href="/WWI/WWI/pages/category/product.php?productID=' . $links[$i] . ' " ><img src="data:image/jpeg;base64,' . $foto . '" style="width:' . $x . 'px; max-height: ' . $y . 'px;"/></a>
                </div>')
-               :
-               print('<div class="carousel-item ' . (($i == 0) ? 'active' : '') . '">
-               <img src="data:image/jpeg;base64,' . $foto . '" style="width:'.$x.'px; max-height: '.$y.'px;"/>
+                :
+                print('<div class="carousel-item ' . (($i == 0) ? 'active' : '') . '">
+               <img src="data:image/jpeg;base64,' . $foto . '" style="width:' . $x . 'px; max-height: ' . $y . 'px;"/>
                </div>');
             $i++;
         }
@@ -87,11 +89,11 @@ function show_afbeelding($foto_lijst,$y=400,$x=400, $links = []) {
 
         // eindig afbeelding element
         print('</div></div></div>');
-    }
-    else{
+    } else {
         print("Er zijn geen fotos voor dit product beschikbaar<br>");
     }
     print('</div>');
 }
+
 ?>
 

@@ -14,9 +14,18 @@ include_once ROOT_PATH . "/controllers/UserController.php";
         print("<meta http-equiv=\"refresh\" content=\"0;URL=wachtwoordvergeten.php\" />");
     } else {
         $ID = getUserByLogOnName($email);
+        echo $ID;
         if (empty($ID)) {
+            echo "aldsfjlakdsjsfladksfj";
             print("<meta http-equiv=\"refresh\" content=\"0;URL=wachtwoordvergeten.php\" />");
-        } ?>
+        }
+        else {
+            $token = md5(uniqid(mt_rand(), true));
+            insertRecoveryToken($token, $ID);
+            mailRecoveryToken($token, $email, $ID);
+        }
+        ?>
+
         <div>
             <h2>Bekijk uw mailbox</h2>
             <h3>Heeft u geen mail ontvangen? Bekijk uw spam</h3>

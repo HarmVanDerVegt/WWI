@@ -1,0 +1,20 @@
+in C:\xampp\php\php.ini find extension=php_openssl.dll and remove the semicolon from the beginning of that line to make SSL working for gmail for localhost.
+
+in php.ini file find [mail function] and change
+
+SMTP=smtp.gmail.com
+smtp_port=587
+sendmail_from = contact.wideworldimporters@gmail.com
+sendmail_path = "\"C:\xampp\sendmail\sendmail.exe\" -t"
+
+Now Open C:\xampp\sendmail\sendmail.ini. Replace all the existing code in sendmail.ini with following code
+
+[sendmail]
+
+smtp_server=smtp.gmail.com
+smtp_port=587
+error_logfile=error.log
+debug_logfile=debug.log
+auth_username=contact.wideworldimporters@gmail.com
+auth_password=GSwqvhFX
+force_sender=contact.wideworldimporters@gmail.com

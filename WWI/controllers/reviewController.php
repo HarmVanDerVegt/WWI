@@ -2,13 +2,6 @@
 
 include_once ROOT_PATH . "/controllers/databaseController.php";
 
-//////////////////////////////////////////////////////////
-//                                                      //
-//                  NIET FUNCTIONEEL                    //
-//              WEL NODIG, NOG NIET RELEVANT            //
-//                  NIET VERWIJDEREN                    //
-//                                                      //
-//////////////////////////////////////////////////////////
 
 $tableReviews = "reviews";
 
@@ -108,7 +101,6 @@ function insertReviewValue($userid, $stockitemID, $reviewvalue) {
 function getAverageReviewValue($stockitemID) {
 
     $db = createDB();
-    $array = [];
     $sql = ""
             . "SELECT AVG(Waarde) average "
             . "FROM reviews "
@@ -165,7 +157,15 @@ function getProductSpecificReviewByStockItemID($StockItemID) {
 
 function deletereview($personid, $stockitemid, $waarde) {
     $db = createDB();
-    $sql = " " . "delete from reviews where PersonID = " . $personid . " and StockItemID = " . $stockitemid . " and Waarde = " . $waarde . " ";
+    $sql = " "
+            . "delete from reviews where PersonID = " . $personid
+            . " and StockItemID = " . $stockitemid
+            . " and Waarde = " . $waarde
+            . " ";
 
-    return $db->query($sql);
+    $db->query($sql);
+
+    $db->close();
+
+    return null;
 }

@@ -1,0 +1,11 @@
+De order van betsanden runnen is:
+
+-ww mysql.txt
+-photo_list.sql
+-reviews.sql
+-wachtwoordtokens.sql
+-special_deals.sql
+-People_PurchaseOrders.sql
+-beheerder.sql
+-vul_photo_lijst.sql
+-reviewgen.php

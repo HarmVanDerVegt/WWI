@@ -1,6 +1,4 @@
 <?php
-
-// Hier worden de verschillende controllers ingevoegd.
 include_once ROOT_PATH . "/controllers/stockItemController.php";
 include_once ROOT_PATH . "/controllers/supplierController.php";
 include_once ROOT_PATH . "/controllers/stockItemHoldingController.php";
@@ -13,12 +11,8 @@ function generateProductPageInformation($StockItem)
 {
     $StockItemID = $StockItem["StockItemID"];
 
-    //Haal voorraad op. TODO: Doen we dit niet ergens anders?
-    $Stock = getStockItemHoldingByID($StockItem["StockItemID"]);
-
     //Haal de category van het product op.
     $StockGroup = getStockGroupByStockItemID($StockItemID);
-    $StockGroupID = $StockGroup["StockGroupID"];
 
     // Maakt product_specs aan zodat er dingen aan toegevoegd kunnen worden om weer te geven
     $product_specs = "";
@@ -44,7 +38,6 @@ function generateProductPageInformation($StockItem)
     }
 
     // Indien het gekozen product een koelproduct is, word $product_is_koelproduct TRUE. Anders is deze FALSE.
-    //TODO: placeholder voor temperatuur
     if ($StockItem["IsChillerStock"] == TRUE) {
         $product_specs .= ("Temperatuur in koeling:" . gemiddelde_temperatuur() . "<br>");
     }
@@ -108,7 +101,6 @@ function getSize($StockItem)
 {
     if ($StockItem["Size"] != NULL) {
         $product_grootte = $StockItem["Size"];
-        //$product_specs .= ("Dit product is " . $product_grootte . "<br>");
     } else {
         $product_grootte = NULL;
     }
@@ -119,7 +111,6 @@ function getBrand($StockItem)
 {
     if ($StockItem["Brand"] != NULL) {
         $product_merk = $StockItem["Brand"];
-        //$product_specs .= ("Merk " . $product_merk . "<br>");
     } else {
         $product_merk = null;
     }
@@ -162,7 +153,7 @@ function generatePrice($StockItem)
 
     if ($StockItem["RecommendedRetailPrice"] != NULL) {
         if ($DiscountPercentage != NULL && $DiscountPercentage != 0) {
-            $product_prijs = number_format($StockItem["RecommendedRetailPrice"] , 2);
+            $product_prijs = number_format($StockItem["RecommendedRetailPrice"], 2);
         } else {
             $product_prijs = number_format($StockItem["RecommendedRetailPrice"], 2);
         }
@@ -204,7 +195,6 @@ function generateStock($StockItem)
     $Stock = getStockItemHoldingByID($StockItem["StockItemID"]);
     if ($Stock["QuantityOnHand"] > 0) {
         $product_voorraad = $Stock["QuantityOnHand"];
-        //$product_voorraad = ("<b>voorraad: </b>" . $product_voorraad) . " eenheden " . "<br>";
     } else {
         $product_voorraad = NULL;
         $product_voorraad = ("Dit product is momenteel niet op voorraad");
@@ -245,7 +235,6 @@ function generateReviews($StockItem)
 function generateUserReview($ReviewWaarde)
 {
 
-    //$ReviewWaarde = 3;
     $ReviewWaarde = (int)$ReviewWaarde;
 
     If ($ReviewWaarde <= 0) {
@@ -268,7 +257,6 @@ function generateCombiDealCards($combiDeals)
 
     foreach ($combiDeals as $combiDeal) {
 
-        //$category = array_rand(getStockGroupIDsFromStockItemID($combiDeal["StockItemID"]));
         $category = $combiDeal["StockGroupID"];
 
         $link = getImageLinkFromStockGroupID($category);

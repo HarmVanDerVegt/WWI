@@ -14,7 +14,7 @@ if (!defined('ROOT_PATH')) {
 include_once ROOT_PATH . "/controllers/reviewController.php";
 
 $count =1;
-while ($count < 500) {
+while ($count < 5000) {
    insertReviewValue(rand(1001, 3311), rand(1, 277), rand(1, 5));
 $count ++;
 }

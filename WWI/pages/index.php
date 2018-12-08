@@ -12,77 +12,55 @@ include_once ROOT_PATH . "/controllers/photoController.php";
 
 <?php include_once(ROOT_PATH . "/includes/header.php"); ?>
 <body>
-    <!-- voegt header toe -->
+<br>
+<!-- ophalen gegevens van special deals uit database -->
+<?php
+$LowestSpecialDealValue = getLowestSpecialDealID();
+$HighestSpecialDealValue = getHighestSpecialDealID();
 
-    <br>
+$SpecialDeals = getAllSpecialDeals();
+$StockItems = array_column($SpecialDeals, "StockItemID");
 
-    <!-- ophalen gegevens van special deals uit database -->
-    <?php
-    $LowestSpecialDealValue = getLowestSpecialDealID();
-    $HighestSpecialDealValue = getHighestSpecialDealID();
+$StockItemImages = [];
+foreach ($StockItems as $StockItem) {
+    $StockItemImages = array_merge(laad_afbeelding($StockItem, 1), $StockItemImages);
+}
 
-    $SpecialDeal = getSpecialDealByID(rand($LowestSpecialDealValue, $HighestSpecialDealValue));
-    $StockItem = $SpecialDeal['StockItemID'];
-
-    ?>
-    <div class="py-5">
-        <div class="container">
-            <div class="row hidden-md-up">
-                <div class="col-md-12">
-                    <div class="card-custom">
-                        <div class="card-block">
-                            <a href="../pages/category/product.php?productID=<?php print($StockItem); ?>" class="card-link"><?php show_afbeelding(laad_afbeelding($StockItem), 300, 1135); ?></a>
-                        </div>
+?>
+<div class="py-5">
+    <div class="container">
+        <div class="row hidden-md-up">
+            <div class="col-md-12">
+                <div class="card-custom">
+                    <div class="card-block">
+                        <?php show_afbeelding($StockItemImages, 300, 1135, $StockItems); ?>
                     </div>
                 </div>
-            </div><br>
-
+            </div>
         </div>
+        <br>
     </div>
-
-
-    <br>
-    <br>
-
-
-    <?php
-
-    // speciale data type voor category informatie
-    class category_type {
-
-        public $category = "";
-        public $foto_path = "";
-        public $link = "";
-
-    }
-
-    // laad category data
-    ?>
-    <!-- laat de product categoryen zien -->
-    <?php
-    // variablen
-    $height = 100;
-    $width = 100;
-    // genereer html code die de category's laat zien
-    print('<div class="container">');
-    print('<div class="row">');
-    ?>
-    <?php
-
-    foreach (getAllStockGroups() as $category){
-        // toon kaart met naam en foto van category
-        print('<div class="col-6 col-sm-4">');
-        print('<div class="card">');
-        print('<a href="' . getStockGroupLink($category) . '" class="btn btn-sample btn-sample-success" role="button">');
-        print('<strong>' . $category["StockGroupName"] . '</strong><br>');
-        print('<img src="' . getImageLinkFromStockGroupID2($category["StockGroupID"]) . '" height=100px" width="100px">');
-        print('</a>');
-        print('</div>');
-        print('</div>');
-    }
+</div>
+<br>
+<br>
+<?php
+// genereer html code die de category's laat zien
+print('<div class="container">');
+print('<div class="row">');
+foreach (getAllStockGroups() as $category) {
+    // toon kaart met naam en foto van category
+    print('<div class="col-6 col-sm-4">');
+    print('<div class="card">');
+    print('<a href="' . getStockGroupLink($category) . '" class="btn btn-sample btn-sample-success" role="button">');
+    print('<strong>' . $category["StockGroupName"] . '</strong><br>');
+    print('<img src="' . getImageLinkFromStockGroupID2($category["StockGroupID"]) . '" height=100px" width="100px">');
+    print('</a>');
     print('</div>');
     print('</div>');
-    ?>
-    <br>
-    <?php include(ROOT_PATH . "/includes/footer.php"); ?>
+}
+print('</div>');
+print('</div>');
+?>
+<br>
+<?php include(ROOT_PATH . "/includes/footer.php"); ?>
 </body>

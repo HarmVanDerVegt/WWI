@@ -9,8 +9,7 @@
 
 $payment = $mollie->payments->get($payment->id);
 
-if ($payment->isPaid())
-{
+if ($payment->isPaid()) {
     echo "Payment received.";
 }
 

@@ -10,10 +10,8 @@ include_once ROOT_PATH . "/controllers/stockItemController.php";
 include_once ROOT_PATH . "/controllers/OrderController.php";
 
 
-
 // voegt header toe
 include(ROOT_PATH . "/includes/header.php");
-
 
 
 $OrderID = filter_input(INPUT_GET, "OrderID", FILTER_SANITIZE_STRING);
@@ -44,7 +42,7 @@ $bezorgdatum = $array['ExpectedDeliveryDate'];
         ?>
 
         <?php }
-    elseif ($morgen == $bezorgdatum) {
+        elseif ($morgen == $bezorgdatum) {
         ?>
         <i class="fa fa-cubes" style="font-size:50px;color: aqua"></i>
         <i class="fa fa-arrow-right" style="font-size:50px;color: aqua"></i>

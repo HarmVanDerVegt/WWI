@@ -41,7 +41,9 @@ echo '<BR>';
                     if (empty($Orders)) {
                         print "<p>Er zijn geen bestellingen beschikbaar</p>";
                     } else {
-                    foreach ($Orders as $index=>$order) {
+                    foreach ($Orders
+
+                    as $index => $order) {
                     ?>
                     <?php
                     $array = getBestellingByPurchaseorderID($index);

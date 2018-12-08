@@ -11,7 +11,7 @@ include_once ROOT_PATH . "/controllers/UserController.php";
     $email = filter_input(INPUT_GET, 'email', FILTER_SANITIZE_EMAIL);
     $emailcontrole = filter_input(INPUT_GET, 'emailControle', FILTER_SANITIZE_EMAIL);
     if ($email != $emailcontrole) {
-        print("<meta http-equiv=\"refresh\" content=\"0;URL=wachtwoordvergeten.php\" />");
+        print("<p>Er is iets fout gegaan, volg nog een keer de link in de mail die u ontvangen heeft.</p>");
     } else {
         $ID = getUserByLogOnName($email);
         echo $ID;
@@ -35,10 +35,7 @@ include_once ROOT_PATH . "/controllers/UserController.php";
         $token = md5(uniqid(mt_rand(), true));
         insertRecoveryToken($token, $ID);
         mailRecoveryToken($token, $email, $ID);
-
     }
-
-
     ?>
     </body>
 <?php include(ROOT_PATH . "/includes/footer.php"); ?>

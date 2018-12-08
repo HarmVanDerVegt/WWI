@@ -1,38 +1,41 @@
 <?php
 function GetPurchaseOrderID()
 {
-//Initieert de database.
+
     $db = createDB();
 
-//Nieuwe orderID aanmaken
+    //Haal de max plus 1 op om een ongebruikte ID op te vragen.
     $orderID = "SELECT max(PurchaseOrderID) +1 AS ID FROM PurchaseOrders";
+
     $MAXorderID = $db->query($orderID);
+
     $maxID = $MAXorderID->fetch_assoc();
+
     $db->close();
+
     return $maxID["ID"];
 }
 
 function GetPurchaseOrderlineID()
 {
-//Initieert de database.
     $db = createDB();
 
-//Nieuwe orderID aanmaken
+    //Haal de max plus 1 op om een ongebruikte ID op te vragen.
     $orderID = "SELECT max(PurchaseOrderlineID) +1 AS ID FROM PurchaseOrderlines";
+
     $MAXorderID = $db->query($orderID);
 
     $maxOrderlineID = $MAXorderID->fetch_assoc();
 
     $db->close();
+
     return $maxOrderlineID["ID"];
 }
 
 function InsertIntoPurchaseorders($maxID, $datum, $bezorgdatum)
 {
-//Initieert de database.
     $db = createDB();
 
-//Prepared de SQL statement.
     $sql = "INSERT INTO purchaseorders
 (PurchaseOrderID,
 SupplierID,
@@ -53,11 +56,9 @@ VALUES ($maxID,
 '$datum',
 '$bezorgdatum')";
 
-//Voert de statement uit.
+
     $result = $db->query($sql);
 
-//Geeft de eerste rij terug als array en gaat naar de volgende rij, die er niet is.
-//Dit geeft dus maar één rij terug.
     $db->close();
 
     return $result;
@@ -65,13 +66,8 @@ VALUES ($maxID,
 
 function InsertIntoPurchaseorderlines($orderID, $orderlineID, $StockitemID, $productnaam, $productprijs, $datum)
 {
-//Initieert de database.
     $db = createDB();
 
-//Geeft een error als de value geen int is.
-//$value = (int)$value;
-
-//Prepared de SQL statement
     $sql = "INSERT INTO purchaseorderlines
 VALUES ($orderlineID,
 $orderID,
@@ -86,11 +82,8 @@ $productprijs,
 '1',
 '$datum')";
 
-//Voert de statement uit.
     $result = $db->query($sql);
 
-//Geeft de eerste rij terug als array en gaat naar de volgende rij, die er niet is.
-//Dit geeft dus maar één rij terug.
     $db->close();
 
     return $result;
@@ -109,19 +102,14 @@ function getProductsByPurchaseorderID($ID)
 
 function insertIntoPeoplePurchaseOrders($PersonID, $PurchaseOrderID)
 {
-    //Initieert de database.
     $db = createDB();
 
-//Prepared de SQL statement
     $sql = "INSERT INTO peoplepurchaseorders 
             (PersonID, PurchaseOrderID) 
             VALUES ($PersonID, $PurchaseOrderID)";
 
-//Voert de statement uit.
     $result = $db->query($sql);
 
-//Geeft de eerste rij terug als array en gaat naar de volgende rij, die er niet is.
-//Dit geeft dus maar één rij terug.
     $db->close();
 
     return $result;
@@ -129,40 +117,33 @@ function insertIntoPeoplePurchaseOrders($PersonID, $PurchaseOrderID)
 
 function UpdateStock($productID, $hoeveelheid)
 {
-    //Initieert de database.
     $db = createDB();
 
-//Prepared de SQL statement
     $sql = "UPDATE stockitemholdings
-            SET QuantityOnHand = QuantityOnHand - ".$hoeveelheid."
-            WHERE StockItemID = ".$productID;
+            SET QuantityOnHand = QuantityOnHand - " . $hoeveelheid . "
+            WHERE StockItemID = " . $productID;
 
-//Voert de statement uit.
     $result = $db->query($sql);
 
-//Geeft de eerste rij terug als array en gaat naar de volgende rij, die er niet is.
-//Dit geeft dus maar één rij terug.
     $db->close();
 
     return $result;
 }
 
-function getOrderByPersonID($PersonID){
-    //Initieert de database.
+function getOrderByPersonID($PersonID)
+{
     $db = createDB();
 
-//Prepared de SQL statement
     $sql = "SELECT PurchaseOrderID
             FROM peoplepurchaseorders 
             WHERE PersonID = $PersonID";
 
-//Voert de statement uit.
     $result = $db->query($sql);
 
     $array = [];
 
-    while ($row = $result->fetch_assoc()){
-        $array [array_values($row)[0]]= $row;
+    while ($row = $result->fetch_assoc()) {
+        $array [array_values($row)[0]] = $row;
     }
 
     $db->close();

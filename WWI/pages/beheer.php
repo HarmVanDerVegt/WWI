@@ -27,35 +27,32 @@ if (($_SESSION['IsSystemUser']) <> 1 and $_SESSION['IsEmployee'] <> 1) {
     echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/index.php\" />";
 }
 ?>
-  <center>
-<table>
-    <tr>
-        <th>ProductID</th>
-        <th>Productnaam</th>
-        <th>Reviews</th>
-    </tr>
-<?php
-$stockitems = getAllStockItems();
-foreach ($stockitems as $stockarray) {
+    <center>
+        <table>
+            <tr>
+                <th>ProductID</th>
+                <th>Productnaam</th>
+                <th>Reviews</th>
+            </tr>
+            <?php
+            $stockitems = getAllStockItems();
+            foreach ($stockitems as $stockarray) {
 
 
-
-    echo("  
+                echo("  
                 <tr>
-                <td>".$stockarray['StockItemID']."</td>
-                <td>".$stockarray['StockItemName']."</td>
+                <td>" . $stockarray['StockItemID'] . "</td>
+                <td>" . $stockarray['StockItemName'] . "</td>
                 <td><a href=\"/WWI/WWI/pages/Beheerreview.php?StockItemID=" . $stockarray['StockItemID'] . "\"><h4 class=\"card-custom-title \"> beheer </h4></a></td>
                 </tr>");
 
 
-
-}
-
+            }
 
 
-?>
-</table>
-  </center>
+            ?>
+        </table>
+    </center>
     <br>
 
 

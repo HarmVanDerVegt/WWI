@@ -4,10 +4,8 @@ include_once "databaseController.php";
 
 function getUser($logonName, $password)
 {
-//start database connectie
     $db = createDB();
 
-// sql voor controleren van gebuikersnaam
     $sql = "SELECT *
             FROM people
             WHERE logonName=\"$logonName\"
@@ -15,10 +13,8 @@ function getUser($logonName, $password)
 
 
     $result = $db->query($sql);
-// waarde van array to string
     $result = $result->fetch_assoc();
 
-// controlleren van het wachtwoord en sluiten database connectie
     $db->close();
     $resultww = password_verify($password, $result['HashedPassword']);
     if ($resultww == TRUE) {
@@ -39,19 +35,14 @@ function getUserByID($ID)
 function getUserByLogOnName($email)
 {
 
-    //Initieert de database.
     $db = createDB();
 
-    //Prepared de SQL statement.
     $sql = "SELECT PersonID
             FROM people
             WHERE LogonName = '$email'";
 
-    //Voert de statement uit.
     $result = $db->query($sql);
 
-    //Geeft de eerste rij terug als array en gaat naar de volgende rij, die er niet is.
-    //Dit geeft dus maar één rij terug.
     $result = $result->fetch_assoc();
     $db->close();
 
@@ -62,15 +53,11 @@ function getUserByLogOnName($email)
 
 function getCustomerByID($ID)
 {
-
-//verkijg een cumtomer bij customerID
     return getRowByIntID('PrimaryContactPersonID', 'Customers', $ID);
 }
 
 function getCityByID($ID)
 {
-
-//verkijg een cumtomer bij cityID
     return getRowByIntID('CityID', 'cities', $ID);
 
 }
@@ -106,7 +93,7 @@ function insertRecoveryToken($token, $ID)
 function mailRecoveryToken($token, $mail, $ID)
 {
 
-    $link = "http://localhost:63342/WWI/WWI/pages/wachtwoordReset.php?token=" . $token . "&userID=" . $ID;
+    $link = "http://localhost:8080/WWI/WWI/pages/wachtwoordReset.php?token=" . $token . "&userID=" . $ID;
 
     $message = "Beste gebruiker,\n
                 \n
@@ -127,8 +114,6 @@ function mailRecoveryToken($token, $mail, $ID)
 function checkRecoveryToken($token, $ID)
 {
     $db = createDB();
-
-    //$token = "\"" . $token . "\"";
 
     $sql = "SELECT Token, ValidTo
             FROM WachtwoordTokens

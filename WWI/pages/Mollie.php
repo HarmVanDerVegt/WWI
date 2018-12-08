@@ -26,8 +26,8 @@ $payment = $mollie->payments->create([
     ],
     "description" => "$paymentID",
     "redirectUrl" => "https://www.google.nl/",
-    "webhookUrl"  => "https://www.google.nl/",
-    "method"      => "ideal"
+    "webhookUrl" => "https://www.google.nl/",
+    "method" => "ideal"
 ]);
 
 $payment->id;

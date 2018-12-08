@@ -1,6 +1,5 @@
 <?php
 
-#header en controllers includen
 if (!defined('ROOT_PATH')) {
     include("../config.php");
 }
@@ -123,17 +122,16 @@ if (isset($_SESSION["cart"])) {
 
         ?>
         <form method="post" action="Bestelling.php">
-        <tr>
-            <td colspan="7">Totaal : €<?php echo(number_format($_SESSION["totaal"], 2)); ?></td>
-            <td colspan="5"></td>
-            <?php if ($_SESSION["totaal"] > 0) {
+            <tr>
+                <td colspan="7">Totaal : €<?php echo(number_format($_SESSION["totaal"], 2)); ?></td>
+                <td colspan="5"></td>
+                <?php if ($_SESSION["totaal"] > 0) {
 
-                echo "<td colspan=\"5\"><input class=\"btn btn-sample\" type=\"submit\" value=\"Afrekenen\"></td>";
-             }
-             else{
-                 echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/error.php\" />";
-             }?>
-        </tr>
+                    echo "<td colspan=\"5\"><input class=\"btn btn-sample\" type=\"submit\" value=\"Afrekenen\"></td>";
+                } else {
+                    echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/error.php\" />";
+                } ?>
+            </tr>
         </form>
     </table>
     <?php

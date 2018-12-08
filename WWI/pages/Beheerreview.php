@@ -14,9 +14,7 @@ $debug = 0;
 <?php
 include_once(ROOT_PATH . "/includes/header.php");
 
-if (!defined('ROOT_PATH')) {
-    include("../config.php");
-}
+
 if (($_SESSION['IsSystemUser']) <> 1 and $_SESSION['IsEmployee'] <> 1) {
     echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/index.php\" />";
 }
@@ -24,15 +22,15 @@ if (($_SESSION['IsSystemUser']) <> 1 and $_SESSION['IsEmployee'] <> 1) {
 $stockitemID = filter_input(INPUT_GET, "StockItemID");
 
 
-
-
 $sarray = getProductSpecificReviewByStockItemID($stockitemID);
 
 
-?><center>
+?>
+    <center>
     <br>
     <link href="\WWI\WWI\css\button.css" rel="stylesheet" type="text/css"/>
-<?php $arraystock = (getStockItemByID($stockitemID)); echo ($arraystock['StockItemName']) ; ?>
+    <?php $arraystock = (getStockItemByID($stockitemID));
+    echo($arraystock['StockItemName']); ?>
     <br>
     <table>
         <tr>
@@ -46,7 +44,7 @@ $sarray = getProductSpecificReviewByStockItemID($stockitemID);
         $stockitems = getAllStockItems();
         foreach ($sarray as $reviews) {
             if ($reviews['Waarde'] <= 1 and $reviews['Waarde'] >= 5) {
-                deletereview($reviews['PersonID'],$reviews['StockItemID'],$reviews['Waarde']);
+                deletereview($reviews['PersonID'], $reviews['StockItemID'], $reviews['Waarde']);
                 echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/Beheerreview.php?StockItemID=" . $stockitemID . "\"  />";
 
             }
@@ -58,9 +56,9 @@ $sarray = getProductSpecificReviewByStockItemID($stockitemID);
                 <td>
                 <form method='post' class=\"form - inline my - 2 my - lg - 0\">
                 <input type='hidden' value='TRUE' name='delete'>
-                <input type='hidden' value='" .$reviews['StockItemID'] ."' name='StockID'>
-                <input type='hidden' value='" .$reviews['PersonID'] ."' name='PersoonID'>
-                <input type='hidden' value='" .$reviews['Waarde'] ."' name='Waarde'>
+                <input type='hidden' value='" . $reviews['StockItemID'] . "' name='StockID'>
+                <input type='hidden' value='" . $reviews['PersonID'] . "' name='PersoonID'>
+                <input type='hidden' value='" . $reviews['Waarde'] . "' name='Waarde'>
                 <button class=\"btn btn - sample btn - sample - success\" onclick=\"return confirm('Weet u het zeker?');\" type=\"submit\">Delete</button>
                 </form>
                 
@@ -73,18 +71,11 @@ $sarray = getProductSpecificReviewByStockItemID($stockitemID);
         $reviewwaarde = filter_input(INPUT_POST, "Waarde");
 
         if ($delete == "TRUE") {
-            deletereview($persoonid,$stockitemID,$reviewwaarde);
+            deletereview($persoonid, $stockitemID, $reviewwaarde);
             echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/Beheerreview.php?StockItemID=" . $stockitemID . "\"  />";
 
 
-
         }
-
-
-
-
-
-
 
 
         ?>

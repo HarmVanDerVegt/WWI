@@ -21,10 +21,12 @@ include_once ROOT_PATH . "/controllers/rpiTempController.php";
 </head>
 <body>
 <?php
+// Haalt productwaardes op
 $StockItem = getStockItemByID(filter_input(INPUT_GET, "productID", FILTER_VALIDATE_INT));
 $Stock = getStockItemHoldingByID($StockItem["StockItemID"])["QuantityOnHand"];
 $CombiDeals = generateCombiDeals($StockItem);
 
+// Controleert de reviewwaarde en insert deze zo nodig in de database
 if (isset($_POST["ster"])) {
     $reviewwaarde = filter_input(INPUT_POST, "ster", FILTER_VALIDATE_INT);
     $reviewwaarde = (int)$reviewwaarde;
@@ -44,6 +46,7 @@ if (isset($_POST["ster"])) {
         <div class="col-6 offset-6" style="padding-bottom: 10px">
             <div style="padding-bottom: 10px">
                 <?php
+                // Controleert of er al een eerder review door deze gebruiker is gegeven en past hierop aan
                 $addendum = "(" . number_format(getAverageReviewValue($StockItem["StockItemID"]), 1) . "), " . getReviewCountByStockItemID($StockItem) . " reviews";
                 if (isset($_SESSION["USID"])) {
                     $reviewValue = getUserSpecificReviewByStockItemID($_SESSION["USID"], $StockItem["StockItemID"]);
@@ -67,15 +70,17 @@ if (isset($_POST["ster"])) {
             <div class="row">
                 <div class="col" style="padding-bottom: 10px">
                     <?php
+                    // Berekent en toont een korting als deze toepasselijk is
                     if (generateDiscountPercentage($StockItem) != null) {
-                        print "<b>Prijs:</b><strike> â‚¬" . number_format(generatePrice($StockItem), 2) . "</strike><br>";
+                        print "<b>Prijs:</b><strike> €" . number_format(generatePrice($StockItem), 2) . "</strike><br>";
                         echo generateDiscountTextIfApplicable($StockItem) . "<br>";
-                        print "<b>Nieuwe Prijs:</b> â‚¬" . number_format(generateDiscountPrice($StockItem), 2);
+                        print "<b>Nieuwe Prijs:</b> €" . number_format(generateDiscountPrice($StockItem), 2);
                     }
                     ?>
                     <?php
+                    // Berekent de prijs als er geen korting toepasselijk is
                     if (generateDiscountPercentage($StockItem) == null) {
-                        print "<b>Prijs:</b> â‚¬" . number_format(generatePrice($StockItem), 2);
+                        print "<b>Prijs:</b> €" . number_format(generatePrice($StockItem), 2);
                     }
                     ?>
 
@@ -99,7 +104,9 @@ if (isset($_POST["ster"])) {
     <br>
     <div class="row">
         <div class="col">
-            <?php print generateProductPageInformation($StockItem); ?>
+            <?php 
+            // Haalt alle toepasselijke productinformatie op
+            print generateProductPageInformation($StockItem); ?>
         </div>
     </div>
 </div>
@@ -109,7 +116,10 @@ if (isset($_POST["ster"])) {
         <div class="bg-light card">
             <h4>Combideals:</h4>
             <p> Misschien zijn deze producten een leuke combinatie met dit product? </p>
-            <?php echo generateCombiDealCards($CombiDeals); ?>
+            <?php
+            // Geneert de combideals
+            
+            echo generateCombiDealCards($CombiDeals); ?>
         </div>
     </div>
 </div>

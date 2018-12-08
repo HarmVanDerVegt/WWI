@@ -24,8 +24,7 @@ if (!defined('ROOT_PATH')) {
 <br>
 
 <?php
-//RACAPTCHA
-// Checked of de form is ingevuld
+// Checkt of de form is ingevuld
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     function post_captcha($user_response)
@@ -51,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         return json_decode($result, true);
     }
 
-    // Call the function post_captcha
+    // Roept de functie post_captcha op
     if (isset($_POST['g-recaptcha-response'])) {
         $res = post_captcha($_POST['g-recaptcha-response']);
 

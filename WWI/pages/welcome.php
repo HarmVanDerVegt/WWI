@@ -16,13 +16,17 @@ include_once ROOT_PATH . "/controllers/OrderController.php";
 <?php
 include_once(ROOT_PATH . "/includes/header.php");
 
-
+// controlleren of rechten kloppen
 if (($_SESSION['IsSystemUser']) <> 1) {
     echo "<meta http-equiv=\"refresh\" content=\"0; url=/WWI/WWI/pages/index.php\" />";
 }
 $customerdata = getCustomerByID($_SESSION['USID']);
-$Cityname = getCityByID($customerdata['DeliveryCityID']);
-
+if (isset( $customerdata['DeliveryCityID'])){
+    $Cityname = getCityByID($customerdata['DeliveryCityID']);
+}
+else {
+    $Cityname['CityName'] =  "";
+}
 
 echo '<BR>';
 ?>
@@ -34,6 +38,7 @@ echo '<BR>';
                 ">
                 <div class="card-block">
                     <h4 class="card-custom-title">Bestellingen</h4>
+<!--                    bestellingen ophalen-->
                     <?php
                     $PersonID = $_SESSION["USID"];
                     $Orders = getOrderByPersonID($PersonID);
@@ -41,9 +46,7 @@ echo '<BR>';
                     if (empty($Orders)) {
                         print "<p>Er zijn geen bestellingen beschikbaar</p>";
                     } else {
-                    foreach ($Orders
-
-                    as $index => $order) {
+                    foreach ($Orders as $index => $order) {
                     ?>
                     <?php
                     $array = getBestellingByPurchaseorderID($index);

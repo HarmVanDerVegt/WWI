@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Call the function post_captcha
-    $res = post_captcha($_POST['g-recaptcha-response']);
+   
 
 
 }

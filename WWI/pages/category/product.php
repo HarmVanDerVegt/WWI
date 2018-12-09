@@ -72,15 +72,15 @@ if (isset($_POST["ster"])) {
                     <?php
                     // Berekent en toont een korting als deze toepasselijk is
                     if (generateDiscountPercentage($StockItem) != null) {
-                        print "<b>Prijs:</b><strike> €" . number_format(generatePrice($StockItem), 2) . "</strike><br>";
+                        print "<b>Prijs:</b><strike> â‚¬" . number_format(generatePrice($StockItem), 2) . "</strike><br>";
                         echo generateDiscountTextIfApplicable($StockItem) . "<br>";
-                        print "<b>Nieuwe Prijs:</b> €" . number_format(generateDiscountPrice($StockItem), 2);
+                        print "<b>Nieuwe Prijs:</b> â‚¬" . number_format(generateDiscountPrice($StockItem), 2);
                     }
                     ?>
                     <?php
                     // Berekent de prijs als er geen korting toepasselijk is
                     if (generateDiscountPercentage($StockItem) == null) {
-                        print "<b>Prijs:</b> €" . number_format(generatePrice($StockItem), 2);
+                        print "<b>Prijs:</b> â‚¬" . number_format(generatePrice($StockItem), 2);
                     }
                     ?>
 
